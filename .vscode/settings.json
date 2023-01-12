@@ -1,8 +1,8 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll": true
     },
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": [
         "--line-length=100"
