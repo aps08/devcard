@@ -9,8 +9,3 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.container{
-  position: relative;
-  width: 90%;
-}
