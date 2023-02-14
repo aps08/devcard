@@ -1,12 +1,22 @@
 * {
+  --color-btn-bg: #238636;
+  --color-btn-hover-bg: #2ea043;
+  --color-bg: #161b22;
+  --color-header-hover: rgba(255,255,255,0.7);
+  --color-white: white;
   margin: 0;
   padding: 0;
   list-style: none;
   text-decoration: none;
   box-sizing: border-box;
-  background-color: #0d1117;
+  background-color: var(--color-bg);
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  border: none;
+}
+
+body{
+  transition: 0.5s ease-in-out;
 }

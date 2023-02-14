@@ -7,19 +7,21 @@
 .branding{
     display: flex;
     align-items: center;
+    transition: 0.5s ease-in-out;
 }
 .brand_logo{
     width: 45px;
     height: 45px;
 }
 .brand_name{
+    color: var(--color-white);
     margin-left: 10px;
     font-size: 2rem;
     font-weight: bolder;
     text-transform: uppercase;
+    color: var(--color-header-hover);
 }
 .navbar{
-    font-size: 1.2rem;
     margin: 0 10px;
     height: 100%;
     display: flex;
@@ -30,16 +32,26 @@
     align-items:center;
 }
 .nav-item{
+    font-size: 1rem;
+    color: var(--color-header-hover);
     margin: 0 5px;
     padding: 0 5px;
     line-height: 2;
-    color: black;
     display: flex;
     align-items: center;
 }
-.nav-item-name{
-    margin-left: 7px;
-}
+
 .nav-btn{
-    font-weight: bolder;
+    padding: 0 20px;
+    border-radius: .2rem;
+    font-weight: 500;
+    background-color: var(--color-btn-bg);
+    border-color: none;
+}
+
+.nav-item:hover,.active{
+    color: var(--color-white);
+}
+.nav-btn:hover{
+    background-color: var(--color-btn-hover-bg);
 }
