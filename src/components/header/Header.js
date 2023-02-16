@@ -29,8 +29,8 @@ const Header = () => {
               <li>Dashboard</li>
             </NavLink>
           )}
+          {!loggedIn && <button className="nav-item nav-btn l-text"></button>}
         </ul>
-        {!loggedIn && <button className="nav-item nav-btn">Sign up</button>}
         {!loggedIn && <button className="nav-item nav-btn">Sign in</button>}
       </div>
     </div>
