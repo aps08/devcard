@@ -1,38 +1,66 @@
+import { useState } from 'react';
 import '../header/Header.css';
 import logo from '../../assets/images/logo.png';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
-  const loggedIn = false;
+  const [Isopen, setIsopen] = useState(false);
+  const hamburgerhandler = () => {
+    setIsopen(!Isopen);
+  };
+  const signuphandler = () => {
+    console.log('signup');
+    setIsopen(!Isopen);
+  };
+  const signinhandler = () => {
+    console.log('signin');
+  };
 
+  const loggedIn = false;
   return (
-    <div className="header">
-      <div className="branding">
-        <img className="brand_logo" src={logo} alt="React Image" />
-        <span className="brand_name">Devcards</span>
-      </div>
-      <div className="navbar">
-        <ul className="navbar-nav">
-          <NavLink to="home" className={'nav-item'}>
-            <li>Home</li>
-          </NavLink>
-          {!loggedIn && (
-            <NavLink to="demo" className={'nav-item'}>
-              <li>Demo</li>
+    <div className="fixed">
+      <header>
+        <div className="branding">
+          <img src={logo} alt="React Image" />
+          <span>Devcards</span>
+        </div>
+        <nav>
+          <ul style={{ right: !Isopen ? '-100%' : '0' }}>
+            <NavLink to="home" className={''}>
+              <li>Home</li>
             </NavLink>
-          )}
-          <NavLink to="about" className={'nav-item'}>
-            <li>About</li>
-          </NavLink>
-          {loggedIn && (
-            <NavLink to="dashboard" className={'nav-item'}>
-              <li>Dashboard</li>
+            {!loggedIn && (
+              <NavLink to="demo" className={''}>
+                <li>Demo</li>
+              </NavLink>
+            )}
+            <NavLink to="about" className={''}>
+              <li>About</li>
             </NavLink>
+            {loggedIn && (
+              <NavLink to="dashboard" className={''}>
+                <li>Dashboard</li>
+              </NavLink>
+            )}
+            <li>
+              {!loggedIn && (
+                <button onClick={signuphandler} className="l-text"></button>
+              )}
+            </li>
+          </ul>
+          {!loggedIn && <button onClick={signinhandler}>Sign in</button>}
+          {!Isopen && (
+            <div className="hamburger" onClick={hamburgerhandler}>
+              &#9776;
+            </div>
           )}
-          {!loggedIn && <button className="nav-item nav-btn l-text"></button>}
-        </ul>
-        {!loggedIn && <button className="nav-item nav-btn">Sign in</button>}
-      </div>
+          {Isopen && (
+            <div className="hamburger" onClick={hamburgerhandler}>
+              &#10006;
+            </div>
+          )}
+        </nav>
+      </header>
     </div>
   );
 };

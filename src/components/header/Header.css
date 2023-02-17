@@ -1,20 +1,28 @@
-.header{
-    padding: 2rem 4rem;
+.fixed{
+    position: fixed;
+    top:0;
+    width: 100%;
+}
+header{
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 2rem 4rem;
     transition: 0.5s ease-in-out;
+    box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
 }
+
 .branding{
     display: flex;
     align-items: center;
 }
-.brand_logo{
+.branding img{
     width: 45px;
     height: 45px;
     transition: 0.5s ease-in-out;
 }
-.brand_name{
+.branding span{
     color: var(--color-white);
     margin-left: 10px;
     font-size: 2rem;
@@ -23,17 +31,16 @@
     color: var(--color-header-hover);
     transition: 0.5s ease-in-out;
 }
-.navbar{
-    margin: 0 10px;
+nav{
     height: 100%;
     display: flex;
     align-items:center;
 }
-.navbar-nav{
+ul{
     display: flex;
     align-items:center;
 }
-.nav-item{
+li{
     font-size: 1rem;
     color: var(--color-header-hover);
     margin: 0 5px;
@@ -43,19 +50,33 @@
     align-items: center;
 }
 
-.nav-btn{
-    padding: 0 20px;
+button{
+    padding: 0 10px;
+    font-size: 1rem;
     border-radius: .2rem;
     font-weight: 500;
+    line-height: 2;
+    margin: 0 5px;
+    color: var(--color-header-hover);
     background-color: var(--color-btn-bg);
     border-color: none;
 }
-
-.nav-item:hover,.active{
+.hamburger{
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+    margin: 0 10px;
+    color: var(--color-header-hover);
+}
+li:hover{
     color: var(--color-white);
 }
 
-.nav-btn:hover{
+a.active li {
+    color: white;
+}
+
+button:hover{
     background-color: var(--color-btn-hover-bg);
 }
 
@@ -64,27 +85,43 @@
     transition: 0.5s ease-in-out;
 }
 
+ 
 @media only screen and (max-width: 1024px){
-    .header{
-        padding: 1.5rem 3rem;
-        transition: 0.5s ease-in-out;
-    }
-    .brand_logo{
-        width: 40px;
-        height: 40px;
-        transition: 0.5s ease-in-out;
-    }
-    .brand_name{
-        font-size: 1.8rem;
-        transition: 0.5s ease-in-out;
-    }
     .l-text::before{
         content: "Sign up";
-    } 
+    }
 }
 
-@media only screen and (max-width: 780px){
-    /* .header{
-        padding: 20px 3%;
-    } */
+@media only screen and (max-width: 768px){
+    header{
+        padding: 1rem;
+        transition: 0.5s ease-in-out;
+    }
+    ul{
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 80px;
+        box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
+        transition: 0.5s ease-in-out;
+    }
+    ul li{
+        display: flex;
+        justify-content: center;
+    }
+    button{
+        margin: 10px auto;
+    }
+    .hamburger{
+        display: block;
+    }
+    .branding img{
+        width: 35px;
+        height: 35px;
+        transition: 0.5s ease-in-out;
+    }
+    .branding span{
+        font-size: 1.6rem;
+        transition: 0.5s ease-in-out;
+    }
 }
