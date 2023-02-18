@@ -26,19 +26,19 @@ const Header = () => {
         </div>
         <nav>
           <ul style={{ right: !Isopen ? '-100%' : '0' }}>
-            <NavLink to="home" className={''}>
+            <NavLink to="home">
               <li>Home</li>
             </NavLink>
             {!loggedIn && (
-              <NavLink to="demo" className={''}>
+              <NavLink to="demo">
                 <li>Demo</li>
               </NavLink>
             )}
-            <NavLink to="about" className={''}>
+            <NavLink to="about">
               <li>About</li>
             </NavLink>
             {loggedIn && (
-              <NavLink to="dashboard" className={''}>
+              <NavLink to="dashboard">
                 <li>Dashboard</li>
               </NavLink>
             )}

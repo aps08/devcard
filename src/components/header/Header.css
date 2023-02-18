@@ -23,7 +23,6 @@ header{
     transition: 0.5s ease-in-out;
 }
 .branding span{
-    color: var(--color-white);
     margin-left: 10px;
     font-size: 2rem;
     font-weight: bolder;
@@ -36,11 +35,11 @@ nav{
     display: flex;
     align-items:center;
 }
-ul{
+nav ul{
     display: flex;
     align-items:center;
 }
-li{
+nav ul li{
     font-size: 1rem;
     color: var(--color-header-hover);
     margin: 0 5px;
@@ -50,7 +49,7 @@ li{
     align-items: center;
 }
 
-button{
+nav button{
     padding: 0 10px;
     font-size: 1rem;
     border-radius: .2rem;
@@ -61,14 +60,14 @@ button{
     background-color: var(--color-btn-bg);
     border-color: none;
 }
-.hamburger{
+nav .hamburger{
     display: none;
     font-size: 26px;
     cursor: pointer;
     margin: 0 10px;
     color: var(--color-header-hover);
 }
-li:hover{
+nav ul li:hover{
     color: var(--color-white);
 }
 
@@ -76,7 +75,7 @@ a.active li {
     color: white;
 }
 
-button:hover{
+nav button:hover{
     background-color: var(--color-btn-hover-bg);
 }
 
@@ -97,7 +96,7 @@ button:hover{
         padding: 1rem;
         transition: 0.5s ease-in-out;
     }
-    ul{
+    header ul{
         display: block;
         position: absolute;
         width: 100%;
@@ -105,22 +104,22 @@ button:hover{
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
         transition: 0.5s ease-in-out;
     }
-    ul li{
+    header ul li{
         display: flex;
         justify-content: center;
     }
-    button{
+    nav button{
         margin: 10px auto;
     }
-    .hamburger{
+    nav .hamburger{
         display: block;
     }
-    .branding img{
+    header .branding img{
         width: 35px;
         height: 35px;
         transition: 0.5s ease-in-out;
     }
-    .branding span{
+    header .branding span{
         font-size: 1.6rem;
         transition: 0.5s ease-in-out;
     }
