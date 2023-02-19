@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../header/Header.css';
 import logo from '../../assets/images/logo.png';
 import { NavLink } from 'react-router-dom';
 
+const WIDTH_SIZE = 768;
+
 const Header = () => {
   const [Isopen, setIsopen] = useState(false);
+  const onresize = (event) => {
+    if (event.target.innerWidth > WIDTH_SIZE && Isopen) {
+      setIsopen(false);
+    }
+  };
+  useEffect(() => {
+    addEventListener('resize', onresize);
+    return () => {
+      removeEventListener('resize', onresize);
+    };
+  });
   const hamburgerhandler = () => {
     setIsopen(!Isopen);
   };
@@ -49,16 +62,9 @@ const Header = () => {
             </li>
           </ul>
           {!loggedIn && <button onClick={signinhandler}>Sign in</button>}
-          {!Isopen && (
-            <div className="hamburger" onClick={hamburgerhandler}>
-              &#9776;
-            </div>
-          )}
-          {Isopen && (
-            <div className="hamburger" onClick={hamburgerhandler}>
-              &#10006;
-            </div>
-          )}
+          <div className="hamburger" onClick={hamburgerhandler}>
+            {!Isopen ? <>&#9776;</> : <>&#10006;</>}
+          </div>
         </nav>
       </header>
     </div>
