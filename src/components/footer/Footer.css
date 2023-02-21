@@ -30,7 +30,7 @@ footer .navigate ul{
     border-left: 2px solid whitesmoke;
 }
 footer .navigate ul li{
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--color-header-hover);
     padding: 0 15px;
     margin: 10px 0;
@@ -60,7 +60,7 @@ footer .branding span{
 footer p{
     margin: 10px 0;
     color: var(--color-header-hover);
-    font-size: .9rem;
+    font-size: 1.1rem;
 }
 footer div button{
     color: white;
