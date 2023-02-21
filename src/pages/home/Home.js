@@ -1,4 +1,5 @@
 import './Home.css';
+import logo from '../../assets/images/logo.png';
 
 const Home = () => {
   return (
@@ -18,9 +19,10 @@ const Home = () => {
           </p>
           <button className="l-text"></button>
         </div>
-        <div className="card">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-          imperdiet feugiat lectus ac venenatis.
+        <div>
+          <div className="card">
+            <img src={logo} alt="cardimage" />
+          </div>
         </div>
       </section>
     </>
