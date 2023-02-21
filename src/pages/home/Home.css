@@ -1,7 +1,8 @@
 .tag-card{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
 }
 .tag-card div{
     width: 50%;
@@ -43,10 +44,11 @@
     display: inline-block;
     width: 60%;
     height: auto;
+    animation: floating 2s infinite ease-in-out;
 }
 
 
-@keyframes float {
+@keyframes floating {
     0% {
         transform: translate(0, 0);
     }

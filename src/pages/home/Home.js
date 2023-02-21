@@ -25,6 +25,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section>SOMETING</section>
     </>
   );
 };
