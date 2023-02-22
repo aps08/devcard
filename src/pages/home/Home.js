@@ -1,5 +1,4 @@
 import './Home.css';
-import logo from '../../assets/images/logo.png';
 
 const Home = () => {
   return (
@@ -21,11 +20,34 @@ const Home = () => {
         </div>
         <div>
           <div className="card">
-            <img src={logo} alt="cardimage" />
+            <img
+              src="https://picsum.photos/600/320?grayscale"
+              alt="cardimage"
+            />
           </div>
         </div>
       </section>
-      <section>SOMETING</section>
+      <section className="stepper">
+        <div>
+          <div className="card">
+            <img
+              src="https://picsum.photos/600/320?grayscale"
+              alt="cardimage"
+            />
+          </div>
+        </div>
+        <div className="steps">
+          <h3>Get your devcard. In three steps.</h3>
+          <p>
+            Create your account.
+            <br />
+            Fill skills and other details.
+            <br />
+            Select and get your devcard.
+          </p>
+          <button>Try demo now</button>
+        </div>
+      </section>
     </>
   );
 };
