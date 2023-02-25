@@ -55,36 +55,49 @@ const Home = () => {
           <h1>What we offer ?</h1>
         </div>
         <div className="offer-cards">
-          <div className="card">
-            <img
-              src="https://picsum.photos/600/320?grayscale"
-              alt="cardimage"
-            />
-            <div className="text">
-              <h3>Exclusive</h3>
-              <p>Get bulk cards.</p>
+          <div style={{ display: 'flex' }}>
+            <div className="card">
+              <img
+                src="https://picsum.photos/600/320?grayscale"
+                alt="cardimage"
+              />
+              <div className="text">
+                <h3>Exclusive</h3>
+                <p>
+                  Experience exclusivity with a pack of three event-exclusive
+                  cards.
+                </p>
+              </div>
+            </div>
+            <div className="card">
+              <img
+                src="https://picsum.photos/600/320?grayscale"
+                alt="cardimage"
+              />
+              <div className="text">
+                <h3>Bulk</h3>
+                <p>Elevate your daily routine with a pack of fifty cards.</p>
+              </div>
             </div>
           </div>
-          <div className="card">
-            <img
-              src="https://picsum.photos/600/320?grayscale"
-              alt="cardimage"
-            />
-            <div className="text">
-              <h3>Bulk</h3>
-              <p>Get bulk cards.</p>
+          <div className="next-line">
+            <div className="card">
+              <img
+                src="https://picsum.photos/600/320?grayscale"
+                alt="cardimage"
+              />
+              <div className="text">
+                <h3>Gift</h3>
+                <p>
+                  Make your buddies, colleagues or friends feel loved with
+                  gifts.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="card">
-            <img
-              src="https://picsum.photos/600/320?grayscale"
-              alt="cardimage"
-            />
-            <div className="text">
-              <h3>Gift</h3>
-              <p>Send gift to your buddy.</p>
-            </div>
-          </div>
+        </div>
+        <div className="learn">
+          <button>Learn more</button>
         </div>
       </section>
     </>

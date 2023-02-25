@@ -1,8 +1,14 @@
+section *{
+    transition: 0.5s ease-in-out;
+}
+.tag-card button, .stepper button,.offers button{
+    transition: none;
+}
 .tag-card, .stepper{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0;
+    margin-bottom: 1rem;
 }
 .tag-card div, .stepper div{
     width: 50%;
@@ -12,20 +18,20 @@
 }
 .tag-card .tag h3, .stepper .steps h3{
     color: var(--color-header-hover);
-    font-size: 2.4rem;
+    font-size: 3vw;
     font-weight: 600;
     margin: 10px 0;
 }
 .tag-card .tag p, .stepper .steps p{
     padding: 10px 0;
-    font-size: 1rem;
+    font-size: 1.5vw;
     color: var(--color-header-hover);
     opacity: 0.7;
 }
-.tag-card .tag button, .stepper .steps button{
+.tag-card .tag button, .stepper .steps button,.offers button,.learn button{
     margin: 10px 0;
     padding: 0 10px;
-    font-size: 1.2rem;
+    font-size: 1.5vw;
     border-radius: .2rem;
     font-weight: 500;
     line-height: 2;
@@ -33,7 +39,12 @@
     background-color: var(--color-btn-bg);
     border-color: none;
 }
-.tag-card .tag button:hover{
+.offers button{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.tag-card .tag button:hover, .stepper .steps button:hover,.offers button:hover{
     background-color: var(--color-btn-hover-bg);
 }
 .tag-card .card, .stepper .card{
@@ -54,10 +65,10 @@
     animation: none;
 }
 .offers{
-    margin: 2rem 0;
+    margin-bottom: 1rem;
 }
 .offers div h1{
-    font-size: 1.8rem;
+    font-size: 2.5vw;
     color: var(--color-header-hover);
     width: 100%;
     text-align: center;
@@ -68,7 +79,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 1rem;
 }
 .offers .offer-cards .card{
     text-align: center;
@@ -80,34 +91,37 @@
     border-radius: .5rem;
 }
 .text{
-    padding: 20px;
+    padding: 5px;
     position: absolute;
     width: 90%;
-    height: 100%;
+    height: 98%;
     top: 30%;
     margin: 0 5%;
     text-align: center;
     background-color: none;
-    transition: 0.5s ease-in-out;
 }
 .text h3{
-    font-size: 2rem;
-    color: white;
+    font-size: 3vw;
+    color: var(--color-header-hover);
+}
+.learn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .text p{
+    padding: 5%;
     opacity: 0;
-    font-size: 1.1rem;
-    transition: 0.5s ease-in-out;
+    font-size: 1.5vw;
+    color: var(--color-header-hover);
 }
 .offers .offer-cards .card:hover .text{
-    top: 0;
-    background-color: aqua;
-    border-radius: .5rem;
-    transition: 0.5s ease-in-out;
+    top: 1%;
+    background-color: rgba(22, 27, 34, 0.7);
+    border-radius: .4rem;
 }
 .offers .offer-cards .card:hover .text p{
     opacity: 1;
-    transition: 0.5s ease-in-out;
 }
 @keyframes floating {
     0% {
@@ -118,5 +132,50 @@
     }
     100% {
         transform: translate(0, 0);
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .tag-card{
+        flex-direction: column-reverse;
+    }
+    .stepper{
+        flex-direction: column;
+    }
+    .tag-card div, .stepper div{
+        width: 100%;
+    }
+    .tag-card .card, .stepper .card{
+        text-align: center;
+    }
+    .tag-card .tag,.stepper .steps{
+        padding: 0 7%;
+    }
+    .tag-card .tag h3,.stepper .steps h3{
+        font-size: 5vw;
+    }
+    .tag-card .tag p,.stepper .steps p,.tag-card .tag button, .stepper .steps button,.learn button{
+        font-size: 2.5vw;
+    }
+    .offers div h1{
+        font-size: 4vw;
+    }
+    .offers .offer-cards{
+        display: block;
+    }
+    .next-line{
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .next-line .card{
+        width: 50%;
+    }
+    .offers .offer-cards .card .text h3{
+        font-size: 4vw;
+    }
+    .offers .offer-cards .card .text p{
+        font-size: 2.5vw;
     }
 }
