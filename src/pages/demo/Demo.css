@@ -1,0 +1,37 @@
+.progress-bar, .demo .demo-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+.progress-bar .bar{
+    height: 5px;
+    border-radius: .5rem;
+    background-color: #238636;
+    transition: 1s ease-in-out;
+}
+.demo-form form{
+    color: rgba(255,255,255,0.7);
+    border-radius: .5rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: rgba(31, 35, 41, 0.9);
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    place-items: center;
+    height: auto;
+}
+.demo-form h3{
+    color: rgba(255,255,255,0.7);
+    font-size: 2vw;
+}
+.demo-form .namer{
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    margin: 2vw 0;
+}
+.demo-form .namer div{
+    margin: 0 1vw;
+}

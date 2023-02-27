@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="navigate">
           <h3>Learn more</h3>
           <ul>
-            <li>How to earn credits ?</li>
+            <li>How to earn credits?</li>
             <li>Contribute</li>
             <li>Source code</li>
             <li>Feedback</li>

@@ -103,7 +103,7 @@ nav button:hover{
         display: block;
         position: absolute;
         width: 100%;
-        top: 80px;
+        top: 100px;
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
         transition: 0.5s ease-in-out;
         background-color: rgba(22, 27, 34, 0.8);
