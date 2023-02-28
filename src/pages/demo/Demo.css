@@ -18,20 +18,40 @@
     background-color: rgba(31, 35, 41, 0.9);
     margin: 1rem 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    place-items: center;
     height: auto;
+}
+.grid_three{
+    row-gap: 1rem;
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+.demo-form form div h3{
+    margin-top: 1rem;
+    font-size: 1.3rem;
 }
 .demo-form h3{
     color: rgba(255,255,255,0.7);
     font-size: 2vw;
 }
-.demo-form .namer{
-    display: flex;
-    justify-content: row;
-    align-items: center;
-    margin: 2vw 0;
+.form_element select{
+    background-color: var(--color-bg);
+    opacity: .6;
+    height: 35px;
+    border: none;
+    border: 2px solid gray;
+    border-radius: .2rem;
+    transition: .5s ease-in-out;
+    color: rgba(228, 228, 228,.6);
+    font-size: 1rem;
+    padding-left: .8rem;
 }
-.demo-form .namer div{
-    margin: 0 1vw;
+.form_element select option:disabled{
+    color: var(--color-white);
+}
+
+.form_element select:focus{
+    border: 2px solid whitesmoke;
+    transition: .5s ease-in-out;
 }

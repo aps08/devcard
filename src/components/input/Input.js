@@ -2,8 +2,13 @@ import './Input.css';
 const Input = (props) => {
   return (
     <div className="form_element">
-      <input type="text" required />
-      <label>{props.name}</label>
+      <label>{props.label}</label>
+      <input
+        name={props.name}
+        type={props.type || 'text'}
+        placeholder={props.placeholder}
+        required
+      />
     </div>
   );
 };
