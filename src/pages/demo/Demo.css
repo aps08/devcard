@@ -27,6 +27,12 @@
     grid-template-columns: 1fr 1fr 1fr;
     place-items: center;
 }
+.grid_three button{
+    width: 12vw;
+    height: 30px;
+    margin-top: 1rem;
+
+}
 .demo-form form div h3{
     margin-top: 1rem;
     font-size: 1.3rem;

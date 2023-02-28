@@ -2,7 +2,7 @@ import './Input.css';
 const Input = (props) => {
   return (
     <div className="form_element">
-      <label>{props.label}</label>
+      {props.label && <label>{props.label}</label>}
       <input
         name={props.name}
         type={props.type || 'text'}

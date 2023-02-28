@@ -110,15 +110,21 @@ const Demo = () => {
                   padding: '0 .5rem'
                 }}>
                 <label>Social media links</label>
-                <ul>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                </ul>
+                <Input name="link_1" placeholder="optional" required={false} />
+                <button>Add more</button>
               </div>
             </div>
           </div>
-          <input type="submit" />
+          <div className="grid_three">
+            <div
+              className="form_element"
+              style={{
+                gridColumn: 'span 3',
+                placeItems: 'center'
+              }}>
+              <button type="submit">Submit</button>
+            </div>
+          </div>
         </form>
       </div>
     </>
