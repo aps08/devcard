@@ -18,7 +18,6 @@
     background-color: rgba(31, 35, 41, 0.9);
     margin: 1rem 0;
     display: grid;
-    height: auto;
 }
 .grid_three{
     row-gap: 1rem;
@@ -31,7 +30,12 @@
     width: 12vw;
     height: 30px;
     margin-top: 1rem;
-
+    font-size: 1rem;
+    border-radius: 0.2rem;
+    font-weight: 500;
+    margin: 0 5px;
+    color: var(--color-header-hover);
+    background-color: var(--color-btn-bg);
 }
 .demo-form form div h3{
     margin-top: 1rem;
@@ -46,18 +50,30 @@
     opacity: .6;
     height: 35px;
     border: none;
-    border: 2px solid gray;
+    border: 2px solid rgb(58, 57, 57);
     border-radius: .2rem;
     transition: .5s ease-in-out;
-    color: rgba(228, 228, 228,.6);
+    color: whitesmoke;
     font-size: 1rem;
     padding-left: .8rem;
 }
-.form_element select option:disabled{
-    color: var(--color-white);
+.form_element select:focus{
+    border: 2px solid rgb(176, 175, 175);
+    transition: .5s ease-in-out;
 }
 
-.form_element select:focus{
-    border: 2px solid whitesmoke;
-    transition: .5s ease-in-out;
+.form_element select option,.form_element select option:disabled{
+    color: whitesmoke;
+}
+#upload{
+    padding: .4rem;
+    padding-left: .8rem;
+    margin: 0;
+    height: 35px;
+    font-size: 1rem;
+    border-radius: .2rem;
+    background-color: var(--color-bg);
+    opacity: .6;
+    border: 2px solid rgb(58, 57, 57);
+    color: whitesmoke;
 }

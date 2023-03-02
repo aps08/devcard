@@ -17,29 +17,39 @@ form .form_element input{
     background-color: var(--color-bg);
     opacity: .6;
     border: none;
-    border: 2px solid gray;
+    border: 2px solid rgb(58, 57, 57);
     border-radius: .2rem;
     transition: .5s ease-in-out;
 }
-form .form_element input[type="text"],form .form_element input[type="email"],form .form_element input[type="number"]{
+form .form_element input::placeholder{
+    color: whitesmoke;
+    font-weight: 100;
+}
+form .form_element input[type="text"],form .form_element input[type="file"],form .form_element input[type="email"],form .form_element input[type="number"]{
     padding: 1rem;
     padding-left: .8rem;
     caret-color: var(--color-header-hover);
     font-weight: bold;
-    color: var(--color-white);
+    color: whitesmoke;
     font-size: 1rem;
     transition: .5s ease-in-out;
 }
+form .form_element input[type="file"]{
+    padding: 0;
+    border: none;
+    padding: .2rem;
+    background-color: rgba(31, 35, 41, 0.9);
+}
+form .form_element input#file-upload-button{
+    width: 100%;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-form .form_element input:focus{
-    border: 2px solid whitesmoke;
-    transition: .5s ease-in-out;
-}
-form .form_element input[type="text"]:focus::placeholder, form .form_element input[type="email"]:focus::placeholder,form .form_element input[type="number"]:focus::placeholder{
-    color: whitesmoke;
+.form_element input:focus{
+    border: 2px solid rgb(176, 175, 175);
     transition: .5s ease-in-out;
 }

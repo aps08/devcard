@@ -1,3 +1,4 @@
+import Card from '../../components/card/Card';
 import './Home.css';
 
 const Home = () => {
@@ -50,54 +51,38 @@ const Home = () => {
           <button>Try demo now</button>
         </div>
       </section>
-      <section className="offers" style={{ display: 'block' }}>
-        <div>
-          <h1>What we offer ?</h1>
-        </div>
+      <section className="offers">
+        <h3 className="head">What we offer ?</h3>
         <div className="offer-cards">
-          <div style={{ display: 'flex' }}>
-            <div className="card">
-              <img
-                src="https://picsum.photos/600/320?grayscale"
-                alt="cardimage"
-              />
-              <div className="text">
-                <h3>Exclusive</h3>
-                <p>
-                  Experience exclusivity with a pack of three event-exclusive
-                  cards.
-                </p>
-              </div>
-            </div>
-            <div className="card">
-              <img
-                src="https://picsum.photos/600/320?grayscale"
-                alt="cardimage"
-              />
-              <div className="text">
-                <h3>Bulk</h3>
-                <p>Elevate your daily routine with a pack of fifty cards.</p>
-              </div>
-            </div>
-          </div>
-          <div className="next-line">
-            <div className="card">
-              <img
-                src="https://picsum.photos/600/320?grayscale"
-                alt="cardimage"
-              />
-              <div className="text">
-                <h3>Gift</h3>
-                <p>
-                  Make your buddies, colleagues or friends feel loved with
-                  gifts.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="learn">
-          <button>Learn more</button>
+          <Card
+            label="Event exclusive"
+            para="Experience exclusivity with event-exclusive
+                  cards."
+            list={['Get three cards', 'Credit 5', 'Mutiple designs']}
+          />
+          <Card
+            label="Bulk cards"
+            para="Elevate your daily routine with a pack of cards."
+            list={['Get thirty cards', 'Credit 6', 'Single designs']}
+          />
+          <Card
+            label="Send gifts"
+            para="Send devcard to your buddies and colleagues."
+            list={[
+              'Send mutiple devcards',
+              'Credit customized',
+              'Pay upon acceptance.'
+            ]}
+          />
+          <Card
+            label="Organization"
+            para="Empowering organizations with custom card and  gifts."
+            list={[
+              'Get mutiple cards.',
+              'Credit customized',
+              'Early access to latest design.'
+            ]}
+          />
         </div>
       </section>
     </>

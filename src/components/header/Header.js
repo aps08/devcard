@@ -31,43 +31,41 @@ const Header = () => {
 
   const loggedIn = false;
   return (
-    <div className="fixed">
-      <header>
-        <div className="branding">
-          <img src={logo} alt="React Image" />
-          <span>Devcards</span>
-        </div>
-        <nav>
-          <ul style={{ right: !Isopen ? '-100%' : '0' }}>
-            <NavLink to="home">
-              <li>Home</li>
+    <header>
+      <div className="branding">
+        <img src={logo} alt="React Image" />
+        <span>Devcards</span>
+      </div>
+      <nav>
+        <ul style={{ right: !Isopen ? '-100%' : '0' }}>
+          <NavLink to="home">
+            <li>Home</li>
+          </NavLink>
+          {!loggedIn && (
+            <NavLink to="demo">
+              <li>Demo</li>
             </NavLink>
+          )}
+          <NavLink to="about">
+            <li>About</li>
+          </NavLink>
+          {loggedIn && (
+            <NavLink to="dashboard">
+              <li>Dashboard</li>
+            </NavLink>
+          )}
+          <li>
             {!loggedIn && (
-              <NavLink to="demo">
-                <li>Demo</li>
-              </NavLink>
+              <button onClick={signuphandler} className="l-text"></button>
             )}
-            <NavLink to="about">
-              <li>About</li>
-            </NavLink>
-            {loggedIn && (
-              <NavLink to="dashboard">
-                <li>Dashboard</li>
-              </NavLink>
-            )}
-            <li>
-              {!loggedIn && (
-                <button onClick={signuphandler} className="l-text"></button>
-              )}
-            </li>
-          </ul>
-          {!loggedIn && <button onClick={signinhandler}>Sign in</button>}
-          <div className="hamburger" onClick={hamburgerhandler}>
-            {!Isopen ? <>&#9776;</> : <>&#10006;</>}
-          </div>
-        </nav>
-      </header>
-    </div>
+          </li>
+        </ul>
+        {!loggedIn && <button onClick={signinhandler}>Sign in</button>}
+        <div className="hamburger" onClick={hamburgerhandler}>
+          {!Isopen ? <>&#9776;</> : <>&#10006;</>}
+        </div>
+      </nav>
+    </header>
   );
 };
 
