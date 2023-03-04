@@ -1,8 +1,11 @@
-.progress-bar, .demo .demo-form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
+.progress-bar, .demo-form{
+    display: grid;
+    place-items: center;
+    padding: 1rem 0;
+}
+.demo-form h3{
+    place-items: center;
+    width: 80%;
 }
 .progress-bar .bar{
     height: 5px;
@@ -13,20 +16,17 @@
 .demo-form form{
     color: rgba(255,255,255,0.7);
     border-radius: .5rem;
-    width: 100%;
+    width: 80%;
     padding: 1rem;
     background-color: rgba(31, 35, 41, 0.9);
     margin: 1rem 0;
     display: grid;
-}
-.grid_three{
+    grid-template-columns: 1fr 1fr;
     row-gap: 1rem;
-    margin: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
     place-items: center;
 }
-.grid_three button{
+.form_element button{
     width: 12vw;
     height: 30px;
     margin-top: 1rem;
@@ -34,12 +34,8 @@
     border-radius: 0.2rem;
     font-weight: 500;
     margin: 0 5px;
-    color: var(--color-header-hover);
     background-color: var(--color-btn-bg);
-}
-.demo-form form div h3{
-    margin-top: 1rem;
-    font-size: 1.3rem;
+    color: var(--color-header-hover);
 }
 .demo-form h3{
     color: rgba(255,255,255,0.7);
@@ -57,6 +53,17 @@
     font-size: 1rem;
     padding-left: .8rem;
 }
+#upload{
+    display: inline-block;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    border-radius: .2rem;
+    border: 2px dashed rgb(58, 57, 57);
+    background-color: var(--color-bg);
+    cursor: pointer;
+}
+
 .form_element select:focus{
     border: 2px solid rgb(176, 175, 175);
     transition: .5s ease-in-out;
@@ -65,15 +72,14 @@
 .form_element select option,.form_element select option:disabled{
     color: whitesmoke;
 }
-#upload{
-    padding: .4rem;
-    padding-left: .8rem;
-    margin: 0;
-    height: 35px;
+form button:hover{
+    background-color: var(--color-btn-hover-bg);
+}
+.file_input_area{
+    display: block;
+}
+.file_input_area p {
+    margin: 1rem 0;
     font-size: 1rem;
-    border-radius: .2rem;
-    background-color: var(--color-bg);
-    opacity: .6;
-    border: 2px solid rgb(58, 57, 57);
-    color: whitesmoke;
+    font-weight: 100;
 }
