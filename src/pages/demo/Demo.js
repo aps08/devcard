@@ -20,15 +20,12 @@ const Demo = () => {
 
   return (
     <>
-      <div className="progress-bar">
-        <div style={{ width: '10%' }} className="bar"></div>
-      </div>
-      <div className="demo-form">
+      <div className="demo">
         <h3>
           Get started by filling out the exciting form below and create your
-          very own demo developer card!
+          very own developer card!
         </h3>
-        <form>
+        <form className="grid-form">
           <Input
             label="Name"
             name="name"
@@ -84,7 +81,7 @@ const Demo = () => {
               type="email"
             />
           ) : (
-            ''
+            <></>
           )}
           {Select.contact === 'phone' || Select.contact === 'both' ? (
             <Input
@@ -94,7 +91,7 @@ const Demo = () => {
               required={true}
             />
           ) : (
-            ''
+            <></>
           )}
           <div className="form_element">
             <label>Social media</label>

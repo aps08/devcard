@@ -1,19 +1,14 @@
-.progress-bar, .demo-form{
+.demo{
     display: grid;
     place-items: center;
-    padding: 1rem 0;
+    margin: 3vw 0;
 }
-.demo-form h3{
+.demo h3{
     place-items: center;
     width: 80%;
+    text-align: center
 }
-.progress-bar .bar{
-    height: 5px;
-    border-radius: .5rem;
-    background-color: #238636;
-    transition: 1s ease-in-out;
-}
-.demo-form form{
+.grid-form{
     color: rgba(255,255,255,0.7);
     border-radius: .5rem;
     width: 80%;
@@ -21,7 +16,6 @@
     background-color: rgba(31, 35, 41, 0.9);
     margin: 1rem 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     row-gap: 1rem;
     column-gap: 1rem;
     place-items: center;
@@ -29,7 +23,8 @@
 .form_element button{
     width: 12vw;
 }
-.demo-form h3{
+.demo h3{
+    padding: 0 1rem;
     color: rgba(255,255,255,0.7);
     font-size: 2vw;
 }
@@ -73,8 +68,7 @@
     font-weight: 100;
 }
 @media only screen and (max-width: 800px){
-    .demo-form form{
-        width: 100%;
+    .grid-form{
         grid-template-columns: 1fr;
     }
 }
