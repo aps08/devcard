@@ -12,6 +12,7 @@ const Card = (props) => {
             <li key={item}>{item}</li>
           ))}
         </ul>
+        <button>{props.buttonlabel}</button>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import './Home.css';
 const Home = () => {
   return (
     <>
-      <section className="tag-card">
+      <section>
         <div className="tag">
           <h3>
             Impress with Devcards.
@@ -20,7 +20,7 @@ const Home = () => {
           <button className="l-text"></button>
         </div>
         <div>
-          <div className="card">
+          <div className="text-right">
             <img
               src="https://picsum.photos/600/320?grayscale"
               alt="cardimage"
@@ -28,17 +28,21 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="stepper">
+      <section>
         <div>
-          <div className="card">
+          <div className="text-left">
             <img
               src="https://picsum.photos/600/320?grayscale"
               alt="cardimage"
             />
           </div>
         </div>
-        <div className="steps">
-          <h3>Get your devcard. In four steps.</h3>
+        <div className="tag">
+          <h3>
+            Get exclusive devcard.
+            <br />
+            In four easy steps.
+          </h3>
           <p>
             Create your account.
             <br />
@@ -51,40 +55,36 @@ const Home = () => {
           <button>Try demo now</button>
         </div>
       </section>
-      <section className="offers">
-        <h3 className="head">What we offer ?</h3>
-        <div className="offer-cards">
+      <div>
+        <h3 className="service text-style">What we offer ?</h3>
+        <section className="offer-cards">
           <Card
             label="Event exclusive"
-            para="Experience exclusivity with event-exclusive
+            para="Experience exclusivity with three event-exclusive
                   cards."
-            list={['Get three cards', 'Credit 5', 'Mutiple designs']}
+            list={['Credit 5', 'Mutiple designs']}
+            buttonlabel="Buy 5 credits"
           />
           <Card
             label="Bulk cards"
-            para="Elevate your daily routine with a pack of cards."
-            list={['Get thirty cards', 'Credit 6', 'Single designs']}
+            para="Elevate your daily routine with a pack of thirty cards."
+            list={['Credit 6', 'Single designs']}
+            buttonlabel="Buy 6 credits"
           />
           <Card
             label="Send gifts"
-            para="Send devcard to your buddies and colleagues."
-            list={[
-              'Send mutiple devcards',
-              'Credit customized',
-              'Pay upon acceptance.'
-            ]}
+            para="Send mutiple devcard to your buddies and colleagues."
+            list={['Credit customized', 'Pay upon acceptance.']}
+            buttonlabel="Buy credits"
           />
           <Card
             label="Organization"
-            para="Empowering organizations with custom card and  gifts."
-            list={[
-              'Get mutiple cards.',
-              'Credit customized',
-              'Early access to latest design.'
-            ]}
+            para="Empowering organizations with custom card and gifts."
+            list={['Credit customized', 'Early access.']}
+            buttonlabel="Buy credits"
           />
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 };

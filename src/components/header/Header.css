@@ -1,5 +1,5 @@
 header{
-    position: fixed;
+    position: sticky;
     top:0;
     width: 100%;
     z-index: 1;
@@ -48,18 +48,6 @@ nav ul li{
     display: flex;
     align-items: center;
 }
-
-nav button{
-    padding: 0 10px;
-    font-size: 1rem;
-    border-radius: .2rem;
-    font-weight: 500;
-    line-height: 2;
-    margin: 0 5px;
-    color: var(--color-header-hover);
-    background-color: var(--color-btn-bg);
-    border-color: none;
-}
 nav .hamburger{
     display: none;
     font-size: 26px;
@@ -75,11 +63,6 @@ nav ul li:hover{
 a.active li {
     color: white;
 }
-
-nav button:hover{
-    background-color: var(--color-btn-hover-bg);
-}
-
 .l-text::before{
     content: "Sign up for free";
     transition: 0.5s ease-in-out;

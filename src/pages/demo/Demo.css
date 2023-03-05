@@ -28,14 +28,6 @@
 }
 .form_element button{
     width: 12vw;
-    height: 30px;
-    margin-top: 1rem;
-    font-size: 1rem;
-    border-radius: 0.2rem;
-    font-weight: 500;
-    margin: 0 5px;
-    background-color: var(--color-btn-bg);
-    color: var(--color-header-hover);
 }
 .demo-form h3{
     color: rgba(255,255,255,0.7);
@@ -72,9 +64,6 @@
 .form_element select option,.form_element select option:disabled{
     color: whitesmoke;
 }
-form button:hover{
-    background-color: var(--color-btn-hover-bg);
-}
 .file_input_area{
     display: block;
 }
@@ -82,4 +71,10 @@ form button:hover{
     margin: 1rem 0;
     font-size: 1rem;
     font-weight: 100;
+}
+@media only screen and (max-width: 800px){
+    .demo-form form{
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
 }

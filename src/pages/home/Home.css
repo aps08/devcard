@@ -1,81 +1,54 @@
 section *{
     transition: 0.5s ease-in-out;
 }
-.tag-card button, .stepper button,.offers button{
-    transition: none;
-}
-.tag-card, .stepper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.tag-card div, .stepper div{
-    width: 50%;
+section{
+    margin-top: 3vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .tag{
-    justify-content: center;
+    padding: 0 1rem;
 }
-.tag-card .tag h3, .stepper .steps h3{
+section h3, .service{
     color: var(--color-header-hover);
     font-size: 3vw;
     font-weight: 600;
     margin: 10px 0;
 }
-.offers .head{
-    font-size: 3vw;
-    color: white;
-    text-align: center;
-    padding: .5rem 0;
-    border-bottom: 2px solid lightgray;
-    opacity: .7;
-}
-.tag-card .tag p, .stepper .steps p{
+section p{
     padding: 10px 0;
     font-size: 1.5vw;
     color: var(--color-header-hover);
     opacity: .7;
 }
-.tag-card .tag button, .stepper .steps button,.offers button{
-    margin: 10px 0;
-    padding: 0 10px;
+section button{
     font-size: 1.5vw;
-    border-radius: .2rem;
-    font-weight: 500;
-    line-height: 2;
-    color: var(--color-header-hover);
-    background-color: var(--color-btn-bg);
-    border-color: none;
+    margin: 0;
+    transition: none;
 }
-
-.tag-card .tag button:hover, .stepper .steps button:hover{
-    background-color: var(--color-btn-hover-bg);
-}
-.tag-card .card, .stepper .card{
-    width:100%;
-    text-align: right;
-}
-.stepper .card{
-    text-align: left;
-}
-.tag-card .card img, .stepper .card img{
+section div img{
     display: inline-block;
-    width: 85%;
+    place-items: center;
+    width: 90%;
     height: auto;
     border-radius: .5rem;
     animation: floating 2s infinite ease-in-out;
+    margin: 1rem;
 }
-.stepper .card img{
+section:nth-child(2) img{
     animation: none;
 }
-.offers .offer-cards{
-    padding: .5rem 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.text-style{
+    margin: 3vw 0 1vw 0;
+    text-align: center;
+    border-bottom: 2px solid var(--color-header-hover);
+}
+.offer-cards{
+    margin-top: 0;
     place-items: center;
     column-gap: 1rem;
     row-gap: 1rem;
-    margin: 1rem;
+    margin-bottom: 3vw;
 }
 @keyframes floating {
     0% {
@@ -89,22 +62,14 @@ section *{
     }
 }
 @media only screen and (max-width: 1048px){
-    .offer-cards .card{
-        width: 100%;
-    }
+    
 }
 @media only screen and (max-width: 800px){
-    .offers .offer-cards{
+    section{
         grid-template-columns: 1fr;
     }
-    .tag-card{
-        flex-direction: column-reverse;
-    }
-    .stepper{
-        flex-direction: column;
-    }
-    .tag-card div, .stepper div{
-        width: 100%;
+    .offer-cards{
+        grid-template-columns: 1fr;
     }
     .tag-card .card, .stepper .card{
         text-align: center;
@@ -112,34 +77,13 @@ section *{
     .tag-card .tag,.stepper .steps{
         padding: 0 7%;
     }
-    .tag-card .tag h3,.stepper .steps h3{
+    section h3, .service{
         font-size: 5vw;
     }
-    .tag-card .tag p,.stepper .steps p,.tag-card .tag button, .stepper .steps button,.learn button{
+    section div p,section button{
         font-size: 2.5vw;
     }
-    .offers div h1{
-        font-size: 4vw;
-    }
-    .offers .offer-cards{
-        display: block;
-    }
-    .next-line{
-        margin-top: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .next-line .card{
-        width: 50%;
-    }
-    .offers .offer-cards .card .text h3{
-        font-size: 4vw;
-    }
-    .offers .offer-cards .card .text p{
-        font-size: 2.5vw;
-    }
-    .offer-cards .card{
-        margin-bottom: 1rem;
+    .text-left,.text-right{
+        text-align: left;
     }
 }

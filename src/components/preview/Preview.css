@@ -34,20 +34,6 @@
     border-bottom-right-radius: .5rem;
     border-bottom-left-radius: .5rem;
 }
-.modal .bottom button{
-    padding: 0 10px;
-    font-size: 1rem;
-    border-radius: .2rem;
-    font-weight: 500;
-    line-height: 2;
-    margin: 0 5px;
-    color: var(--color-header-hover);
-    background-color: var(--color-btn-bg);
-    border-color: none;
-}
-.modal .bottom button:hover{
-    background-color: var(--color-btn-hover-bg);
-}
 .modal .body img{
     padding: 1rem;
     width: 100%;

@@ -1,3 +1,6 @@
+.card img{
+    margin: 1vw;
+}
 .offer-cards .card{
     display: flex;
     text-align: center;
@@ -13,31 +16,50 @@
     border-bottom-left-radius: .5rem;
 }
 .card .description{
-    padding: .5rem 1rem;
+    text-align: left;
+    position: relative;
 }
 .card .description h3{
     color: var(--color-header-hover);
-    font-size: 2vw;
+    font-size: 2.4vw;
     margin-bottom: 1rem;
     text-align: left;
 }
-.card .description p{
+.card .description p,.card .description ul li{
     text-align: left;
-    font-size: 1rem;
+    font-size: 1.4vw;
     color: var(--color-header-hover);
     opacity: .7;
+    padding: 0;
 }
 .card .description ul{
-    list-style-type: disc;
-    margin: 1rem 0;
+    margin: 1vw 0;
     text-align: left;
     color: var(--color-header-hover);
 }
-.card .description ul li{
-    margin: .2rem 0;
-    opacity: .7;
+.card button{
+    position: absolute;
+    font-size: 1.2vw;
+    bottom: 1vw;
 }
 .offer-cards .card:hover{
     transform: scale(1.02);
     transition: .5s ease-in-out;
+}
+@media only screen and (max-width: 800px){
+    .card .description h3{
+        font-size: 4.4vw;
+    }
+    .card .description p,.card .description ul li{
+        font-size: 2.4vw;
+    }
+    .card button{
+        font-size: 2.2vw;
+    }
+    .card .description ul{
+        margin: 1rem 0;
+    }
+    .card .description ul li{
+        margin: .5rem 0;
+    }
 }

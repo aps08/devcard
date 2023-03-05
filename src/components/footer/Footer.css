@@ -63,16 +63,6 @@ footer p{
     color: var(--color-header-hover);
     font-size: 1.1rem;
 }
-footer div button{
-    color: white;
-    background-color: var(--color-btn-bg);
-    font-size: 1rem;
-    padding: 8px 10px;
-    border-radius: .2rem;
-}
-footer div button:hover{
-    background-color: var(--color-btn-hover-bg);
-}
 
 @media only screen and (max-width: 800px){
     footer{
