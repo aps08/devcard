@@ -1,5 +1,5 @@
 import './Backdrop.css';
-const Backdrop = (props) => {
+const Backdrop = () => {
   return <div className="backdrop"></div>;
 };
 
