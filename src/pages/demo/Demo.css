@@ -1,27 +1,28 @@
 .demo{
-    display: grid;
-    place-items: center;
-    margin: 3vw 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3vw;
 }
-.demo h3{
-    place-items: center;
+.demo .container{
     width: 80%;
-    text-align: center
 }
-.grid-form{
+.demo .container h3{
+    text-align: center;
+}
+form{
     color: rgba(255,255,255,0.7);
     border-radius: .5rem;
-    width: 80%;
+    width: 100%;
     padding: 1rem;
     background-color: rgba(31, 35, 41, 0.9);
-    margin: 1rem 0;
-    display: grid;
     row-gap: 1rem;
     column-gap: 1rem;
     place-items: center;
 }
-.form_element button{
-    width: 12vw;
+#demoform{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .demo h3{
     padding: 0 1rem;
@@ -55,7 +56,6 @@
     border: 2px solid rgb(176, 175, 175);
     transition: .5s ease-in-out;
 }
-
 .form_element select option,.form_element select option:disabled{
     color: whitesmoke;
 }
@@ -63,12 +63,27 @@
     display: block;
 }
 .file_input_area p {
-    margin: 1rem 0;
     font-size: 1rem;
     font-weight: 100;
 }
+.file_input_area img{
+    padding: 0;
+    margin: 0;
+    height: 5rem;
+    width: 5rem;
+    animation: none;
+}
+.gridspan2{
+    grid-column: span 2;
+    margin: .5rem 0;
+    place-items: center;
+}
 @media only screen and (max-width: 800px){
-    .grid-form{
+    .gridspan2{
+        grid-column: span 1;
+    }
+    #demoform{
+        display: grid;
         grid-template-columns: 1fr;
     }
 }

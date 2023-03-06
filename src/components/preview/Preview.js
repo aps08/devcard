@@ -27,7 +27,10 @@ const Preview = (props) => {
           shadingOpacity=".9"
           label="Browse file"
           labelStyle={{ color: 'whitesmoke' }}
-          onClose={() => SetImage(null)}
+          onClose={() => {
+            setPreview(null);
+            SetImage(null);
+          }}
           onCrop={(view) => setPreview(view)}
         />
       </div>

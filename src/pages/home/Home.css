@@ -68,6 +68,9 @@ section:nth-child(2) img{
     section{
         grid-template-columns: 1fr;
     }
+    .tag{
+        order: 1;
+    }
     .offer-cards{
         grid-template-columns: 1fr;
     }
