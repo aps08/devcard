@@ -23,10 +23,18 @@ const Footer = () => {
         <div className="navigate">
           <h3>Learn more</h3>
           <ul>
-            <li>How to earn credits?</li>
-            <li>Offers</li>
-            <li>Contact</li>
-            <li>Feedback</li>
+            <NavLink to="about#earncredits">
+              <li>How to earn credits?</li>
+            </NavLink>
+            <NavLink to="home#offers">
+              <li>Offers</li>
+            </NavLink>
+            <NavLink to="about#contactfeedback">
+              <li>Contact</li>
+            </NavLink>
+            <NavLink to="about#contactfeedback">
+              <li>Feedback</li>
+            </NavLink>
           </ul>
         </div>
       </div>

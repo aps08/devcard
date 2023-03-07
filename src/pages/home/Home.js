@@ -57,7 +57,7 @@ const Home = () => {
       </section>
       <div>
         <h3 className="service text-style">What we offer ?</h3>
-        <section className="offer-cards">
+        <section className="offer-cards" id="offers">
           <Card
             label="Event exclusive"
             para="Experience exclusivity with three event-exclusive

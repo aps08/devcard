@@ -5,3 +5,22 @@
 .about p button{
     opacity: 1;
 }
+.cfform{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.cfform .form_element{
+    width: 100%;
+}
+.cfmessage{
+    grid-column: span 2;
+    text-align: left;
+}
+textarea{
+    padding: .5rem;
+    font-size: 1rem;
+    color: whitesmoke;
+}
+textarea::placeholder{
+    font-size: 1rem;
+}
