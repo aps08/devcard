@@ -17,7 +17,7 @@ const Home = () => {
             Stand out from the competition with our high-quality business cards
             designed to showcase your skills and expertise as a developer.
           </p>
-          <button className="l-text"></button>
+          <button>Try demo now</button>
         </div>
         <div>
           <div className="text-right">
@@ -50,9 +50,9 @@ const Home = () => {
             <br />
             Fill skills and other details.
             <br />
-            Select and get your devcard.
+            Get your devcard on your doorstep.
           </p>
-          <button>Try demo now</button>
+          <button className="l-text"></button>
         </div>
       </section>
       <div>

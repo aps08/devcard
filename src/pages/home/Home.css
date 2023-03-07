@@ -44,10 +44,10 @@ section:nth-child(2) img{
     border-bottom: 2px solid var(--color-header-hover);
 }
 .offer-cards{
-    margin-top: 0;
+    margin-top: 2rem;
     place-items: center;
-    column-gap: 1rem;
-    row-gap: 1rem;
+    column-gap: 2vw;
+    row-gap: 2vw;
     margin-bottom: 3vw;
 }
 @keyframes floating {

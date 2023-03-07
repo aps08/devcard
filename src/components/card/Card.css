@@ -39,7 +39,6 @@
 }
 .card button{
     position: absolute;
-    font-size: 1.2vw;
     bottom: 1vw;
 }
 .offer-cards .card:hover{
@@ -47,6 +46,9 @@
     transition: .5s ease-in-out;
 }
 @media only screen and (max-width: 800px){
+    .card img{
+        margin: 1rem;
+    }
     .card .description h3{
         font-size: 4.4vw;
     }
@@ -55,6 +57,7 @@
     }
     .card button{
         font-size: 2.2vw;
+        bottom: 1rem;
     }
     .card .description ul{
         margin: 1rem 0;

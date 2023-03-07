@@ -24,8 +24,8 @@ const Footer = () => {
           <h3>Learn more</h3>
           <ul>
             <li>How to earn credits?</li>
-            <li>Contribute</li>
-            <li>Source code</li>
+            <li>Offers</li>
+            <li>Contact</li>
             <li>Feedback</li>
           </ul>
         </div>

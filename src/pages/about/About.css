@@ -1,0 +1,7 @@
+.about{
+    grid-template-columns: 1fr;
+    margin-bottom: 3vw;
+}
+.about p button{
+    opacity: 1;
+}
