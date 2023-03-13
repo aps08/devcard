@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 import '../header/Header.css';
 import logo from '../../assets/images/logo.png';
 import { NavLink } from 'react-router-dom';
 
-const WIDTH_SIZE = 768;
+const WIDTH_SIZE = 800;
 
 const Header = () => {
+  const { IsLoggedin } = useContext(AuthContext);
   const [Isopen, setIsopen] = useState(false);
   const onresize = (event) => {
     if (event.target.innerWidth > WIDTH_SIZE && Isopen) {
@@ -18,18 +20,22 @@ const Header = () => {
       removeEventListener('resize', onresize);
     };
   });
+  const navigationhandler = () => {
+    if (Isopen) {
+      setIsopen(!Isopen);
+    }
+  };
   const hamburgerhandler = () => {
     setIsopen(!Isopen);
   };
   const signuphandler = () => {
     console.log('signup');
-    setIsopen(!Isopen);
+    navigationhandler();
   };
   const signinhandler = () => {
     console.log('signin');
+    navigationhandler();
   };
-
-  const loggedIn = false;
   return (
     <header>
       <div className="branding">
@@ -38,29 +44,29 @@ const Header = () => {
       </div>
       <nav>
         <ul style={{ right: !Isopen ? '-100%' : '0' }}>
-          <NavLink to="home">
+          <NavLink to="home" onClick={navigationhandler}>
             <li>Home</li>
           </NavLink>
-          {!loggedIn && (
-            <NavLink to="demo">
+          {!IsLoggedin && (
+            <NavLink to="demo" onClick={navigationhandler}>
               <li>Demo</li>
             </NavLink>
           )}
-          <NavLink to="about">
+          <NavLink to="about" onClick={navigationhandler}>
             <li>About</li>
           </NavLink>
-          {loggedIn && (
-            <NavLink to="dashboard">
+          {IsLoggedin && (
+            <NavLink to="dashboard" onClick={navigationhandler}>
               <li>Dashboard</li>
             </NavLink>
           )}
           <li>
-            {!loggedIn && (
+            {!IsLoggedin && (
               <button onClick={signuphandler} className="l-text"></button>
             )}
           </li>
         </ul>
-        {!loggedIn && <button onClick={signinhandler}>Sign in</button>}
+        {!IsLoggedin && <button onClick={signinhandler}>Sign in</button>}
         <div className="hamburger" onClick={hamburgerhandler}>
           {!Isopen ? <>&#9776;</> : <>&#10006;</>}
         </div>

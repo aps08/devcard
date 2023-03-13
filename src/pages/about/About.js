@@ -59,6 +59,9 @@ const About = () => {
                 required
                 name="message"></textarea>
             </div>
+            <div className="form_element">
+              <button type="submit">Submit</button>
+            </div>
           </form>
         </div>
         <div>
@@ -75,14 +78,24 @@ const About = () => {
           <h3>How to earn credits?</h3>
           <p>
             In simple words, you can contribute to this project and earn
-            credits, you can use those credits to get your favorite card. Follow
-            the instruction below in order to contribute:
+            credits, you can use those credits to get your favorite card. There
+            are two ways to contribute.
           </p>
           <ul>
-            <li>A</li>
-            <li>B</li>
+            <li>1. Submit new card design and earn 1 credit point</li>
+            <li>
+              2. Write and submit code for the submitted design and earn 2
+              credit points
+            </li>
           </ul>
+          <p>Follow the steps below in order to submit your design or code:</p>
         </div>
+        <ul>
+          <li>1. Create your account</li>
+          <li>2. Go to dashboard</li>
+          <li>3. Click on contribution</li>
+          <li>4. Select design or code, and submit it.</li>
+        </ul>
       </section>
     </>
   );

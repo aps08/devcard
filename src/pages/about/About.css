@@ -16,6 +16,14 @@
     grid-column: span 2;
     text-align: left;
 }
+#contactfeedback button{
+    width: 50%;
+}
+ul li{
+    font-size: 1.5vw;
+    color: var(--color-header-hover);
+    opacity: .7;
+}
 textarea{
     padding: .5rem;
     font-size: 1rem;

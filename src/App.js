@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-
+import AuthContext from './store/auth-context';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -9,22 +9,26 @@ import Demo from './pages/demo/Demo';
 import Footer from './components/footer/Footer';
 
 function App() {
+  const IsLoggedin = false;
   return (
-    <>
+    <AuthContext.Provider
+      value={{
+        IsLoggedin: IsLoggedin
+      }}>
       <Header />
       <main>
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/demo" element={<Demo />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
           <Route path="/About" element={<About />} />
+          {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
       </main>
       <Footer />
-    </>
+    </AuthContext.Provider>
   );
 }
 

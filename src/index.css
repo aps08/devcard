@@ -40,6 +40,13 @@ button{
 button:hover{
   background-color: var(--color-btn-hover-bg);
 }
+@media only screen and (max-width: 800px){
+  button {
+    font-size: 2.5vw;
+  }
+}
+
+
 #dots,#dots2,#dots3{
   z-index: 15;
 }

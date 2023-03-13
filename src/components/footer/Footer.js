@@ -1,7 +1,10 @@
 import '../footer/Footer.css';
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 const Footer = () => {
+  const { IsLoggedin } = useContext(AuthContext);
   return (
     <footer>
       <div className="links">
@@ -11,20 +14,28 @@ const Footer = () => {
             <NavLink to="home">
               <li>Home</li>
             </NavLink>
-            <NavLink to="demo">
-              <li>Demo</li>
-            </NavLink>
+            {!IsLoggedin && (
+              <NavLink to="demo">
+                <li>Demo</li>
+              </NavLink>
+            )}
+            {IsLoggedin && (
+              <NavLink to="home">
+                <li>Contribute</li>
+              </NavLink>
+            )}
             <NavLink to="about">
               <li>About</li>
             </NavLink>
-            <li>Sign in</li>
+            {!IsLoggedin && <li>Sign in</li>}
+            {IsLoggedin && <li>Sign out</li>}
           </ul>
         </div>
         <div className="navigate">
           <h3>Learn more</h3>
           <ul>
             <NavLink to="about#earncredits">
-              <li>How to earn credits?</li>
+              <li>Earn credits?</li>
             </NavLink>
             <NavLink to="home#offers">
               <li>Offers</li>
@@ -47,7 +58,8 @@ const Footer = () => {
           Devcards is a digital platform for personalized developer cards,
           highlighting skills and expertise with professional templates.
         </p>
-        <button>Try now for free</button>
+        {!IsLoggedin && <button>Try now for free</button>}
+        {IsLoggedin && <button>Get your card</button>}
       </div>
     </footer>
   );
