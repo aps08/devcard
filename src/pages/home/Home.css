@@ -17,7 +17,7 @@ section h3, .service{
 }
 section p{
     padding: 10px 0;
-    font-size: 1.5vw;
+    /* font-size: 1.5vw; */
     color: var(--color-header-hover);
     opacity: .7;
 }

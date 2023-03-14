@@ -13,39 +13,6 @@
     monospace;
   border: none;
 }
-body{
-  background-color: var(--color-bg);
-}
-main{
-  padding: 0 4rem;
-  transition: 0.5s ease-in-out;
-}
-.text-left{
-  text-align: left;
-}
-.text-right{
-  text-align: right;
-}
-button{
-  padding: 0 10px;
-  font-size: 1rem;
-  border-radius: .2rem;
-  font-weight: 500;
-  line-height: 2;
-  margin: 0 5px;
-  color: var(--color-header-hover);
-  background-color: var(--color-btn-bg);
-  border-color: none;
-}
-button:hover{
-  background-color: var(--color-btn-hover-bg);
-}
-@media only screen and (max-width: 800px){
-  button {
-    font-size: 2.5vw;
-  }
-}
-
 
 #dots,#dots2,#dots3{
   z-index: 15;

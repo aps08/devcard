@@ -1,0 +1,44 @@
+body{
+    background-color: var(--color-bg);
+  }
+main{
+    padding: 0 4rem;
+    transition: 0.5s ease-in-out;
+}
+body p{
+    padding: 10px 0;
+    font-size: 1.6vw;
+    color: var(--color-header-hover);
+    opacity: .7;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
+button{
+    padding: 0 10px;
+    font-size: 1rem;
+    border-radius: .2rem;
+    font-weight: 500;
+    line-height: 2;
+    margin: 0 5px;
+    color: var(--color-header-hover);
+    background-color: var(--color-btn-bg);
+    border-color: none;
+}
+main button{
+    font-size: 1.4vw;
+}
+button:hover{
+    background-color: var(--color-btn-hover-bg);
+}
+@media only screen and (max-width: 800px){
+    body button {
+      font-size: 2.5vw;
+    }
+    body p{
+        font-size: 2.4vw;
+    }
+}
