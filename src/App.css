@@ -1,7 +1,8 @@
 body{
     background-color: var(--color-bg);
-  }
+}
 main{
+    margin-top: 7rem;
     padding: 0 4rem;
     transition: 0.5s ease-in-out;
 }
@@ -11,10 +12,10 @@ body p{
     color: var(--color-header-hover);
     opacity: .7;
 }
-.text-left{
+.left{
     text-align: left;
 }
-.text-right{
+.right{
     text-align: right;
 }
 button{
@@ -35,10 +36,10 @@ button:hover{
     background-color: var(--color-btn-hover-bg);
 }
 @media only screen and (max-width: 800px){
-    body button {
+    /* main button {
       font-size: 2.5vw;
     }
-    body p{
+    main p{
         font-size: 2.4vw;
-    }
+    } */
 }

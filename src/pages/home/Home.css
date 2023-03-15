@@ -1,32 +1,26 @@
-section *{
+.section *{
     transition: 0.5s ease-in-out;
 }
-section{
+.section{
     margin-top: 3vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-.tag{
+.tagline{
     padding: 0 1rem;
 }
-section h3, .service{
+.heading, .service{
     color: var(--color-header-hover);
     font-size: 3vw;
     font-weight: 600;
     margin: 10px 0;
-}
-section p{
-    padding: 10px 0;
-    /* font-size: 1.5vw; */
-    color: var(--color-header-hover);
-    opacity: .7;
 }
 section button{
     font-size: 1.5vw;
     margin: 0;
     transition: none;
 }
-section div img{
+.section div img{
     display: inline-block;
     place-items: center;
     width: 90%;
@@ -35,7 +29,7 @@ section div img{
     animation: floating 2s infinite ease-in-out;
     margin: 1rem;
 }
-section:nth-child(2) img{
+.section:nth-child(2) img{
     animation: none;
 }
 .text-style{
@@ -65,10 +59,10 @@ section:nth-child(2) img{
     
 }
 @media only screen and (max-width: 800px){
-    section{
+    .section{
         grid-template-columns: 1fr;
     }
-    .tag{
+    .tagline{
         order: 1;
     }
     .offer-cards{
@@ -80,10 +74,10 @@ section:nth-child(2) img{
     .tag-card .tag,.stepper .steps{
         padding: 0 7%;
     }
-    section h3, .service{
+    .section h3, .service{
         font-size: 5vw;
     }
-    section div p,section button{
+    .section div p,section button{
         font-size: 2.5vw;
     }
     .text-left,.text-right{

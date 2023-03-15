@@ -1,67 +1,25 @@
-footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.footer *{
+    transition: .5s ease-in-out;
+}
+.footer{
+    display: grid;
+    grid-template-columns: 24% 24% 52%;
     padding: 1rem 4rem;
-    transition: 0.5s ease-in-out;
-    background: transparent;
     box-shadow: rgb(30, 34, 40) 0px -10px 10px -10px;
 }
-footer div{
-    width: 50%;
-    transition: 0.5s ease-in-out;
-}
-
-.links{
-    display: flex;
-    justify-content: space-between;
-}
-footer .navigate{
-    padding: 0.5rem;
-    margin: 0.5rem;
-}
-footer .navigate h3{
+.footer .brand_name{
     margin-left: 10px;
-    font-size: 1rem;
-    color: var(--color-btn-bg);
 }
-footer .navigate ul{
+.footer .nav-list{
     display: block;
     margin: 15px 0;
     border-left: 2px solid whitesmoke;
 }
-footer .navigate ul li{
-    font-size: 1rem;
+.footer .list-item{
     color: var(--color-header-hover);
-    padding: 0 15px;
-    margin: 10px 0;
-    font-weight: bold;
 }
-footer ul li:hover{
-    color: var(--color-white);
-}
-footer .navigate p{
-    display: contents;
-    width: inherit;
-}
-a.active li {
+a.active .list-item {
     color: white;
-}
-footer .branding img{
-    width: 45px;
-    height: 30px;
-}
-footer .branding span{
-    margin-left: 10px;
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-transform: capitalize;
-    color: var(--color-header-hover);
-}
-footer p{
-    margin: 10px 0;
-    color: var(--color-header-hover);
-    font-size: 1.1rem;
 }
 
 @media only screen and (max-width: 800px){

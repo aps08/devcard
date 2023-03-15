@@ -4,9 +4,9 @@ import './Home.css';
 const Home = () => {
   return (
     <>
-      <section>
-        <div className="tag">
-          <h3>
+      <section className="section">
+        <div className="tagline">
+          <h3 className="heading">
             Impress with Devcards.
             <br />
             Showcase expertise
@@ -28,7 +28,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className="section">
         <div>
           <div className="text-left">
             <img
@@ -38,7 +38,7 @@ const Home = () => {
           </div>
         </div>
         <div className="tag">
-          <h3>
+          <h3 className="heading">
             Get exclusive devcard.
             <br />
             In four easy steps.
@@ -52,12 +52,12 @@ const Home = () => {
             <br />
             Get your devcard on your doorstep.
           </p>
-          <button className="l-text"></button>
+          <button className="long-text"></button>
         </div>
       </section>
       <div>
-        <h3 className="service text-style">What we offer ?</h3>
-        <section className="offer-cards" id="offers">
+        <h3 className="heading service text-style">What we offer ?</h3>
+        <section className="section offer-cards" id="offers">
           <Card
             label="Event exclusive"
             para="Experience exclusivity with three event-exclusive

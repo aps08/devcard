@@ -1,13 +1,15 @@
-header{
-    position: sticky;
+.navbar *{
+    transition: 0.5s ease-in-out;
+}
+.navbar{
+    position: fixed;
     top:0;
     width: 100%;
     z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 4rem;
-    transition: 0.5s ease-in-out;
+    padding: 1rem 4rem;
     background-color: rgba(22, 27, 34, 0.95);
     box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
 }
@@ -16,95 +18,103 @@ header{
     display: flex;
     align-items: center;
 }
-.branding img{
+.brand_image{
     width: 60px;
     height: 40px;
-    transition: 0.5s ease-in-out;
 }
-.branding span{
+.brand_name{
     margin-left: 10px;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bolder;
     text-transform: capitalize;
     color: var(--color-header-hover);
-    transition: 0.5s ease-in-out;
 }
-nav{
+.nav{
     height: 100%;
     display: flex;
     align-items:center;
 }
-nav ul{
-    display: none;
+.nav-list{
     display: flex;
     align-items:center;
 }
-nav ul li{
-    font-size: 1rem;
+.list-item{
+    font-size: 1.2rem;
     color: var(--color-header-hover);
-    margin: 0 5px;
-    padding: 0 5px;
-    line-height: 2;
-    display: flex;
-    align-items: center;
+    margin: 0 12px;
 }
-nav .hamburger{
+#menu{
     display: none;
-    font-size: 26px;
-    width: 24px;
+}
+.hamburger{
+    font-size: 2rem;
+    width: 28px;
     cursor: pointer;
     margin: 0 10px;
     color: var(--color-header-hover);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-nav ul li:hover{
+.hamburger-line{
+    width: 100%;
+    height: 3px;
+    margin: 8px 0;
+    background-color: var(--color-header-hover);
+}
+.list-item:hover{
     color: var(--color-white);
 }
 
-a.active li {
+a.active .list-item {
     color: white;
 }
-.l-text::before{
+.long-text::before{
     content: "Sign up for free";
-    transition: 0.5s ease-in-out;
 }
 
- 
 @media only screen and (max-width: 1024px){
-    .l-text::before{
-        content: "Sign up";
+    #menu{
+        display: block;
     }
-}
-
-@media only screen and (max-width: 800px){
-    header{
-        transition: 0.5s ease-in-out;
+    .navbar button{
+        margin: 5px 0;
     }
-    header ul{
+    .nav-list{
         display: block;
         position: absolute;
         width: 100%;
-        top: 100px;
+        top: 76px;
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
-        transition: 0.5s ease-in-out;
         background-color: rgba(22, 27, 34, 0.8);
     }
-    header ul li{
+    .list-item{
         display: flex;
         justify-content: center;
+        font-size: 1.2rem;
+        margin: 10px 0;
     }
-    nav button{
-        margin: 10px auto;
-    }
-    nav .hamburger{
+    .hamburger{
         display: block;
+        visibility: visible;
     }
-    header .branding img{
-        width: 50px;
+    
+}
+
+@media only screen and (max-width: 768px){
+    .navbar{
+        padding: 1rem 2rem;
+    }
+    .brand_image{
+        width: 55px;
         height: 35px;
-        transition: 0.5s ease-in-out;
     }
-    header .branding span{
-        font-size: 1.6rem;
-        transition: 0.5s ease-in-out;
+    .brand_name{
+        font-size: 2rem;
+    }
+}
+@media only screen and (max-width: 480px){
+    .brand_name{
+        display: none;
     }
 }
