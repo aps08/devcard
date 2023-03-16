@@ -1,68 +1,78 @@
-.card img{
-    margin: 1vw;
-}
-.offer-cards .card{
-    display: flex;
-    text-align: center;
-    position: relative;
-    background-color: rgba(31, 35, 41, 0.9);
-    border-radius: .5rem;
+.card *{
     transition: .5s ease-in-out;
 }
-.offer-cards img{
-    width: 40%;
+.card{
+    margin: 1vw;
+    display: flex;
+    background-color: rgba(31, 35, 41, 0.9);
+    border-radius: .5rem;
+}
+.card_visual{
+    width: 45%;
     height: auto;
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
 }
-.card .description{
-    text-align: left;
-    position: relative;
-}
-.card .description h3{
-    color: var(--color-header-hover);
-    font-size: 2.4vw;
-    margin-bottom: 1rem;
+.description{
+    margin: 1rem;
     text-align: left;
 }
-.card .description p,.card .description ul li{
-    text-align: left;
-    font-size: 1.4vw;
-    color: var(--color-header-hover);
-    opacity: .7;
+.description h3{
+    font-size: 2vw;
+    margin: 5px 0;
+}
+.card ul{
+    margin: .4vw 0;
+}
+.card ul .para{
     padding: 0;
 }
-.card .description ul{
-    margin: 1vw 0;
-    text-align: left;
-    color: var(--color-header-hover);
-}
-.card button{
-    position: absolute;
-    bottom: 1vw;
-}
-.offer-cards .card:hover{
+.cards .card:hover{
     transform: scale(1.02);
     transition: .5s ease-in-out;
 }
-@media only screen and (max-width: 800px){
-    .card img{
-        margin: 1rem;
+@media only screen and (max-width: 1024px){
+    .card{
+        display: block;
     }
-    .card .description h3{
-        font-size: 4.4vw;
+    .description{
+        margin-top: 0;
     }
-    .card .description p,.card .description ul li{
-        font-size: 2.4vw;
+    .description h3{
+        font-size: 2rem;
     }
-    .card button{
-        font-size: 2.2vw;
-        bottom: 1rem;
+    .card_visual{
+        padding: 1rem;
+        width: 100%;
+        border-radius: .2rem;
     }
-    .card .description ul{
-        margin: 1rem 0;
+    .section .card button{
+        font-size: 1.2rem;
     }
-    .card .description ul li{
-        margin: .5rem 0;
+}
+@media only screen and (max-width: 768px){
+    .description h3{
+        font-size: 4vw;
+    }
+    .card{
+        display: flex;
+    }
+    .card_visual{
+        padding: 0;
+        width: 40%;
+        border-radius: none;
+    }
+}
+@media only screen and (max-width: 480px){
+    .description h3{
+        font-size: 2rem;
+    }
+    .card{
+        display: block;
+    }
+    .card_visual{
+        padding: 1rem;
+        width: 100%;
+        border-radius: .2rem;
     }
 }

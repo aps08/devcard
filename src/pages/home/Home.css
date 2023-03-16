@@ -2,25 +2,28 @@
     transition: 0.5s ease-in-out;
 }
 .section{
-    margin-top: 3vw;
+    margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-.tagline{
+.first,.second{
     padding: 0 1rem;
 }
-.heading, .service{
+.line{
+    border-bottom: 2px solid gray;
+    padding-bottom: 1rem;
+}
+.heading{
     color: var(--color-header-hover);
     font-size: 3vw;
     font-weight: 600;
     margin: 10px 0;
 }
-section button{
-    font-size: 1.5vw;
-    margin: 0;
-    transition: none;
+.section button{
+    font-size: 1.2rem;
+    margin: 8px 0;
 }
-.section div img{
+.showcase{
     display: inline-block;
     place-items: center;
     width: 90%;
@@ -32,17 +35,9 @@ section button{
 .section:nth-child(2) img{
     animation: none;
 }
-.text-style{
-    margin: 3vw 0 1vw 0;
-    text-align: center;
-    border-bottom: 2px solid var(--color-header-hover);
-}
-.offer-cards{
-    margin-top: 2rem;
-    place-items: center;
-    column-gap: 2vw;
-    row-gap: 2vw;
-    margin-bottom: 3vw;
+.cards{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 @keyframes floating {
     0% {
@@ -55,32 +50,41 @@ section button{
         transform: translate(0, 0);
     }
 }
-@media only screen and (max-width: 1048px){
-    
-}
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1024px){
     .section{
         grid-template-columns: 1fr;
     }
-    .tagline{
+    .section:last-child{
+        grid-template-columns: 1fr 1fr;
+    }
+    .section .right{
+        text-align: left;
+    }
+    .first{
         order: 1;
     }
-    .offer-cards{
-        grid-template-columns: 1fr;
-    }
-    .tag-card .card, .stepper .card{
-        text-align: center;
-    }
-    .tag-card .tag,.stepper .steps{
-        padding: 0 7%;
-    }
-    .section h3, .service{
+    .heading{
         font-size: 5vw;
     }
-    .section div p,section button{
+    .section .para,.section button{
         font-size: 2.5vw;
     }
     .text-left,.text-right{
         text-align: left;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .section .para,.section button{
+        font-size: 1.2rem;
+    }
+    .section:last-child{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .heading{
+        font-size: 2rem;
     }
 }

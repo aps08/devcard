@@ -75,7 +75,7 @@ const Header = () => {
           )}
           <li className="list-item">
             {!IsLoggedin && (
-              <button onClick={signuphandler} className="long-text"></button>
+              <button onClick={signuphandler}>Sign up for free</button>
             )}
           </li>
         </ul>

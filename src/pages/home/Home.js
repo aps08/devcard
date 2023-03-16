@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <section className="section">
-        <div className="tagline">
+        <div className="first">
           <h3 className="heading">
             Impress with Devcards.
             <br />
@@ -13,15 +13,16 @@ const Home = () => {
             <br />
             professionally.
           </h3>
-          <p>
+          <p className="para">
             Stand out from the competition with our high-quality business cards
             designed to showcase your skills and expertise as a developer.
           </p>
           <button>Try demo now</button>
         </div>
         <div>
-          <div className="text-right">
+          <div className="right">
             <img
+              className="showcase"
               src="https://picsum.photos/600/320?grayscale"
               alt="cardimage"
             />
@@ -30,20 +31,21 @@ const Home = () => {
       </section>
       <section className="section">
         <div>
-          <div className="text-left">
+          <div className="left">
             <img
+              className="showcase"
               src="https://picsum.photos/600/320?grayscale"
               alt="cardimage"
             />
           </div>
         </div>
-        <div className="tag">
+        <div className="second">
           <h3 className="heading">
             Get exclusive devcard.
             <br />
             In four easy steps.
           </h3>
-          <p>
+          <p className="para">
             Create your account.
             <br />
             Buy or earn credits.
@@ -52,12 +54,12 @@ const Home = () => {
             <br />
             Get your devcard on your doorstep.
           </p>
-          <button className="long-text"></button>
+          <button>Sign up for free</button>
         </div>
       </section>
       <div>
-        <h3 className="heading service text-style">What we offer ?</h3>
-        <section className="section offer-cards" id="offers">
+        <h3 className="heading center line">What we offer ?</h3>
+        <section className="section cards">
           <Card
             label="Event exclusive"
             para="Experience exclusivity with three event-exclusive

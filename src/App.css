@@ -6,11 +6,14 @@ main{
     padding: 0 4rem;
     transition: 0.5s ease-in-out;
 }
-body p{
+.para{
     padding: 10px 0;
     font-size: 1.6vw;
     color: var(--color-header-hover);
     opacity: .7;
+}
+.center{
+    text-align: center;
 }
 .left{
     text-align: left;
@@ -35,11 +38,9 @@ main button{
 button:hover{
     background-color: var(--color-btn-hover-bg);
 }
-@media only screen and (max-width: 800px){
-    /* main button {
-      font-size: 2.5vw;
+@media only screen and (max-width: 768px){
+    main{
+        margin-top: 2rem;
+        padding: 1rem 2rem;
     }
-    main p{
-        font-size: 2.4vw;
-    } */
 }

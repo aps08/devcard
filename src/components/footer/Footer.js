@@ -48,9 +48,10 @@ const Footer = () => {
           <span className="brand_name">Devcards</span>
         </div>
         <p className="mark_line">
-          Unleash your coding potential with Devcards - the ultimate digital
-          solution to showcase your unique skills and expertise using stunning,
-          professional templates tailored just for you.
+          Unleash more potential and opportunities with Devcards - the ultimate
+          digital solution to showcase your unique developer skills and
+          expertise using stunning, professional templates designed just for
+          you. Try the demo now.
         </p>
       </div>
     </footer>
