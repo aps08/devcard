@@ -7,9 +7,9 @@ const Footer = () => {
   const { IsLoggedin } = useContext(AuthContext);
   return (
     <footer className="footer">
-      <div className="navigate">
-        <h3>Quick links</h3>
-        <ul className="nav-list">
+      <div>
+        <h3 className="sub-heading">Quick links</h3>
+        <ul>
           <NavLink className={'list-item'} to="home">
             <li>Home</li>
           </NavLink>
@@ -26,33 +26,28 @@ const Footer = () => {
           <NavLink className={'list-item'} to="about">
             <li>About</li>
           </NavLink>
-          {!IsLoggedin && <li>Sign in</li>}
-          {IsLoggedin && <li>Sign out</li>}
         </ul>
       </div>
-      <div className="navigate">
-        <h3>Learn more</h3>
+      <div>
+        <h3 className="sub-heading">Learn more</h3>
         <ul>
-          <NavLink to="about#earncredits">
+          <NavLink className={'list-item'} to="about">
             <li>Earn credits?</li>
           </NavLink>
-          <NavLink to="home#offers">
+          <NavLink className={'list-item'} to="home">
             <li>Offers</li>
           </NavLink>
-          <NavLink to="about#contactfeedback">
+          <NavLink className={'list-item'} to="about">
             <li>Contact</li>
-          </NavLink>
-          <NavLink to="about#contactfeedback">
-            <li>Feedback</li>
           </NavLink>
         </ul>
       </div>
       <div className="branding_footer">
         <div className="branding">
-          <img className="brand_image" src={logo} alt="React Image" />
+          <img className="brand_image" src={logo} alt="devcardlogo" />
           <span className="brand_name">Devcards</span>
         </div>
-        <p>
+        <p className="mark_line">
           Unleash your coding potential with Devcards - the ultimate digital
           solution to showcase your unique skills and expertise using stunning,
           professional templates tailored just for you.
