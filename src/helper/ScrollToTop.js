@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const ScrollToTop = () => {
-  const fullpath = window.location.href;
+  const fullpath = useLocation();
   useEffect(() => {
     document.documentElement.scrollTo({
       top: 0,

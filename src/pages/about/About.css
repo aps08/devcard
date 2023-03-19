@@ -1,34 +1,41 @@
-.about{
-    grid-template-columns: 1fr;
-    margin-bottom: 3vw;
-}
-.about p button{
-    opacity: 1;
-}
-.cfform{
+.contact_form{
+    padding-right: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    row-gap: 1rem;
+    padding: 1rem;
+    background-color: rgba(31, 35, 41, 0.9);
+    border-radius: .5rem;
+    margin-top: 1rem;
 }
-.cfform .form_element{
+.about_step .para{
+    padding: 0;
+}
+#form_inline_image{
+    margin: 1rem;
     width: 100%;
+    height: auto;
+    border-radius: .5rem;
 }
-.cfmessage{
-    grid-column: span 2;
-    text-align: left;
+@media only screen and (max-width: 1024px){
+    #form_inline_image{
+        margin: 0;
+        margin-top: 1rem;
+    }
 }
-#contactfeedback button{
-    width: 50%;
+
+@media only screen and (max-width: 768px){
+    .contact_form{
+        grid-template-columns: 1fr;
+        margin-top: 0;
+    }
+    .contact_form .form_element{
+        width: 100%;
+    }
+    .contact_form button{
+        width: 50%;
+    }
 }
-ul li{
-    font-size: 1.5vw;
-    color: var(--color-header-hover);
-    opacity: .7;
-}
-textarea{
-    padding: .5rem;
-    font-size: 1rem;
-    color: whitesmoke;
-}
-textarea::placeholder{
-    font-size: 1rem;
+@media only screen and (max-width: 4px){
+    
 }

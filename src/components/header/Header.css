@@ -66,13 +66,6 @@
     color: var(--color-white);
 }
 
-a.active .list-item {
-    color: white;
-}
-.long-text::before{
-    content: "Sign up for free";
-}
-
 @media only screen and (max-width: 1024px){
     #menu{
         display: block;

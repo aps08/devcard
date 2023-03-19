@@ -1,15 +1,13 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
 import AuthContext from './store/auth-context';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import Home from './pages/home/Home';
+import Demo from './pages/demo/Demo';
+import Dashboard from './pages/dashboard/Dashboard';
+import Notfound from './pages/notfound/Notfound';
+import About from './pages/about/About';
 import './App.css';
-
-const HEADER = lazy(() => import('./components/header/Header'));
-const FOOTER = lazy(() => import('./components/footer/Footer'));
-const HOME = lazy(() => import('./pages/home/Home'));
-const DASHBOARD = lazy(() => import('./pages/dashboard/Dashboard'));
-const Notfound = lazy(() => import('./pages/notfound/Notfound'));
-const ABOUT = lazy(() => import('./pages/about/About'));
-const DEMO = lazy(() => import('./pages/demo/Demo'));
 
 function App() {
   const IsLoggedin = false;
@@ -18,21 +16,19 @@ function App() {
       value={{
         IsLoggedin: IsLoggedin
       }}>
-      <HEADER />
+      <Header />
       <main>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/home" element={<HOME />} />
-            {!IsLoggedin && <Route path="/demo" element={<DEMO />} />}
-            <Route path="/About" element={<ABOUT />} />
-            {IsLoggedin && <Route path="/dashboard" element={<DASHBOARD />} />}
-            <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="" element={<Navigate to="/home" replace />} />
-            <Route path="*" element={<Notfound />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
+          <Route path="/About" element={<About />} />
+          {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="" element={<Navigate to="/home" replace />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
       </main>
-      <FOOTER />
+      <Footer />
     </AuthContext.Provider>
   );
 }

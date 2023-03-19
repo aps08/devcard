@@ -38,9 +38,21 @@ main button{
 button:hover{
     background-color: var(--color-btn-hover-bg);
 }
+a.active{
+    color: white;
+}
+@media only screen and (max-width: 1024px){
+    .para{
+        font-size: 2.4vw;
+    }
+}
+
 @media only screen and (max-width: 768px){
     main{
         margin-top: 2rem;
         padding: 1rem 2rem;
+    }
+    .para{
+        font-size: 1.2rem;
     }
 }
