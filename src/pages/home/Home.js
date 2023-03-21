@@ -1,9 +1,30 @@
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import ReactDOM from 'react-dom';
 import Card from '../../components/card/Card';
+import SignUp from '../../components/signup/SignUp';
 import './Home.css';
 
+const MODAL_ELEMENT = document.getElementById('root-modal');
 const Home = () => {
+  const [showmodal, setshowmodal] = useState(false);
+
+  const signupmodalopen = () => {
+    document.body.style.overflow = 'hidden';
+    setshowmodal(true);
+  };
+  const sigupmodalclose = () => {
+    setshowmodal(false);
+    document.body.style.overflow = 'unset';
+  };
+
   return (
     <>
+      {showmodal &&
+        ReactDOM.createPortal(
+          <SignUp close={sigupmodalclose} />,
+          MODAL_ELEMENT
+        )}
       <section className="section">
         <div className="first">
           <h3 className="heading">
@@ -17,7 +38,9 @@ const Home = () => {
             Stand out from the competition with our high-quality business cards
             designed to showcase your skills and expertise as a developer.
           </p>
-          <button>Try demo now</button>
+          <NavLink to="/demo">
+            <button>Try demo now</button>
+          </NavLink>
         </div>
         <div>
           <div className="right">
@@ -54,7 +77,7 @@ const Home = () => {
             <br />
             Get your devcard on your doorstep.
           </p>
-          <button>Sign up for free</button>
+          <button onClick={signupmodalopen}>Sign up for free</button>
         </div>
       </section>
       <div>

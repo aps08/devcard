@@ -1,6 +1,5 @@
 import './Preview.css';
-import ReactDOM from 'react-dom';
-import Backdrop from '../backdrop/Backdrop';
+import ModalWrapper from '../../helper/Modalwrapper';
 import Avatar from 'react-avatar-edit';
 import { useState } from 'react';
 
@@ -8,21 +7,17 @@ const Preview = (props) => {
   const [Image, SetImage] = useState(URL.createObjectURL(props.file));
   const [Preview, setPreview] = useState(null);
   const ImageSavehandler = () => {
-    props.mutator(Preview, false);
+    props.mutator(Preview);
   };
   return (
-    <div className="modal">
-      {ReactDOM.createPortal(
-        <Backdrop />,
-        document.getElementById('root-backdrop')
-      )}
+    <ModalWrapper close={props.close}>
       <div className="top">
-        <h4>Crop your card image</h4>
+        <h3>Crop your devcard image</h3>
       </div>
       <div className="body">
         <Avatar
           src={Image}
-          imageWidth={260}
+          imageWidth={320}
           shadingColor="#111111"
           shadingOpacity=".9"
           label="Browse file"
@@ -37,7 +32,7 @@ const Preview = (props) => {
       <div className="bottom">
         <button onClick={ImageSavehandler}>Save</button>
       </div>
-    </div>
+    </ModalWrapper>
   );
 };
 

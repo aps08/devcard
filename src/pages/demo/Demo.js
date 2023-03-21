@@ -54,9 +54,15 @@ const Demo = () => {
     showmodal: false,
     croppedImage: false
   });
-  const mutate = (Preview, show) => {
-    setSelect({ ...Select, showmodal: show });
+  const mutate = (Preview) => {
+    document.body.style.overflow = 'unset';
+    setSelect({ ...Select, showmodal: false });
     setFormdata({ ...Formdata, image: Preview });
+  };
+  const imagechangehandler = (event) => {
+    document.body.style.overflow = 'hidden';
+    setfile(event.target.files[0]);
+    setSelect({ ...Select, showmodal: true });
   };
   const formchangehandler = (event) => {
     const { name, value } = event.target;
@@ -69,137 +75,137 @@ const Demo = () => {
     console.log(Formdata);
   };
   return (
-    <section className="center">
-      <h3 className="heading">
-        Get started by filling out the exciting form below and create your very
-        own developer card!
-      </h3>
-      <form id="demo_form" onBlur={formchangehandler}>
-        {INPUTS.slice(0, 4).map((input) => (
-          <Input
-            key={input.label}
-            label={input.label.toUpperCase()}
-            name={input.label}
-            placeholder={input.placeholder}
-            required={input.required}
-          />
-        ))}
-        <div className="form_element">
-          <label>CONTACT TYPE</label>
-          <select
-            name="contact_type"
-            title="contact_type"
-            defaultValue={Select.contact}
-            onChange={(event) => {
-              setSelect({
-                ...Select,
-                contact: event.target.value.toLowerCase()
-              });
-            }}
-            required>
-            <option value="0" disabled>
-              required
-            </option>
-            <option value="email">Email</option>
-            <option value="phone">Phone number</option>
-            <option value="both">Both</option>
-          </select>
-        </div>
-        {Select.contact === 'email' || Select.contact === 'both' ? (
-          <Input
-            label="Personal email"
-            name="email"
-            placeholder="required"
-            required={true}
-            type="email"
-          />
-        ) : (
-          <></>
+    <>
+      {Select.showmodal &&
+        ReactDOM.createPortal(
+          <Preview
+            Select={Select}
+            mutator={mutate}
+            setSelect={setSelect}
+            file={file}
+            close={() => setSelect({ ...Select, showmodal: false })}
+          />,
+          MODAL_ELEMENT
         )}
-        {Select.contact === 'phone' || Select.contact === 'both' ? (
-          <Input
-            label="Phone"
-            name="phone"
-            placeholder="required"
-            required={true}
-          />
-        ) : (
-          <></>
-        )}
-        <div className="form_element">
-          <label>SOCIAL MEDIA</label>
-          <select
-            name="scocial_media"
-            title="scocial_media"
-            defaultValue={Select.social}
-            onChange={(event) => {
-              setSelect({
-                ...Select,
-                social: event.target.value.toLowerCase() == 'true'
-              });
-            }}
-            required>
-            <option value="0" disabled>
-              required
-            </option>
-            <option value="false">False</option>
-            <option value="true">True</option>
-          </select>
-        </div>
-        {Select.social === true && (
-          <>
-            {INPUTS.slice(4, 8).map((input) => (
-              <Input
-                key={input.label}
-                label={input.label.toUpperCase()}
-                name={input.label}
-                placeholder={input.placeholder}
-                required={input.required}
-              />
-            ))}
-          </>
-        )}
-        <div className="form_element grid_span_two">
-          <label>Add image</label>
-          <input
-            name="image"
-            accept="image/*"
-            type="file"
-            id="img"
-            style={{ display: 'none' }}
-            onChange={(event) => {
-              setfile(event.target.files[0]);
-              setSelect({ ...Select, showmodal: true });
-            }}
-          />
-          {Select.showmodal &&
-            ReactDOM.createPortal(
-              <Preview
-                Select={Select}
-                mutator={mutate}
-                setSelect={setSelect}
-                file={file}
-              />,
-              MODAL_ELEMENT
-            )}
-          <label name="upload" id="upload" htmlFor="img">
-            <div className="file_input_area">
-              <img
-                className="preview_image_area"
-                src={Formdata.image ? Formdata.image : BrowseLogo}
-                alt="browselogo"
-              />
-              <p>Browse files</p>
-            </div>
-          </label>
-        </div>
-        <div
-          className="form_element grid_span_two"
-          style={{ margin: '0 10px' }}>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </section>
+      <section className="center">
+        <h3 className="heading">
+          Get started by filling out the exciting form below and create your
+          very own developer card!
+        </h3>
+        <form id="demo_form" onBlur={formchangehandler}>
+          {INPUTS.slice(0, 4).map((input) => (
+            <Input
+              key={input.label}
+              label={input.label.toUpperCase()}
+              name={input.label}
+              placeholder={input.placeholder}
+              required={input.required}
+            />
+          ))}
+          <div className="form_element">
+            <label>CONTACT TYPE</label>
+            <select
+              name="contact_type"
+              title="contact_type"
+              defaultValue={Select.contact}
+              onChange={(event) => {
+                setSelect({
+                  ...Select,
+                  contact: event.target.value.toLowerCase()
+                });
+              }}
+              required>
+              <option value="0" disabled>
+                required
+              </option>
+              <option value="email">Email</option>
+              <option value="phone">Phone number</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
+          {Select.contact === 'email' || Select.contact === 'both' ? (
+            <Input
+              label="Personal email"
+              name="email"
+              placeholder="required"
+              required={true}
+              type="email"
+            />
+          ) : (
+            <></>
+          )}
+          {Select.contact === 'phone' || Select.contact === 'both' ? (
+            <Input
+              label="Phone"
+              name="phone"
+              placeholder="required"
+              required={true}
+            />
+          ) : (
+            <></>
+          )}
+          <div className="form_element">
+            <label>SOCIAL MEDIA</label>
+            <select
+              name="scocial_media"
+              title="scocial_media"
+              defaultValue={Select.social}
+              onChange={(event) => {
+                setSelect({
+                  ...Select,
+                  social: event.target.value.toLowerCase() == 'true'
+                });
+              }}
+              required>
+              <option value="0" disabled>
+                required
+              </option>
+              <option value="false">False</option>
+              <option value="true">True</option>
+            </select>
+          </div>
+          {Select.social === true && (
+            <>
+              {INPUTS.slice(4, 8).map((input) => (
+                <Input
+                  key={input.label}
+                  label={input.label.toUpperCase()}
+                  name={input.label}
+                  placeholder={input.placeholder}
+                  required={input.required}
+                />
+              ))}
+            </>
+          )}
+          <div className="form_element grid_span_two">
+            <label>ADD IMAGE</label>
+            <input
+              name="image"
+              accept="image/*"
+              type="file"
+              id="img"
+              style={{ display: 'none' }}
+              onChange={imagechangehandler}
+            />
+            <label name="upload" id="upload" htmlFor="img">
+              <div className="file_input_area">
+                <img
+                  className="preview_image_area"
+                  src={Formdata.image ? Formdata.image : BrowseLogo}
+                  alt="browselogo"
+                />
+                <p>Browse files</p>
+              </div>
+            </label>
+          </div>
+          <div
+            className="form_element grid_span_two"
+            style={{ margin: '0 10px' }}>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 
