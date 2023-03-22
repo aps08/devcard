@@ -32,10 +32,13 @@ button{
     background-color: var(--color-btn-bg);
     border-color: none;
 }
+button:disabled{
+    opacity: .7;
+}
 main button{
     font-size: 1.4vw;
 }
-button:hover{
+button:hover:enabled{
     background-color: var(--color-btn-hover-bg);
 }
 a.active{

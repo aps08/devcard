@@ -11,6 +11,9 @@ form .form_element label{
     color: var(--color-header-hover);
     text-align: left;
 }
+form .form_element input:focus::placeholder {
+    color: transparent;
+  }
 form .form_element input, textarea{
     width: 100%;
     outline: none;
@@ -26,7 +29,7 @@ form .form_element input::placeholder, textarea::placeholder{
     color: whitesmoke;
     font-weight: 100;
 }
-form .form_element input[type="text"],form .form_element input[type="file"],form .form_element input[type="email"],form .form_element input[type="number"]{
+input[type="text"],input[type="file"],input[type="email"],input[type="number"], input[type="password"]{
     padding: 1rem;
     padding-left: .8rem;
     caret-color: var(--color-header-hover);

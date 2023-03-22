@@ -1,3 +1,32 @@
 #signup{
-    width: 50%;
+    width: 40%;
+} 
+#signup .form_element{
+    width: 100%;
+}
+#signup button{
+    width: 100%;
+    margin: 0;
+}
+#signup .form_element input{
+    text-indent: 28px;
+    margin-bottom: 1rem;
+    height: 42px;
+}
+#signup .hints{
+    margin-bottom: 1rem;
+}
+#signup .hint-item{
+    font-size: 14px;
+    color: brown;
+}
+#signup .input_logo{
+    margin: 8px;
+    position: absolute;
+    left: 0;
+    height: 24px;
+    width: auto;
+}
+#signup .bottom{
+    justify-content: space-between;
 }

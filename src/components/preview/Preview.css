@@ -23,8 +23,13 @@
     padding: 1rem;
     background-color: rgba(22, 27, 34, 1);
 }
-.modal button,.modal h3{
+.modal button{
     font-size: 1.2rem;
+    color: var(--color-header-hover);
+}
+.modal h2{
+    font-size: 2rem;
+    color: var(--color-header-hover);
 }
 .modal .top{
     border-top-right-radius: .5rem;
@@ -39,7 +44,6 @@
     border-bottom-left-radius: .5rem;
 }
 .modal .body img{
-    padding: 1rem;
     width: 100%;
     height: auto;
     text-align: center;
