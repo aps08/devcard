@@ -1,3 +1,6 @@
+#signup *{
+    transition: .5s ease-in-out;
+}
 #signup{
     width: 40%;
 } 
@@ -19,6 +22,7 @@
 #signup .hint-item{
     font-size: 14px;
     color: brown;
+    font-weight: bolder;
 }
 #signup .input_logo{
     margin: 8px;
@@ -29,4 +33,20 @@
 }
 #signup .bottom{
     justify-content: space-between;
+}
+
+@media only screen and (max-width: 1024px){
+    #signup{
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 768px){
+    #signup{
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 480px){
+    #signup{
+        width: 90%;
+    }
 }

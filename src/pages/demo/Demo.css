@@ -82,6 +82,9 @@ form{
     }
     .form_element button{
         font-size: 1.2rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
     #demo_form{
         display: block;

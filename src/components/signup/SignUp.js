@@ -49,7 +49,6 @@ const SignUp = (props) => {
       }, 500)
     );
   };
-
   const emailhanlder = (event) => {
     const { name, value } = event.target;
     if (timeoutId) {
@@ -122,7 +121,6 @@ const SignUp = (props) => {
       }, 500)
     );
   };
-
   const formchangehandler = () => {
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -130,7 +128,6 @@ const SignUp = (props) => {
     setTimeoutId(
       setTimeout(() => {
         const allFalse = Object.values(Valid).every((value) => value === true);
-        console.log(allFalse, Valid);
         if (allFalse) {
           setisDisabled(false);
         } else {
@@ -165,7 +162,6 @@ const SignUp = (props) => {
                 required={true}
                 onChange={usernamehandler}
                 onFocus={usernamehandler}
-                autoComplete={false}
               />
               <img className="input_logo" src={Username} />
             </div>
@@ -185,7 +181,6 @@ const SignUp = (props) => {
                 required={true}
                 onChange={emailhanlder}
                 onFocus={emailhanlder}
-                autoComplete={false}
               />
               <img className="input_logo" src={Email} />
             </div>
@@ -204,7 +199,6 @@ const SignUp = (props) => {
                 placeholder="************"
                 required={true}
                 onChange={passwordhandler}
-                autoComplete={false}
                 onFocus={passwordhandler}
               />
               <img className="input_logo" src={Password} />
