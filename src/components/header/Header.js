@@ -1,26 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import SignUp from '../signup/SignUp';
 import AuthContext from '../../store/auth-context';
 import '../header/Header.css';
 import logo from '../../assets/images/logo.png';
 
 const WIDTH_SIZE = 1024;
-const MODAL_ELEMENT = document.getElementById('root-modal');
-const Header = () => {
-  const [showmodal, setshowmodal] = useState(false);
+function Header() {
   const { IsLoggedin } = useContext(AuthContext);
   const [Isopen, setIsopen] = useState(false);
-
-  const signupmodalopen = () => {
-    document.body.style.overflow = 'hidden';
-    setshowmodal(true);
-  };
-  const sigupmodalclose = () => {
-    setshowmodal(false);
-    document.body.style.overflow = 'unset';
-  };
 
   const onresize = (event) => {
     if (event.target.innerWidth > WIDTH_SIZE && Isopen) {
@@ -43,11 +30,6 @@ const Header = () => {
 
   return (
     <header className="navbar">
-      {showmodal &&
-        ReactDOM.createPortal(
-          <SignUp close={sigupmodalclose} />,
-          MODAL_ELEMENT
-        )}
       <div className="branding">
         <img className="brand_image" src={logo} alt="React Image" />
         <span className="brand_name">Devcards</span>
@@ -84,7 +66,9 @@ const Header = () => {
           )}
           <li className="list-item">
             {!IsLoggedin && (
-              <button onClick={signupmodalopen}>Sign up for free</button>
+              <NavLink to="/signup">
+                <button>Sign up for free</button>
+              </NavLink>
             )}
           </li>
         </ul>
@@ -114,6 +98,6 @@ const Header = () => {
       </nav>
     </header>
   );
-};
+}
 
 export default Header;

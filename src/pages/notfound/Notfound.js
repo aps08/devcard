@@ -1,7 +1,7 @@
 import './Notfound.css';
 
-const Notfound = () => {
+function Notfound() {
   return <>Page Notfound</>;
-};
+}
 
 export default Notfound;

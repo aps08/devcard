@@ -75,6 +75,9 @@
 }
 
 @media only screen and (max-width: 768px){
+    .section{
+        margin-top: 1rem;
+    }
     .section .para,.section button{
         font-size: 1.2rem;
     }
@@ -86,5 +89,8 @@
 @media only screen and (max-width: 480px){
     .heading{
         font-size: 2rem;
+    }
+    .section{
+        margin-top: 0;
     }
 }

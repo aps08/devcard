@@ -2,7 +2,6 @@ body{
     background-color: var(--color-bg);
 }
 main{
-    margin-top: 7rem;
     padding: 0 4rem;
     transition: 0.5s ease-in-out;
 }
@@ -52,8 +51,7 @@ a.active{
 
 @media only screen and (max-width: 768px){
     main{
-        margin-top: 2rem;
-        padding: 1rem 2rem;
+        padding: 1rem;
     }
     .para{
         font-size: 1.2rem;

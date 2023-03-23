@@ -6,7 +6,7 @@ import './Demo.css';
 
 const MODAL_ELEMENT = document.getElementById('root-modal');
 
-const Demo = () => {
+function Demo() {
   const [Formdata, setFormdata] = useState({
     name: '',
     company: '',
@@ -26,7 +26,6 @@ const Demo = () => {
     setfile(event.target.files[0]);
     setshowmodal(true);
   };
-  const namehanlder = (event = {});
   const formchangehandler = (event) => {
     const { name, value } = event.target;
     if (name !== 'image') {
@@ -120,6 +119,6 @@ const Demo = () => {
       </section>
     </>
   );
-};
+}
 
 export default Demo;

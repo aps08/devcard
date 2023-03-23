@@ -1,6 +1,6 @@
 import './Backdrop.css';
-const Backdrop = (props) => {
+function Backdrop(props) {
   return <div onClick={props.close || null} className="backdrop"></div>;
-};
+}
 
 export default Backdrop;

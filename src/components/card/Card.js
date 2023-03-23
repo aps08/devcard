@@ -1,6 +1,6 @@
 import './Card.css';
 
-const Card = (props) => {
+function Card(props) {
   return (
     <div className="card">
       <img
@@ -22,6 +22,6 @@ const Card = (props) => {
       </div>
     </div>
   );
-};
+}
 
 export default Card;

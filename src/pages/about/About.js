@@ -1,7 +1,7 @@
 import Input from '../../components/input/Input';
 import './About.css';
 
-const About = () => {
+function About() {
   return (
     <>
       <section className="section" style={{ gridTemplateColumns: '1fr' }}>
@@ -104,6 +104,6 @@ const About = () => {
       </section>
     </>
   );
-};
+}
 
 export default About;

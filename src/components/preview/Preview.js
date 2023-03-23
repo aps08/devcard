@@ -3,7 +3,7 @@ import ModalWrapper from '../../helper/Modalwrapper';
 import Avatar from 'react-avatar-edit';
 import { useState } from 'react';
 
-const Preview = (props) => {
+function Preview(props) {
   const [Image, SetImage] = useState(URL.createObjectURL(props.file));
   const [Preview, setPreview] = useState(null);
   const ImageSavehandler = () => {
@@ -34,6 +34,6 @@ const Preview = (props) => {
       </div>
     </ModalWrapper>
   );
-};
+}
 
 export default Preview;

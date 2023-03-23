@@ -1,6 +1,6 @@
 import './Input.css';
 
-const Input = (props) => {
+function Input(props) {
   return (
     <div className="form_element">
       <label>{props.label}</label>
@@ -12,6 +12,6 @@ const Input = (props) => {
       />
     </div>
   );
-};
+}
 
 export default Input;

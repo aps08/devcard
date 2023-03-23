@@ -1,30 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import ReactDOM from 'react-dom';
 import Card from '../../components/card/Card';
-import SignUp from '../../components/signup/SignUp';
 import './Home.css';
 
-const MODAL_ELEMENT = document.getElementById('root-modal');
-const Home = () => {
-  const [showmodal, setshowmodal] = useState(false);
-
-  const signupmodalopen = () => {
-    document.body.style.overflow = 'hidden';
-    setshowmodal(true);
-  };
-  const sigupmodalclose = () => {
-    setshowmodal(false);
-    document.body.style.overflow = 'unset';
-  };
-
+function Home() {
   return (
     <>
-      {showmodal &&
-        ReactDOM.createPortal(
-          <SignUp close={sigupmodalclose} />,
-          MODAL_ELEMENT
-        )}
       <section className="section">
         <div className="first">
           <h3 className="heading">
@@ -77,7 +57,9 @@ const Home = () => {
             <br />
             Get your devcard on your doorstep.
           </p>
-          <button onClick={signupmodalopen}>Sign up for free</button>
+          <NavLink to="/signup">
+            <button>Sign up for free</button>
+          </NavLink>
         </div>
       </section>
       <div>
@@ -112,6 +94,6 @@ const Home = () => {
       </div>
     </>
   );
-};
+}
 
 export default Home;

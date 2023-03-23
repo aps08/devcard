@@ -1,8 +1,5 @@
-.navbar *{
-    transition: 0.5s ease-in-out;
-}
 .navbar{
-    position: fixed;
+    position: sticky;
     top:0;
     width: 100%;
     z-index: 1;
@@ -12,6 +9,7 @@
     padding: 1rem 4rem;
     background-color: rgba(22, 27, 34, 0.95);
     box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
+    transition: all .5s ease-in-out;
 }
 
 .branding{
@@ -21,6 +19,7 @@
 .brand_image{
     width: 60px;
     height: 40px;
+    transition: all .5s ease-in-out;
 }
 .brand_name{
     margin-left: 10px;
@@ -28,6 +27,7 @@
     font-weight: bolder;
     text-transform: capitalize;
     color: var(--color-header-hover);
+    transition: all .5s ease-in-out;
 }
 .nav{
     height: 100%;
@@ -37,11 +37,15 @@
 .nav-list{
     display: flex;
     align-items:center;
+    transition: all .5s ease-in-out;
 }
 .list-item{
     font-size: 1.2rem;
     color: var(--color-header-hover);
     margin: 0 12px;
+}
+.active button{
+    background-color:var(--color-btn-hover-bg);
 }
 #menu{
     display: none;
@@ -55,6 +59,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all .5s ease-in-out;
 }
 .hamburger-line{
     width: 100%;
@@ -69,9 +74,11 @@
 @media only screen and (max-width: 1024px){
     #menu{
         display: block;
+        transition: all .5s ease-in-out;
     }
     .navbar button{
         margin: 4px 0;
+        transition: all .5s ease-in-out;
     }
     .nav-list{
         display: block;
@@ -80,6 +87,7 @@
         top: 76px;
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
         background-color: rgba(22, 27, 34, 0.8);
+        transition: all .5s ease-in-out;
     }
     .list-item{
         display: flex;
@@ -97,6 +105,7 @@
 @media only screen and (max-width: 768px){
     .navbar{
         padding: 1rem 2rem;
+        transition: all .5s ease-in-out;
     }
     .nav-list{
         top: 72px;
@@ -104,9 +113,11 @@
     .brand_image{
         width: 55px;
         height: 35px;
+        transition: all .5s ease-in-out;
     }
     .brand_name{
         font-size: 2rem;
+        transition: all .5s ease-in-out;
     }
 }
 @media only screen and (max-width: 480px){

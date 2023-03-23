@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-const Footer = () => {
+function Footer() {
   const { IsLoggedin } = useContext(AuthContext);
   return (
     <footer className="footer">
@@ -56,6 +56,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;
