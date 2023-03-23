@@ -1,9 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import AuthContext from './store/auth-context';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
 import Demo from './pages/demo/Demo';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -14,39 +10,24 @@ import Signin from './pages/signin/Signin';
 import './App.css';
 
 function App() {
-  const [showhf, setshowhf] = useState(true);
-  const location = useLocation();
   const IsLoggedin = false;
-  useEffect(() => {
-    if (['/signin', '/signup'].includes(location.pathname)) {
-      setshowhf(false);
-    } else {
-      setshowhf(true);
-    }
-    console.log(showhf);
-  }, [location]);
-
   return (
     <AuthContext.Provider
       value={{
         IsLoggedin: IsLoggedin
       }}>
-      {showhf && <Header />}
-      <main>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
-          <Route path="/About" element={<About />} />
-          {!IsLoggedin && <Route path="/SignUp" element={<Signup />} />}
-          {!IsLoggedin && <Route path="/Signin" element={<Signin />} />}
-          {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
-          <Route path="/register" element={<Navigate to="/signup" replace />} />
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="" element={<Navigate to="/home" replace />} />
-          <Route path="*" element={<Notfound />} />
-        </Routes>
-      </main>
-      {showhf && <Footer />}
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
+        <Route path="/About" element={<About />} />
+        {!IsLoggedin && <Route path="/SignUp" element={<Signup />} />}
+        {!IsLoggedin && <Route path="/Signin" element={<Signin />} />}
+        {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
+        <Route path="/register" element={<Navigate to="/signup" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="" element={<Navigate to="/home" replace />} />
+        <Route path="*" element={<Notfound />} />
+      </Routes>
     </AuthContext.Provider>
   );
 }

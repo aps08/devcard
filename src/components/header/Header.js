@@ -38,28 +38,28 @@ function Header() {
         <ul className="nav-list" style={{ right: !Isopen ? '-100%' : '0' }}>
           <NavLink
             className={'list-item'}
-            to="home"
+            to="/home"
             onClick={navigationhandler}>
             <li>Home</li>
           </NavLink>
           {!IsLoggedin && (
             <NavLink
               className={'list-item'}
-              to="demo"
+              to="/demo"
               onClick={navigationhandler}>
               <li>Demo</li>
             </NavLink>
           )}
           <NavLink
             className={'list-item'}
-            to="about"
+            to="/about"
             onClick={navigationhandler}>
             <li>About</li>
           </NavLink>
           {IsLoggedin && (
             <NavLink
               className={'list-item'}
-              to="dashboard"
+              to="/dashboard"
               onClick={navigationhandler}>
               <li>Dashboard</li>
             </NavLink>
@@ -72,7 +72,11 @@ function Header() {
             )}
           </li>
         </ul>
-        {!IsLoggedin && <button>Sign in</button>}
+        {!IsLoggedin && (
+          <NavLink to="/signin">
+            <button>Sign in</button>
+          </NavLink>
+        )}
         <div
           id="menu"
           className="hamburger"
