@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom';
-import Card from '../../components/card/Card';
-import Header from '../../components/header/Header';
-import Footer from '../../components/footer/Footer';
-import './Home.css';
+import { NavLink } from "react-router-dom";
+import Card from "../../components/card/Card";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
+import "./Home.css";
 
 function Home() {
   return (
@@ -19,9 +19,8 @@ function Home() {
               professionally.
             </h3>
             <p className="para">
-              Stand out from the competition with our high-quality business
-              cards designed to showcase your skills and expertise as a
-              developer.
+              Stand out from the competition with our high-quality business cards designed to showcase your skills and
+              expertise as a developer.
             </p>
             <NavLink to="/demo">
               <button>Try demo now</button>
@@ -29,22 +28,14 @@ function Home() {
           </div>
           <div>
             <div className="right">
-              <img
-                className="showcase"
-                src="https://picsum.photos/600/320?grayscale"
-                alt="cardimage"
-              />
+              <img className="showcase" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
             </div>
           </div>
         </section>
         <section className="section">
           <div>
             <div className="left">
-              <img
-                className="showcase"
-                src="https://picsum.photos/600/320?grayscale"
-                alt="cardimage"
-              />
+              <img className="showcase" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
             </div>
           </div>
           <div className="second">
@@ -74,25 +65,25 @@ function Home() {
               label="Event exclusive"
               para="Experience exclusivity with three event-exclusive
                   cards."
-              list={['Credit 5', 'Mutiple designs']}
+              list={["Credit 5", "Mutiple designs"]}
               buttonlabel="Buy 5 credits"
             />
             <Card
               label="Bulk cards"
               para="Elevate your daily routine with a pack of thirty cards."
-              list={['Credit 6', 'Single designs']}
+              list={["Credit 6", "Single designs"]}
               buttonlabel="Buy 6 credits"
             />
             <Card
               label="Send gifts"
               para="Send mutiple devcard to your buddies and colleagues."
-              list={['Credit customized', 'Pay upon acceptance.']}
+              list={["Credit customized", "Pay upon acceptance."]}
               buttonlabel="Buy credits"
             />
             <Card
               label="Organization"
               para="Empowering organizations with custom card and gifts."
-              list={['Credit customized', 'Early access.']}
+              list={["Credit customized", "Early access."]}
               buttonlabel="Buy credits"
             />
           </section>

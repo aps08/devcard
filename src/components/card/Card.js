@@ -1,13 +1,9 @@
-import './Card.css';
+import "./Card.css";
 
 function Card(props) {
   return (
     <div className="card">
-      <img
-        className="card_visual"
-        src="https://picsum.photos/300/300?grayscale"
-        alt="cardimage"
-      />
+      <img className="card_visual" src="https://picsum.photos/300/300?grayscale" alt="cardimage" />
       <div className="description">
         <h3 className="heading">{props.label}</h3>
         <p className="para">{props.para}</p>

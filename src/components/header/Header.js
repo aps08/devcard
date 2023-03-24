@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import AuthContext from '../../store/auth-context';
-import '../header/Header.css';
-import logo from '../../assets/images/logo.png';
+import { useState, useEffect, useContext } from "react";
+import { NavLink } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
+import "../header/Header.css";
+import logo from "../../assets/images/logo.png";
 
 const WIDTH_SIZE = 1024;
 function Header() {
@@ -16,9 +16,9 @@ function Header() {
   };
 
   useEffect(() => {
-    addEventListener('resize', onresize);
+    addEventListener("resize", onresize);
     return () => {
-      removeEventListener('resize', onresize);
+      removeEventListener("resize", onresize);
     };
   });
 
@@ -35,32 +35,20 @@ function Header() {
         <span className="brand_name">Devcards</span>
       </div>
       <nav className="nav">
-        <ul className="nav-list" style={{ right: !Isopen ? '-100%' : '0' }}>
-          <NavLink
-            className={'list-item'}
-            to="/home"
-            onClick={navigationhandler}>
+        <ul className="nav-list" style={{ right: !Isopen ? "-100%" : "0" }}>
+          <NavLink className={"list-item"} to="/home" onClick={navigationhandler}>
             <li>Home</li>
           </NavLink>
           {!IsLoggedin && (
-            <NavLink
-              className={'list-item'}
-              to="/demo"
-              onClick={navigationhandler}>
+            <NavLink className={"list-item"} to="/demo" onClick={navigationhandler}>
               <li>Demo</li>
             </NavLink>
           )}
-          <NavLink
-            className={'list-item'}
-            to="/about"
-            onClick={navigationhandler}>
+          <NavLink className={"list-item"} to="/about" onClick={navigationhandler}>
             <li>About</li>
           </NavLink>
           {IsLoggedin && (
-            <NavLink
-              className={'list-item'}
-              to="/dashboard"
-              onClick={navigationhandler}>
+            <NavLink className={"list-item"} to="/dashboard" onClick={navigationhandler}>
               <li>Dashboard</li>
             </NavLink>
           )}
@@ -86,17 +74,15 @@ function Header() {
           <div
             className="hamburger-line"
             style={{
-              transform: Isopen ? 'rotate(45deg) translate(8px, 8px)' : '',
-              margin: !Isopen ? '8px 0' : '4px 0'
+              transform: Isopen ? "rotate(45deg) translate(8px, 8px)" : "",
+              margin: !Isopen ? "8px 0" : "4px 0"
             }}></div>
-          <div
-            className="hamburger-line"
-            style={{ opacity: !Isopen ? '1' : '0' }}></div>
+          <div className="hamburger-line" style={{ opacity: !Isopen ? "1" : "0" }}></div>
           <div
             className="hamburger-line"
             style={{
-              transform: Isopen ? 'rotate(-45deg) translate(8px, -8px)' : '',
-              margin: !Isopen ? '8px 0' : '4px 0'
+              transform: Isopen ? "rotate(-45deg) translate(8px, -8px)" : "",
+              margin: !Isopen ? "8px 0" : "4px 0"
             }}></div>
         </div>
       </nav>

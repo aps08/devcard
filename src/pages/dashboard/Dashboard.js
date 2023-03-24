@@ -1,4 +1,4 @@
-import './Dashboard.css';
+import "./Dashboard.css";
 
 function Dashboard() {
   return <>Dashboard Page</>;

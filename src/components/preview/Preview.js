@@ -1,7 +1,7 @@
-import './Preview.css';
-import ModalWrapper from '../../helper/Modalwrapper';
-import Avatar from 'react-avatar-edit';
-import { useState } from 'react';
+import "./Preview.css";
+import ModalWrapper from "../../helper/Modalwrapper";
+import Avatar from "react-avatar-edit";
+import { useState } from "react";
 
 function Preview(props) {
   const [Image, SetImage] = useState(URL.createObjectURL(props.file));
@@ -21,7 +21,7 @@ function Preview(props) {
           shadingColor="#111111"
           shadingOpacity=".9"
           label="Browse file"
-          labelStyle={{ color: 'whitesmoke' }}
+          labelStyle={{ color: "whitesmoke" }}
           onClose={() => {
             setPreview(null);
             SetImage(null);

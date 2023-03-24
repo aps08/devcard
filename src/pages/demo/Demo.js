@@ -1,42 +1,81 @@
-import Header from '../../components/header/Header';
-import Footer from '../../components/footer/Footer';
-import Preview from '../../components/preview/Preview';
-import BrowseLogo from '../../assets/images/browselogo.svg';
-import { useState } from 'react';
-import ReactDOM from 'react-dom';
-import './Demo.css';
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
+import Preview from "../../components/preview/Preview";
+import BrowseLogo from "../../assets/images/browselogo.svg";
+import Input from "../../components/input/Input";
+import { useState } from "react";
+import ReactDOM from "react-dom";
+import "./Demo.css";
 
-const MODAL_ELEMENT = document.getElementById('root-modal');
-
+const MODAL_ELEMENT = document.getElementById("root-modal");
+const ELEMENTS = [
+  {
+    label: "NAME",
+    placeholder: "enter your name"
+  },
+  {
+    label: "COMPANY",
+    placeholder: "enter your company name"
+  },
+  {
+    label: "EXPERIENCE",
+    placeholder: "enter experience in years"
+  },
+  {
+    label: "ROLE",
+    placeholder: "enter your role"
+  }
+];
+const HINTS = {
+  name: [
+    "Name is required",
+    "Only alphabets and spaces are allowed",
+    "Type first name or full name that will be visible in your devcard"
+  ],
+  company: [
+    "Company name is required",
+    "Only alphabets and spaces are allowed",
+    "Make sure you type correct company name"
+  ],
+  experience: ["Experience is required", "Experience cannot be less than 0 or more than 50."],
+  role: ["Role is requried", "Only alphabets and spaces are allowed", "Example: Back-end Developer, Python Developer"],
+  image: ["Image is required", "Image must be png,jpg or jpeg format"]
+};
+const CHECKS = {
+  name: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
+  company: /^[A-Za-z][A-Za-z-.\s]{0,18}[A-Za-z]$/,
+  experience: /^([0-9]|[1-4][0-9]|50)$/,
+  role: /^[A-Za-z][A-Za-z-\s]{0,28}[A-Za-z]$/
+};
+const INITIAL = {
+  name: "",
+  company: "",
+  experience: 0,
+  role: "",
+  image: ""
+};
 function Demo() {
-  const [Formdata, setFormdata] = useState({
-    name: '',
-    company: '',
-    experience: 0,
-    role: '',
-    image: ''
-  });
+  const [Formdata, setFormdata] = useState(INITIAL);
+  const [validate, setvalidate] = useState(INITIAL);
   const [file, setfile] = useState(null);
   const [showmodal, setshowmodal] = useState(false);
   const mutate = (Preview) => {
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
     setshowmodal(false);
     setFormdata({ ...Formdata, image: Preview });
   };
   const imagechangehandler = (event) => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     setfile(event.target.files[0]);
     setshowmodal(true);
   };
-  const formchangehandler = (event) => {
+  const changehandler = (event) => {
     const { name, value } = event.target;
-    if (name !== 'image') {
-      setFormdata({
-        ...Formdata,
-        [name]: value
-      });
+    if (CHECKS[name].test(value)) {
+      setvalidate({ ...validate, [name]: true });
+    } else {
+      setvalidate({ ...validate, [name]: false });
     }
-    console.log(Formdata);
   };
   return (
     <>
@@ -55,46 +94,19 @@ function Demo() {
           )}
         <section className="center">
           <h3 className="heading">
-            Get started by filling out the exciting form below and create your
-            very own developer card!
+            Get started by filling out the exciting form below and create your very own developer card!
           </h3>
-          <form id="demo_form" onChange={formchangehandler}>
-            <div className="form_element">
-              <label>NAME</label>
-              <input
-                name="name"
-                type="text"
-                placeholder="enter your name"
-                required={true}
+          <form id="demo_form">
+            {ELEMENTS.map((element, index) => (
+              <Input
+                key={index}
+                label={element.label}
+                placeholder={element.placeholder}
+                hints={HINTS[element.label.toLowerCase()]}
+                change={changehandler}
+                valid={validate[element.label.toLowerCase()]}
               />
-            </div>
-            <div className="form_element">
-              <label>COMPANY</label>
-              <input
-                name="company"
-                type="text"
-                placeholder="enter your company name"
-                required={true}
-              />
-            </div>
-            <div className="form_element">
-              <label>EXPERIENCE</label>
-              <input
-                name="experience"
-                type="number"
-                placeholder="enter number of experience"
-                required={true}
-              />
-            </div>
-            <div className="form_element">
-              <label>ROLE</label>
-              <input
-                name="role"
-                type="text"
-                placeholder="enter your role"
-                required={true}
-              />
-            </div>
+            ))}
             <div className="form_element grid_span_two">
               <label>ADD IMAGE</label>
               <input
@@ -102,7 +114,7 @@ function Demo() {
                 accept="image/*"
                 type="file"
                 id="img"
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 onChange={imagechangehandler}
               />
               <label name="upload" id="upload" htmlFor="img">
