@@ -7,6 +7,7 @@ function Input(props) {
     <div className="form_element">
       <label>{props.label}</label>
       <input
+        style={{ border: !props.valid && focused ? "2px solid brown" : "" }}
         onFocus={() => setfocused(true)}
         name={props.label.toLowerCase()}
         type={props.type || "text"}

@@ -19,7 +19,7 @@ const ELEMENTS = [
   },
   {
     label: "EXPERIENCE",
-    placeholder: "enter experience in years"
+    placeholder: "enter experience in number of years"
   },
   {
     label: "ROLE",
@@ -62,6 +62,7 @@ function Demo() {
   const mutate = (Preview) => {
     document.body.style.overflow = "unset";
     setshowmodal(false);
+    setvalidate({ ...validate, image: true });
     setFormdata({ ...Formdata, image: Preview });
   };
   const imagechangehandler = (event) => {
@@ -71,10 +72,22 @@ function Demo() {
   };
   const changehandler = (event) => {
     const { name, value } = event.target;
-    if (CHECKS[name].test(value)) {
-      setvalidate({ ...validate, [name]: true });
+    if (name !== "image") {
+      if (CHECKS[name].test(value)) {
+        setvalidate({ ...validate, [name]: true });
+        setFormdata({ ...Formdata, [name]: value });
+      } else {
+        setvalidate({ ...validate, [name]: false });
+      }
+    }
+  };
+  const submithandler = (event) => {
+    event.preventDefault();
+    const allTrueValues = Object.values(validate).every((value) => value === true);
+    if (allTrueValues) {
+      console.log(Formdata);
     } else {
-      setvalidate({ ...validate, [name]: false });
+      alert("Some field is missing. If not reload page and try again.");
     }
   };
   return (
@@ -93,22 +106,23 @@ function Demo() {
             MODAL_ELEMENT
           )}
         <section className="center">
-          <h3 className="heading">
+          <h3 className="heading" style={{ marginTop: "1rem" }}>
             Get started by filling out the exciting form below and create your very own developer card!
           </h3>
-          <form id="demo_form">
+          <form id="demo_form" onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
               <Input
                 key={index}
                 label={element.label}
+                type={element.type || "text"}
                 placeholder={element.placeholder}
                 hints={HINTS[element.label.toLowerCase()]}
                 change={changehandler}
                 valid={validate[element.label.toLowerCase()]}
               />
             ))}
-            <div className="form_element grid_span_two">
-              <label>ADD IMAGE</label>
+            <div className="form_element">
+              <label style={{ textAlign: "center" }}>ADD IMAGE</label>
               <input
                 name="image"
                 accept="image/*"
@@ -117,7 +131,7 @@ function Demo() {
                 style={{ display: "none" }}
                 onChange={imagechangehandler}
               />
-              <label name="upload" id="upload" htmlFor="img">
+              <label name="upload" id="upload" htmlFor="img" style={{ marginLeft: "0" }}>
                 <div className="file_input_area">
                   <img
                     className="preview_image_area"
@@ -128,7 +142,7 @@ function Demo() {
                 </div>
               </label>
             </div>
-            <div className="form_element grid_span_two">
+            <div className="form_element">
               <button type="submit">Get a demo now</button>
             </div>
           </form>
