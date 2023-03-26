@@ -2,8 +2,53 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Input from "../../components/input/Input";
 import "./About.css";
+import { useState } from "react";
 
+const ELEMENTS = [
+  { label: "NAME", placeholder: "enter full name" },
+  { label: "EMAIL", placeholder: "enter your email" },
+  { label: "SUBJECT", placeholder: "enter subject detail" },
+  { label: "MESSAGE", placeholder: "enter your messsage" }
+];
+const HINTS = {
+  name: ["Name is required", "Only alphabets and spaces are allowed", "Name should not exceed 30 characters"],
+  email: ["Email is required", "Email should not exceed 30 characters"],
+  subject: ["Subject is required", "Subject should not exceed 30 characters"],
+  message: ["Message is required", "Message should not exeed 100 characters"]
+};
+const CHECKS = {
+  name: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
+  email: /^[^\s@]{1,30}@[^\s@]+\.[^\s@]+$/,
+  subject: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
+  message: /^[A-Za-z][A-Za-z\s]{0,98}[A-Za-z]$/
+};
+const INITIAL = {
+  name: "",
+  email: "",
+  subject: "",
+  message: ""
+};
 function About() {
+  const [validate, setvalidate] = useState(INITIAL);
+  const [Formdata, setFormdata] = useState(INITIAL);
+  const changehandler = (event) => {
+    const { name, value } = event.target;
+    if (CHECKS[name].test(value)) {
+      setvalidate({ ...validate, [name]: true });
+      setFormdata({ ...Formdata, [name]: value });
+    } else {
+      setvalidate({ ...validate, [name]: false });
+    }
+  };
+  const submithandler = (event) => {
+    event.preventDefault();
+    const allTrueValues = Object.values(validate).every((value) => value === true);
+    if (allTrueValues) {
+      console.log(Formdata);
+    } else {
+      alert("Some field is missing. If not reload page and try again.");
+    }
+  };
   return (
     <>
       <Header />
@@ -38,11 +83,17 @@ function About() {
         <h3 className="heading">Contacts and Feedback</h3>
         <section className="section">
           <div>
-            <form className="contact_form">
-              <Input label="NAME" required={true} placeholder="enter full name" />
-              <Input label="EMAIL" type="email" required={true} placeholder="enter email" />
-              <Input label="SUBJECT" required={true} placeholder="enter subject" />
-              <Input label="MESSAGE" required={true} placeholder="enter your message" />
+            <form className="contact_form" onSubmit={submithandler}>
+              {ELEMENTS.map((element, index) => (
+                <Input
+                  key={index}
+                  change={changehandler}
+                  hints={HINTS[element.label.toLowerCase()]}
+                  label={element.label}
+                  valid={validate[element.label.toLowerCase()]}
+                  placeholder={element.placeholder}
+                />
+              ))}
               <div className="form_element">
                 <button type="submit">Submit</button>
               </div>

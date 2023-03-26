@@ -1,52 +1,28 @@
-#signup *{
-    transition: .5s ease-in-out;
+.pd-4{
+    padding: 2rem 0 2rem 0;
+    justify-content: center;
+}
+.justify-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.justify-center .heading{
+    font-size: 2rem;
+    margin-right: 8rem;
 }
 #signup{
-    width: 40%;
-} 
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(31, 35, 41, 0.9);
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    display: inline-block;
+    text-align: center;
+    width: 700px;
+    place-items: center;
+    margin: 1rem 0;
+    text-align: left;
+}
 #signup .form_element{
-    width: 100%;
-}
-#signup button{
-    width: 100%;
-    margin: 0;
-}
-#signup .form_element input{
-    text-indent: 28px;
-    margin-bottom: 1rem;
-    height: 42px;
-}
-#signup .hints{
-    margin-bottom: 1rem;
-}
-#signup .hint-item{
-    font-size: 14px;
-    color: brown;
-    font-weight: bolder;
-}
-#signup .input_logo{
-    margin: 8px;
-    position: absolute;
-    left: 0;
-    height: 24px;
-    width: auto;
-}
-#signup .bottom{
-    justify-content: space-between;
-}
-
-@media only screen and (max-width: 1024px){
-    #signup{
-        width: 50%;
-    }
-}
-@media only screen and (max-width: 768px){
-    #signup{
-        width: 70%;
-    }
-}
-@media only screen and (max-width: 480px){
-    #signup{
-        width: 90%;
-    }
+    margin: 1rem 0;
 }

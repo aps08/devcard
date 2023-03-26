@@ -1,6 +1,6 @@
 form .form_element{
     position: relative;
-    width: 85%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -21,23 +21,20 @@ form .form_element label{
     background-color: var(--color-bg);
     opacity: .6;
     border: none;
+    caret-color: var(--color-header-hover);
+    text-indent: 10px;
+    font-size: 1.2rem;
+    color: whitesmoke;
     border: 2px solid rgb(58, 57, 57);
-    border-radius: .2rem;
+    border-radius: .5rem;
+    font-weight: 100;
     transition: .5s ease-in-out;
 }
-form .form_element input::placeholder, textarea::placeholder{
+form .form_element input::placeholder{
     color: whitesmoke;
     font-weight: 100;
     opacity: .4;
     font-size: 1rem;
-}
-input[type="text"],input[type="file"],input[type="email"],input[type="number"], input[type="password"]{
-    padding: 1rem;
-    padding-left: .8rem;
-    caret-color: var(--color-header-hover);
-    color: whitesmoke;
-    font-size: 1.2rem;
-    transition: .5s ease-in-out;
 }
 form .form_element input[type="file"]{
     padding: 0;

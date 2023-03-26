@@ -19,7 +19,7 @@ const ELEMENTS = [
   },
   {
     label: "EXPERIENCE",
-    placeholder: "enter experience in number of years"
+    placeholder: "enter experience(in years)"
   },
   {
     label: "ROLE",
@@ -30,31 +30,38 @@ const HINTS = {
   name: [
     "Name is required",
     "Only alphabets and spaces are allowed",
-    "Type first name or full name that will be visible in your devcard"
+    "Type first name or full name that will be visible in your devcard",
+    "Name should not exceed 30 characters"
   ],
   company: [
     "Company name is required",
     "Only alphabets and spaces are allowed",
-    "Make sure you type correct company name"
+    "Make sure you type correct company name",
+    "Company should not exceed 20 characters"
   ],
   experience: ["Experience is required", "Experience cannot be less than 0 or more than 50."],
-  role: ["Role is requried", "Only alphabets and spaces are allowed", "Example: Back-end Developer, Python Developer"],
+  role: [
+    "Role is requried",
+    "Only alphabets and spaces are allowed",
+    "Company should not exceed 20 characters",
+    "Example: Back-end Developer, Python Developer"
+  ],
   image: ["Image is required", "Image must be png,jpg or jpeg format"]
 };
 const CHECKS = {
   name: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
   company: /^[A-Za-z][A-Za-z-.\s]{0,18}[A-Za-z]$/,
   experience: /^([0-9]|[1-4][0-9]|50)$/,
-  role: /^[A-Za-z][A-Za-z-\s]{0,28}[A-Za-z]$/
+  role: /^[A-Za-z][A-Za-z-\s]{0,18}[A-Za-z]$/
 };
 const INITIAL = {
   name: "",
   company: "",
   experience: 0,
-  role: "",
-  image: ""
+  role: ""
 };
 function Demo() {
+  const [buttondisabled, setbuttondisabled] = useState(true);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const [file, setfile] = useState(null);
@@ -62,7 +69,6 @@ function Demo() {
   const mutate = (Preview) => {
     document.body.style.overflow = "unset";
     setshowmodal(false);
-    setvalidate({ ...validate, image: true });
     setFormdata({ ...Formdata, image: Preview });
   };
   const imagechangehandler = (event) => {
@@ -79,16 +85,17 @@ function Demo() {
       } else {
         setvalidate({ ...validate, [name]: false });
       }
+      const allTrueValues = Object.values(validate).every((value) => value === true);
+      if (allTrueValues) {
+        setbuttondisabled(false);
+      } else {
+        setbuttondisabled(true);
+      }
     }
   };
   const submithandler = (event) => {
     event.preventDefault();
-    const allTrueValues = Object.values(validate).every((value) => value === true);
-    if (allTrueValues) {
-      console.log(Formdata);
-    } else {
-      alert("Some field is missing. If not reload page and try again.");
-    }
+    console.log(Formdata);
   };
   return (
     <>
@@ -114,7 +121,6 @@ function Demo() {
               <Input
                 key={index}
                 label={element.label}
-                type={element.type || "text"}
                 placeholder={element.placeholder}
                 hints={HINTS[element.label.toLowerCase()]}
                 change={changehandler}
@@ -143,7 +149,14 @@ function Demo() {
               </label>
             </div>
             <div className="form_element">
-              <button type="submit">Get a demo now</button>
+              <button type="submit" disabled={buttondisabled}>
+                Get a demo now
+              </button>
+              {buttondisabled && (
+                <p className="para" style={{ fontSize: "14px" }}>
+                  Fill the form to make this button clickable.
+                </p>
+              )}
             </div>
           </form>
         </section>

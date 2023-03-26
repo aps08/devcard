@@ -36,7 +36,7 @@
     padding: 1rem;
     width: 100%;
     text-align: center;
-    border-radius: .2rem;
+    border-radius: .5rem;
     border: 2px dashed rgb(58, 57, 57);
     background-color: var(--color-bg);
     cursor: pointer;
@@ -61,6 +61,9 @@
 }
 .form_element button{
     font-size: 1.2rem;
+}
+.form_element button:disabled{
+    cursor: not-allowed;
 }
 @media only screen and (max-width: 1024px){
     #demo_form{

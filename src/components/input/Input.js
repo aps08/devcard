@@ -10,9 +10,9 @@ function Input(props) {
         style={{ border: !props.valid && focused ? "2px solid brown" : "" }}
         onFocus={() => setfocused(true)}
         name={props.label.toLowerCase()}
-        type={props.type || "text"}
         placeholder={props.placeholder}
         onChange={props.change}
+        type={props.type || "text"}
       />
       {!props.valid && focused && (
         <ul className="hints">
