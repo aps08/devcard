@@ -2,14 +2,13 @@ import { useState } from "react";
 import Input from "../../components/input/Input";
 import logo from "../../assets/images/logo.png";
 import "./Signup.css";
+
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/
+  password: /^.{8,20}$/
 };
 const HINTS = {
-  password: [
-    "Password should contains uppercase letters, lowercase letters, numbers, and must be between 8 and 20 characters long"
-  ],
+  password: ["Password must be 8 to 20 characters long"],
   email: ["Enter a correct email address"]
 };
 const ELEMENTS = [
@@ -28,8 +27,8 @@ const INITIAL = {
   email: "",
   password: ""
 };
+
 function Signup() {
-  const [buttondisabled, setbuttondisabled] = useState(true);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const changehandler = (event) => {
@@ -40,17 +39,13 @@ function Signup() {
     } else {
       setvalidate({ ...validate, [name]: false });
     }
-    const allTrueValues = Object.values(validate).every((value) => value === true);
-    console.log(allTrueValues);
-    if (allTrueValues) {
-      setbuttondisabled(false);
-    } else {
-      setbuttondisabled(true);
-    }
   };
   const submithandler = (event) => {
     event.preventDefault();
-    console.log(Formdata);
+    const allTrueValues = Object.values(validate).every((value) => value === true);
+    if (allTrueValues) {
+      console.log(Formdata);
+    }
   };
   return (
     <>
@@ -74,14 +69,7 @@ function Signup() {
               />
             ))}
             <div className="form_element">
-              <button type="submit" disabled={buttondisabled}>
-                Create account
-              </button>
-              {buttondisabled && (
-                <p className="para center" style={{ fontSize: "14px" }}>
-                  Fill the form to make this button clickable.
-                </p>
-              )}
+              <button type="submit">Create account</button>
             </div>
           </form>
         </div>

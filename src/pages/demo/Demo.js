@@ -61,7 +61,6 @@ const INITIAL = {
   role: ""
 };
 function Demo() {
-  const [buttondisabled, setbuttondisabled] = useState(true);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const [file, setfile] = useState(null);
@@ -85,17 +84,14 @@ function Demo() {
       } else {
         setvalidate({ ...validate, [name]: false });
       }
-      const allTrueValues = Object.values(validate).every((value) => value === true);
-      if (allTrueValues) {
-        setbuttondisabled(false);
-      } else {
-        setbuttondisabled(true);
-      }
     }
   };
   const submithandler = (event) => {
     event.preventDefault();
-    console.log(Formdata);
+    const allTrueValues = Object.values(validate).every((value) => value === true);
+    if (allTrueValues) {
+      console.log(Formdata);
+    }
   };
   return (
     <>
@@ -149,14 +145,7 @@ function Demo() {
               </label>
             </div>
             <div className="form_element">
-              <button type="submit" disabled={buttondisabled}>
-                Get a demo now
-              </button>
-              {buttondisabled && (
-                <p className="para" style={{ fontSize: "14px" }}>
-                  Fill the form to make this button clickable.
-                </p>
-              )}
+              <button type="submit">Get a demo now</button>
             </div>
           </form>
         </section>
