@@ -9,20 +9,75 @@
 }
 .justify-center .heading{
     font-size: 2rem;
-    margin-right: 8rem;
 }
 #signup{
     color: rgba(255,255,255,0.7);
-    background-color: rgba(31, 35, 41, 0.9);
-    padding: 1rem 2rem;
-    border-radius: .5rem;
     display: inline-block;
     text-align: center;
-    width: 700px;
+    width: 100%;
     place-items: center;
-    margin: 1rem 0;
+    margin-top: 1rem;
     text-align: left;
+    transition: .5s ease-in-out;
+}
+.main_div{
+    border-radius: .5rem;
+    padding: 1rem 2rem;
+    display: block;
+    width: 60%;
+    background-color: rgba(31, 35, 41, 0.9);
 }
 #signup .form_element{
     margin: 1rem 0;
+}
+.divider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.divider .para{
+    font-size: 1rem;
+}
+.divider .navlink_signin{
+    color: var(--color-btn-bg);
+    border-bottom: 1px solid var(--color-btn-bg);
+    cursor: pointer;
+    margin: 0 1rem;
+}
+@media only screen and (max-width: 1024px){
+    .main_div{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 768px){
+    .main_div{
+        width: 90%;
+    }
+    .pd-4 .brand_image{
+        width: 60px;
+        height: 40px;
+        transition: all .5s ease-in-out;
+    }
+    .pd-4 .brand_name{
+        font-size: 3.2rem;
+        transition: all .5s ease-in-out;
+    }
+}
+@media only screen and (max-width: 480px){
+    .justify-center .heading{
+        font-size: 1.2rem;
+    }
+    .main_div{
+        width: 95%;
+    }
+    .pd-4 .brand_image{
+        width: 50px;
+        height: 35px;
+        transition: all .5s ease-in-out;
+    }
+    .pd-4 .brand_name{
+        display: block;
+        font-size: 2.4rem;
+        transition: all .5s ease-in-out;
+    }
 }

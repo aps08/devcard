@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import Input from "../../components/input/Input";
 import logo from "../../assets/images/logo.png";
 import "./Signup.css";
@@ -54,7 +55,7 @@ function Signup() {
         <span className="brand_name">Devcards</span>
       </div>
       <div className="justify-center">
-        <div style={{ display: "block" }}>
+        <div className="main_div">
           <div className="heading left">Create your account for free</div>
           <form id="signup" onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
@@ -72,6 +73,17 @@ function Signup() {
               <button type="submit">Create account</button>
             </div>
           </form>
+          <div className="divider">
+            <p className="para">Already have an account ?</p>
+            <NavLink to="/signin">
+              <span className="navlink_signin">Sign In</span>
+            </NavLink>
+          </div>
+          <div className="divider">
+            <p className="para" style={{ fontSize: "14px" }}>
+              By creating an account, you agree to the Terms of Service and Privacy Policy.
+            </p>
+          </div>
         </div>
       </div>
     </>
