@@ -4,6 +4,7 @@ import Preview from "../../components/preview/Preview";
 import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./Demo.css";
 
@@ -11,19 +12,19 @@ const MODAL_ELEMENT = document.getElementById("root-modal");
 const ELEMENTS = [
   {
     label: "NAME",
-    placeholder: "enter your name"
+    placeholder: "Anoop Singh"
   },
   {
     label: "COMPANY",
-    placeholder: "enter your company name"
+    placeholder: "10xlab"
   },
   {
     label: "EXPERIENCE",
-    placeholder: "enter experience(in years)"
+    placeholder: "2"
   },
   {
     label: "ROLE",
-    placeholder: "enter your role"
+    placeholder: "Full-stack developer"
   }
 ];
 const HINTS = {
@@ -109,10 +110,10 @@ function Demo() {
             MODAL_ELEMENT
           )}
         <section className="center">
-          <h3 className="heading" style={{ marginTop: "1rem" }}>
-            Get started by filling out the exciting form below and create your very own developer card!
-          </h3>
           <form id="demo_form" onSubmit={submithandler}>
+            <h3 className="heading" style={{ marginTop: "1rem", fontSize: "2rem" }}>
+              Filling out the exciting form below and create your devcard!
+            </h3>
             {ELEMENTS.map((element, index) => (
               <Input
                 key={index}
@@ -147,6 +148,12 @@ function Demo() {
             <div className="form_element">
               <button type="submit">Get a demo now</button>
             </div>
+            <p className="para" style={{ fontSize: "1.2rem" }}>
+              Get more customization by
+              <NavLink to="/signup">
+                <span className="navlink_signin">Signing Up</span>
+              </NavLink>
+            </p>
           </form>
         </section>
       </main>

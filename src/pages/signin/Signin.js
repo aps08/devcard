@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Input from "../../components/input/Input";
 import logo from "../../assets/images/logo.png";
 import "./Signin.css";
@@ -27,6 +28,7 @@ const HINTS = {
   email: ["Email address is requried"]
 };
 function Signin() {
+  const navigate = useNavigate();
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const changehandler = (event) => {
@@ -53,7 +55,7 @@ function Signin() {
       </div>
       <div className="justify-center">
         <div className="main_div">
-          <div className="heading left">Create your account for free</div>
+          <div className="heading left">Sign in and get started</div>
           <form id="signin" onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
               <Input
@@ -68,6 +70,21 @@ function Signin() {
             ))}
             <div className="form_element">
               <button type="submit">Sign In</button>
+            </div>
+            <div style={{ marginTop: "1rem" }} className="divider">
+              <p className="para">
+                Don<>&apos;</>t have an account ?
+              </p>
+              <NavLink to="/signup">
+                <span className="navlink_signin">Sign Up</span>
+              </NavLink>
+            </div>
+            <div className="divider">
+              <NavLink onClick={() => navigate(-1)}>
+                <span className="navlink_signin" style={{ fontSize: "1.2rem" }}>
+                  Go Back
+                </span>
+              </NavLink>
             </div>
           </form>
         </div>

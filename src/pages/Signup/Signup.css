@@ -38,7 +38,7 @@
 .divider .para{
     font-size: 1rem;
 }
-.divider .navlink_signin{
+.navlink_signin{
     color: var(--color-btn-bg);
     border-bottom: 1px solid var(--color-btn-bg);
     cursor: pointer;
@@ -79,5 +79,9 @@
         display: block;
         font-size: 2.4rem;
         transition: all .5s ease-in-out;
+    }
+    .divider{
+        display: block;
+        text-align: center;
     }
 }

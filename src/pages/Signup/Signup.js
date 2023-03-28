@@ -23,7 +23,7 @@ const ELEMENTS = [
   {
     label: "PASSWORD",
     type: "password",
-    placeholder: "**************"
+    placeholder: "***********"
   }
 ];
 const INITIAL = {
@@ -57,6 +57,7 @@ function Signup() {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
+      delete Formdata.confirm_password;
       console.log(Formdata);
     }
   };
