@@ -1,0 +1,13 @@
+#signin{
+    color: rgba(255,255,255,0.7);
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    place-items: center;
+    margin-top: 1rem;
+    text-align: left;
+    transition: .5s ease-in-out;
+}
+#signin .form_element{
+    margin: 1rem 0;
+}
