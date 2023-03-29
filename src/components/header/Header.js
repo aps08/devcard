@@ -7,6 +7,7 @@ import logo from "../../assets/images/logo.png";
 const WIDTH_SIZE = 1024;
 function Header() {
   const { IsLoggedin } = useContext(AuthContext);
+  const creditcounts = 5;
   const [Isopen, setIsopen] = useState(false);
 
   const onresize = (event) => {
@@ -48,9 +49,11 @@ function Header() {
             <li>About</li>
           </NavLink>
           {IsLoggedin && (
-            <NavLink className={"list-item"} to="/dashboard" onClick={navigationhandler}>
-              <li>Dashboard</li>
-            </NavLink>
+            <>
+              <NavLink className={"list-item"} to="/dashboard" onClick={navigationhandler}>
+                <li>Dashboard</li>
+              </NavLink>
+            </>
           )}
           <li className="list-item">
             {!IsLoggedin && (
@@ -65,6 +68,11 @@ function Header() {
             <button>Sign in</button>
           </NavLink>
         )}
+        {/* {IsLoggedin && (
+          <NavLink to="/dashboard">
+            <button>Credits:{creditcounts}</button>
+          </NavLink>
+        )} */}
         <div
           id="menu"
           className="hamburger"
