@@ -15,7 +15,7 @@
   },
   "scripts": {
     "ui": "react-scripts start",
-    "api": "cd server && python server.py",
+    "api": "cd server && python app.py",
     "lint": "eslint src/**/**/*.js",
     "lint:fix": "eslint src/**/**/*.js --fix",
     "build": "react-scripts build",
