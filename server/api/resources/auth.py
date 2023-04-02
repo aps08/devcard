@@ -11,21 +11,20 @@ api = Api(auth_resource)
 
 class Register(Resource):
     def post(self):
-        result = None
         try:
             data = RegisterSchema().load(request.json)
         except ValidationError as err:
             messages = list(err.messages.values())
-            result = {"error": messages}, 422
+            return {"error": messages}, 422
         if User.query.filter_by(email=data['email']).first() is not None:
-            result = {'error': 'Email already exists'}, 409
+            return {'error': 'Email already exists'}, 409
         else:
             password_hash = flask_bcrypt.generate_password_hash(data['password']).decode('utf-8')
             user = User(email=data['email'], password=password_hash)
             result = user.add_user() 
             if result[1] == 201:
-                print("send email")
-        return result
+                print("send email logic here")
+            return result
 
 class Login(Resource):
     def post(self):
