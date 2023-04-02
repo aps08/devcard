@@ -107,7 +107,8 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
-
+/server/api/devcard.db
+server\api\devcard.db
 # mkdocs documentation
 /site
 /pythonexample

@@ -1,16 +1,10 @@
 from flask import Flask
-from flask_bcrypt import Bcrypt
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-from flask_login import LoginManager
-from flask_sqlalchemy import SQLAlchemy
 
 from .config import config_by_name
+from .extensions import db, flask_bcrypt, jwt, login_manager, ma
+from .models import Contributor, Role, User
 from .resources import auth_resource
-
-db = SQLAlchemy()
-flask_bcrypt = Bcrypt()
-login_manager = LoginManager()
 
 
 def create_app(config_name):
@@ -19,8 +13,9 @@ def create_app(config_name):
 
     # Initilization
     db.init_app(app)
+    ma.init_app(app)
     flask_bcrypt.init_app(app)
-    jwt = JWTManager(app)
+    jwt.init_app(app)
     login_manager.init_app(app)
 
     # Registering resources

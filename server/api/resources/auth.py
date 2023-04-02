@@ -1,27 +1,35 @@
+from api.extensions import db, flask_bcrypt
+from api.models import User
+from api.schemas import RegisterSchema
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from flask_restful import Api, Resource
+from marshmallow import ValidationError
 
 auth_resource = Blueprint('auth', __name__)
 api = Api(auth_resource)
 
 class Register(Resource):
     def post(self):
-        return {'message': 'User registered successfully'}
-    
+        result = None
+        try:
+            data = RegisterSchema().load(request.json)
+        except ValidationError as err:
+            messages = list(err.messages.values())
+            result = {"error": messages}, 422
+        if User.query.filter_by(email=data['email']).first() is not None:
+            result = {'error': 'Email already exists'}, 409
+        else:
+            password_hash = flask_bcrypt.generate_password_hash(data['password']).decode('utf-8')
+            user = User(email=data['email'], password=password_hash)
+            result = user.add_user() 
+            if result[1] == 201:
+                print("send email")
+        return result
+
 class Login(Resource):
     def post(self):
-        request_data = {
-        'headers': dict(request.headers),
-        # 'cookies': dict(request.cookies),
-        # 'args': dict(request.args),
-        # 'form': dict(request.form),
-        # 'data': request.data.decode(),
-        # 'user_agent': str(request.user_agent),
-        # 'remote_addr': request.remote_addr,
-        # 'method': request.method,
-        # 'url': request.url
-        }
+        request_data = dict(dev="dev")
         return jsonify(request_data)
 
 
