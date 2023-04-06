@@ -1,13 +1,13 @@
-from api.extensions import db, flask_bcrypt
+from api.extensions import flask_bcrypt
 from api.models import User
 from api.schemas import RegisterSchema
-from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask import Blueprint, request
 from flask_restful import Api, Resource
 from marshmallow import ValidationError
 
-auth_resource = Blueprint('auth', __name__)
+auth_resource = Blueprint("auth", __name__)
 api = Api(auth_resource)
+
 
 class Register(Resource):
     def post(self):
@@ -16,27 +16,24 @@ class Register(Resource):
         except ValidationError as err:
             messages = list(err.messages.values())
             return {"error": messages}, 422
-        if User.query.filter_by(email=data['email']).first() is not None:
-            return {'error': 'Email already exists'}, 409
-        else:
-            password_hash = flask_bcrypt.generate_password_hash(data['password']).decode('utf-8')
-            user = User(email=data['email'], password=password_hash)
-            result = user.add_user() 
-            if result[1] == 201:
-                print("send email logic here")
-            return result
+        password_hash = flask_bcrypt.generate_password_hash(data["password"]).decode("utf-8")
+        user = User(email=data["email"], password=password_hash)
+        json_data, status_code = user.add_user()
+        if status_code == 201:
+            print("send email logic here")
+        return json_data, status_code
+
 
 class Login(Resource):
     def post(self):
-        request_data = dict(dev="dev")
-        return jsonify(request_data)
+        print("logged in")
 
 
 class Logout(Resource):
-     
-     def post(self):
-          print("logged out")
+    def post(self):
+        print("logged out")
 
-api.add_resource(Register, '/register')
-api.add_resource(Login, '/login')
-api.add_resource(Logout, '/logout')
+
+api.add_resource(Register, "/register")
+api.add_resource(Login, "/login")
+api.add_resource(Logout, "/logout")
