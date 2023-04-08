@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 devcard.db
+.flaskenv
 # Distribution / packaging
 .Python
 build/

@@ -111,6 +111,7 @@ venv.bak/
 server\api\devcard.db
 # mkdocs documentation
 /site
+.flaskenv
 /pythonexample
 # mypy
 .mypy_cache/

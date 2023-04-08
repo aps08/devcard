@@ -6,7 +6,7 @@ from api.extensions import db
 class ProfessionalInfo(db.Model):
     __tablename__ = "professional_info"
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"), primary_key=True)
     professional_role = db.Column(db.String(120), nullable=True)
     company_name = db.Column(db.String(120), nullable=True)
     experience = db.Column(db.Float, nullable=True)

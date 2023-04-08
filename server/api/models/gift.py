@@ -4,7 +4,7 @@ from api.extensions import db
 
 
 class Gift(db.Model):
-    __tablename__ = "gifts"
+    __tablename__ = "gift"
 
     gift_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=False)
