@@ -1,3 +1,4 @@
+from .blacklisted import TokenBlocklist
 from .contribution import Contribution
 from .gift import Gift
 from .order import Order

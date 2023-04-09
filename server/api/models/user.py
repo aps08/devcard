@@ -1,9 +1,10 @@
 from datetime import datetime
 
 from api.extensions import db
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "user"
 
     user_id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +14,8 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+    role = db.relationship("Role", backref="users")
 
     def __init__(self, email, password, **kwargs):
         self.email = email
@@ -30,3 +33,6 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
         return {"message": "A verification email has been sent to your email " + self.email}, 200
+
+    def get_id(self):
+        return str(self.user_id)
