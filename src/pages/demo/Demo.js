@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import ReactDOM from "react-dom";
 import ReactLoading from "react-loading";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Preview from "../../components/preview/Preview";
+import Sign from "../../components/sign/Sign";
 import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
-import ModalWrapper from "../../helper/Modalwrapper";
 import "./Demo.css";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
@@ -64,21 +63,38 @@ const INITIAL = {
   role: ""
 };
 function Demo() {
+  const loading = <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />;
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
+  const [showsingup, setshowsignup] = useState(null);
+  const [show, setshow] = useState(false);
   const [file, setfile] = useState(null);
+  const [spinner, setspinner] = useState(false);
   const [showmodal, setshowmodal] = useState(false);
-  const [showmodalsubmit, setshowmodalsubmit] = useState(false);
+
   const mutate = (Preview) => {
     document.body.style.overflow = "unset";
     setshowmodal(false);
     setFormdata({ ...Formdata, image: Preview });
   };
+
   const imagechangehandler = (event) => {
     document.body.style.overflow = "hidden";
     setfile(event.target.files[0]);
     setshowmodal(true);
   };
+
+  const showmodalhandler = () => {
+    document.body.style.overflow = "hidden";
+    setshow(true);
+  };
+
+  const closemodal = () => {
+    setshow(false);
+    setshowsignup(false);
+    document.body.style.overflow = "unset";
+  };
+
   const changehandler = (event) => {
     const { name, value } = event.target;
     if (name !== "image") {
@@ -90,12 +106,16 @@ function Demo() {
       }
     }
   };
+
   const submithandler = (event) => {
     event.preventDefault();
-    setshowmodalsubmit(true);
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
+      setspinner(true);
       console.log(Formdata);
+      setTimeout(() => {
+        setspinner(false);
+      }, 5000);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -106,19 +126,13 @@ function Demo() {
         }
       }
     }
-    setshowmodalsubmit(false);
   };
+
   return (
     <>
       <Header />
       <main>
-        {showmodalsubmit &&
-          ReactDOM.createPortal(
-            <ModalWrapper close={null}>
-              <ReactLoading type="spin" color="#fff" height="100px" width="100px" className="reactloading" />
-            </ModalWrapper>,
-            MODAL_ELEMENT
-          )}
+        {show && ReactDOM.createPortal(<Sign show={showsingup} close={closemodal} />, MODAL_ELEMENT)}
         {showmodal &&
           ReactDOM.createPortal(
             <Preview
@@ -167,13 +181,15 @@ function Demo() {
               </label>
             </div>
             <div className="form_element">
-              <button type="submit">Get a demo now</button>
+              <button type="submit" style={{ height: "39px" }} disabled={spinner}>
+                {spinner ? loading : <>Get a demo now</>}
+              </button>
             </div>
             <p className="para" style={{ fontSize: "1.2rem" }}>
               Get more customization by
-              <NavLink to="/signup">
-                <span className="navlink_signin">Signing Up</span>
-              </NavLink>
+              <span onClick={spinner ? null : showmodalhandler} className="navlink_signin">
+                Signing Up
+              </span>
             </p>
           </form>
         </section>

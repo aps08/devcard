@@ -1,18 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import ModalWrapper from "../../helper/Modalwrapper";
 import AuthContext from "../../store/auth-context";
-import Signup from "../Signup/Signup";
-import Signin from "../signin/Signin";
+import Sign from "../sign/Sign";
 import "../header/Header.css";
 import ReactDOM from "react-dom";
 import logo from "../../assets/images/logo.png";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
 const WIDTH_SIZE = 1024;
+
 function Header() {
-  const [showmodalsignup, setshowmodalsignup] = useState(false);
-  const [showmodalsigin, setshowmodalsignin] = useState(false);
+  const [showsingup, setshowsignup] = useState(null);
+  const [show, setshow] = useState(false);
   const { IsLoggedin } = useContext(AuthContext);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
@@ -22,6 +21,7 @@ function Header() {
       setIsopen(false);
     }
   };
+
   useEffect(() => {
     addEventListener("resize", onresize);
     return () => {
@@ -29,21 +29,16 @@ function Header() {
     };
   });
 
-  const closeanymodal = () => {
-    setshowmodalsignin(false);
-    setshowmodalsignup(false);
+  const closemodal = () => {
+    setshow(false);
+    setshowsignup(false);
     document.body.style.overflow = "unset";
   };
 
-  const showformmodalsignup = () => {
-    setshowmodalsignin(false);
+  const showhandler = (formtype) => {
+    setshowsignup(formtype);
     document.body.style.overflow = "hidden";
-    setshowmodalsignup(true);
-  };
-  const showformmodalsignin = () => {
-    setshowmodalsignup(false);
-    document.body.style.overflow = "hidden";
-    setshowmodalsignin(true);
+    setshow(true);
   };
 
   const navigationhandler = () => {
@@ -54,20 +49,7 @@ function Header() {
 
   return (
     <>
-      {showmodalsignup &&
-        ReactDOM.createPortal(
-          <ModalWrapper close={closeanymodal}>
-            <Signup changeform={showformmodalsignin} />
-          </ModalWrapper>,
-          MODAL_ELEMENT
-        )}
-      {showmodalsigin &&
-        ReactDOM.createPortal(
-          <ModalWrapper close={closeanymodal}>
-            <Signin changeform={showformmodalsignup} />
-          </ModalWrapper>,
-          MODAL_ELEMENT
-        )}
+      {show && ReactDOM.createPortal(<Sign show={showsingup} close={closemodal} />, MODAL_ELEMENT)}
       <header className="navbar">
         <div className="branding">
           <img className="brand_image" src={logo} alt="React Image" />
@@ -92,10 +74,10 @@ function Header() {
               </NavLink>
             )}
             <li className="list-item">
-              {!IsLoggedin && <button onClick={showformmodalsignup}>Sign up for free</button>}
+              {!IsLoggedin && <button onClick={() => showhandler(false)}>Sign up for free</button>}
             </li>
           </ul>
-          {!IsLoggedin && <button onClick={showformmodalsignin}>Sign in</button>}
+          {!IsLoggedin && <button onClick={() => showhandler(true)}>Sign in</button>}
           {IsLoggedin && (
             <NavLink to="/dashboard">
               <button>{creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}</button>

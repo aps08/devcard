@@ -9,7 +9,6 @@
     width: auto;
     height:auto;
     border-radius: .5rem;
-    box-shadow: 0px 1px 1px rgb(30, 34, 40);
 }
 .modal .body{
     padding: 1rem;
