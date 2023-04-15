@@ -63,7 +63,18 @@ input::-webkit-inner-spin-button {
 }
 .hints .hint-item{
     margin: .1rem 0;
+    animation: fade-in .5s ease-in-out forwards;
 }
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
 @media only screen and (max-width: 768px){
     .form_element input{
         height: 40px;

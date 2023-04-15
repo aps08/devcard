@@ -2,7 +2,7 @@
     color: rgba(255,255,255,0.7);
     display: inline-block;
     text-align: center;
-    width: 100%;
+    width: 300px;
     place-items: center;
     margin-top: 1rem;
     text-align: left;
@@ -10,4 +10,9 @@
 }
 #signin .form_element{
     margin: 1rem 0;
+}
+@media only screen and (max-width: 480px){
+    #signin{
+        width: 250px;
+    }
 }

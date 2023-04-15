@@ -14,7 +14,9 @@ class DevelopmentConfig(Config):
     MAIL_SERVER = "smtp.gmail.com"
     MAIL_PORT = 465
     MAIL_USE_SSL = True
-
+    MAIL_USERNAME = "anoopprsingh.exp.spam@gmail.com"
+    MAIL_DEFAULT_SENDER = MAIL_USERNAME
+    MAIL_PASSWORD = "xzjcrdhdlhyyhpdj"
     MAIL_DEBUG = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "devcard.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False

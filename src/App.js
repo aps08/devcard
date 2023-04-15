@@ -5,12 +5,10 @@ import Demo from "./pages/demo/Demo";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Notfound from "./pages/notfound/Notfound";
 import About from "./pages/about/About";
-import Signup from "./pages/Signup/Signup";
-import Signin from "./pages/signin/Signin";
 import "./App.css";
 
 function App() {
-  const IsLoggedin = true;
+  const IsLoggedin = false;
   return (
     <AuthContext.Provider
       value={{
@@ -20,10 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
         <Route path="/About" element={<About />} />
-        {!IsLoggedin && <Route path="/SignUp" element={<Signup />} />}
-        {!IsLoggedin && <Route path="/Signin" element={<Signin />} />}
         {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
-        <Route path="/register" element={<Navigate to="/signup" replace />} />
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="" element={<Navigate to="/home" replace />} />
         <Route path="*" element={<Notfound />} />

@@ -7,25 +7,21 @@ import { useState } from "react";
 const ELEMENTS = [
   { label: "NAME", placeholder: "enter full name" },
   { label: "EMAIL", placeholder: "enter your email" },
-  { label: "SUBJECT", placeholder: "enter subject detail" },
   { label: "MESSAGE", placeholder: "enter your messsage" }
 ];
 const HINTS = {
   name: ["Name is required", "Only alphabets and spaces are allowed", "Name should not exceed 30 characters"],
   email: ["Email is required", "Email should not exceed 30 characters"],
-  subject: ["Subject is required", "Subject should not exceed 30 characters"],
   message: ["Message is required", "Message should not exeed 100 characters"]
 };
 const CHECKS = {
   name: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
   email: /^[^\s@]{1,30}@[^\s@]+\.[^\s@]+$/,
-  subject: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
   message: /^[A-Za-z][A-Za-z\s]{0,98}[A-Za-z]$/
 };
 const INITIAL = {
   name: "",
   email: "",
-  subject: "",
   message: ""
 };
 function About() {
@@ -46,7 +42,14 @@ function About() {
     if (allTrueValues) {
       console.log(Formdata);
     } else {
-      alert("Some field is missing. If not reload page and try again.");
+      for (const key in validate) {
+        if (validate[key] !== true) {
+          const inputfield = document.querySelector(`input[name=${key}]`);
+          inputfield.focus();
+          inputfield.scrollIntoView({ block: "center" });
+          break;
+        }
+      }
     }
   };
   return (

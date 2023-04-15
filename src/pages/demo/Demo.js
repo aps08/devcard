@@ -1,11 +1,13 @@
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import ReactDOM from "react-dom";
+import ReactLoading from "react-loading";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Preview from "../../components/preview/Preview";
 import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import ReactDOM from "react-dom";
+import ModalWrapper from "../../helper/Modalwrapper";
 import "./Demo.css";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
@@ -16,7 +18,7 @@ const ELEMENTS = [
   },
   {
     label: "COMPANY",
-    placeholder: "10xlab"
+    placeholder: "Tenxlab"
   },
   {
     label: "EXPERIENCE",
@@ -66,6 +68,7 @@ function Demo() {
   const [validate, setvalidate] = useState(INITIAL);
   const [file, setfile] = useState(null);
   const [showmodal, setshowmodal] = useState(false);
+  const [showmodalsubmit, setshowmodalsubmit] = useState(false);
   const mutate = (Preview) => {
     document.body.style.overflow = "unset";
     setshowmodal(false);
@@ -89,15 +92,33 @@ function Demo() {
   };
   const submithandler = (event) => {
     event.preventDefault();
+    setshowmodalsubmit(true);
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       console.log(Formdata);
+    } else {
+      for (const key in validate) {
+        if (validate[key] !== true) {
+          const inputfield = document.querySelector(`input[name=${key}]`);
+          inputfield.focus();
+          inputfield.scrollIntoView({ block: "center" });
+          break;
+        }
+      }
     }
+    setshowmodalsubmit(false);
   };
   return (
     <>
       <Header />
       <main>
+        {showmodalsubmit &&
+          ReactDOM.createPortal(
+            <ModalWrapper close={null}>
+              <ReactLoading type="spin" color="#fff" height="100px" width="100px" className="reactloading" />
+            </ModalWrapper>,
+            MODAL_ELEMENT
+          )}
         {showmodal &&
           ReactDOM.createPortal(
             <Preview

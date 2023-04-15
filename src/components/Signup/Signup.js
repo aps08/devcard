@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
+import ModalWrapper from "../../helper/Modalwrapper";
 import Input from "../../components/input/Input";
-import logo from "../../assets/images/logo.png";
-import "./Signin.css";
+import ReactDOM from "react-dom";
+import "./Signup.css";
+
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  password: /^.+$/
+  password: /^.{8,20}$/
+};
+const HINTS = {
+  password: ["Password must be 8 to 20 characters long"],
+  email: ["Enter a correct email address"]
 };
 const ELEMENTS = [
   {
@@ -16,21 +22,18 @@ const ELEMENTS = [
   {
     label: "PASSWORD",
     type: "password",
-    placeholder: "**************"
+    placeholder: "***********"
   }
 ];
 const INITIAL = {
   email: "",
   password: ""
 };
-const HINTS = {
-  password: ["Password is requried"],
-  email: ["Email address is requried"]
-};
-function Signin() {
-  const navigate = useNavigate();
+const MODAL_ELEMENT = document.getElementById("root-modal");
+function Signup(props) {
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
+  const [showmodal, setshowmodal] = useState(false);
   const changehandler = (event) => {
     const { name, value } = event.target;
     if (CHECKS[name].test(value)) {
@@ -42,21 +45,37 @@ function Signin() {
   };
   const submithandler = (event) => {
     event.preventDefault();
+    setshowmodal(true);
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
+      delete Formdata.confirm_password;
       console.log(Formdata);
+    } else {
+      for (const key in validate) {
+        if (validate[key] !== true) {
+          const inputfield = document.querySelector(`input[name=${key}]`);
+          console.log(inputfield, `input[name=${key}]`);
+          inputfield.focus();
+          inputfield.scrollIntoView({ block: "center" });
+          break;
+        }
+      }
     }
+    setshowmodal(false);
   };
   return (
     <>
-      <div className="branding pd-4">
-        <img className="brand_image" src={logo} alt="React Image" />
-        <span className="brand_name">Devcards</span>
-      </div>
+      {showmodal &&
+        ReactDOM.createPortal(
+          <ModalWrapper close={null}>
+            <ReactLoading type="spin" color="#fff" height="100px" width="100px" className="reactloading" />
+          </ModalWrapper>,
+          MODAL_ELEMENT
+        )}
       <div className="justify-center">
         <div className="main_div">
-          <div className="heading left">Sign in and get started</div>
-          <form id="signin" onSubmit={submithandler}>
+          <div className="heading left">Create account</div>
+          <form id="signup" onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
               <Input
                 key={index}
@@ -69,27 +88,19 @@ function Signin() {
               />
             ))}
             <div className="form_element">
-              <button type="submit">Sign In</button>
-            </div>
-            <div style={{ marginTop: "1rem" }} className="divider">
-              <p className="para">
-                Don<>&apos;</>t have an account ?
-              </p>
-              <NavLink to="/signup">
-                <span className="navlink_signin">Sign Up</span>
-              </NavLink>
-            </div>
-            <div className="divider">
-              <NavLink onClick={() => navigate(-1)}>
-                <span className="navlink_signin" style={{ fontSize: "1.2rem" }}>
-                  Go Back
-                </span>
-              </NavLink>
+              <button type="submit">Sign up</button>
             </div>
           </form>
+          <div className="divider">
+            <p className="para">Already have an account ?</p>
+            <span onClick={props.changeform} className="navlink_signin">
+              Sign In
+            </span>
+          </div>
         </div>
       </div>
     </>
   );
 }
-export default Signin;
+
+export default Signup;
