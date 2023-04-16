@@ -1,8 +1,6 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import ReactLoading from "react-loading";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
 import Preview from "../../components/preview/Preview";
 import Sign from "../../components/sign/Sign";
 import BrowseLogo from "../../assets/images/browselogo.svg";
@@ -130,71 +128,67 @@ function Demo() {
 
   return (
     <>
-      <Header />
-      <main>
-        {show && ReactDOM.createPortal(<Sign show={showsingup} close={closemodal} />, MODAL_ELEMENT)}
-        {showmodal &&
-          ReactDOM.createPortal(
-            <Preview
-              Select={showmodal}
-              mutator={mutate}
-              setSelect={setshowmodal}
-              file={file}
-              close={() => setshowmodal(false)}
-            />,
-            MODAL_ELEMENT
-          )}
-        <section className="center">
-          <form id="demo_form" onSubmit={submithandler}>
-            <h3 className="heading" style={{ marginTop: "1rem", fontSize: "2rem" }}>
-              Filling out the exciting form below and create your devcard!
-            </h3>
-            {ELEMENTS.map((element, index) => (
-              <Input
-                key={index}
-                label={element.label}
-                placeholder={element.placeholder}
-                hints={HINTS[element.label.toLowerCase()]}
-                change={changehandler}
-                valid={validate[element.label.toLowerCase()]}
-              />
-            ))}
-            <div className="form_element">
-              <label style={{ textAlign: "center" }}>ADD IMAGE</label>
-              <input
-                name="image"
-                accept="image/*"
-                type="file"
-                id="img"
-                style={{ display: "none" }}
-                onChange={imagechangehandler}
-              />
-              <label name="upload" id="upload" htmlFor="img" style={{ marginLeft: "0" }}>
-                <div className="file_input_area">
-                  <img
-                    className="preview_image_area"
-                    src={Formdata.image ? Formdata.image : BrowseLogo}
-                    alt="browselogo"
-                  />
-                  <p>Browse files</p>
-                </div>
-              </label>
-            </div>
-            <div className="form_element">
-              <button type="submit" style={{ height: "39px" }} disabled={spinner}>
-                {spinner ? loading : <>Get a demo now</>}
-              </button>
-            </div>
-            <p className="para" style={{ fontSize: "1.2rem" }}>
-              Get more customization by
-              <span onClick={spinner ? null : showmodalhandler} className="navlink_signin">
-                Signing Up
-              </span>
-            </p>
-          </form>
-        </section>
-      </main>
-      <Footer />
+      {show && ReactDOM.createPortal(<Sign show={showsingup} close={closemodal} />, MODAL_ELEMENT)}
+      {showmodal &&
+        ReactDOM.createPortal(
+          <Preview
+            Select={showmodal}
+            mutator={mutate}
+            setSelect={setshowmodal}
+            file={file}
+            close={() => setshowmodal(false)}
+          />,
+          MODAL_ELEMENT
+        )}
+      <section className="center">
+        <form id="demo_form" onSubmit={submithandler}>
+          <h3 className="heading" style={{ marginTop: "1rem", fontSize: "2rem" }}>
+            Filling out the exciting form below and create your devcard!
+          </h3>
+          {ELEMENTS.map((element, index) => (
+            <Input
+              key={index}
+              label={element.label}
+              placeholder={element.placeholder}
+              hints={HINTS[element.label.toLowerCase()]}
+              change={changehandler}
+              valid={validate[element.label.toLowerCase()]}
+            />
+          ))}
+          <div className="form_element">
+            <label style={{ textAlign: "center" }}>ADD IMAGE</label>
+            <input
+              name="image"
+              accept="image/*"
+              type="file"
+              id="img"
+              style={{ display: "none" }}
+              onChange={imagechangehandler}
+            />
+            <label name="upload" id="upload" htmlFor="img" style={{ marginLeft: "0" }}>
+              <div className="file_input_area">
+                <img
+                  className="preview_image_area"
+                  src={Formdata.image ? Formdata.image : BrowseLogo}
+                  alt="browselogo"
+                />
+                <p>Browse files</p>
+              </div>
+            </label>
+          </div>
+          <div className="form_element">
+            <button type="submit" style={{ height: "39px" }} disabled={spinner}>
+              {spinner ? loading : <>Get a demo now</>}
+            </button>
+          </div>
+          <p className="para" style={{ fontSize: "1.2rem" }}>
+            Get more customization by
+            <span onClick={spinner ? null : showmodalhandler} className="navlink_signin">
+              Signing Up
+            </span>
+          </p>
+        </form>
+      </section>
     </>
   );
 }

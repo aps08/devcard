@@ -5,6 +5,8 @@ import Demo from "./pages/demo/Demo";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Notfound from "./pages/notfound/Notfound";
 import About from "./pages/about/About";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 import "./App.css";
 
 function App() {
@@ -14,15 +16,19 @@ function App() {
       value={{
         IsLoggedin: IsLoggedin
       }}>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
-        <Route path="/About" element={<About />} />
-        {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="" element={<Navigate to="/home" replace />} />
-        <Route path="*" element={<Notfound />} />
-      </Routes>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
+          <Route path="/About" element={<About />} />
+          {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="" element={<Navigate to="/home" replace />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
+      </main>
+      <Footer />
     </AuthContext.Provider>
   );
 }

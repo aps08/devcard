@@ -29,8 +29,7 @@ const HINTS = {
 };
 
 function Sign(props) {
-  console.log("1");
-  const [show, setshow] = useState(props.show);
+  const [show, setshow] = useState(!props.show);
   const loading = <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />;
   const [spinner, setspinner] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
@@ -69,74 +68,37 @@ function Sign(props) {
   };
 
   return (
-    <>
-      <ModalWrapper close={props.close}>
-        {show && (
-          <div className="justify-center">
-            <div className="main_div">
-              <div className="heading left">Get started</div>
-              <form id="signin" onSubmit={submithandler} name="signin">
-                {ELEMENTS.map((element, index) => (
-                  <Input
-                    key={index}
-                    label={element.label}
-                    placeholder={element.placeholder}
-                    hints={HINTS[element.label.toLowerCase()]}
-                    change={changehandler}
-                    type={element.type}
-                    valid={validate[element.label.toLowerCase()]}
-                  />
-                ))}
-                <div className="form_element">
-                  <button type="submit" style={{ height: "39px" }} disabled={spinner}>
-                    {spinner ? loading : <>Sign in</>}
-                  </button>
-                </div>
-                <div style={{ marginTop: "1rem" }} className="divider">
-                  <p className="para">
-                    Don<>&apos;</>t have an account ?
-                  </p>
-                  <span onClick={() => setshow(!show)} className="navlink_signin">
-                    Sign Up
-                  </span>
-                </div>
-              </form>
+    <ModalWrapper close={props.close}>
+      <div className="justify-center">
+        <div className="main_div">
+          <div className="heading left">{show ? <>Create account</> : <>Get started</>}</div>
+          <form id={show ? "signin" : "signup"} onSubmit={submithandler} name={show ? "signin" : "signup"}>
+            {ELEMENTS.map((element, index) => (
+              <Input
+                key={index}
+                label={element.label}
+                placeholder={element.placeholder}
+                hints={HINTS[element.label.toLowerCase()]}
+                change={changehandler}
+                type={element.type}
+                valid={validate[element.label.toLowerCase()]}
+              />
+            ))}
+            <div className="form_element">
+              <button type="submit" style={{ height: "39px" }} disabled={spinner}>
+                {spinner ? loading : show ? <>Sign up</> : <>Sign in</>}
+              </button>
             </div>
-          </div>
-        )}
-        {!show && (
-          <div className="justify-center">
-            <div className="main_div">
-              <div className="heading left">Create account</div>
-              <form id="signup" onSubmit={submithandler} name="signup">
-                {ELEMENTS.map((element, index) => (
-                  <Input
-                    key={index}
-                    label={element.label}
-                    placeholder={element.placeholder}
-                    hints={HINTS[element.label.toLowerCase()]}
-                    change={changehandler}
-                    type={element.type}
-                    valid={validate[element.label.toLowerCase()]}
-                  />
-                ))}
-                <div className="form_element">
-                  <button type="submit" style={{ height: "39px" }} disabled={spinner}>
-                    {spinner ? loading : <>Sign up</>}
-                  </button>
-                </div>
-              </form>
-              <div className="divider">
-                <p className="para">Already have an account ?</p>
-                <span onClick={() => setshow(!show)} className="navlink_signin">
-                  Sign in
-                </span>
-              </div>
+            <div style={{ marginTop: "1rem" }} className="divider">
+              <p className="para">{show ? <>Already have an account ?</> : <>Don&apos;t have an account ?</>}</p>
+              <span onClick={() => setshow(!show)} className="navlink_signin">
+                {show ? <>Sign in</> : <>Sign up</>}
+              </span>
             </div>
-          </div>
-        )}
-      </ModalWrapper>
-    </>
+          </form>
+        </div>
+      </div>
+    </ModalWrapper>
   );
 }
 export default Sign;

@@ -1,20 +1,15 @@
-#signin{
+#signin, #signup{
     color: rgba(255,255,255,0.7);
     display: inline-block;
     text-align: center;
-    width: 300px;
+    width: 320px;
     place-items: center;
     margin-top: 1rem;
     text-align: left;
     transition: .5s ease-in-out;
 }
-#signin .form_element{
+#signin .form_element, #signup .form_element{
     margin: 1rem 0;
-}
-@media only screen and (max-width: 480px){
-    #signin{
-        width: 250px;
-    }
 }
 
 .justify-center{
@@ -27,24 +22,11 @@
     margin-left: 45%;
     padding: 5px;
 }
-#signup{
-    color: rgba(255,255,255,0.7);
-    display: inline-block;
-    text-align: center;
-    width: 300px;
-    place-items: center;
-    margin-top: 1rem;
-    text-align: left;
-    transition: .5s ease-in-out;
-}
 .main_div{
     border-radius: .5rem;
     padding: 1rem 2rem;
     display: block;
     background-color: rgba(31, 35, 41, 0.9);
-}
-#signup .form_element{
-    margin: 1rem 0;
 }
 .divider{
     display: flex;
@@ -76,7 +58,7 @@
     }
 }
 @media only screen and (max-width: 480px){
-    #signup{
+    #signin, #signup{
         width: 250px;
     }
 }
