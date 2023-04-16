@@ -11,7 +11,10 @@
     box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
     transition: all .5s ease-in-out;
 }
-
+.avatar img{
+    height: 45px;
+    width: 45px;
+}
 .branding{
     display: flex;
     align-items: center;
@@ -84,7 +87,7 @@
         display: block;
         position: absolute;
         width: 100%;
-        top: 76px;
+        top: 100px;
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
         background-color: rgba(22, 27, 34, 0.8);
         transition: all .5s ease-in-out;

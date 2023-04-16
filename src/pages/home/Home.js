@@ -1,20 +1,25 @@
+import ReactDOM from "react-dom";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Card from "../../components/card/Card";
-import { useState } from "react";
-import "./Home.css";
-import ReactDOM from "react-dom";
 import Sign from "../../components/sign/Sign";
+import "./Home.css";
+
 const MODAL_ELEMENT = document.getElementById("root-modal");
+
 function Home() {
   const [show, setshow] = useState(false);
+
   const showmodalhandler = () => {
     document.body.style.overflow = "hidden";
     setshow(true);
   };
+
   const closemodal = () => {
     setshow(false);
     document.body.style.overflow = "unset";
   };
+
   return (
     <>
       {show && ReactDOM.createPortal(<Sign show={false} close={closemodal} />, MODAL_ELEMENT)}

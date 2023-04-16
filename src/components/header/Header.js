@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
+import { AvatarGenerator } from "random-avatar-generator";
 import Sign from "../sign/Sign";
 import "../header/Header.css";
 import ReactDOM from "react-dom";
@@ -15,6 +16,8 @@ function Header() {
   const { IsLoggedin } = useContext(AuthContext);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
+  const generator = new AvatarGenerator();
+  const random_avatar = generator.generateRandomAvatar();
 
   const onresize = (event) => {
     if (event.target.innerWidth > WIDTH_SIZE && Isopen) {
@@ -68,19 +71,25 @@ function Header() {
             <NavLink className={"list-item"} to="/about" onClick={navigationhandler}>
               <li>About</li>
             </NavLink>
+            {!IsLoggedin && (
+              <li className="list-item">
+                <button onClick={() => showhandler(false)}>Sign up for free</button>
+              </li>
+            )}
             {IsLoggedin && (
-              <NavLink className={"list-item"} to="/dashboard" onClick={navigationhandler}>
-                <li>Dashboard</li>
+              <NavLink className={"list-item"} onClick={navigationhandler} to="/none">
+                <li>
+                  <button>{creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}</button>
+                </li>
               </NavLink>
             )}
-            <li className="list-item">
-              {!IsLoggedin && <button onClick={() => showhandler(false)}>Sign up for free</button>}
-            </li>
           </ul>
           {!IsLoggedin && <button onClick={() => showhandler(true)}>Sign in</button>}
           {IsLoggedin && (
-            <NavLink to="/dashboard">
-              <button>{creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}</button>
+            <NavLink className={"list-item avatar"} to="/dashboard" onClick={navigationhandler}>
+              <li>
+                <img src={random_avatar} alt="random avatar" />
+              </li>
             </NavLink>
           )}
           <div
