@@ -1,16 +1,17 @@
+import ReactDOM from "react-dom";
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
 import { AvatarGenerator } from "random-avatar-generator";
+import AuthContext from "../../store/auth-context";
 import Sign from "../sign/Sign";
-import "../header/Header.css";
-import ReactDOM from "react-dom";
 import logo from "../../assets/images/logo.png";
+import "../header/Header.css";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
 const WIDTH_SIZE = 1024;
 
 function Header() {
+  const [profile, setprofile] = useState(false);
   const [showsingup, setshowsignup] = useState(null);
   const [show, setshow] = useState(false);
   const { IsLoggedin } = useContext(AuthContext);
@@ -31,6 +32,12 @@ function Header() {
       removeEventListener("resize", onresize);
     };
   });
+  useEffect(() => {
+    document.addEventListener("mousedown", navigationhandler);
+    return () => {
+      document.removeEventListener("mousedown", navigationhandler);
+    };
+  }, [profile, Isopen]);
 
   const closemodal = () => {
     setshow(false);
@@ -48,6 +55,13 @@ function Header() {
     if (Isopen) {
       setIsopen(!Isopen);
     }
+    if (profile) {
+      setprofile(false);
+    }
+  };
+
+  const signouthandler = () => {
+    console.log("signouthandler works");
   };
 
   return (
@@ -86,11 +100,23 @@ function Header() {
           </ul>
           {!IsLoggedin && <button onClick={() => showhandler(true)}>Sign in</button>}
           {IsLoggedin && (
-            <NavLink className={"list-item avatar"} to="/dashboard" onClick={navigationhandler}>
-              <li>
+            <>
+              <li className="list-item avatar" style={{ position: "relative" }} onClick={() => setprofile(!profile)}>
                 <img src={random_avatar} alt="random avatar" />
               </li>
-            </NavLink>
+              {profile && (
+                <div className="profile">
+                  <ul className="profile-nav-list">
+                    <NavLink to="/pro">
+                      <li className="profile-nav-list-item">Profile</li>
+                    </NavLink>
+                    <li className="profile-nav-list-item" onClick={signouthandler}>
+                      Sign out
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </>
           )}
           <div
             id="menu"

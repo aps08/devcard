@@ -10,7 +10,7 @@ import Footer from "./components/footer/Footer";
 import "./App.css";
 
 function App() {
-  const IsLoggedin = false;
+  const IsLoggedin = true;
   return (
     <AuthContext.Provider
       value={{
@@ -23,6 +23,7 @@ function App() {
           {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
           <Route path="/About" element={<About />} />
           {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
+          {IsLoggedin && <Route path="/profile" element={<Dashboard />} />}
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Notfound />} />
