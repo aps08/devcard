@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { AvatarGenerator } from "random-avatar-generator";
 import AuthContext from "../../store/auth-context";
 import Sign from "../sign/Sign";
 import logo from "../../assets/images/logo.png";
@@ -11,14 +10,11 @@ const MODAL_ELEMENT = document.getElementById("root-modal");
 const WIDTH_SIZE = 1024;
 
 function Header() {
-  const [profile, setprofile] = useState(false);
   const [showsingup, setshowsignup] = useState(null);
   const [show, setshow] = useState(false);
   const { IsLoggedin } = useContext(AuthContext);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
-  const generator = new AvatarGenerator();
-  const random_avatar = generator.generateRandomAvatar();
 
   const onresize = (event) => {
     if (event.target.innerWidth > WIDTH_SIZE && Isopen) {
@@ -32,12 +28,6 @@ function Header() {
       removeEventListener("resize", onresize);
     };
   });
-  useEffect(() => {
-    document.addEventListener("mousedown", navigationhandler);
-    return () => {
-      document.removeEventListener("mousedown", navigationhandler);
-    };
-  }, [profile, Isopen]);
 
   const closemodal = () => {
     setshow(false);
@@ -55,12 +45,10 @@ function Header() {
     if (Isopen) {
       setIsopen(!Isopen);
     }
-    if (profile) {
-      setprofile(false);
-    }
   };
 
   const signouthandler = () => {
+    navigationhandler();
     console.log("signouthandler works");
   };
 
@@ -91,33 +79,31 @@ function Header() {
               </li>
             )}
             {IsLoggedin && (
-              <NavLink className={"list-item"} onClick={navigationhandler} to="/none">
-                <li>
-                  <button>{creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}</button>
+              <>
+                <NavLink to="/pro" className={"list-item"} onClick={navigationhandler}>
+                  <li>Profile</li>
+                </NavLink>
+                <li className="list-item">
+                  <button className="sign_out_one" onClick={signouthandler}>
+                    Sign out
+                  </button>
                 </li>
-              </NavLink>
+              </>
             )}
           </ul>
-          {!IsLoggedin && <button onClick={() => showhandler(true)}>Sign in</button>}
           {IsLoggedin && (
             <>
-              <li className="list-item avatar" style={{ position: "relative" }} onClick={() => setprofile(!profile)}>
-                <img src={random_avatar} alt="random avatar" />
+              <NavLink onClick={navigationhandler} to="/none">
+                <button>{creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}</button>
+              </NavLink>
+              <li className="list-item">
+                <button className="sign_out_two" onClick={signouthandler}>
+                  Sign out
+                </button>
               </li>
-              {profile && (
-                <div className="profile">
-                  <ul className="profile-nav-list">
-                    <NavLink to="/pro">
-                      <li className="profile-nav-list-item">Profile</li>
-                    </NavLink>
-                    <li className="profile-nav-list-item" onClick={signouthandler}>
-                      Sign out
-                    </li>
-                  </ul>
-                </div>
-              )}
             </>
           )}
+          {!IsLoggedin && <button onClick={() => showhandler(true)}>Sign in</button>}
           <div
             id="menu"
             className="hamburger"

@@ -70,28 +70,22 @@
     margin: 8px 0;
     background-color: var(--color-header-hover);
 }
-.profile{
-    position: absolute;
-    top:80px;
-    right: 60px;
-    background-color: #222933;
-    border: 1px solid rgb(62, 60, 60);
-    border-radius: 4px; 
+.sign_out_one{
+    display: none;
 }
-.profile-nav-list{
-    padding: 4px;
+.sign_out_two{
     display: block;
 }
-.profile-nav-list-item{
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 4px;
-    color: var(--color-header-hover);
-}
-.list-item:hover, .profile-nav-list-item:hover{
+.list-item:hover{
     color: var(--color-white);
 }
 @media only screen and (max-width: 1024px){
+    .sign_out_one{
+        display: block;
+    }
+    .sign_out_two{
+        display: none;
+    }
     #menu{
         display: block;
         transition: all .5s ease-in-out;
