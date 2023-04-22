@@ -7,7 +7,7 @@ form .form_element{
 form .form_element label{
     margin-left: .5rem;
     margin-bottom: .5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--color-header-hover);
     text-align: left;
 }
@@ -17,24 +17,23 @@ form .form_element label{
 .form_element input{
     width: 100%;
     outline: none;
-    height: 48px;
+    height: 40px;
     background-color: var(--color-bg);
     opacity: .6;
     border: none;
     caret-color: var(--color-header-hover);
-    text-indent: 10px;
-    font-size: 1.2rem;
+    text-indent: 8px;
+    font-size: 1rem;
     color: whitesmoke;
     border: 2px solid rgb(58, 57, 57);
-    border-radius: .5rem;
-    font-weight: 100;
+    border-radius: 6px;
     transition: .5s ease-in-out;
 }
 form .form_element input::placeholder{
     color: whitesmoke;
     font-weight: 100;
     opacity: .4;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 form .form_element input[type="file"]{
     padding: 0;

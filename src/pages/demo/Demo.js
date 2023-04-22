@@ -142,7 +142,7 @@ function Demo() {
         )}
       <section className="center">
         <form id="demo_form" onSubmit={submithandler}>
-          <h3 className="heading" style={{ marginTop: "1rem", fontSize: "2rem" }}>
+          <h3 className="heading" style={{ marginTop: "1rem", fontSize: "1.6rem" }}>
             Filling out the exciting form below and create your devcard!
           </h3>
           {ELEMENTS.map((element, index) => (

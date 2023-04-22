@@ -5,6 +5,7 @@ import Demo from "./pages/demo/Demo";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Notfound from "./pages/notfound/Notfound";
 import About from "./pages/about/About";
+import Profile from "./pages/profile/Profile";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import "./App.css";
@@ -23,7 +24,7 @@ function App() {
           {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
           <Route path="/About" element={<About />} />
           {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
-          {IsLoggedin && <Route path="/profile" element={<Dashboard />} />}
+          {IsLoggedin && <Route path="/profile/*" element={<Profile />} />}
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Notfound />} />

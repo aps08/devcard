@@ -1,5 +1,6 @@
 body{
     background-color: var(--color-bg);
+    overflow-x: hidden;
 }
 main{
     padding: 0 4rem;
@@ -30,6 +31,7 @@ button{
     color: var(--color-header-hover);
     background-color: var(--color-btn-bg);
     border-color: none;
+    cursor: pointer;
 }
 button:disabled{
     opacity: .7;

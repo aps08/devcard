@@ -80,7 +80,7 @@ function Header() {
             )}
             {IsLoggedin && (
               <>
-                <NavLink to="/pro" className={"list-item"} onClick={navigationhandler}>
+                <NavLink to="/profile" className={"list-item"} onClick={navigationhandler}>
                   <li>Profile</li>
                 </NavLink>
                 <li className="list-item">
