@@ -1,0 +1,42 @@
+#personaldetails{
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(78, 78, 78,.3);
+    border-radius: .5rem;
+    width: 100%;
+    padding: 1rem;
+    display: inline-block;
+    text-align: center;
+    place-items: center;
+}
+.user_name{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.occupy_three{
+    grid-column: 1 / span 3;
+}
+.single_line{
+    margin: 1rem 0;
+    height: 2px;
+    background-color: rgb(87, 84, 84);
+    grid-column: 1 / span 3;
+}
+.occupy_two{
+    grid-column: 1 / span 2;
+}
+
+@media only screen and (max-width: 1024px){
+    .user_name{
+        grid-template-columns: 1fr 1fr;
+    }
+    .occupy_three,.single_line{
+        grid-column: 1 / span 2;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .user_name{
+        grid-template-columns: 1fr;
+    }
+}

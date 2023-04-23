@@ -1,49 +1,38 @@
-import { useState } from "react";
-import Personal from "../../components/personalinfo/Personal";
-import Professional from "../../components/professional/Professional";
-import Account from "../../components/account/Account";
-import Orders from "../../components/orders/Orders";
-import Gifts from "../../components/gifts/Gifts";
+import { NavLink, Outlet } from "react-router-dom";
 import "./Profile.css";
 
-const routes = {
-  personal: <Personal />,
-  professional: <Professional />,
-  account: <Account />,
-  orders: <Orders />,
-  gifts: <Gifts />
-};
 function Profile() {
-  const [key, setkey] = useState("personal");
   return (
     <>
-      <section className="section profile">
+      <section className="profile">
         <div className="pro-menu">
           <div>
             <img className="pro-image" src="https://picsum.photos/600/320?grayscale" alt="user image" />
           </div>
           <ul className="pro-list">
-            <li className={key === "personal" ? "list-item active" : "list-item"} onClick={() => setkey("personal")}>
-              Personal details
+            <NavLink to="personal" className={"pro-list-item"}>
+              <li>Personal details</li>
+            </NavLink>
+            <NavLink to="professional" className={"pro-list-item"}>
+              <li>Professional details</li>
+            </NavLink>
+            <NavLink to="account" className={"pro-list-item"}>
+              <li>Account settings</li>
+            </NavLink>
+            <NavLink to="Orders" className={"pro-list-item"}>
+              <li>Orders</li>
+            </NavLink>
+            <NavLink to="gifts" className={"pro-list-item"}>
+              <li style={{ margin: ".4rem 0" }}>Gifts</li>
+            </NavLink>
+            <li>
+              <button>Sign out</button>
             </li>
-            <li
-              className={key === "professional" ? "list-item active" : "list-item"}
-              onClick={() => setkey("professional")}>
-              Professional details
-            </li>
-            <li className={key === "account" ? "list-item active" : "list-item"} onClick={() => setkey("account")}>
-              Account settings
-            </li>
-            <li className={key === "orders" ? "list-item active" : "list-item"} onClick={() => setkey("orders")}>
-              Orders
-            </li>
-            <li className={key === "gifts" ? "list-item active" : "list-item"} onClick={() => setkey("gifts")}>
-              Gifts
-            </li>
-            <li className="list-item">Sign out</li>
           </ul>
         </div>
-        <div className="pro-panel">{routes[key]}</div>
+        <div>
+          <Outlet />
+        </div>
       </section>
     </>
   );

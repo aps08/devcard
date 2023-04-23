@@ -42,9 +42,7 @@ main button{
 button:hover:enabled{
     background-color: var(--color-btn-hover-bg);
 }
-a.active{
-    color: white;
-}
+
 @media only screen and (max-width: 1024px){
     .para{
         font-size: 2.4vw;

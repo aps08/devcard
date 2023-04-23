@@ -5,7 +5,7 @@ function Input(props) {
   const [focused, setfocused] = useState(false);
   return (
     <div className="form_element">
-      <label>{props.label}</label>
+      <label className="label">{props.label}</label>
       <input
         style={{ border: !props.valid && focused ? "2px solid brown" : "" }}
         onFocus={() => setfocused(true)}
@@ -18,11 +18,12 @@ function Input(props) {
       />
       {!props.valid && focused && (
         <ul className="hints">
-          {props.hints.map((hint, index) => (
-            <li className="hint-item" key={index}>
-              {hint}
-            </li>
-          ))}
+          {props.hints &&
+            props.hints.map((hint, index) => (
+              <li className="hint-item" key={index}>
+                {hint}
+              </li>
+            ))}
         </ul>
       )}
     </div>

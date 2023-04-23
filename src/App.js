@@ -8,6 +8,11 @@ import About from "./pages/about/About";
 import Profile from "./pages/profile/Profile";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import Personal from "./components/personalinfo/Personal";
+import Professional from "./components/professional/Professional";
+import Account from "./components/account/Account";
+import Orders from "./components/orders/Orders";
+import Gifts from "./components/gifts/Gifts";
 import "./App.css";
 
 function App() {
@@ -24,7 +29,16 @@ function App() {
           {!IsLoggedin && <Route path="/demo" element={<Demo />} />}
           <Route path="/About" element={<About />} />
           {IsLoggedin && <Route path="/dashboard" element={<Dashboard />} />}
-          {IsLoggedin && <Route path="/profile/*" element={<Profile />} />}
+          {IsLoggedin && (
+            <Route path="/profile" element={<Profile />}>
+              <Route path="personal" element={<Personal />} />
+              <Route path="professional" element={<Professional />} />
+              <Route path="account" element={<Account />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="gifts" element={<Gifts />} />
+              <Route path="" element={<Navigate to="personal" replace />} />
+            </Route>
+          )}
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Notfound />} />

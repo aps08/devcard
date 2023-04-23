@@ -4,12 +4,14 @@ form .form_element{
     display: flex;
     flex-direction: column;
 }
-form .form_element label{
-    margin-left: .5rem;
-    margin-bottom: .5rem;
+.label{
+    display: block;
+    text-transform: uppercase;
     font-size: 1rem;
     color: var(--color-header-hover);
     text-align: left;
+    margin-left: .4rem;
+    margin-bottom: .4rem;
 }
 .form_element input:focus::placeholder {
     color: transparent;
@@ -55,7 +57,7 @@ input::-webkit-inner-spin-button {
     transition: .5s ease-in-out;
 }
 .hints{
-    margin: .5rem;
+    margin: .4rem;
     text-align: left;
     color: brown;
     font-size: 14px;
@@ -63,6 +65,9 @@ input::-webkit-inner-spin-button {
 .hints .hint-item{
     margin: .1rem 0;
     animation: fade-in .5s ease-in-out forwards;
+}
+input:disabled{
+    cursor:not-allowed;
 }
 
 @keyframes fade-in {

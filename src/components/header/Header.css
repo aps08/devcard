@@ -47,6 +47,9 @@
     color: var(--color-header-hover);
     margin: 0 12px;
 }
+.list-item.active{
+    color: white;
+}
 .active button{
     background-color:var(--color-btn-hover-bg);
 }
@@ -113,22 +116,6 @@
         display: block;
         visibility: visible;
     }
-    /* .profile{
-        position: absolute;
-        top:80px;
-        right: 60px;
-        background-color: #222933;
-        border: 1px solid rgb(62, 60, 60);
-        border-radius: 6px; 
-    }
-    .profile .nav-list{
-        padding: 4px;
-        display: block;
-    }
-    .profile .nav-list .list-item{
-        font-size: 1rem;
-        padding: 4px;
-    } */
     
 }
 
