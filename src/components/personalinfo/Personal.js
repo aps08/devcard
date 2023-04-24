@@ -12,13 +12,17 @@ const CITIES = [
   "Kolkata, West Bengal",
   "Ahmedabad, Gujarat"
 ];
-// quote
-// linkedin
-// twitter
-// github
+
 function Personal() {
+  const personalhandler = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <form id="personaldetails">
+    <form id="personaldetails" onSubmit={personalhandler}>
+      <p className="para" style={{ fontSize: "16px", textAlign: "left", marginBottom: "1rem", marginLeft: ".5rem" }}>
+        Information will be used for generating the devcard.
+      </p>
       <div className="user_name">
         <Input label="first name" change={null} hints={null} placeholder="enter first name" valid={true} />
         <Input label="middle name" change={null} hints={null} placeholder="enter middle name" valid={true} />
@@ -53,17 +57,20 @@ function Personal() {
         <div className="single_line"></div>
         <div className="form_element occupy_two">
           <label className="label">Linkedin</label>
-          <input name="linkedin" type="text" placeholder="take us to your linkedin" />
+          <input name="linkedin" type="text" placeholder="enter your linkedin profile url" />
         </div>
         <div className="form_element occupy_two">
           <label className="label">Github</label>
-          <input name="github" type="text" placeholder="take us to your github" />
+          <input name="github" type="text" placeholder="enter your github profile url" />
         </div>
         <div className="form_element occupy_two">
           <label className="label">Twitter</label>
-          <input name="twitter" type="text" placeholder="take us to your twitter" />
+          <input name="twitter" type="text" placeholder="enter your twitter profile url" />
         </div>
       </div>
+      <button style={{ marginTop: "1rem", fontSize: "1.2rem" }} type="submit">
+        Save
+      </button>
     </form>
   );
 }

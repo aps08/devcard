@@ -11,8 +11,7 @@ import Footer from "./components/footer/Footer";
 import Personal from "./components/personalinfo/Personal";
 import Professional from "./components/professional/Professional";
 import Account from "./components/account/Account";
-import Orders from "./components/orders/Orders";
-import Gifts from "./components/gifts/Gifts";
+import Purchasehistory from "./components/purchasehistory/Purchasehistory";
 import "./App.css";
 
 function App() {
@@ -34,8 +33,7 @@ function App() {
               <Route path="personal" element={<Personal />} />
               <Route path="professional" element={<Professional />} />
               <Route path="account" element={<Account />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="gifts" element={<Gifts />} />
+              <Route path="purchasehistory" element={<Purchasehistory />} />
               <Route path="" element={<Navigate to="personal" replace />} />
             </Route>
           )}

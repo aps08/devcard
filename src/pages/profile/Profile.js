@@ -19,18 +19,15 @@ function Profile() {
             <NavLink to="account" className={"pro-list-item"}>
               <li>Account settings</li>
             </NavLink>
-            <NavLink to="Orders" className={"pro-list-item"}>
-              <li>Orders</li>
-            </NavLink>
-            <NavLink to="gifts" className={"pro-list-item"}>
-              <li style={{ margin: ".4rem 0" }}>Gifts</li>
+            <NavLink to="purchasehistory" className={"pro-list-item"}>
+              <li style={{ margin: ".4rem 0" }}>Purchase history</li>
             </NavLink>
             <li>
-              <button>Sign out</button>
+              <button style={{ fontSize: "1.2rem" }}>Sign out</button>
             </li>
           </ul>
         </div>
-        <div>
+        <div className="pro-panel">
           <Outlet />
         </div>
       </section>
