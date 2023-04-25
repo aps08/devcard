@@ -142,9 +142,7 @@ function Demo() {
         )}
       <section className="center">
         <form id="demo_form" onSubmit={submithandler}>
-          <h3 className="heading" style={{ marginTop: "1rem", fontSize: "1.6rem" }}>
-            Filling out the exciting form below and create your devcard!
-          </h3>
+          <h3 className="heading">Filling out the exciting form below and create your devcard!</h3>
           {ELEMENTS.map((element, index) => (
             <Input
               key={index}
@@ -156,7 +154,7 @@ function Demo() {
             />
           ))}
           <div className="form_element">
-            <label style={{ textAlign: "center" }}>ADD IMAGE</label>
+            <label className="label">ADD IMAGE</label>
             <input
               name="image"
               accept="image/*"
@@ -172,12 +170,14 @@ function Demo() {
                   src={Formdata.image ? Formdata.image : BrowseLogo}
                   alt="browselogo"
                 />
-                <p>Browse files</p>
+                <p className="label" style={{ textAlign: "center" }}>
+                  Browse files
+                </p>
               </div>
             </label>
           </div>
           <div className="form_element">
-            <button type="submit" style={{ height: "39px" }} disabled={spinner}>
+            <button type="submit" style={{ height: "36px" }} disabled={spinner}>
               {spinner ? loading : <>Get a demo now</>}
             </button>
           </div>

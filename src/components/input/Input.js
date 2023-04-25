@@ -15,6 +15,8 @@ function Input(props) {
         type={props.type || "text"}
         onBlur={() => setfocused(false)}
         autoComplete="off"
+        defaultValue={props.setvalue || null}
+        className={props.className || null}
       />
       {!props.valid && focused && (
         <ul className="hints">

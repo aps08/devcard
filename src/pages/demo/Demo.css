@@ -15,6 +15,10 @@
     place-items: center;
     margin: 2rem 0;
 }
+#demo_form .heading{
+    margin-bottom: 2.4rem;
+    font-size: 1.6rem;
+}
 #demo_form .form_element{
     width: 100%;
     margin: 1rem 0;
@@ -39,6 +43,7 @@
     border-radius: .5rem;
     border: 2px dashed rgb(58, 57, 57);
     background-color: var(--color-bg);
+    opacity: .6;
     cursor: pointer;
 }
 
@@ -55,8 +60,9 @@
 .preview_image_area{
     padding: 0;
     margin: 0;
-    height: 5rem;
-    width: 5rem;
+    height: 52px;
+    width: 52px;
+    margin-bottom: 8px;
     animation: none;
 }
 .form_element button{
