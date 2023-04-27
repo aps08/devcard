@@ -2,3 +2,26 @@
     padding: 1rem;
     color: rgba(255,255,255,0.7);
 }
+.order_card{
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid gray;
+    margin-bottom: 1rem;
+}
+.order_card_top, .order_card_body{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: rgba(78, 78, 78,.6);
+}
+.order_card_body{
+    background-color: unset;
+}
+.label_order{
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.order_date{
+    font-size: 14px;
+}
