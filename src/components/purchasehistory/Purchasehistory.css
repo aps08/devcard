@@ -33,11 +33,7 @@
 }
 
 @media only screen and (max-width: 480px){
-    /* .order_card{
-        display: flex;
-        justify-content: space-between;
-    } */
-    .order_card_top, .order_card_body{
+    .order_card_top{
         display: block;
     }
     .label_order{
