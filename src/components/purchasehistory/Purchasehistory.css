@@ -9,12 +9,15 @@
     grid-template-columns: 1fr;
 }
 
-.order_card_top, .order_card_body{
+.order_card_top{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 8px;
     background-color: var(--color-bg);
+    border: 2px solid rgb(58, 57, 57);
+    opacity: .6;
     border-radius: 6px;
+    transition: .5s ease-in-out;
 }
 .order_card_body{
     background-color: unset;
@@ -30,6 +33,10 @@
 }
 .order_info{
     margin-bottom: 12px;
+}
+.order_card_top:hover{
+    opacity: 1;
+    transition: .5s ease-in-out;
 }
 
 @media only screen and (max-width: 480px){

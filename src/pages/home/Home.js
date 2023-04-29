@@ -70,31 +70,31 @@ function Home() {
           <button onClick={showmodalhandler}>Sign up for free</button>
         </div>
       </section>
-      <div>
+      <div style={{ marginTop: "2rem" }}>
         <h3 className="heading center line">What we offer ?</h3>
-        <section className="section cards">
+        <section className="section" style={{ marginTop: "0", marginBottom: "1rem" }}>
           <Card
-            label="Event exclusive"
-            para="Experience exclusivity with three event-exclusive
+            label="Exclusive"
+            para="Experience exclusivity with three event exclusive
                   cards."
             list={["Credit 5", "Mutiple designs"]}
             buttonlabel="Buy 5 credits"
           />
           <Card
-            label="Bulk cards"
+            label="Bulk"
             para="Elevate your daily routine with a pack of thirty cards."
             list={["Credit 6", "Single designs"]}
             buttonlabel="Buy 6 credits"
           />
           <Card
-            label="Send gifts"
+            label="Gifts"
             para="Send mutiple devcard to your buddies and colleagues."
             list={["Credit customized", "Pay upon acceptance."]}
             buttonlabel="Buy credits"
           />
           <Card
-            label="Organization"
-            para="Empowering organizations with custom card and gifts."
+            label="Corporate"
+            para="Empowering corporate world with custom card and gifts."
             list={["Credit customized", "Early access."]}
             buttonlabel="Buy credits"
           />

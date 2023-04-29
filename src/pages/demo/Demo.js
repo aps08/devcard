@@ -177,11 +177,11 @@ function Demo() {
             </label>
           </div>
           <div className="form_element">
-            <button type="submit" style={{ height: "36px" }} disabled={spinner}>
+            <button type="submit" disabled={spinner}>
               {spinner ? loading : <>Get a demo now</>}
             </button>
           </div>
-          <p className="para" style={{ fontSize: "1.2rem" }}>
+          <p className="para" style={{ padding: "0" }}>
             Get more customization by
             <span onClick={spinner ? null : showmodalhandler} className="navlink_signin">
               Signing Up

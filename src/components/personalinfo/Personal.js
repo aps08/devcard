@@ -20,9 +20,7 @@ function Personal() {
 
   return (
     <form id="personaldetails" onSubmit={personalhandler}>
-      <p className="para" style={{ fontSize: "16px", textAlign: "left", marginBottom: "1rem", marginLeft: ".5rem" }}>
-        Information will be used for generating the devcard.
-      </p>
+      <h2 className="mb-1">Personal details</h2>
       <div className="user_name">
         <Input label="first name" change={null} hints={null} placeholder="enter first name" valid={true} />
         <Input label="middle name" change={null} hints={null} placeholder="enter middle name" valid={true} />
@@ -68,7 +66,7 @@ function Personal() {
           <input name="twitter" type="text" placeholder="enter your twitter profile url" />
         </div>
       </div>
-      <button style={{ marginTop: "1rem", fontSize: "1.2rem" }} type="submit">
+      <button style={{ marginTop: "1rem" }} type="submit">
         Save
       </button>
     </form>

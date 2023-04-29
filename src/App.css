@@ -8,7 +8,7 @@ main{
 }
 .para{
     padding: 10px 0;
-    font-size: 1.6vw;
+    font-size: 1.2rem;
     color: var(--color-header-hover);
     opacity: .7;
 }
@@ -24,7 +24,7 @@ main{
 button{
     padding: 0 10px;
     font-size: 1rem;
-    border-radius: .2rem;
+    border-radius: 4px;
     font-weight: 500;
     line-height: 2;
     margin: 0 5px;
@@ -36,24 +36,24 @@ button{
 button:disabled{
     opacity: .7;
 }
-main button{
-    font-size: 1.4vw;
-}
+
 button:hover:enabled{
     background-color: var(--color-btn-hover-bg);
 }
 
 @media only screen and (max-width: 1024px){
-    .para{
-        font-size: 2.4vw;
-    }
+
 }
 
 @media only screen and (max-width: 768px){
     main{
         padding: 1rem;
     }
+    
+}
+
+@media only screen and (max-width: 480px){
     .para{
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }

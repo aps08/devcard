@@ -31,7 +31,7 @@ function Orderinfo(props) {
             <p className="label_info">{props.orderid}</p>
           </div>
           <div className="order_info">
-            <button style={{ fontSize: "1rem", margin: "0" }}>Raise issue</button>
+            <button style={{ fontSize: "1rem", margin: "0", opacity: "1" }}>Raise issue</button>
           </div>
         </div>
       </div>

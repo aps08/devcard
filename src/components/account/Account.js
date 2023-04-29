@@ -8,7 +8,7 @@ function Account() {
   return (
     <div className="account">
       <h2 className="mb-1">Email settings</h2>
-      <form id="change_email" className="user_name">
+      <form id="change_email">
         <Input
           label="Email"
           className="occupy_two"
@@ -18,9 +18,7 @@ function Account() {
           hints={null}
           valid={true}
         />
-        <div className="form_element">
-          <button type="submit">change email</button>
-        </div>
+        <button type="submit">change email</button>
       </form>
       <div className="single_line"></div>
       <h2 className="mb-1">Credits</h2>
@@ -48,10 +46,8 @@ function Account() {
             placeholder="enter new password"
             valid={true}
           />
-          <div className="form_element">
-            <button type="submit">Change password</button>
-          </div>
         </div>
+        <button type="submit">Change password</button>
       </form>
       <div className="single_line"></div>
       <h2 className="mb-1">Privacy settings</h2>

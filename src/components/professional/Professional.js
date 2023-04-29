@@ -4,9 +4,7 @@ import "./Professional.css";
 function Professional() {
   return (
     <form id="professionaldetails">
-      <p className="para" style={{ fontSize: "16px", textAlign: "left", marginBottom: "1rem", marginLeft: ".5rem" }}>
-        Information will be used for generating the devcard.
-      </p>
+      <h2 className="mb-1">Professional details</h2>
       <div className="user_name">
         <Input label="Company" change={null} hints={null} type="text" placeholder="enter company name" valid={true} />
         <Input label="Role" change={null} hints={null} type="text" placeholder="enter your role" valid={true} />
@@ -39,7 +37,7 @@ function Professional() {
           <input name="github" type="text" placeholder="enter other tools, stacks" />
         </div>
       </div>
-      <button style={{ marginTop: "1rem", fontSize: "1.2rem" }} type="submit">
+      <button style={{ marginTop: "1rem" }} type="submit">
         Save
       </button>
     </form>

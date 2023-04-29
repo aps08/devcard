@@ -79,7 +79,7 @@ function About() {
         </div>
       </section>
       <h3 className="heading">Contacts and Feedback</h3>
-      <section className="section">
+      <section className="section" style={{ marginTop: "0" }}>
         <div>
           <form className="contact_form" onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
@@ -92,8 +92,10 @@ function About() {
                 placeholder={element.placeholder}
               />
             ))}
-            <div className="form_element">
-              <button type="submit">Submit</button>
+            <div style={{ textAlign: "center" }}>
+              <button style={{ marginBottom: "1rem" }} type="submit">
+                Submit
+              </button>
             </div>
           </form>
         </div>

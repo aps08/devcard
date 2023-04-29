@@ -5,6 +5,8 @@
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
 }
 .first,.second{
     padding: 0 1rem;
@@ -20,8 +22,8 @@
     margin: 10px 0;
 }
 .section button{
-    font-size: 1.2rem;
-    margin: 8px 0;
+    margin: 0;
+    transition: none;
 }
 .showcase{
     display: inline-block;
@@ -66,9 +68,6 @@
     .heading{
         font-size: 5vw;
     }
-    .section button{
-        font-size: 2.5vw;
-    }
     .text-left,.text-right{
         text-align: left;
     }
@@ -77,9 +76,6 @@
 @media only screen and (max-width: 768px){
     .section{
         margin-top: 1rem;
-    }
-    .section .para,.section button{
-        font-size: 1.2rem;
     }
     .section:last-child{
         grid-template-columns: 1fr;
@@ -92,5 +88,8 @@
     }
     .section{
         margin-top: 0;
+    }
+    .section .para{
+        font-size: 1rem;
     }
 }

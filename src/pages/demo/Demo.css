@@ -15,10 +15,6 @@
     place-items: center;
     margin: 2rem 0;
 }
-#demo_form .heading{
-    margin-bottom: 2.4rem;
-    font-size: 1.6rem;
-}
 #demo_form .form_element{
     width: 100%;
     margin: 1rem 0;
@@ -65,9 +61,7 @@
     margin-bottom: 8px;
     animation: none;
 }
-.form_element button{
-    font-size: 1.2rem;
-}
+
 .form_element button:disabled{
     cursor: not-allowed;
 }
@@ -79,12 +73,6 @@
 @media only screen and (max-width: 768px){
     #demo_form{
         width: 90%;
-    }
-    .form_element button{
-        font-size: 1.2rem;
-        width: 100%;
-        margin: 0;
-        padding: 0;
     }
     #demo_form .form_element{
         width: 100%;

@@ -23,7 +23,7 @@ function Profile() {
               <li style={{ margin: ".4rem 0" }}>Purchase history</li>
             </NavLink>
             <li>
-              <button style={{ fontSize: "1.2rem" }}>Sign out</button>
+              <button>Sign out</button>
             </li>
           </ul>
         </div>

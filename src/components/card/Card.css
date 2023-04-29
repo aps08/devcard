@@ -8,27 +8,30 @@
     border-radius: .5rem;
 }
 .card_visual{
-    width: 45%;
+    width: 50%;
     height: auto;
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
 }
 .description{
-    margin: 1rem;
+    margin: 12px;
     text-align: left;
 }
 .description h3{
-    font-size: 2vw;
-    margin: 5px 0;
+    font-size: 2rem;
+    margin: 0;
+    margin-bottom: 8px;
 }
 .card ul{
-    margin: .4vw 0;
+    margin: 10px 0;
 }
 .card ul .para{
     padding: 0;
 }
-.cards .card:hover{
+
+.card:hover{
     transform: scale(1.02);
+    background-color: rgb(41, 44, 49);
     transition: .5s ease-in-out;
 }
 @media only screen and (max-width: 1024px){
@@ -42,13 +45,10 @@
         font-size: 2rem;
     }
     .card_visual{
-        padding: 1rem;
         width: 100%;
         border-radius: .2rem;
     }
-    .section .card button{
-        font-size: 1.2rem;
-    }
+
 }
 @media only screen and (max-width: 768px){
     .description h3{
@@ -69,9 +69,9 @@
     }
     .card{
         display: block;
+        width: 90%;
     }
     .card_visual{
-        padding: 1rem;
         width: 100%;
         border-radius: .2rem;
     }
