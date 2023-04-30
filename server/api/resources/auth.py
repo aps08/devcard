@@ -1,12 +1,12 @@
 from datetime import datetime, timezone
 
-from api.extensions import flask_bcrypt, jwt
-from api.models import TokenBlocklist, User
+from api.extensions import flask_bcrypt
+from api.models import PersonalInfo, ProfessionalInfo, TokenBlocklist, User
 from api.schemas import LoginSchema, RegisterSchema
-from api.utils import load_user, role_required, send_email, validate_json
-from flask import Blueprint, make_response
-from flask_jwt_extended import create_access_token, current_user, get_jwt, jwt_required
-from flask_login import login_required, login_user, logout_user
+from api.utils import load_user, send_email, validate_json
+from flask import Blueprint
+from flask_jwt_extended import create_access_token, get_jwt, jwt_required
+from flask_login import login_user, logout_user
 from flask_restful import Api, Resource
 
 auth_resource = Blueprint("auth", __name__)
@@ -18,10 +18,16 @@ class Register(Resource):
     def post(self, data):
         password_hash = flask_bcrypt.generate_password_hash(data["password"]).decode("utf-8")
         user = User(email=data["email"], password=password_hash)
-        json_data, status_code = user.add_user()
-        if status_code == 200:
-            send_email("Welcom to Devcard", [data["email"]], "register.html", email=data["email"])
-        return json_data, status_code
+        if not user.check_email_exists():
+            user_id, professional_id, personal_id = user.add_user()
+            professional = ProfessionalInfo(professional_id, user_id)
+            personal = PersonalInfo(personal_id, user_id)
+            professional.add_professional_info()
+            personal.add_personal_info()
+            send_email("Welcom to Devcard", [user.email], "register.html", email=user.email)
+            return {"message": "A verification email has been sent to your email " + user.email}, 200
+        else:
+            return {"message": "Email already exists."}, 200
 
 
 class Login(Resource):

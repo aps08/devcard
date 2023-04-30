@@ -2,7 +2,7 @@ from api.extensions import db, jwt
 
 
 class TokenBlocklist(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    block_id = db.Column(db.Integer, primary_key=True)
     jti = db.Column(db.String(36), nullable=False, index=True)
     created_at = db.Column(db.DateTime, nullable=False)
 
@@ -16,7 +16,7 @@ class TokenBlocklist(db.Model):
 
 
 @jwt.token_in_blocklist_loader
-def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
+def check_if_token_revoked(jwt_payload: dict) -> bool:
     jti = jwt_payload["jti"]
     token = db.session.query(TokenBlocklist.id).filter_by(jti=jti).scalar()
 

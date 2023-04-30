@@ -1,0 +1,14 @@
+.verify{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+}
+
+.verify_box{
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    width: 50%;
+    background-color: rgba(78, 78, 78, 0.3);
+}

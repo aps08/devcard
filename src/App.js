@@ -12,10 +12,11 @@ import Personal from "./components/personalinfo/Personal";
 import Professional from "./components/professional/Professional";
 import Account from "./components/account/Account";
 import Purchasehistory from "./components/purchasehistory/Purchasehistory";
+import Verify from "./components/verify/Verify";
 import "./App.css";
 
 function App() {
-  const IsLoggedin = true;
+  const IsLoggedin = false;
   return (
     <AuthContext.Provider
       value={{
@@ -37,6 +38,7 @@ function App() {
               <Route path="" element={<Navigate to="personal" replace />} />
             </Route>
           )}
+          <Route path="/verify/:token" element={<Verify />} />
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Notfound />} />

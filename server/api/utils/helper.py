@@ -28,9 +28,9 @@ def role_required(role_name):
         @wraps(func)
         def wrapper(*args, **kwargs):
             if not current_user.is_authenticated:
-                abort(401)  # Unauthorized access
+                abort(401)
             if current_user.role.name != role_name:
-                abort(403)  # Forbidden access
+                abort(403)
             return func(*args, **kwargs)
 
         return wrapper

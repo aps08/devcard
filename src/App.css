@@ -4,6 +4,7 @@ body{
 }
 main{
     padding: 0 4rem;
+    min-height: 55vh;
     transition: 0.5s ease-in-out;
 }
 .para{

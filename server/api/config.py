@@ -18,7 +18,7 @@ class DevelopmentConfig(Config):
     MAIL_DEFAULT_SENDER = MAIL_USERNAME
     MAIL_PASSWORD = "xzjcrdhdlhyyhpdj"
     MAIL_DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "devcard.db")
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "devcard_dev.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = "mysecret"
     SECRET_KEY = JWT_SECRET_KEY

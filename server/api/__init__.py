@@ -2,7 +2,7 @@
 doc string
 """
 
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
 
 from .config import config_by_name
@@ -30,6 +30,16 @@ def create_app(config_name):
     # creating database
     with app.app_context():
         db.create_all()
+        roles = Role.query.filter(Role.role_id.in_([1, 2, 3])).all()
+        if len(roles) == 3:
+            pass
+        else:
+            role_admin = Role(1, "admin")
+            role_user = Role(2, "user")
+            role_contributor = Role(3, "contributor")
+            db.session.add_all([role_admin, role_user, role_contributor])
+            db.session.commit()
+
     cors = CORS(app, resources={r"*": {"origins": "http://localhost:3000"}})
 
     return app
