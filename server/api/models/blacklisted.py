@@ -1,23 +1,18 @@
-from api.extensions import db, jwt
+from datetime import datetime
+from uuid import uuid4
+
+from api.extensions import db
 
 
 class TokenBlocklist(db.Model):
-    block_id = db.Column(db.Integer, primary_key=True)
+    block_id = db.Column(db.String(50), primary_key=True)
     jti = db.Column(db.String(36), nullable=False, index=True)
-    created_at = db.Column(db.DateTime, nullable=False)
+    created_timestamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
-    def __init__(self, jti, now) -> None:
+    def __init__(self, jti) -> None:
+        self.block_id = str(uuid4())
         self.jti = jti
-        self.created_at = now
 
     def add_to_blacklist(self):
         db.session.add(self)
         db.session.commit()
-
-
-@jwt.token_in_blocklist_loader
-def check_if_token_revoked(jwt_payload: dict) -> bool:
-    jti = jwt_payload["jti"]
-    token = db.session.query(TokenBlocklist.id).filter_by(jti=jti).scalar()
-
-    return token is not None

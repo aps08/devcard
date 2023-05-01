@@ -1,10 +1,26 @@
+from datetime import datetime
 from functools import wraps
 
-from api.extensions import login_manager
-from api.models import User
+from api.extensions import db, jwt, login_manager
+from api.models import EmailVerification, TokenBlocklist, User
 from flask import abort, request
 from flask_login import current_user
 from marshmallow import ValidationError
+
+
+def create_verification_link(user_id: str) -> str:
+    email_verify = (
+        EmailVerification.query.filter(EmailVerification.user_id == user_id)
+        .order_by(EmailVerification.expiry_timestamp.desc())
+        .first()
+    )
+    if email_verify is None or email_verify.expiry_timestamp > datetime.utcnow():
+        new_verify = EmailVerification(user_id)
+        token = new_verify.add_verify()
+        url = "http://localhost:3000/verify/" + token
+    else:
+        url = "http://localhost:3000/verify/" + email_verify.token
+    return url
 
 
 def validate_json(schema):
@@ -44,3 +60,10 @@ def load_user(user_email):
     if user:
         return user
     return None
+
+
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header: str, jwt_payload: dict) -> bool:
+    jti = jwt_payload["jti"]
+    token = db.session.query(TokenBlocklist.block_id).filter_by(jti=jti).scalar()
+    return token is not None

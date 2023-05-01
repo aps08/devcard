@@ -8,7 +8,7 @@ from flask_cors import CORS
 from .config import config_by_name
 from .extensions import db, flask_bcrypt, jwt, login_manager, ma, mail
 from .models import *
-from .resources import auth_resource
+from .resources import auth_resource, public_resource
 
 
 def create_app(config_name):
@@ -26,6 +26,7 @@ def create_app(config_name):
 
     # Registering resources
     app.register_blueprint(auth_resource, url_prefix="/auth")
+    app.register_blueprint(public_resource, url_prefix="/public")
 
     # creating database
     with app.app_context():

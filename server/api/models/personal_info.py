@@ -6,7 +6,7 @@ from api.extensions import db
 class PersonalInfo(db.Model):
     __tablename__ = "personal_info"
 
-    professional_id = db.Column(db.String(50), primary_key=True)
+    personal_id = db.Column(db.String(50), primary_key=True)
     user_id = db.Column(db.String(50), db.ForeignKey("user_info.user_id"))
     first_name = db.Column(db.String(20), nullable=True)
     middle_name = db.Column(db.String(20), nullable=True)
@@ -20,7 +20,8 @@ class PersonalInfo(db.Model):
     twitter = db.Column(db.String(50), nullable=True)
     created_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, user_id, **kwargs):
+    def __init__(self, user_id: str, personal_id: str, **kwargs):
+        self.personal_id = personal_id
         self.user_id = user_id
         self.first_name = kwargs.get("first_name", None)
         self.middle_name = kwargs.get("middle_name", None)

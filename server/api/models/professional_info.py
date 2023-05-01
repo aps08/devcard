@@ -16,7 +16,7 @@ class ProfessionalInfo(db.Model):
     others = db.Column(db.String(50))
     created_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, professional_id, user_id, **kwargs):
+    def __init__(self, professional_id: str, user_id: str, **kwargs):
         self.professional_id = professional_id
         self.user_id = user_id
         self.professional_role = kwargs.get("professional_role", None)

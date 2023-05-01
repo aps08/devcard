@@ -1,9 +1,7 @@
-from datetime import datetime, timezone
-
 from api.extensions import flask_bcrypt
 from api.models import PersonalInfo, ProfessionalInfo, TokenBlocklist, User
 from api.schemas import LoginSchema, RegisterSchema
-from api.utils import load_user, send_email, validate_json
+from api.utils import create_verification_link, load_user, send_email, validate_json
 from flask import Blueprint
 from flask_jwt_extended import create_access_token, get_jwt, jwt_required
 from flask_login import login_user, logout_user
@@ -24,10 +22,11 @@ class Register(Resource):
             personal = PersonalInfo(personal_id, user_id)
             professional.add_professional_info()
             personal.add_personal_info()
-            send_email("Welcom to Devcard", [user.email], "register.html", email=user.email)
-            return {"message": "A verification email has been sent to your email " + user.email}, 200
+            url = create_verification_link(user_id)
+            send_email("Welcom to Devcard", [user.email], "register.html", email=user.email, url=url)
+            return {"message": "A verification email has been sent to your email, which is valid for 7 days."}, 200
         else:
-            return {"message": "Email already exists."}, 200
+            return {"message": "Email already exists. Try Singing In."}, 200
 
 
 class Login(Resource):
@@ -35,10 +34,17 @@ class Login(Resource):
     def post(self, data):
         user = load_user(data["email"])
         if user and flask_bcrypt.check_password_hash(user.password, data["password"]):
-            login_user(user)
-            access_token = create_access_token(identity=data["email"])
-            response = {"access_token": access_token, "access_type": user.role.name}
-            return response, 200
+            if user.verified:
+                login_user(user)
+                access_token = create_access_token(identity=data["email"])
+                response = {"access_token": access_token, "access_type": user.role.role_name}
+                return response, 200
+            else:
+                url = create_verification_link(user.user_id)
+                send_email("Verify Email", [user.email], "register.html", email=user.email, url=url)
+                return {
+                    "message": "Email not verified. A verification mail has been sent to your registered email."
+                }, 200
         else:
             return {"error": "Invalid email or password"}, 400
 
@@ -48,8 +54,7 @@ class Logout(Resource):
     def post(self):
         logout_user()
         jti = get_jwt()["jti"]
-        now = datetime.now(timezone.utc)
-        blacked = TokenBlocklist(jti, now)
+        blacked = TokenBlocklist(jti)
         blacked.add_to_blacklist()
         return {}, 200
 

@@ -10,12 +10,13 @@ class User(db.Model, UserMixin):
     __tablename__ = "user_info"
 
     user_id = db.Column(db.String(50), primary_key=True)
-    role_id = db.Column(db.Integer, default=2)
+    role_id = db.Column(db.Integer, db.ForeignKey("role.role_id"), default=2)
     personal_id = db.Column(db.String(50), nullable=False)
     professional_id = db.Column(db.String(50), nullable=False)
     credits = db.Column(db.Integer, default=0)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    verified = db.Column(db.Boolean, default=False)
     created_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     updated_timestamp = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     professional = db.relationship("ProfessionalInfo", backref="users")
@@ -23,9 +24,9 @@ class User(db.Model, UserMixin):
     role = db.relationship("Role", backref="users")
 
     def __init__(self, email, password):
-        self.user_id = uuid4()
-        self.personal_id = uuid4()
-        self.professional_id = uuid4()
+        self.user_id = str(uuid4())
+        self.personal_id = str(uuid4())
+        self.professional_id = str(uuid4())
         self.email = email
         self.password = password
 
@@ -37,8 +38,14 @@ class User(db.Model, UserMixin):
         db.session.commit()
         return self.user_id, self.professional_id, self.personal_id
 
+    def update_verification(user_id: str) -> None:
+        if not User.query.with_entities(User.verified).first()[0]:
+            num_updated = User.query.filter(User.user_id == user_id).update({User.verified: True})
+            db.session.commit()
+
+    def get_email(self, user_id: str):
+        user = User.query.filter(user_id=user_id).first()
+        return user.email
+
     def get_id(self) -> str:
         return self.user_id
-
-    def __repr__(self):
-        return "<User %r>" % self.user_id

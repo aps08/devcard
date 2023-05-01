@@ -1,2 +1,2 @@
-from .login import LoginSchema
-from .register import RegisterSchema
+from .auth import LoginSchema, RegisterSchema
+from .public import DemoSchema, FeedbackContactSchema
