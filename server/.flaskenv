@@ -1,2 +1,2 @@
-FLASK_APP=server/app.py
-FLASK_DEBUG=development
+FLASK_APP=app.py
+FLASK_DEBUG=True

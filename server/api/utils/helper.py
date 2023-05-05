@@ -39,19 +39,19 @@ def validate_json(schema):
     return decorator
 
 
-def role_required(role_name):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            if not current_user.is_authenticated:
-                abort(401)
-            if current_user.role.name != role_name:
-                abort(403)
-            return func(*args, **kwargs)
+# def role_required(role_name):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             if not current_user.is_authenticated:
+#                 abort(401)
+#             if current_user.role.name != role_name:
+#                 abort(403)
+#             return func(*args, **kwargs)
 
-        return wrapper
+#         return wrapper
 
-    return decorator
+#     return decorator
 
 
 @login_manager.user_loader
@@ -67,3 +67,14 @@ def check_if_token_revoked(jwt_header: str, jwt_payload: dict) -> bool:
     jti = jwt_payload["jti"]
     token = db.session.query(TokenBlocklist.block_id).filter_by(jti=jti).scalar()
     return token is not None
+
+
+def update_verification(user_id: str) -> None:
+    if not User.query.with_entities(User.verified).first()[0]:
+        num_updated = User.query.filter(User.user_id == user_id).update({User.verified: True})
+        db.session.commit()
+
+
+def get_email(user_id: str) -> str:
+    user = User.query.filter(user_id=user_id).first()
+    return user.email

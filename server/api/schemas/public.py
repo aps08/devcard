@@ -5,14 +5,14 @@ class DemoSchema(Schema):
     name = fields.Str(
         required=True,
         validate=[
-            validate.Regexp("^[a-zA-Z\s]+$", error="Only alphabets and spaces are allowed"),
+            validate.Regexp("^[a-zA-Z ]+$", error="Only alphabets and spaces are allowed"),
             validate.Length(max=30, error="Name should not exceed 30 characters"),
         ],
     )
     company = fields.Str(
         required=True,
         validate=[
-            validate.Regexp("^[a-zA-Z\s]+$", error="Only alphabets and spaces are allowed"),
+            validate.Regexp("^[a-zA-Z ]+$", error="Only alphabets and spaces are allowed"),
             validate.Length(max=20, error="Company should not exceed 20 characters"),
         ],
     )
@@ -22,7 +22,7 @@ class DemoSchema(Schema):
     role = fields.Str(
         required=True,
         validate=[
-            validate.Regexp("^[a-zA-Z\s]+$", error="Only alphabets and spaces are allowed"),
+            validate.Regexp("^[a-zA-Z ]+$", error="Only alphabets and spaces are allowed"),
             validate.Length(max=20, error="Role should not exceed 20 characters"),
         ],
     )
@@ -39,7 +39,7 @@ class FeedbackContactSchema(Schema):
     )
     email = fields.Email(
         required=True,
-        validate=[validate.Length(max=30, error="Email should not exceed 30 characters")],
+        validate=[validate.Length(max=50, error="Email should not exceed 30 characters")],
         error_messages={"required": "Email is required"},
     )
     message = fields.Str(

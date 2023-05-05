@@ -38,14 +38,5 @@ class User(db.Model, UserMixin):
         db.session.commit()
         return self.user_id, self.professional_id, self.personal_id
 
-    def update_verification(user_id: str) -> None:
-        if not User.query.with_entities(User.verified).first()[0]:
-            num_updated = User.query.filter(User.user_id == user_id).update({User.verified: True})
-            db.session.commit()
-
-    def get_email(self, user_id: str):
-        user = User.query.filter(user_id=user_id).first()
-        return user.email
-
     def get_id(self) -> str:
         return self.user_id

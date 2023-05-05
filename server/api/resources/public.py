@@ -1,11 +1,15 @@
 # api endpoint for demo card return 2 cards data
-# api endpoint for submitting feedback and contact
-# API for email verification
 from datetime import datetime
 
-from api.models import EmailVerification, User
+from api.models import EmailVerification, FeedbackContact
 from api.schemas import DemoSchema, FeedbackContactSchema
-from api.utils import create_verification_link, send_email, validate_json
+from api.utils import (
+    create_verification_link,
+    get_email,
+    send_email,
+    update_verification,
+    validate_json,
+)
 from flask import Blueprint, request
 from flask_restful import Api, Resource
 
@@ -22,7 +26,13 @@ class Demo(Resource):
 class FeebackContact(Resource):
     @validate_json(FeedbackContactSchema)
     def post(self, data):
-        return f"post feebackcontcat {data}"
+        fc = FeedbackContact(data["email"], data["name"], data["message"])
+        if fc.check_duplicate():
+            fc.add_feedbackcontact()
+            send_email("Feeback/Contact Confirmation", [data["email"]], "feedbackcontact.html", **data)
+            return {"message": "We have successfully recieved your message, and will respond soon."}, 200
+        else:
+            return {"error": "Something went wrong"}, 400
 
 
 class VerifyEmail(Resource):
@@ -34,11 +44,11 @@ class VerifyEmail(Resource):
             email_data = EmailVerification.query.filter_by(token=token).first()
             if email_data is not None:
                 if email_data.expiry_timestamp >= datetime.utcnow():
-                    User.update_verification(email_data.user_id)
+                    update_verification(email_data.user_id)
                     return {"message": "Your email is verified successfully.Sign In and enjoy our services."}, 200
                 else:
                     url = create_verification_link(email_data.user_id)
-                    email = User.get_email(email_data.user_id)
+                    email = get_email(email_data.user_id)
                     send_email("Verify Email", [email], "register.html", email=email, url=url)
                     return {"error": "Email verification failed. We have resent an email for verification."}, 400
             else:

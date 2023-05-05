@@ -1,20 +1,17 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length=120"],
+  "isort.args": ["--profile=black"],
+  "python.linting.lintOnSave": true,
+  "python.linting.enabled": true,
+  "[python]": {
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
-    },
-    "editor.formatOnSave": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "--line-length=120"
-    ],
-    "isort.args": [
-        "--profile=black"
-    ],
-    "python.linting.lintOnSave": true,
-    "python.linting.enabled": true,
-    "[python]": {
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        }
-    },
+      "source.organizeImports": true
+    }
+  },
+  "python.analysis.typeCheckingMode": "basic"
 }
