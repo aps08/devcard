@@ -1,24 +1,45 @@
+import ReactDOM from "react-dom";
+import { useState } from "react";
+import CardModal from "./CardModal";
 import "./Card.css";
 
+const MODAL_ELEMENT = document.getElementById("root-modal");
+
 function Card(props) {
+  const [show, setshow] = useState(false);
+  const openemodal = () => {
+    setshow(true);
+    document.body.style.overflow = "hidden";
+  };
+  const closemodal = () => {
+    setshow(false);
+    document.body.style.overflow = "unset";
+  };
   return (
-    <div className="card">
-      <img className="card_visual" src="https://picsum.photos/300/200?grayscale" alt="cardimage" />
-      <div className="description">
-        <h3 className="heading">{props.label}</h3>
-        <p className="para" style={{ padding: "0" }}>
-          {props.para}
-        </p>
-        <ul>
-          {props.list.map((item) => (
-            <li className="para" key={item}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <button>Read more</button>
+    <>
+      {show &&
+        ReactDOM.createPortal(
+          <CardModal heading={props.label} description={props.description} close={closemodal} />,
+          MODAL_ELEMENT
+        )}
+      <div className="card">
+        <img className="card_visual" src="https://picsum.photos/300/200?grayscale" alt="cardimage" />
+        <div className="description">
+          <h3 className="heading">{props.label}</h3>
+          <p className="para" style={{ padding: "0" }}>
+            {props.para}
+          </p>
+          <ul>
+            {props.list.map((item) => (
+              <li className="para" key={item}>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <button onClick={openemodal}>Read more</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

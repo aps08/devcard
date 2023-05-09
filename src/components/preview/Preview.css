@@ -23,7 +23,6 @@
     background-color: rgba(22, 27, 34, 1);
 }
 .modal button{
-    font-size: 1.2rem;
     color: var(--color-header-hover);
 }
 .modal h2{

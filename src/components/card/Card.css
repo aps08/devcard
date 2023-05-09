@@ -28,7 +28,24 @@
 .card ul .para{
     padding: 0;
 }
-
+.card_modal{
+    width: 500px;
+    text-align: center;
+}
+.card_modal .card_visual{
+    display: block;
+    width: 300px;
+    height: auto;
+    border-radius: .6rem;
+}
+.card_modal button{
+    margin-top: 1rem;
+}
+.card_modal .label{
+    text-align: center;
+    margin-top: 1rem;
+    text-transform: none;
+}
 .card:hover{
     transform: scale(1.02);
     background-color: rgb(41, 44, 49);
