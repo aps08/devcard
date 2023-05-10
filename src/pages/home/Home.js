@@ -28,14 +28,16 @@ const CARDS = [
     para: "Send mutiple devcard to your buddies and colleagues.",
     list: ["Credit customized", "Pay upon acceptance."],
     buttonlabel: "Buy credits",
-    description: ""
+    description:
+      "Send one devcard to your buddies and colleagues. Credit will be deducted only if your friend has accepted the gift and provided there details."
   },
   {
     label: "Corporate",
     para: "Empowering corporate world with custom card and gifts.",
     list: ["Credit customized", "Early access."],
     buttonlabel: "Buy credits",
-    description: ""
+    description:
+      "If you are organizing an event or from an organization, and want to give cards to you audience as an appreciation, then you can choose this offer. We will reach out to you for details."
   }
 ];
 
