@@ -3,7 +3,7 @@
     "source.fixAll": true
   },
   "editor.formatOnSave": true,
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "none",
   "python.formatting.blackArgs": ["--line-length=120"],
   "isort.args": ["--profile=black"],
   "python.linting.lintOnSave": true,
@@ -11,7 +11,8 @@
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
-    }
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "python.analysis.typeCheckingMode": "basic"
 }

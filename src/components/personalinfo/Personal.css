@@ -4,6 +4,7 @@
     padding: 1rem;
     display: inline-block;
     place-items: center;
+    padding-bottom: 0;
 }
 .user_name{
     display: grid;

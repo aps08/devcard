@@ -89,6 +89,12 @@
     .section{
         margin-top: 0;
     }
+    .section:last-child{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .section .para{
         font-size: 1rem;
     }

@@ -1,14 +1,7 @@
 from api.extensions import flask_bcrypt
 from api.models import PersonalInfo, ProfessionalInfo, TokenBlocklist, User
 from api.schemas import LoginSchema, RegisterSchema
-from api.utils import (
-    create_verification_link,
-    get_email,
-    load_user,
-    send_email,
-    update_verification,
-    validate_json,
-)
+from api.utils import create_verification_link, load_user, send_email, validate_json
 from flask import Blueprint
 from flask_jwt_extended import create_access_token, get_jwt, jwt_required
 from flask_login import login_user, logout_user

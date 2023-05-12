@@ -1,4 +1,3 @@
-# api endpoint for demo card return 2 cards data
 from datetime import datetime
 
 from api.models import EmailVerification, FeedbackContact
@@ -45,7 +44,7 @@ class VerifyEmail(Resource):
             if email_data is not None:
                 if email_data.expiry_timestamp >= datetime.utcnow():
                     update_verification(email_data.user_id)
-                    return {"message": "Your email is verified successfully.Sign In and enjoy our services."}, 200
+                    return {"message": "Your email is verified successfully. Sign In and enjoy our services."}, 200
                 else:
                     url = create_verification_link(email_data.user_id)
                     email = get_email(email_data.user_id)

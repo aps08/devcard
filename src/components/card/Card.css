@@ -8,7 +8,8 @@
     border-radius: .5rem;
 }
 .card_visual{
-    width: 50%;
+    width: 40%;
+    min-width: 240px;
     height: auto;
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
@@ -73,6 +74,7 @@
     .card_visual{
         padding: 0;
         width: 40%;
+        min-width: 240px;
         border-radius: none;
     }
     .card_modal{
@@ -83,19 +85,15 @@
 @media only screen and (max-width: 480px){
     .card{
         display: block;
-        width: 100%;
-        padding: 1rem;
+        width: 90%;
     }
     .card_modal .card_visual{
         width: 280px;
         transition: .5s ease-in-out;
     }
-    .description{
-        margin: 0;
-        margin-top: 10px;
-    }
     .card_visual{
         width: 100%;
+        height: 200px;
         border-radius: .2rem;
     }
     .card_modal{
