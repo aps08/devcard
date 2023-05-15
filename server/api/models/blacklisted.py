@@ -2,6 +2,7 @@ from datetime import datetime
 from uuid import uuid4
 
 from api.extensions import db
+from marshmallow import Schema, fields
 
 
 class TokenBlocklist(db.Model):
@@ -16,3 +17,13 @@ class TokenBlocklist(db.Model):
     def add_to_blacklist(self):
         db.session.add(self)
         db.session.commit()
+
+
+# class TokenBlocklistSchema(Schema):
+#     block_id = fields.String()
+#     jti = fields.String()
+#     created_timestamp = fields.DateTime()
+
+#     class Meta:
+#         fields = ("block_id", "jti", "created_timestamp")
+#         datetimeformat = "%Y-%m-%dT%H:%M:%S.%fZ"

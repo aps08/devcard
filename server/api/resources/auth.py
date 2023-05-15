@@ -36,7 +36,8 @@ class Login(Resource):
         if user and flask_bcrypt.check_password_hash(user.password, data["password"]):
             if user.verified:
                 login_user(user)
-                access_token = create_access_token(identity=data["email"])
+                user_identity = {"email": data["email"], "user_id": user.user_id}
+                access_token = create_access_token(identity=user_identity)
                 response = {"access_token": access_token, "access_type": user.role.role_name}
                 return response, 200
             else:

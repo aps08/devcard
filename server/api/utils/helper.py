@@ -9,6 +9,7 @@ from marshmallow import ValidationError
 
 
 def create_verification_link(user_id: str) -> str:
+    HOST = "http://localhost:3000/verify/"
     email_verify = (
         EmailVerification.query.filter(EmailVerification.user_id == user_id)
         .order_by(EmailVerification.expiry_timestamp.desc())
@@ -17,9 +18,9 @@ def create_verification_link(user_id: str) -> str:
     if email_verify is None or email_verify.expiry_timestamp > datetime.utcnow():
         new_verify = EmailVerification(user_id)
         token = new_verify.add_verify()
-        url = "http://localhost:3000/verify/" + token
+        url = HOST + token
     else:
-        url = "http://localhost:3000/verify/" + email_verify.token
+        url = HOST + email_verify.token
     return url
 
 
@@ -56,10 +57,10 @@ def validate_json(schema):
 
 @login_manager.user_loader
 def load_user(user_email):
-    user = User.query.filter_by(email=user_email).first()
-    if user:
-        return user
-    return None
+    try:
+        return User.query.filter_by(email=user_email).first()
+    except:
+        return None
 
 
 @jwt.token_in_blocklist_loader
