@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
 from uuid import uuid4
 
-from api.extensions import db
+from api.extensions import db, ma
+from marshmallow import Schema, fields
 
 
 class EmailVerification(db.Model):
@@ -20,3 +21,8 @@ class EmailVerification(db.Model):
         db.session.add(self)
         db.session.commit()
         return self.token
+
+
+class EmailVerificationSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = EmailVerification

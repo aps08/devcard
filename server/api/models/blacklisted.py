@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import uuid4
 
-from api.extensions import db
+from api.extensions import db, ma
 from marshmallow import Schema, fields
 
 
@@ -19,11 +19,6 @@ class TokenBlocklist(db.Model):
         db.session.commit()
 
 
-# class TokenBlocklistSchema(Schema):
-#     block_id = fields.String()
-#     jti = fields.String()
-#     created_timestamp = fields.DateTime()
-
-#     class Meta:
-#         fields = ("block_id", "jti", "created_timestamp")
-#         datetimeformat = "%Y-%m-%dT%H:%M:%S.%fZ"
+class TokenBlocklistSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = TokenBlocklist

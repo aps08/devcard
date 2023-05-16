@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from uuid import uuid4
 
-from api.extensions import db
+from api.extensions import db, ma
 
 
 class FeedbackContact(db.Model):
@@ -29,3 +29,8 @@ class FeedbackContact(db.Model):
     def add_feedbackcontact(self) -> None:
         db.session.add(self)
         db.session.commit()
+
+
+class FeedbackContactSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = FeedbackContact

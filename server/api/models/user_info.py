@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Tuple
 from uuid import uuid4
 
-from api.extensions import db
+from api.extensions import db, ma
 from flask_login import UserMixin
 
 
@@ -40,3 +40,8 @@ class User(db.Model, UserMixin):
 
     def get_id(self) -> str:
         return self.user_id
+
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User

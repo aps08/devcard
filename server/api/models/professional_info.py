@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from api.extensions import db
+from api.extensions import db, ma
 
 
 class ProfessionalInfo(db.Model):
@@ -30,3 +30,8 @@ class ProfessionalInfo(db.Model):
         db.session.add(self)
         db.session.commit()
         return self.professional_id
+
+
+class ProfessionalInfoSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = ProfessionalInfo

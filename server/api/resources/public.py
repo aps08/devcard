@@ -1,14 +1,9 @@
 from datetime import datetime
 
-from api.models import EmailVerification, FeedbackContact
+from api.extensions import db
+from api.models import EmailVerification, EmailVerificationSchema, FeedbackContact, User
 from api.schemas import DemoSchema, FeedbackContactSchema
-from api.utils import (
-    create_verification_link,
-    get_email,
-    send_email,
-    update_verification,
-    validate_json,
-)
+from api.utils import create_verification_link, send_email, validate_json
 from flask import Blueprint, request
 from flask_restful import Api, Resource
 
@@ -43,12 +38,16 @@ class VerifyEmail(Resource):
             email_data = EmailVerification.query.filter_by(token=token).first()
             if email_data is not None:
                 if email_data.expiry_timestamp >= datetime.utcnow():
-                    update_verification(email_data.user_id)
+                    if not User.query.with_entities(User.verified).filter_by(user_id=email_data.user_id).first()[0]:
+                        num_updated = User.query.filter(User.user_id == email_data.user_id).update(
+                            {User.verified: True}
+                        )
+                        db.session.commit()
                     return {"message": "Your email is verified successfully. Sign In and enjoy our services."}, 200
                 else:
                     url = create_verification_link(email_data.user_id)
-                    email = get_email(email_data.user_id)
-                    send_email("Verify Email", [email], "register.html", email=email, url=url)
+                    user = User.query.filter(user_id=email_data.user_id).first()
+                    send_email("Verify Email", [user.email], "register.html", email=user.email, url=url)
                     return {"error": "Email verification failed. We have resent an email for verification."}, 400
             else:
                 return {"error": "Something went wrong."}, 400

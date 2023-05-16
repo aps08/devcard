@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from api.extensions import db
+from api.extensions import db, ma
 
 
 class PersonalInfo(db.Model):
@@ -20,7 +20,7 @@ class PersonalInfo(db.Model):
     twitter = db.Column(db.String(50), nullable=True)
     created_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, user_id: str, personal_id: str, **kwargs):
+    def __init__(self, personal_id: str, user_id: str, **kwargs):
         self.personal_id = personal_id
         self.user_id = user_id
         self.first_name = kwargs.get("first_name", None)
@@ -38,3 +38,8 @@ class PersonalInfo(db.Model):
         db.session.add(self)
         db.session.commit()
         return self.user_id
+
+
+class PersonalInfoSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = PersonalInfo

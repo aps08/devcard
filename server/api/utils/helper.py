@@ -68,14 +68,3 @@ def check_if_token_revoked(jwt_header: str, jwt_payload: dict) -> bool:
     jti = jwt_payload["jti"]
     token = db.session.query(TokenBlocklist.block_id).filter_by(jti=jti).scalar()
     return token is not None
-
-
-def update_verification(user_id: str) -> None:
-    if not User.query.with_entities(User.verified).first()[0]:
-        num_updated = User.query.filter(User.user_id == user_id).update({User.verified: True})
-        db.session.commit()
-
-
-def get_email(user_id: str) -> str:
-    user = User.query.filter(user_id=user_id).first()
-    return user.email
