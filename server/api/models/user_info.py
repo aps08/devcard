@@ -19,8 +19,15 @@ class User(db.Model, UserMixin):
     verified = db.Column(db.Boolean, default=False)
     created_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     updated_timestamp = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    professional = db.relationship("ProfessionalInfo", backref="users")
-    personal = db.relationship("PersonalInfo", backref="users")
+    professional = db.relationship(
+        "ProfessionalInfo",
+        backref="users",
+        uselist=False,
+        primaryjoin="User.professional_id == ProfessionalInfo.professional_id",
+    )
+    personal = db.relationship(
+        "PersonalInfo", backref="users", uselist=False, primaryjoin="User.personal_id == PersonalInfo.personal_id"
+    )
     role = db.relationship("Role", backref="users")
 
     def __init__(self, email, password):

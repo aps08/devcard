@@ -20,3 +20,11 @@ class PasswordChangeSchema(Schema):
         validate=[validate.Length(min=8, error="Password must be at least 8 characters long")],
         error_messages={"required": "Old password is required"},
     )
+
+
+class PersonalInfoChangeSchema(Schema):
+    pass
+
+
+class ProfessionalInfoChangeSchema(Schema):
+    pass

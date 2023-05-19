@@ -6,7 +6,7 @@ from api.extensions import db, ma
 class PersonalInfo(db.Model):
     __tablename__ = "personal_info"
 
-    personal_id = db.Column(db.String(50), primary_key=True)
+    personal_id = db.Column(db.String(50), db.ForeignKey("user_info.personal_id"), primary_key=True)
     user_id = db.Column(db.String(50), db.ForeignKey("user_info.user_id"))
     first_name = db.Column(db.String(20), nullable=True)
     middle_name = db.Column(db.String(20), nullable=True)

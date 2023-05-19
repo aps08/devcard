@@ -1,4 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import AuthContext from "./store/auth-context";
 import Home from "./pages/home/Home";
 import Demo from "./pages/demo/Demo";
@@ -13,10 +14,16 @@ import Professional from "./components/professional/Professional";
 import Account from "./components/account/Account";
 import Purchasehistory from "./components/purchasehistory/Purchasehistory";
 import Verify from "./components/verify/Verify";
+import { checkLocalStorageKeys } from "./store/localstorageoperations";
 import "./App.css";
 
 function App() {
-  const IsLoggedin = true;
+  const [IsLoggedin, setIsLoggedin] = useState(false);
+  // const [Usertype, setUsertype] = useState(false);
+  useEffect(() => {
+    setIsLoggedin(checkLocalStorageKeys());
+    // setUsertype(getUserType());
+  }, []);
   return (
     <AuthContext.Provider
       value={{

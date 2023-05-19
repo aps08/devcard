@@ -6,7 +6,11 @@ from api.extensions import db, ma
 class ProfessionalInfo(db.Model):
     __tablename__ = "professional_info"
 
-    professional_id = db.Column(db.String(50), primary_key=True)
+    professional_id = db.Column(
+        db.String(50),
+        db.ForeignKey("user_info.professional_id"),
+        primary_key=True,
+    )
     user_id = db.Column(db.String(50), db.ForeignKey("user_info.user_id"))
     professional_role = db.Column(db.String(50))
     company_name = db.Column(db.String(50))

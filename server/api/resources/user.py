@@ -11,13 +11,14 @@ from api.models import (
     PersonalInfoSchema,
     ProfessionalInfo,
     ProfessionalInfoSchema,
+    TokenBlocklist,
     User,
     UserSchema,
 )
 from api.schemas import EmailSchema, PasswordChangeSchema
 from api.utils import create_verification_link, send_email, validate_json
 from flask import Blueprint
-from flask_jwt_extended import get_jwt_identity, jwt_required
+from flask_jwt_extended import get_jwt, get_jwt_identity, jwt_required
 from flask_restful import Api, Resource
 
 user_resource = Blueprint("user", __name__)
@@ -51,7 +52,7 @@ class Account(Resource):
             json.dump(user_data, file, indent=3)
         with zipfile.ZipFile(zip_file_path, "w") as zip_file:
             zip_file.write(file_path)
-
+        # zip file will be sent to aws s3
         send_email("Your Information", [user_info.email], "userinfo.html", zip_file_path)
         os.remove(file_path)
         os.remove(zip_file_path)
@@ -60,14 +61,24 @@ class Account(Resource):
 
     @jwt_required()
     def put(self):
-        # directly change the user type to contributor
-        # no input data is required
-        return {"message": "Your are a contributor now."}, 200
+        user_id = get_jwt_identity()["user_id"]
+        num_updated = User.query.filter(User.user_id == user_id).update({User.role_id: 3})
+        db.session.commit()
+        user_info = User.query.filter(User.user_id == user_id).first()
+        return {"X-USER": user_info.role.role_name}, 200
 
     @jwt_required()
     def delete(self):
-        # delete account
-        return {"message": "We are very sad to say good bye to you. Your account has been deleted."}, 200
+        user_id = get_jwt_identity()["user_id"]
+        User.query.filter_by(user_id=user_id).delete()
+        PersonalInfo.query.filter_by(user_id=user_id).delete()
+        ProfessionalInfo.query.filter_by(user_id=user_id).delete()
+        EmailVerification.query.filter_by(user_id=user_id).delete()
+        db.session.commit()
+        jti = get_jwt()["jti"]
+        blacked = TokenBlocklist(jti)
+        blacked.add_to_blacklist()
+        return {"message": "We are sad to say good bye. Your account has been deleted."}, 200
 
 
 class Profile(Resource):
@@ -105,5 +116,37 @@ class Profile(Resource):
         }, 200
 
 
+class Personal(Resource):
+    @jwt_required()
+    def get(self):
+        user_id = get_jwt_identity()["user_id"]
+        user_info = User.query.filter_by(user_id=user_id).first()
+        personal_info_schema = PersonalInfoSchema()
+        data = personal_info_schema.dump(user_info.personal)
+        return data, 200
+
+    @jwt_required()
+    def put(self):
+        # update personal info
+        pass
+
+
+class Professional(Resource):
+    @jwt_required()
+    def get(self):
+        user_id = get_jwt_identity()["user_id"]
+        user_info = User.query.filter_by(user_id=user_id).first()
+        professional_info_schema = ProfessionalInfoSchema()
+        data = professional_info_schema.dump(user_info.professional)
+        return data, 200
+
+    @jwt_required()
+    def put(self):
+        # update professioanal info
+        pass
+
+
 api.add_resource(Account, "/account")
 api.add_resource(Profile, "/profile")
+api.add_resource(Personal, "/personal")
+api.add_resource(Professional, "/professional")

@@ -38,7 +38,7 @@ class Login(Resource):
                 login_user(user)
                 user_identity = {"email": data["email"], "user_id": user.user_id}
                 access_token = create_access_token(identity=user_identity)
-                response = {"access_token": access_token, "access_type": user.role.role_name}
+                response = {"X-ACCESS-TOKEN": access_token, "X-USER": user.role.role_name}
                 return response, 200
             else:
                 url = create_verification_link(user.user_id)
