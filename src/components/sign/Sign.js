@@ -2,7 +2,9 @@ import { useState } from "react";
 import Input from "../input/Input";
 import ReactLoading from "react-loading";
 import ModalWrapper from "../../helper/Modalwrapper";
+import useFetchpublic from "../../helper/useFetchPublic";
 import "./Sign.css";
+import { setLocalStorage } from "../../store/localstorageoperations";
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   password: /^.{8,20}$/
@@ -30,6 +32,8 @@ const HINTS = {
 
 function Sign(props) {
   const [show, setshow] = useState(!props.show);
+  const [error, seterror] = useState(false);
+  const [message, setmessage] = useState(false);
   const loading = <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />;
   const [spinner, setspinner] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
@@ -45,16 +49,30 @@ function Sign(props) {
     }
   };
 
+  const callingapi = (formname, endpoint, apidata) => {
+    const { response, statuscode } = useFetchpublic(endpoint, "POST", apidata);
+    if (formname === "signin" && statuscode === 200) {
+      setLocalStorage(response);
+      window.location.reload();
+    } else if (formname === "signup" && statuscode === 200) {
+      setmessage(response);
+    } else {
+      seterror(response);
+    }
+  };
+
   const submithandler = (event) => {
     event.preventDefault();
+    const formname = event.target.name;
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setspinner(true);
-      console.log(Formdata);
-      setTimeout(() => {
-        setspinner(false);
-        props.close();
-      }, 5000);
+      if (formname === "signin") {
+        callingapi(formname, "/auth/login", Formdata);
+      }
+      if (formname === "signup") {
+        callingapi(formname, "/auth/register", Formdata);
+      }
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -65,6 +83,9 @@ function Sign(props) {
         }
       }
     }
+
+    setspinner(false);
+    props.close();
   };
 
   return (
@@ -72,6 +93,8 @@ function Sign(props) {
       <div className="justify-center">
         <div className="main_div">
           <div className="heading left">{show ? <>Create account</> : <>Get started</>}</div>
+          {error && <p className="error">{error}</p>}
+          {message && <p className="message">{message}</p>}
           <form id={show ? "signin" : "signup"} onSubmit={submithandler} name={show ? "signin" : "signup"}>
             {ELEMENTS.map((element, index) => (
               <Input
@@ -89,7 +112,16 @@ function Sign(props) {
                 {spinner ? loading : show ? <>Sign up</> : <>Sign in</>}
               </button>
             </div>
-            <div style={{ marginTop: "1rem" }} className="divider">
+            {!show && (
+              <p
+                onClick={() => {
+                  console.log("forgot password");
+                }}
+                className="forgot_pass">
+                Forgot password
+              </p>
+            )}
+            <div style={{ marginTop: ".5rem" }} className="divider">
               <p className="para">{show ? <>Already have an account ?</> : <>Don&apos;t have an account ?</>}</p>
               <span onClick={() => setshow(!show)} className="navlink_signin">
                 {show ? <>Sign in</> : <>Sign up</>}

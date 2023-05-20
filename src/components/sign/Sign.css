@@ -11,7 +11,23 @@
 #signin .form_element, #signup .form_element{
     margin: 1rem 0;
 }
-
+.forgot_pass{
+    color: var(--color-btn-bg);
+    text-align: center;
+    cursor: pointer;
+}
+.message{
+    padding: .5rem;
+    text-align: center;
+    background-color: rgba(64, 199, 64, 0.66);
+    color: var(--color-btn-bg);
+}
+.error{
+    padding: .5rem;
+    text-align: center;
+    background-color: rgba(205, 69, 69, 0.605);
+    color: brown;
+}
 .justify-center{
     animation: zoomOut 0.5s forwards;
 }
@@ -38,7 +54,6 @@
 }
 .navlink_signin{
     color: var(--color-btn-bg);
-    border-bottom: 1px solid var(--color-btn-bg);
     cursor: pointer;
     margin: 0 1rem;
 }

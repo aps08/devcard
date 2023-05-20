@@ -19,10 +19,7 @@ export function getUserToken() {
   return hasAccessToken;
 }
 
-export function setUserType(usertype) {
-  const usertype = localStorage.setItem("X-USER", usertype);
-}
-
-export function setUserToken(token) {
-  const hasAccessToken = localStorage.setItem("X-ACCESS-TOKEN", token);
+export function setLocalStorage(data) {
+  localStorage.setItem("X-USER", data["X-USER"]);
+  localStorage.setItem("X-USER", data["X-ACCESS-TOKEN"]);
 }

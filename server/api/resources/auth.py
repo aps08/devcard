@@ -47,7 +47,7 @@ class Login(Resource):
                     "message": "Email not verified. A verification mail has been sent to your registered email."
                 }, 200
         else:
-            return {"error": "Invalid email or password"}, 400
+            return {"message": "Invalid email or password"}, 400
 
 
 class Logout(Resource):

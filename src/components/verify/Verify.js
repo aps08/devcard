@@ -8,6 +8,7 @@ function Verify() {
   const [check, setcheck] = useState(false);
   const [verified, setverified] = useState(false);
   const { token } = useParams();
+  console.log(token, setcheck, setverified);
   const factshandler = async () => {
     try {
       const response = await fetch("https://animechan.vercel.app/api/random");

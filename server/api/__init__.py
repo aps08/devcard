@@ -42,6 +42,5 @@ def create_app(config_name):
             db.session.add_all([role_admin, role_user, role_contributor])
             db.session.commit()
 
-    cors = CORS(app, resources={r"*": {"origins": "http://localhost:3000"}})
-
+    CORS(app, resources="*", origins="http://localhost:3000")
     return app
