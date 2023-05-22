@@ -6,19 +6,43 @@ import "./ChangePassword.css";
 
 function ChangePassword() {
   const { token } = useParams();
+  const [ChangePass, setChangePass] = useState({
+    password: "",
+    confirm: ""
+  });
+  const [validPass, setvalidPass] = useState({
+    password: false,
+    confirm: false
+  });
   const [spinner, setspinner] = useState(false);
   const [Formdata, setFormdata] = useState("");
   const [valid, setvalid] = useState(false);
   const loading = <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />;
-  const buttonemailcontent = spinner ? loading : <>Forgot password</>;
   const buttonpasswordcontent = spinner ? loading : <>Change password</>;
   const changeemailhandler = (event) => {
-    const value = event.target.value;
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      setvalid(true);
-      setFormdata(value);
-    } else {
-      setvalid(false);
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(event.target.value);
+    setvalid(isValidEmail);
+    if (isValidEmail) {
+      setFormdata(event.target.value);
+    }
+  };
+
+  const newpasswordhandler = (event) => {
+    const isValidPassword = /^.{8,}$/.test(event.target.value);
+    setvalidPass({ ...validPass, password: isValidPassword });
+    if (isValidPassword) {
+      setChangePass({ ...ChangePass, password: event.target.value });
+    }
+  };
+
+  const confirmpasswordhandler = (event) => {
+    const isMatched = event.target.value === ChangePass.password;
+    setvalidPass({
+      ...validPass,
+      confirm: isMatched
+    });
+    if (isMatched) {
+      setChangePass({ ...ChangePass, confirm: event.target.value });
     }
   };
 
@@ -32,6 +56,23 @@ function ChangePassword() {
       inputfield.scrollIntoView({ block: "center" });
     }
   };
+  const submitpasswordhandler = (event) => {
+    event.preventDefault();
+    const validation = validPass.password && validPass.confirm;
+    if (validation) {
+      console.log(ChangePass);
+    } else {
+      for (const key in validPass) {
+        if (validPass[key] !== true) {
+          const inputfield = document.querySelector(`input[name=${key}]`);
+          inputfield.focus();
+          inputfield.scrollIntoView({ block: "center" });
+          break;
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     if (spinner) {
       console.log({ email: Formdata });
@@ -43,23 +84,25 @@ function ChangePassword() {
       <div className="verify_box">
         {token ? (
           <>
-            <p className="para">Enter new password</p>
-            <form id="changepassword" onSubmit={submitemailhandler}>
+            <p className="para" style={{ marginTop: "1rem", color: "whitesmoke" }}>
+              Enter new password
+            </p>
+            <form id="changepassword" onSubmit={submitpasswordhandler}>
               <Input
                 label="PASSWORD"
                 placeholder="*********"
                 hints={["Password must be 8 to 20 characters long"]}
-                change={null}
+                change={newpasswordhandler}
                 type="password"
-                valid={false}
+                valid={validPass["password"]}
               />
               <Input
-                label="CONFIRM PASSWORD"
+                label="CONFIRM"
                 placeholder="*********"
-                hints={["Password must be 8 to 20 characters long", "Confirm password must match with password"]}
-                change={null}
+                hints={["Confirm password must match with password"]}
+                change={confirmpasswordhandler}
                 type="password"
-                valid={false}
+                valid={validPass["confirm"]}
               />
               <button type="submit" disabled={spinner}>
                 {buttonpasswordcontent}
@@ -68,7 +111,9 @@ function ChangePassword() {
           </>
         ) : (
           <>
-            <p className="para">Enter your registered email address</p>
+            <p className="para" style={{ marginTop: "1rem", color: "whitesmoke" }}>
+              Enter your registered email address
+            </p>
             <form id="forgotpassword" onSubmit={submitemailhandler}>
               <Input
                 label="EMAIL"
@@ -79,7 +124,7 @@ function ChangePassword() {
                 valid={valid}
               />
               <button type="submit" disabled={spinner}>
-                {buttonemailcontent}
+                {buttonpasswordcontent}
               </button>
             </form>
           </>
