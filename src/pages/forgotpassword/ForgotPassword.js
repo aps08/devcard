@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Input from "../../components/input/Input";
-import "./ChangePassword.css";
+import "./ForgotPassword.css";
 
 function ChangePassword() {
   const { token } = useParams();

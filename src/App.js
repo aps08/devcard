@@ -13,7 +13,7 @@ import Personal from "./components/personalinfo/Personal";
 import Professional from "./components/professional/Professional";
 import Account from "./components/account/Account";
 import Purchasehistory from "./components/purchasehistory/Purchasehistory";
-import ChangePassword from "./pages/changepassword/ChangePassword";
+import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import Verify from "./pages/verify/Verify";
 import { checkLocalStorageKeys } from "./store/localstorageoperations";
 import "./App.css";
@@ -47,8 +47,8 @@ function App() {
             </Route>
           )}
           <Route path="/verify/:token" element={<Verify />} />
-          <Route path="/forgotpassword" element={<ChangePassword />} />
-          <Route path="/forgotpassword/:token" element={<ChangePassword />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/forgotpassword/:token" element={<ForgotPassword />} />
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Notfound />} />
