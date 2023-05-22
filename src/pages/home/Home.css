@@ -37,6 +37,13 @@
 .section:nth-child(2) img{
     animation: none;
 }
+.mt-2{
+    margin-top: 2rem;
+}
+.mt-2 .section{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
 .cards{
     margin-top: 1rem;
     margin-bottom: 2rem;

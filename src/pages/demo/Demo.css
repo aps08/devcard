@@ -15,6 +15,9 @@
     place-items: center;
     margin: 2rem 0;
 }
+input[type="file"][name="image"] {
+    display: none;
+  }
 #demo_form .form_element{
     width: 100%;
     margin: 1rem 0;
@@ -41,8 +44,15 @@
     background-color: var(--color-bg);
     opacity: .6;
     cursor: pointer;
+    margin-left: 0;
 }
-
+#upload .label{
+    text-align: center;
+}
+#demo_form .para:last-child{
+    padding: 0;
+    font-size: unset;
+}
 .form_element select:focus{
     border: 2px solid rgb(176, 175, 175);
     transition: .5s ease-in-out;

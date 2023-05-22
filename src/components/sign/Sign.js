@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import Input from "../input/Input";
 import ReactLoading from "react-loading";
 import ModalWrapper from "../../helper/Modalwrapper";
@@ -38,6 +39,19 @@ function Sign(props) {
   const [spinner, setspinner] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
+  const title = show ? <>Create account</> : <>Get started</>;
+  const formid = show ? "signin" : "signup";
+  const footerpara = show ? <>Already have an account ?</> : <>Don&apos;t have an account ?</>;
+  const buttoncontent = spinner ? loading : show ? <>Sign up</> : <>Sign in</>;
+  const footernav = show ? <>Sign in</> : <>Sign up</>;
+  const apiendpoint = show ? "/auth/register" : "/auth/login";
+  const forgotpassword = show ? (
+    ""
+  ) : (
+    <p onClick={props.close} className="forgot_pass">
+      Forgot password
+    </p>
+  );
 
   const changehandler = (event) => {
     const { name, value } = event.target;
@@ -49,30 +63,11 @@ function Sign(props) {
     }
   };
 
-  const callingapi = (formname, endpoint, apidata) => {
-    const { response, statuscode } = useFetchpublic(endpoint, "POST", apidata);
-    if (formname === "signin" && statuscode === 200) {
-      setLocalStorage(response);
-      window.location.reload();
-    } else if (formname === "signup" && statuscode === 200) {
-      setmessage(response);
-    } else {
-      seterror(response);
-    }
-  };
-
   const submithandler = (event) => {
     event.preventDefault();
-    const formname = event.target.name;
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setspinner(true);
-      if (formname === "signin") {
-        callingapi(formname, "/auth/login", Formdata);
-      }
-      if (formname === "signup") {
-        callingapi(formname, "/auth/register", Formdata);
-      }
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -83,19 +78,36 @@ function Sign(props) {
         }
       }
     }
-
-    setspinner(false);
-    props.close();
   };
+
+  useEffect(() => {
+    const callingapi = async () => {
+      const { response, statuscode } = useFetchpublic(apiendpoint, "POST", Formdata);
+      if (show && statuscode === 200) {
+        setmessage(response);
+      } else if (!show && statuscode === 200) {
+        setLocalStorage(response);
+        window.location.reload();
+      } else {
+        seterror(response);
+      }
+
+      setspinner(false);
+    };
+
+    if (spinner) {
+      callingapi();
+    }
+  }, [spinner]);
 
   return (
     <ModalWrapper close={props.close}>
       <div className="justify-center">
         <div className="main_div">
-          <div className="heading left">{show ? <>Create account</> : <>Get started</>}</div>
+          <div className="heading left">{title}</div>
           {error && <p className="error">{error}</p>}
           {message && <p className="message">{message}</p>}
-          <form id={show ? "signin" : "signup"} onSubmit={submithandler} name={show ? "signin" : "signup"}>
+          <form id={formid} onSubmit={submithandler} name={formid}>
             {ELEMENTS.map((element, index) => (
               <Input
                 key={index}
@@ -109,22 +121,14 @@ function Sign(props) {
             ))}
             <div className="form_element">
               <button type="submit" style={{ height: "39px" }} disabled={spinner}>
-                {spinner ? loading : show ? <>Sign up</> : <>Sign in</>}
+                {buttoncontent}
               </button>
             </div>
-            {!show && (
-              <p
-                onClick={() => {
-                  console.log("forgot password");
-                }}
-                className="forgot_pass">
-                Forgot password
-              </p>
-            )}
+            <NavLink to="/forgotpassword">{forgotpassword}</NavLink>
             <div style={{ marginTop: ".5rem" }} className="divider">
-              <p className="para">{show ? <>Already have an account ?</> : <>Don&apos;t have an account ?</>}</p>
+              <p className="para">{footerpara}</p>
               <span onClick={() => setshow(!show)} className="navlink_signin">
-                {show ? <>Sign in</> : <>Sign up</>}
+                {footernav}
               </span>
             </div>
           </form>

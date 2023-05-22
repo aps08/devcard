@@ -1,9 +1,15 @@
+#about_section{
+    grid-template-columns: 1fr;
+}
 .contact_form{
     padding: .5rem 1rem;
     padding-right: 1rem;
     background-color: rgba(78, 78, 78,.3);
     border-radius: .5rem;
     margin-top: 1rem;
+}
+#contactform{
+    margin-top: 0;
 }
 .contact_form .form_element{
     width: 100%;

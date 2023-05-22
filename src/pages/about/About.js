@@ -52,7 +52,7 @@ function About() {
   };
   return (
     <>
-      <section className="section" style={{ gridTemplateColumns: "1fr" }}>
+      <section className="section" id="about_section">
         <div>
           <h3 className="heading">About us</h3>
           <p className="para">
@@ -79,7 +79,7 @@ function About() {
         </div>
       </section>
       <h3 className="heading">Contacts and Feedback</h3>
-      <section className="section" style={{ marginTop: "0" }}>
+      <section className="section" id="contactform">
         <div>
           <form className="contact_form" onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
@@ -92,10 +92,8 @@ function About() {
                 placeholder={element.placeholder}
               />
             ))}
-            <div style={{ textAlign: "center" }}>
-              <button style={{ marginBottom: "1rem" }} type="submit">
-                Submit
-              </button>
+            <div className="center">
+              <button type="submit">Submit</button>
             </div>
           </form>
         </div>

@@ -104,9 +104,9 @@ function Home() {
           <button onClick={showmodalhandler}>Sign up for free</button>
         </div>
       </section>
-      <div style={{ marginTop: "2rem" }}>
+      <div className="mt-2">
         <h3 className="heading center line">What we offer ?</h3>
-        <section className="section" style={{ marginTop: "0", marginBottom: "1rem" }}>
+        <section className="section">
           {CARDS.map((card) => (
             <Card
               key={card.label}

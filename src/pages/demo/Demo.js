@@ -155,24 +155,15 @@ function Demo() {
           ))}
           <div className="form_element">
             <label className="label">ADD IMAGE</label>
-            <input
-              name="image"
-              accept="image/*"
-              type="file"
-              id="img"
-              style={{ display: "none" }}
-              onChange={imagechangehandler}
-            />
-            <label name="upload" id="upload" htmlFor="img" style={{ marginLeft: "0" }}>
+            <input name="image" accept="image/*" type="file" id="img" onChange={imagechangehandler} />
+            <label name="upload" id="upload" htmlFor="img">
               <div className="file_input_area">
                 <img
                   className="preview_image_area"
                   src={Formdata.image ? Formdata.image : BrowseLogo}
                   alt="browselogo"
                 />
-                <p className="label" style={{ textAlign: "center" }}>
-                  Browse files
-                </p>
+                <p className="label">Browse files</p>
               </div>
             </label>
           </div>
@@ -181,7 +172,7 @@ function Demo() {
               {spinner ? loading : <>Get a demo now</>}
             </button>
           </div>
-          <p className="para" style={{ padding: "0" }}>
+          <p className="para">
             Get more customization by
             <span onClick={spinner ? null : showmodalhandler} className="navlink_signin">
               Signing Up
