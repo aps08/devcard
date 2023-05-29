@@ -17,16 +17,20 @@
     cursor: pointer;
 }
 .message{
+    border-radius: 4px;
     padding: .5rem;
     text-align: center;
-    background-color: rgba(64, 199, 64, 0.66);
-    color: var(--color-btn-bg);
+    background-color: rgba(84, 248, 84, 0.2);
+    color: whitesmoke;
+    word-wrap: break-word;
 }
 .error{
+    border-radius: 4px;
     padding: .5rem;
     text-align: center;
-    background-color: rgba(205, 69, 69, 0.605);
-    color: brown;
+    background-color: rgba(205, 69, 69, 0.2);
+    color: whitesmoke;
+    word-wrap: break-word;
 }
 .justify-center{
     animation: zoomOut 0.5s forwards;

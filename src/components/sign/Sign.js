@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import Input from "../input/Input";
 import ReactLoading from "react-loading";
 import ModalWrapper from "../../helper/Modalwrapper";
-import useFetchpublic from "../../helper/useFetchPublic";
 import "./Sign.css";
 import { setLocalStorage } from "../../store/localstorageoperations";
 const CHECKS = {
@@ -35,22 +34,22 @@ function Sign(props) {
   const [show, setshow] = useState(!props.show);
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
-  const loading = <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />;
   const [spinner, setspinner] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const title = show ? <>Create account</> : <>Get started</>;
   const formid = show ? "signin" : "signup";
   const footerpara = show ? <>Already have an account ?</> : <>Don&apos;t have an account ?</>;
-  const buttoncontent = spinner ? loading : show ? <>Sign up</> : <>Sign in</>;
-  const footernav = show ? <>Sign in</> : <>Sign up</>;
+  const buttontext = show ? <>Sign in</> : <>Sign up</>;
   const apiendpoint = show ? "/auth/register" : "/auth/login";
   const forgotpassword = show ? (
-    ""
+    <p className="forgot_pass">Welcome to devcards</p>
   ) : (
-    <p onClick={props.close} className="forgot_pass">
-      Forgot password
-    </p>
+    <NavLink to="/forgotpassword">
+      <p onClick={props.close} className="forgot_pass">
+        Forgot password
+      </p>
+    </NavLink>
   );
 
   const changehandler = (event) => {
@@ -63,6 +62,16 @@ function Sign(props) {
     }
   };
 
+  const formchange = () => {
+    setFormdata(INITIAL);
+    seterror(false);
+    setmessage(false);
+    setshow(!show);
+    const userelement = document.getElementsByName("email")[0];
+    userelement.value = "";
+    const passwordelement = document.getElementsByName("password")[0];
+    passwordelement.value = "";
+  };
   const submithandler = (event) => {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
@@ -81,28 +90,44 @@ function Sign(props) {
   };
 
   useEffect(() => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(Formdata),
+      mode: "cors"
+    };
     const callingapi = async () => {
-      const { response, statuscode } = useFetchpublic(apiendpoint, "POST", Formdata);
-      if (show && statuscode === 200) {
-        setmessage(response);
-      } else if (!show && statuscode === 200) {
-        setLocalStorage(response);
-        window.location.reload();
-      } else {
-        seterror(response);
+      try {
+        const response = await fetch(apiendpoint, requestOptions);
+        const data = await response.json();
+        if (response.ok) {
+          setmessage(data.message);
+          if (apiendpoint === "/auth/login") {
+            setLocalStorage(data);
+            window.location.reload();
+          }
+        } else {
+          seterror(data.message);
+        }
+        setspinner(false);
+      } catch (error) {
+        console.log(error);
       }
-
-      setspinner(false);
     };
 
     if (spinner) {
+      seterror(false);
+      setmessage(false);
       callingapi();
     }
   }, [spinner]);
 
   return (
     <ModalWrapper close={props.close}>
-      <div className="justify-center">
+      <div className="justify-center" id="modalsign">
         <div className="main_div">
           <div className="heading left">{title}</div>
           {error && <p className="error">{error}</p>}
@@ -120,15 +145,22 @@ function Sign(props) {
               />
             ))}
             <div className="form_element">
-              <button type="submit" style={{ height: "39px" }} disabled={spinner}>
-                {buttoncontent}
-              </button>
+              {!spinner && (
+                <button type="submit" style={{ height: "39px" }} disabled={spinner}>
+                  Submit
+                </button>
+              )}
+              {spinner && (
+                <button type="submit" style={{ height: "39px" }} disabled={spinner}>
+                  <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
+                </button>
+              )}
             </div>
-            <NavLink to="/forgotpassword">{forgotpassword}</NavLink>
+            {forgotpassword}
             <div style={{ marginTop: ".5rem" }} className="divider">
               <p className="para">{footerpara}</p>
-              <span onClick={() => setshow(!show)} className="navlink_signin">
-                {footernav}
+              <span onClick={formchange} className="navlink_signin">
+                {buttontext}
               </span>
             </div>
           </form>

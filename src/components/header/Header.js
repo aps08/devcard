@@ -5,6 +5,7 @@ import AuthContext from "../../store/auth-context";
 import Sign from "../sign/Sign";
 import logo from "../../assets/images/logo.png";
 import "../header/Header.css";
+import { getUserToken, removeLocalstorage } from "../../store/localstorageoperations";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
 const WIDTH_SIZE = 1024;
@@ -49,7 +50,28 @@ function Header() {
 
   const signouthandler = () => {
     navigationhandler();
-    console.log("signouthandler works");
+    const jwt_token = getUserToken();
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json",
+        Authorization: `Bearer ${jwt_token}`
+      },
+      mode: "cors"
+    };
+    fetch("/auth/logout", requestOptions)
+      .then(async (response) => {
+        if (response.ok) {
+          removeLocalstorage();
+          window.location.reload();
+        } else {
+          throw new Error("API call failed");
+        }
+      })
+      .catch((error) => {
+        console.err(error);
+      });
   };
 
   return (

@@ -5,7 +5,6 @@ const HEADERS = {
   "Content-Type": "application/json; charset=UTF-8",
   Accept: "application/json"
 };
-const HOST = "http://localhost:5000";
 
 const useFetchpublic = (url, method, body = null, authorizaton = false) => {
   const [data, setData] = useState(null);

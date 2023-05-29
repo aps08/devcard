@@ -21,5 +21,10 @@ export function getUserToken() {
 
 export function setLocalStorage(data) {
   localStorage.setItem("X-USER", data["X-USER"]);
-  localStorage.setItem("X-USER", data["X-ACCESS-TOKEN"]);
+  localStorage.setItem("X-ACCESS-TOKEN", data["X-ACCESS-TOKEN"]);
+}
+
+export function removeLocalstorage() {
+  localStorage.removeItem("X-USER");
+  localStorage.removeItem("X-ACCESS-TOKEN");
 }
