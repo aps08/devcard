@@ -2,7 +2,8 @@ import ReactDOM from "react-dom";
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
-import Sign from "../sign/Sign";
+import Signin from "../sign/Signin";
+import Signup from "../sign/Signup";
 import logo from "../../assets/images/logo.png";
 import "../header/Header.css";
 import { getUserToken, removeLocalstorage } from "../../store/localstorageoperations";
@@ -11,8 +12,8 @@ const MODAL_ELEMENT = document.getElementById("root-modal");
 const WIDTH_SIZE = 1024;
 
 function Header() {
-  const [showsingup, setshowsignup] = useState(null);
-  const [show, setshow] = useState(false);
+  const [showsignin, setshowsignin] = useState(false);
+  const [showsignup, setshowsignup] = useState(false);
   const { IsLoggedin } = useContext(AuthContext);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
@@ -31,21 +32,30 @@ function Header() {
   });
 
   const closemodal = () => {
-    setshow(false);
+    setshowsignin(false);
     setshowsignup(false);
     document.body.style.overflow = "unset";
   };
 
-  const showhandler = (formtype) => {
-    setshowsignup(formtype);
+  const showhandler = (type) => {
     document.body.style.overflow = "hidden";
-    setshow(true);
+    if (type === "signin") {
+      setshowsignin(true);
+    }
+    if (type === "signup") {
+      setshowsignup(true);
+    }
   };
 
   const navigationhandler = () => {
     if (Isopen) {
       setIsopen(!Isopen);
     }
+  };
+
+  const formchange = () => {
+    setshowsignin(!showsignin);
+    setshowsignup(!showsignup);
   };
 
   const signouthandler = () => {
@@ -76,7 +86,8 @@ function Header() {
 
   return (
     <>
-      {show && ReactDOM.createPortal(<Sign show={showsingup} close={closemodal} />, MODAL_ELEMENT)}
+      {showsignin && ReactDOM.createPortal(<Signin formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
+      {showsignup && ReactDOM.createPortal(<Signup formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
       <header className="navbar">
         <div className="branding">
           <img className="brand_image" src={logo} alt="React Image" />
@@ -97,7 +108,7 @@ function Header() {
             </NavLink>
             {!IsLoggedin && (
               <li className="list-item">
-                <button onClick={() => showhandler(false)}>Sign up for free</button>
+                <button onClick={() => showhandler("signup")}>Sign up for free</button>
               </li>
             )}
             {IsLoggedin && (
@@ -125,7 +136,7 @@ function Header() {
               </li>
             </>
           )}
-          {!IsLoggedin && <button onClick={() => showhandler(true)}>Sign in</button>}
+          {!IsLoggedin && <button onClick={() => showhandler("signin")}>Sign in</button>}
           <div
             id="menu"
             className="hamburger"

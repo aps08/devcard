@@ -1,6 +1,7 @@
 import Input from "../../components/input/Input";
 import "./About.css";
-import { useState } from "react";
+import ReactLoading from "react-loading";
+import { useEffect, useState } from "react";
 
 const ELEMENTS = [
   { label: "NAME", placeholder: "enter full name" },
@@ -15,7 +16,7 @@ const HINTS = {
 const CHECKS = {
   name: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,
   email: /^[^\s@]{1,30}@[^\s@]+\.[^\s@]+$/,
-  message: /^[A-Za-z][A-Za-z\s]{0,98}[A-Za-z]$/
+  message: /^[A-Za-z][A-Za-z\s]{0,98}$/
 };
 const INITIAL = {
   name: "",
@@ -23,8 +24,11 @@ const INITIAL = {
   message: ""
 };
 function About() {
+  const [spinner, setspinner] = useState(false);
   const [validate, setvalidate] = useState(INITIAL);
   const [Formdata, setFormdata] = useState(INITIAL);
+  const [error, seterror] = useState(false);
+  const [message, setmessage] = useState(false);
   const changehandler = (event) => {
     const { name, value } = event.target;
     if (CHECKS[name].test(value)) {
@@ -38,7 +42,7 @@ function About() {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
-      console.log(Formdata);
+      setspinner(true);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -50,6 +54,36 @@ function About() {
       }
     }
   };
+  useEffect(() => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(Formdata),
+      mode: "cors"
+    };
+    const callingapi = async () => {
+      try {
+        const response = await fetch("/public/feeback_contact", requestOptions);
+        const data = await response.json();
+        if (response.ok) {
+          setmessage(data.message);
+        } else {
+          seterror(data.message);
+        }
+        setspinner(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (spinner) {
+      seterror(false);
+      setmessage(false);
+      callingapi();
+    }
+  }, [spinner]);
   return (
     <>
       <section className="section" id="about_section">
@@ -80,8 +114,10 @@ function About() {
       </section>
       <h3 className="heading">Contacts and Feedback</h3>
       <section className="section" id="contactform">
-        <div>
-          <form className="contact_form" onSubmit={submithandler}>
+        <div className="contact_form">
+          {error && <p className="error">{error}</p>}
+          {message && <p className="message">{message}</p>}
+          <form onSubmit={submithandler}>
             {ELEMENTS.map((element, index) => (
               <Input
                 key={index}
@@ -93,7 +129,13 @@ function About() {
               />
             ))}
             <div className="center">
-              <button type="submit">Submit</button>
+              <button type="submit" style={{ width: "100px" }} disabled={spinner}>
+                {!spinner ? (
+                  <>Submit</>
+                ) : (
+                  <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="" />
+                )}
+              </button>
             </div>
           </form>
         </div>

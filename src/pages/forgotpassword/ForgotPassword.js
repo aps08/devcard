@@ -91,7 +91,6 @@ function ChangePassword() {
       try {
         const response = await fetch("/public/forgot_password", requestOptions);
         const data = await response.json();
-        console.log(data, BODY);
         if (response.ok) {
           setmessage(data.message);
         } else {
