@@ -115,15 +115,13 @@ function Signup(props) {
               />
             ))}
             <div className="form_element">
-              <button type="submit" style={{ height: "39px" }} disabled={submitted}>
-                {!submitted ? (
-                  <>Submit</>
-                ) : (
-                  <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-                )}
-              </button>
+              {submitted ? (
+                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
+              ) : (
+                <button type="submit">Submit</button>
+              )}
             </div>
-            <div style={{ marginTop: ".5rem" }} className="divider">
+            <div className="divider">
               <p className="para">Already have an account ?</p>
               <span onClick={props.formchange} className="navlink_signin">
                 Sign in

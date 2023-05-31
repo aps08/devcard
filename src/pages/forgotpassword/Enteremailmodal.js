@@ -4,52 +4,36 @@ import ReactLoading from "react-loading";
 import ModalWrapper from "../../helper/Modalwrapper";
 import "./ForgotPassword.css";
 
-const INITIAL = {
-  password: false,
-  confirm: false
-};
-
-function Forgotpasswordmodal(props) {
-  const [Formdata, setFormdata] = useState(INITIAL);
-  const [valid, setvalid] = useState(INITIAL);
-  const [submitted, setsubmitted] = useState(false);
+function Enteremailmodal(props) {
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
+  const [submitted, setsubmitted] = useState(false);
+  const [Formdata, setFormdata] = useState("");
+  const [valid, setvalid] = useState(false);
 
-  const changedhandler = (event) => {
-    const isMatched = event.target.value === Formdata.password;
-    setvalid({
-      ...valid,
-      confirm: isMatched
-    });
-    if (isMatched) {
-      setFormdata({ ...Formdata, confirm: event.target.value });
+  const changehandler = (event) => {
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(event.target.value);
+    setvalid(isValidEmail);
+    if (isValidEmail) {
+      setFormdata({ email: event.target.value });
     }
   };
 
   const submithandler = (event) => {
     event.preventDefault();
-    const validation = valid.password && valid.confirm;
-    if (validation) {
-      delete Formdata.confirm;
-      setFormdata({ ...Formdata, token: props.token });
+    if (valid) {
       setsubmitted(true);
     } else {
-      for (const key in valid) {
-        if (valid[key] !== true) {
-          const inputfield = document.querySelector(`input[name=${key}]`);
-          inputfield.focus();
-          inputfield.scrollIntoView({ block: "center" });
-          break;
-        }
-      }
+      const inputfield = document.querySelector(`input[name="email"]`);
+      inputfield.focus();
+      inputfield.scrollIntoView({ block: "center" });
     }
   };
 
   useEffect(() => {
     const callingapi = async () => {
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
           Accept: "application/json"
@@ -70,10 +54,11 @@ function Forgotpasswordmodal(props) {
       }
       setsubmitted(false);
     };
+
     if (submitted) {
       setmessage(false);
       seterror(false);
-      callingapi();
+      callingapi(Formdata);
     }
   }, [submitted]);
 
@@ -81,31 +66,23 @@ function Forgotpasswordmodal(props) {
     <ModalWrapper close={props.close}>
       <div className="justify-center" id="modalsign">
         <div className="main_div">
-          <div className="heading left">Reset password</div>
+          <div className="heading left">Enter registered email</div>
           {message && <p className="message">{message}</p>}
           {error && <p className="error">{error}</p>}
-          <form id="changepassword" onSubmit={submithandler}>
+          <form id="forgotpassword" onSubmit={submithandler}>
             <Input
-              label="PASSWORD"
-              placeholder="*********"
-              hints={["Password must be 8 to 20 characters long"]}
-              change={changedhandler}
-              type="password"
-              valid={valid["password"]}
-            />
-            <Input
-              label="CONFIRM"
-              placeholder="*********"
-              hints={["Confirm password must match with password"]}
-              change={changedhandler}
-              type="password"
-              valid={valid["confirm"]}
+              label="EMAIL"
+              placeholder="aps08@email.com"
+              hints={["Enter a correct email address"]}
+              change={changehandler}
+              type="email"
+              valid={valid}
             />
             <div className="form_element">
               {submitted ? (
                 <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
               ) : (
-                <button type="submit">Change password</button>
+                <button type="submit">Submit</button>
               )}
             </div>
           </form>
@@ -115,4 +92,4 @@ function Forgotpasswordmodal(props) {
   );
 }
 
-export default Forgotpasswordmodal;
+export default Enteremailmodal;

@@ -17,20 +17,22 @@
     cursor: pointer;
 }
 .message{
+    max-width: inherit;
     border-radius: 4px;
     padding: .5rem;
     text-align: center;
     background-color: rgba(84, 248, 84, 0.2);
     color: whitesmoke;
-    word-wrap: break-word;
+    max-width: 320px
 }
 .error{
+    max-width: inherit;
     border-radius: 4px;
     padding: .5rem;
     text-align: center;
     background-color: rgba(205, 69, 69, 0.2);
     color: whitesmoke;
-    word-wrap: break-word;
+    max-width: 320px
 }
 .justify-center{
     animation: zoomOut 0.5s forwards;
@@ -46,7 +48,7 @@
     border-radius: .5rem;
     padding: 1rem 2rem;
     display: block;
-    background-color: rgba(31, 35, 41, 0.9);
+    background-color: rgb(31, 35, 41);
 }
 .divider{
     display: flex;

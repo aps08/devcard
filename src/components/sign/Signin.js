@@ -119,20 +119,18 @@ function Signin(props) {
               />
             ))}
             <div className="form_element">
-              <button type="submit" style={{ height: "39px" }} disabled={submitted}>
-                {!submitted ? (
-                  <>Submit</>
-                ) : (
-                  <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-                )}
-              </button>
+              {submitted ? (
+                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
+              ) : (
+                <button type="submit">Submit</button>
+              )}
             </div>
             <NavLink to="/forgotpassword">
               <p onClick={props.close} className="forgot_pass">
                 Forgot password
               </p>
             </NavLink>
-            <div style={{ marginTop: ".5rem" }} className="divider">
+            <div className="divider">
               <p className="para">Don&apos;t have an account ?</p>
               <span onClick={props.formchange} className="navlink_signin">
                 Sign up
