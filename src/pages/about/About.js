@@ -24,7 +24,7 @@ const INITIAL = {
   message: ""
 };
 function About() {
-  const [spinner, setspinner] = useState(false);
+  const [submitted, setsubmitted] = useState(false);
   const [validate, setvalidate] = useState(INITIAL);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [error, seterror] = useState(false);
@@ -42,7 +42,7 @@ function About() {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
-      setspinner(true);
+      setsubmitted(true);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -73,17 +73,17 @@ function About() {
         } else {
           seterror(data.message);
         }
-        setspinner(false);
+        setsubmitted(false);
       } catch (error) {
         console.log(error);
       }
     };
-    if (spinner) {
+    if (submitted) {
       seterror(false);
       setmessage(false);
       callingapi();
     }
-  }, [spinner]);
+  }, [submitted]);
   return (
     <>
       <section className="section" id="about_section">
@@ -128,14 +128,12 @@ function About() {
                 placeholder={element.placeholder}
               />
             ))}
-            <div className="center">
-              <button type="submit" style={{ width: "100px" }} disabled={spinner}>
-                {!spinner ? (
-                  <>Submit</>
-                ) : (
-                  <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="" />
-                )}
-              </button>
+            <div className="form_element">
+              {submitted ? (
+                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
+              ) : (
+                <button type="submit">Submit</button>
+              )}
             </div>
           </form>
         </div>
