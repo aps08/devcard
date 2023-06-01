@@ -2,7 +2,8 @@ import ReactDOM from "react-dom";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Card from "../../components/card/Card";
-import Sign from "../../components/sign/Sign";
+import Signup from "../../components/sign/Signup";
+import Signin from "../../components/sign/Signin";
 import "./Home.css";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
@@ -42,21 +43,34 @@ const CARDS = [
 ];
 
 function Home() {
-  const [show, setshow] = useState(false);
+  const [showsignin, setshowsignin] = useState(false);
+  const [showsignup, setshowsignup] = useState(false);
 
-  const showmodalhandler = () => {
+  const showmodalhandler = (type) => {
     document.body.style.overflow = "hidden";
-    setshow(true);
+    if (type === "signin") {
+      setshowsignin(true);
+    }
+    if (type === "signup") {
+      setshowsignup(true);
+    }
+  };
+
+  const formchange = () => {
+    setshowsignin(!showsignin);
+    setshowsignup(!showsignup);
   };
 
   const closemodal = () => {
-    setshow(false);
+    setshowsignin(false);
+    setshowsignup(false);
     document.body.style.overflow = "unset";
   };
 
   return (
     <>
-      {show && ReactDOM.createPortal(<Sign show={false} close={closemodal} />, MODAL_ELEMENT)}
+      {showsignin && ReactDOM.createPortal(<Signin formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
+      {showsignup && ReactDOM.createPortal(<Signup formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
       <section className="section">
         <div className="first">
           <h3 className="heading">
@@ -101,7 +115,7 @@ function Home() {
             <br />
             Get your devcard on your doorstep.
           </p>
-          <button onClick={showmodalhandler}>Sign up for free</button>
+          <button onClick={() => showmodalhandler("signup")}>Sign up for free</button>
         </div>
       </section>
       <div className="mt-2">

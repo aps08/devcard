@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import ReactLoading from "react-loading";
 import Preview from "../../components/preview/Preview";
-import Sign from "../../components/sign/Sign";
 import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
 import "./Demo.css";
@@ -61,13 +60,12 @@ const INITIAL = {
   role: ""
 };
 function Demo() {
-  const loading = <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />;
+  const [error, seterror] = useState(false);
+  const [message, setmessage] = useState(false);
+  const [submitted, setsubmitted] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
-  const [showsingup, setshowsignup] = useState(null);
-  const [show, setshow] = useState(false);
   const [file, setfile] = useState(null);
-  const [spinner, setspinner] = useState(false);
   const [showmodal, setshowmodal] = useState(false);
 
   const mutate = (Preview) => {
@@ -80,17 +78,6 @@ function Demo() {
     document.body.style.overflow = "hidden";
     setfile(event.target.files[0]);
     setshowmodal(true);
-  };
-
-  const showmodalhandler = () => {
-    document.body.style.overflow = "hidden";
-    setshow(true);
-  };
-
-  const closemodal = () => {
-    setshow(false);
-    setshowsignup(false);
-    document.body.style.overflow = "unset";
   };
 
   const changehandler = (event) => {
@@ -109,11 +96,7 @@ function Demo() {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
-      setspinner(true);
-      console.log(Formdata);
-      setTimeout(() => {
-        setspinner(false);
-      }, 5000);
+      setsubmitted(true);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -126,9 +109,40 @@ function Demo() {
     }
   };
 
+  useEffect(() => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(Formdata),
+      mode: "cors"
+    };
+    const callingapi = async () => {
+      try {
+        const response = await fetch("/public/demo", requestOptions);
+        const data = await response.json();
+        if (response.ok) {
+          setmessage(data.message);
+        } else {
+          seterror(data.message);
+        }
+        setsubmitted(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (submitted) {
+      seterror(false);
+      setmessage(false);
+      callingapi();
+    }
+  }, [submitted]);
+
   return (
     <>
-      {show && ReactDOM.createPortal(<Sign show={showsingup} close={closemodal} />, MODAL_ELEMENT)}
       {showmodal &&
         ReactDOM.createPortal(
           <Preview
@@ -143,6 +157,8 @@ function Demo() {
       <section className="center">
         <form id="demo_form" onSubmit={submithandler}>
           <h3 className="heading">Filling out the exciting form below and create your devcard!</h3>
+          {error && <p className="error">{error}</p>}
+          {message && <p className="message">{message}</p>}
           {ELEMENTS.map((element, index) => (
             <Input
               key={index}
@@ -168,16 +184,12 @@ function Demo() {
             </label>
           </div>
           <div className="form_element">
-            <button type="submit" disabled={spinner}>
-              {spinner ? loading : <>Get a demo now</>}
-            </button>
+            {submitted ? (
+              <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
+            ) : (
+              <button type="submit">Submit</button>
+            )}
           </div>
-          <p className="para">
-            Get more customization by
-            <span onClick={spinner ? null : showmodalhandler} className="navlink_signin">
-              Signing Up
-            </span>
-          </p>
         </form>
       </section>
     </>
