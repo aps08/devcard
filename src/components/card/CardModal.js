@@ -2,7 +2,7 @@ import ModalWrapper from "../../helper/Modalwrapper";
 function CardModal(props) {
   return (
     <ModalWrapper close={props.close}>
-      <div className="main_div ">
+      <div className="main_div justify-center">
         <div className="card_modal">
           <div className="heading center">{props.heading}</div>
           <div style={{ display: "flex", justifyContent: "center" }}>

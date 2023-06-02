@@ -40,12 +40,12 @@
     .footer{
         padding: 1rem 2rem;
     }
+    .branding_footer{
+        margin-top: 2rem;
+    }
 }
 
 @media only screen and (max-width: 480px){
-    .footer .list-item{
-       font-size: 1rem;
-    }
     .sub-heading{
         font-size: 1.2rem;
     }

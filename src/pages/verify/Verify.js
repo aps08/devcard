@@ -72,10 +72,10 @@ function Verify() {
                 {message && <p className="message">{message}</p>}
                 {error && <p className="error">{error}</p>}
                 {!message && !error && (
-                  <>
-                    <ReactLoading type="bars" height="60px" width="60px" className="reactloading" />
-                    <p className="para progress">Please wait while we verify your email address.</p>
-                  </>
+                  <div className="form_element">
+                    <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
+                    <p className="para center">Please wait while we verify your email address.</p>
+                  </div>
                 )}
               </div>
             </div>

@@ -32,7 +32,7 @@ function Footer() {
         <h3 className="sub-heading">Learn more</h3>
         <ul>
           <NavLink className={"list-item"} to="about">
-            <li>Earn credits?</li>
+            <li>Earn ?</li>
           </NavLink>
           <NavLink className={"list-item"} to="home">
             <li>Offers</li>

@@ -104,7 +104,7 @@ function Home() {
           <h3 className="heading">
             Get exclusive devcard.
             <br />
-            In four easy steps.
+            In five easy steps.
           </h3>
           <p className="para">
             Create your account.
@@ -112,6 +112,8 @@ function Home() {
             Buy or earn credits.
             <br />
             Fill skills and other details.
+            <br />
+            Order your favorite card.
             <br />
             Get your devcard on your doorstep.
           </p>

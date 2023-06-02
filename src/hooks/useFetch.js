@@ -28,6 +28,7 @@ function useFetch(EndPoint, Method, Data = null, Authorization = false) {
     const callingApi = async () => {
       try {
         const response = await fetch(EndPoint, Requestoptions);
+        console.log("callled");
         const data = await response.json();
         if (response.ok) {
           setmessage(data.message);

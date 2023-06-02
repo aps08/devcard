@@ -34,9 +34,6 @@
     animation: floating 2s infinite ease-in-out;
     margin: 1rem;
 }
-.section:nth-child(2) img{
-    animation: none;
-}
 .mt-2{
     margin-top: 2rem;
 }
@@ -46,7 +43,6 @@
 }
 .cards{
     margin-top: 1rem;
-    margin-bottom: 2rem;
 }
 @keyframes floating {
     0% {

@@ -22,8 +22,17 @@
     padding: 1rem;
     background-color: rgba(22, 27, 34, 1);
 }
+.modal .bottom{
+    width: 100%;
+}
 .modal button{
     color: var(--color-header-hover);
+}
+#preview_bottom{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .modal h2{
     font-size: 2rem;

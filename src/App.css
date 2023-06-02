@@ -3,6 +3,8 @@ body{
     overflow-x: hidden;
 }
 main{
+    margin-top: 7rem;
+    margin-bottom: 3rem;
     padding: 0 4rem;
     min-height: 55vh;
     transition: 0.5s ease-in-out;

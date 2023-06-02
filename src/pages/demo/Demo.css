@@ -1,9 +1,6 @@
 #demo_form *{
     transition: 0.5s ease-in-out;
 }
-.demo .container h3{
-    text-align: center;
-}
 #demo_form{
     color: rgba(255,255,255,0.7);
     background-color: rgba(78, 78, 78,.3);
@@ -13,7 +10,7 @@
     text-align: center;
     width: 70%;
     place-items: center;
-    margin: 2rem 0;
+    margin-top: 2rem;
 }
 input[type="file"][name="image"] {
     display: none;
@@ -48,6 +45,8 @@ input[type="file"][name="image"] {
 }
 #upload .label{
     text-align: center;
+    text-transform: capitalize;
+    font-size: 1rem;
 }
 #demo_form .para:last-child{
     padding: 0;
@@ -63,13 +62,20 @@ input[type="file"][name="image"] {
 .file_input_area{
     display: block;
 }
-.preview_image_area{
+
+.preview_image_after, .preview_image_before{
     padding: 0;
     margin: 0;
-    height: 52px;
-    width: 52px;
-    margin-bottom: 8px;
-    animation: none;
+    margin-bottom: 12px;
+}
+.preview_image_before{
+    height: 50px;
+    width: 50px;    
+}
+.preview_image_after{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;  
 }
 
 .form_element button:disabled{
@@ -91,6 +97,9 @@ input[type="file"][name="image"] {
     .preview_image_area{
         height: 50px;
         width: 50px;
+    }
+    #demo_form .heading{
+     font-size: 1.2rem;   
     }
 }
 @media only screen and (max-width: 480px){

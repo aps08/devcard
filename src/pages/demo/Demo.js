@@ -57,27 +57,42 @@ const INITIAL = {
   name: "",
   company: "",
   experience: 0,
-  role: ""
+  role: "",
+  image: false
 };
 function Demo() {
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
   const [submitted, setsubmitted] = useState(false);
+  const [demoimage, setdemoimage] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const [file, setfile] = useState(null);
   const [showmodal, setshowmodal] = useState(false);
 
   const mutate = (Preview) => {
+    seterror(false);
+    setFormdata({ ...Formdata, image: true });
+    setdemoimage(Preview);
     document.body.style.overflow = "unset";
     setshowmodal(false);
-    setFormdata({ ...Formdata, image: Preview });
+    setvalidate({ ...validate, image: true });
+  };
+
+  const closemodal = () => {
+    setdemoimage(false);
+    document.body.style.overflow = "unset";
+    setshowmodal(false);
+    setvalidate({ ...validate, image: false });
   };
 
   const imagechangehandler = (event) => {
-    document.body.style.overflow = "hidden";
-    setfile(event.target.files[0]);
-    setshowmodal(true);
+    seterror(false);
+    if (event.target.files.length !== 0) {
+      document.body.style.overflow = "hidden";
+      setfile(event.target.files[0]);
+      setshowmodal(true);
+    }
   };
 
   const changehandler = (event) => {
@@ -100,9 +115,14 @@ function Demo() {
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
-          const inputfield = document.querySelector(`input[name=${key}]`);
-          inputfield.focus();
-          inputfield.scrollIntoView({ block: "center" });
+          if (key === "image") {
+            const err = key.charAt(0).toUpperCase() + key.slice(1) + " field is missing.";
+            seterror(err);
+          } else {
+            const inputfield = document.querySelector(`input[name=${key}]`);
+            inputfield.focus();
+            inputfield.scrollIntoView({ block: "center" });
+          }
           break;
         }
       }
@@ -145,20 +165,18 @@ function Demo() {
     <>
       {showmodal &&
         ReactDOM.createPortal(
-          <Preview
-            Select={showmodal}
-            mutator={mutate}
-            setSelect={setshowmodal}
-            file={file}
-            close={() => setshowmodal(false)}
-          />,
+          <Preview Select={showmodal} mutator={mutate} setSelect={setshowmodal} file={file} close={closemodal} />,
           MODAL_ELEMENT
         )}
       <section className="center">
-        <form id="demo_form" onSubmit={submithandler}>
-          <h3 className="heading">Filling out the exciting form below and create your devcard!</h3>
-          {error && <p className="error">{error}</p>}
-          {message && <p className="message">{message}</p>}
+        <form id="demo_form" className="justify-center" onSubmit={submithandler}>
+          <h3 className="heading" style={{ marginBottom: "2rem" }}>
+            Filling out the exciting form below and create your devcard!
+          </h3>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {error && <p className="error">{error}</p>}
+            {message && <p className="message">{message}</p>}
+          </div>
           {ELEMENTS.map((element, index) => (
             <Input
               key={index}
@@ -175,11 +193,11 @@ function Demo() {
             <label name="upload" id="upload" htmlFor="img">
               <div className="file_input_area">
                 <img
-                  className="preview_image_area"
-                  src={Formdata.image ? Formdata.image : BrowseLogo}
+                  className={Formdata.image ? "preview_image_after" : "preview_image_before"}
+                  src={demoimage ? demoimage : BrowseLogo}
                   alt="browselogo"
                 />
-                <p className="label">Browse files</p>
+                <p className="label">{Formdata.image ? <>Change image</> : <>Browse files</>}</p>
               </div>
             </label>
           </div>
