@@ -64,19 +64,20 @@ function Demo() {
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
   const [submitted, setsubmitted] = useState(false);
-  const [demoimage, setdemoimage] = useState(false);
+  const [demoimage, setdemoimage] = useState(null);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
   const [file, setfile] = useState(null);
   const [showmodal, setshowmodal] = useState(false);
 
-  const mutate = (Preview) => {
+  const mutate = (url) => {
     seterror(false);
+    // Remove preview and use URL as it contains the cdn url
+    setdemoimage(url);
     setFormdata({ ...Formdata, image: true });
-    setdemoimage(Preview);
+    setvalidate({ ...validate, image: true });
     document.body.style.overflow = "unset";
     setshowmodal(false);
-    setvalidate({ ...validate, image: true });
   };
 
   const closemodal = () => {

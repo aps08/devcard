@@ -6,7 +6,6 @@ import "./Preview.css";
 
 function Preview(props) {
   const [error, seterror] = useState(false);
-  const [message, setmessage] = useState(false);
   const [Image, SetImage] = useState(null);
   const [Preview, setPreview] = useState(null);
   const [submitted, setsubmitted] = useState(false);
@@ -47,7 +46,7 @@ function Preview(props) {
         const response = await fetch("/public/demo", requestOptions);
         const data = await response.json();
         if (response.ok) {
-          setmessage(data.message);
+          props.mutator(data.message);
         } else {
           seterror(data.message);
         }
@@ -58,7 +57,6 @@ function Preview(props) {
     };
     if (submitted) {
       callingapi();
-      props.mutator(Preview, message);
     }
   }, [submitted]);
 
