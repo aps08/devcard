@@ -72,7 +72,6 @@ function Demo() {
 
   const mutate = (url) => {
     seterror(false);
-    // Remove preview and use URL as it contains the cdn url
     setdemoimage(url);
     setFormdata({ ...Formdata, image: true });
     setvalidate({ ...validate, image: true });
