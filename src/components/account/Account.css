@@ -5,11 +5,11 @@
 .account form button{
     margin-top: 1rem;
 }
-.account form h2{
-    margin-bottom: 1rem;
-}
 .mb-1{
     margin-bottom: 1rem;
+}
+.mb-2{
+    margin-bottom: 2rem;
 }
 .privacy{
     display: block;

@@ -47,7 +47,6 @@ function Home() {
   const [showsignup, setshowsignup] = useState(false);
 
   const showmodalhandler = (type) => {
-    document.body.style.overflow = "hidden";
     if (type === "signin") {
       setshowsignin(true);
     }
@@ -64,7 +63,6 @@ function Home() {
   const closemodal = () => {
     setshowsignin(false);
     setshowsignup(false);
-    document.body.style.overflow = "unset";
   };
 
   return (

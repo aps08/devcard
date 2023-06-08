@@ -89,9 +89,14 @@ function Demo() {
   const imagechangehandler = (event) => {
     seterror(false);
     if (event.target.files.length !== 0) {
-      document.body.style.overflow = "hidden";
-      setfile(event.target.files[0]);
-      setshowmodal(true);
+      const file = event.target.files[0];
+      if (file.size / (1024 * 1024) > 5) {
+        seterror("File size exceeds the limit of 5MB");
+      } else {
+        document.body.style.overflow = "hidden";
+        setfile(event.target.files[0]);
+        setshowmodal(true);
+      }
     }
   };
 

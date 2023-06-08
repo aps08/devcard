@@ -7,19 +7,11 @@ const MODAL_ELEMENT = document.getElementById("root-modal");
 
 function Card(props) {
   const [show, setshow] = useState(false);
-  const openemodal = () => {
-    setshow(true);
-    document.body.style.overflow = "hidden";
-  };
-  const closemodal = () => {
-    setshow(false);
-    document.body.style.overflow = "unset";
-  };
   return (
     <>
       {show &&
         ReactDOM.createPortal(
-          <CardModal heading={props.label} description={props.description} close={closemodal} />,
+          <CardModal heading={props.label} description={props.description} close={() => setshow(false)} />,
           MODAL_ELEMENT
         )}
       <div className="card">
@@ -36,7 +28,7 @@ function Card(props) {
               </li>
             ))}
           </ul>
-          <button onClick={openemodal}>Read more</button>
+          <button onClick={() => setshow(true)}>Read more</button>
         </div>
       </div>
     </>

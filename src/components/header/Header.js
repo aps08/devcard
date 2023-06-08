@@ -15,6 +15,7 @@ function Header() {
   const [showsignin, setshowsignin] = useState(false);
   const [showsignup, setshowsignup] = useState(false);
   const { IsLoggedin } = useContext(AuthContext);
+  const [showmenu, setshowmenu] = useState(false);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
 
@@ -80,7 +81,7 @@ function Header() {
         }
       })
       .catch((error) => {
-        console.err(error);
+        console.log(error);
       });
   };
 
@@ -98,11 +99,9 @@ function Header() {
             <NavLink className={"list-item"} to="/home" onClick={navigationhandler}>
               <li>Home</li>
             </NavLink>
-            {!IsLoggedin && (
-              <NavLink className={"list-item"} to="/demo" onClick={navigationhandler}>
-                <li>Demo</li>
-              </NavLink>
-            )}
+            <NavLink className={"list-item"} to="/demo" onClick={navigationhandler}>
+              <li>Demo</li>
+            </NavLink>
             <NavLink className={"list-item"} to="/about" onClick={navigationhandler}>
               <li>About</li>
             </NavLink>
@@ -114,7 +113,8 @@ function Header() {
             {IsLoggedin && (
               <>
                 <NavLink to="/profile" className={"list-item"} onClick={navigationhandler}>
-                  <li>Profile</li>
+                  <li onClick={() => setshowmenu(!showmenu)}>Profile</li>
+                  {showmenu && <div>AA</div>}
                 </NavLink>
                 <li className="list-item">
                   <button className="sign_out_one" onClick={signouthandler}>

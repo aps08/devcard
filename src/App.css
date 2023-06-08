@@ -51,6 +51,7 @@ button:hover:enabled{
 @media only screen and (max-width: 768px){
     main{
         padding: 1rem;
+        margin-top: 4rem;
     }
     
 }

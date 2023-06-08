@@ -1,71 +1,63 @@
+import { useState } from "react";
 import Input from "../input/Input";
+import ReactDOM from "react-dom";
 import "./Account.css";
-// [add credits, show credits history][You have 0 devcard credits.]
-// Contribute
-// [switch to contribution mode] [learn, build and earn credits]
+import Confirm from "../confirm/Confirm";
+
+const MODAL_ELEMENT = document.getElementById("root-modal");
+
 function Account() {
+  const [confirm, setconfirm] = useState(false);
   const email = "8anoopsinngh@gmail.com";
+
+  const checkconfirmation = (yesorno) => {
+    console.log(yesorno);
+  };
+
   return (
-    <div className="account">
-      <h2 className="mb-1">Email settings</h2>
-      <form id="change_email">
-        <Input
-          label="Email"
-          className="occupy_two"
-          type="email"
-          setvalue={email}
-          change={null}
-          hints={null}
-          valid={true}
-        />
-        <button type="submit">change email</button>
-      </form>
-      <div className="single_line"></div>
-      <h2 className="mb-1">Credits</h2>
-      <p style={{ marginLeft: ".4rem" }}>You have 0 devcard credits.</p>
-      <div className="privacy_item form_element">
-        <button>Buy credits</button>
-      </div>
-      <div className="single_line"></div>
-      <form id="change_password">
-        <h2 className="mb-1">Security settings</h2>
-        <div className="user_name">
+    <>
+      {confirm &&
+        ReactDOM.createPortal(<Confirm close={() => setconfirm(false)} check={checkconfirmation} />, MODAL_ELEMENT)}
+      <div className="account">
+        <h2 className="mb-2">Email settings</h2>
+        <form id="change_email">
           <Input
-            label="Old passsword"
+            label="Email"
+            className="occupy_two"
+            type="email"
+            setvalue={email}
             change={null}
             hints={null}
-            type="password"
-            placeholder="enter old password"
             valid={true}
           />
-          <Input
-            label="new password"
-            change={null}
-            hints={null}
-            type="password"
-            placeholder="enter new password"
-            valid={true}
-          />
-        </div>
-        <button type="submit">Change password</button>
-      </form>
-      <div className="single_line"></div>
-      <h2 className="mb-1">Privacy settings</h2>
-      <div className="privacy">
+          <button type="submit">change email</button>
+        </form>
+        <div className="single_line"></div>
+        <h2 className="mb-2">Credits</h2>
+        <p style={{ marginLeft: ".4rem" }}>You have 0 devcard credits.</p>
         <div className="privacy_item form_element">
-          <button>Delete account</button>
-          <p className="para">Your account will be deleted instantly, and you won&apos;t be able to recover it.</p>
+          <button>Buy credits</button>
         </div>
-        <div className="privacy_item form_element">
-          <button>Export data</button>
-          <p className="para">Your data will be delivered to you registered email.</p>
-        </div>
-        <div className="privacy_item form_element">
-          <button>Contributor mode</button>
-          <p className="para">Become a contributor. Learn, build and earn credits</p>
+        <div className="single_line"></div>
+        <h2 className="mb-2">Security and Privacy settings</h2>
+        <div className="privacy">
+          <div className="privacy_item form_element">
+            <button>Update password</button>
+            <p className="para">An email will be sent to your registered email with instructions to change password.</p>
+          </div>
+          <div className="privacy_item form_element">
+            <button>Export account data</button>
+            <p className="para">
+              Export all information and profile metadata. Exports will be available within an hour.
+            </p>
+          </div>
+          <div className="privacy_item form_element">
+            <button onClick={() => setconfirm(true)}>Delete account</button>
+            <p className="para">Once you delete your account, there is no going back. Please be certain.</p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

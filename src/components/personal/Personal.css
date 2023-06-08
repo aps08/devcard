@@ -16,8 +16,8 @@
 }
 .single_line{
     margin: 1rem 0;
-    height: 2px;
-    background-color: rgb(87, 84, 84);
+    height: 1px;
+    background-color: rgb(63, 63, 63);
     grid-column: 1 / span 3;
 }
 .occupy_two{
