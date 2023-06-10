@@ -95,7 +95,7 @@ function ChangePassword() {
       {showenteremail &&
         ReactDOM.createPortal(
           <ModalWrapper close={closemodal}>
-            <div className="justify-center" id="modalsign">
+            <div className="justify-center">
               <div className="main_div">
                 <div className="heading left">Enter registered email</div>
                 {message && <p className="message">{message}</p>}

@@ -97,7 +97,7 @@ function Signup(props) {
 
   return (
     <ModalWrapper close={props.close}>
-      <div className="justify-center" id="modalsign">
+      <div className="justify-center">
         <div className="main_div">
           <div className="heading left">Create account</div>
           {error && <p className="error">{error}</p>}

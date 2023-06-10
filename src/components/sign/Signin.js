@@ -5,6 +5,7 @@ import ReactLoading from "react-loading";
 import ModalWrapper from "../../helper/Modalwrapper";
 import { setLocalStorage } from "../../store/localstorageoperations";
 import "./Sign.css";
+import useFetch from "../../hooks/useFetch";
 
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -77,6 +78,7 @@ function Signin(props) {
     };
     const callingapi = async () => {
       try {
+        const { message, error } = useFetch("/auth/login", "POST", Formdata);
         const response = await fetch("/auth/login", requestOptions);
         const data = await response.json();
         if (response.ok) {
@@ -101,7 +103,7 @@ function Signin(props) {
 
   return (
     <ModalWrapper close={props.close}>
-      <div className="justify-center" id="modalsign">
+      <div className="justify-center">
         <div className="main_div">
           <div className="heading left">Get started</div>
           {error && <p className="error">{error}</p>}

@@ -79,7 +79,7 @@ function Forgotpasswordmodal(props) {
 
   return (
     <ModalWrapper close={props.close}>
-      <div className="justify-center" id="modalsign">
+      <div className="justify-center">
         <div className="main_div">
           <div className="heading left">Reset password</div>
           {message && <p className="message">{message}</p>}

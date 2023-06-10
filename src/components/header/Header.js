@@ -35,17 +35,6 @@ function Header() {
   const closemodal = () => {
     setshowsignin(false);
     setshowsignup(false);
-    document.body.style.overflow = "unset";
-  };
-
-  const showhandler = (type) => {
-    document.body.style.overflow = "hidden";
-    if (type === "signin") {
-      setshowsignin(true);
-    }
-    if (type === "signup") {
-      setshowsignup(true);
-    }
   };
 
   const navigationhandler = () => {
@@ -99,44 +88,34 @@ function Header() {
             <NavLink className={"list-item"} to="/home" onClick={navigationhandler}>
               <li>Home</li>
             </NavLink>
-            <NavLink className={"list-item"} to="/demo" onClick={navigationhandler}>
-              <li>Demo</li>
-            </NavLink>
+            {!IsLoggedin && (
+              <NavLink className={"list-item"} to="/demo" onClick={navigationhandler}>
+                <li>Demo</li>
+              </NavLink>
+            )}
             <NavLink className={"list-item"} to="/about" onClick={navigationhandler}>
               <li>About</li>
             </NavLink>
             {!IsLoggedin && (
               <li className="list-item">
-                <button onClick={() => showhandler("signup")}>Sign up for free</button>
+                <button onClick={() => setshowsignup(true)}>Sign up for free</button>
               </li>
             )}
             {IsLoggedin && (
-              <>
-                <NavLink to="/profile" className={"list-item"} onClick={navigationhandler}>
-                  <li onClick={() => setshowmenu(!showmenu)}>Profile</li>
-                  {showmenu && <div>AA</div>}
-                </NavLink>
-                <li className="list-item">
-                  <button className="sign_out_one" onClick={signouthandler}>
-                    Sign out
-                  </button>
-                </li>
-              </>
+              <NavLink to="/profile" className={"list-item"} onClick={navigationhandler}>
+                <li onClick={() => setshowmenu(!showmenu)}>Profile</li>
+                {showmenu && <div>AA</div>}
+              </NavLink>
             )}
           </ul>
           {IsLoggedin && (
-            <>
-              <NavLink onClick={navigationhandler} to="/none">
-                <button>{creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}</button>
-              </NavLink>
-              <li className="list-item">
-                <button className="sign_out_two" onClick={signouthandler}>
-                  Sign out
-                </button>
-              </li>
-            </>
+            <NavLink onClick={navigationhandler} to="/none">
+              <button style={{ marginLeft: "1rem" }}>
+                {creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}
+              </button>
+            </NavLink>
           )}
-          {!IsLoggedin && <button onClick={() => showhandler("signin")}>Sign in</button>}
+          {!IsLoggedin && <button onClick={() => setshowsignin(true)}>Sign in</button>}
           <div
             id="menu"
             className="hamburger"
