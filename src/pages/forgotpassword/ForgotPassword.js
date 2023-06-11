@@ -4,7 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Input from "../../components/input/Input";
 import Forgotpasswordmodal from "./forgotpasswordmodal";
 import ReactLoading from "react-loading";
-import ModalWrapper from "../../helper/Modalwrapper";
+import ModalWrapper from "../../utils/Modalwrapper";
+import Callendpoint from "../../utils/Callendpoint";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
 
@@ -45,48 +46,25 @@ function ChangePassword() {
     }
   };
 
-  const submithandler = (event) => {
+  const submithandler = async (event) => {
     event.preventDefault();
+    setmessage(false);
+    seterror(false);
     if (valid) {
       setsubmitted(true);
+      const { data, statuscode } = await Callendpoint("post", "/public/forgot_password", null, Formdata);
+      if (statuscode === 200) {
+        setmessage(data.message);
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
     } else {
       const inputfield = document.querySelector(`input[name="email"]`);
       inputfield.focus();
       inputfield.scrollIntoView({ block: "center" });
     }
   };
-
-  useEffect(() => {
-    const callingapi = async () => {
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(Formdata),
-        mode: "cors"
-      };
-      try {
-        const response = await fetch("/public/forgot_password", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          setmessage(data.message);
-        } else {
-          seterror(data.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-      setsubmitted(false);
-    };
-
-    if (submitted) {
-      setmessage(false);
-      seterror(false);
-      callingapi(Formdata);
-    }
-  }, [submitted]);
 
   return (
     <>

@@ -13,8 +13,8 @@ import Account from "./components/account/Account";
 import Purchasehistory from "./components/purchasehistory/Purchasehistory";
 import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import Verify from "./pages/verify/Verify";
-import PrivateRoute from "./helper/PrivateRouter";
-import PublicRoute from "./helper/PublicRoute";
+import PrivateRoute from "./utils/PrivateRouter";
+import PublicRoute from "./utils/PublicRoute";
 import { checkLocalStorageKeys } from "./store/localstorageoperations";
 import "./App.css";
 

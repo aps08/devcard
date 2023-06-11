@@ -10,7 +10,7 @@
     background-color: rgba(22, 27, 34, 0.8);
     box-shadow: rgb(33, 34, 36) 0px 10px 10px -10px;
     transition: all .5s ease-in-out;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
 }
 .avatar img{
     height: 45px;
@@ -84,12 +84,6 @@
     color: var(--color-white);
 }
 @media only screen and (max-width: 1024px){
-    .sign_out_one{
-        display: block;
-    }
-    .sign_out_two{
-        display: none;
-    }
     #menu{
         display: block;
         transition: all .5s ease-in-out;
@@ -99,10 +93,12 @@
         transition: all .5s ease-in-out;
     }
     .nav-list{
+        z-index: 1;
         display: block;
         position: absolute;
         width: 100%;
         top: 90px;
+        backdrop-filter: blur(4px);
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
         background-color: rgba(22, 27, 34, 0.8);
         transition: all .5s ease-in-out;

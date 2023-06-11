@@ -117,6 +117,8 @@ function Demo() {
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);
+      // Callendpoint here
+      setsubmitted(false);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {

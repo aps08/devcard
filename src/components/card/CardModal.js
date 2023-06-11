@@ -1,4 +1,4 @@
-import ModalWrapper from "../../helper/Modalwrapper";
+import ModalWrapper from "../../utils/Modalwrapper";
 function CardModal(props) {
   return (
     <ModalWrapper close={props.close}>

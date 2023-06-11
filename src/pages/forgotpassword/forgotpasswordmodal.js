@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input from "../../components/input/Input";
 import ReactLoading from "react-loading";
-import ModalWrapper from "../../helper/Modalwrapper";
+import ModalWrapper from "../../utils/Modalwrapper";
+import Callendpoint from "../../utils/Callendpoint";
 import "./ForgotPassword.css";
 
 const INITIAL = {
@@ -10,30 +11,39 @@ const INITIAL = {
 };
 
 function Forgotpasswordmodal(props) {
-  const [Formdata, setFormdata] = useState(INITIAL);
+  const [Formdata, setFormdata] = useState({ ...INITIAL, token: props.token });
   const [valid, setvalid] = useState(INITIAL);
   const [submitted, setsubmitted] = useState(false);
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
 
   const changedhandler = (event) => {
-    const isMatched = event.target.value === Formdata.password;
-    setvalid({
-      ...valid,
-      confirm: isMatched
-    });
-    if (isMatched) {
-      setFormdata({ ...Formdata, confirm: event.target.value });
+    const { name, value } = event.target;
+    if (name === "password" && /^.{8,20}$/.test(value)) {
+      setvalid({ ...valid, password: true });
+      setFormdata({ ...Formdata, password: value });
+    }
+    if (name === "confirm" && /^.{8,20}$/.test(value) && value === Formdata.password) {
+      setvalid({ ...valid, confirm: true });
+      setFormdata({ ...Formdata, confirm: value });
     }
   };
 
-  const submithandler = (event) => {
+  const submithandler = async (event) => {
     event.preventDefault();
     const validation = valid.password && valid.confirm;
     if (validation) {
+      console.log(Formdata);
       delete Formdata.confirm;
-      setFormdata({ ...Formdata, token: props.token });
       setsubmitted(true);
+      console.log(Formdata);
+      const { data, statuscode } = await Callendpoint("put", "/public/forgot_password", null, Formdata);
+      if (statuscode === 200) {
+        setmessage(data.message);
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
     } else {
       for (const key in valid) {
         if (valid[key] !== true) {
@@ -45,37 +55,6 @@ function Forgotpasswordmodal(props) {
       }
     }
   };
-
-  useEffect(() => {
-    const callingapi = async () => {
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(Formdata),
-        mode: "cors"
-      };
-      try {
-        const response = await fetch("/public/forgot_password", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          setmessage(data.message);
-        } else {
-          seterror(data.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-      setsubmitted(false);
-    };
-    if (submitted) {
-      setmessage(false);
-      seterror(false);
-      callingapi();
-    }
-  }, [submitted]);
 
   return (
     <ModalWrapper close={props.close}>

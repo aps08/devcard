@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ModalWrapper from "../../helper/Modalwrapper";
+import ModalWrapper from "../../utils/Modalwrapper";
 import ReactLoading from "react-loading";
 import Avatar from "react-avatar-edit";
 import "./Preview.css";

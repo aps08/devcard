@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Input from "../input/Input";
 import ReactLoading from "react-loading";
-import ModalWrapper from "../../helper/Modalwrapper";
-import { setLocalStorage } from "../../store/localstorageoperations";
+import ModalWrapper from "../../utils/Modalwrapper";
+import Callendpoint from "../../utils/Callendpoint";
+import { setlocaldata } from "../../store/localstorage";
 import "./Sign.css";
-import useFetch from "../../hooks/useFetch";
 
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -34,7 +34,6 @@ const HINTS = {
 
 function Signin(props) {
   const [error, seterror] = useState(false);
-  const [message, setmessage] = useState(false);
   const [submitted, setsubmitted] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [validate, setvalidate] = useState(INITIAL);
@@ -49,11 +48,21 @@ function Signin(props) {
     }
   };
 
-  const submithandler = (event) => {
+  const submithandler = async (event) => {
     event.preventDefault();
+    seterror(false);
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);
+      const { data, statuscode } = await Callendpoint("post", "/auth/login", null, Formdata);
+      if (statuscode === 200) {
+        setlocaldata("X-ACCESS-TOKEN", data["X-ACCESS-TOKEN"]);
+        setlocaldata("X-USER", data["X-USER"]);
+        window.location.reload();
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -66,48 +75,12 @@ function Signin(props) {
     }
   };
 
-  useEffect(() => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(Formdata),
-      mode: "cors"
-    };
-    const callingapi = async () => {
-      try {
-        const { message, error } = useFetch("/auth/login", "POST", Formdata);
-        const response = await fetch("/auth/login", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          setmessage(data.message);
-          setLocalStorage(data);
-          window.location.reload();
-        } else {
-          seterror(data.message);
-        }
-        setsubmitted(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (submitted) {
-      seterror(false);
-      setmessage(false);
-      callingapi();
-    }
-  }, [submitted]);
-
   return (
     <ModalWrapper close={props.close}>
       <div className="justify-center">
         <div className="main_div">
           <div className="heading left">Get started</div>
           {error && <p className="error">{error}</p>}
-          {message && <p className="message">{message}</p>}
           <form id="signin" onSubmit={submithandler} name="signin">
             {ELEMENTS.map((element, index) => (
               <Input

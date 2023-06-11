@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Input from "../input/Input";
 import ReactLoading from "react-loading";
-import ModalWrapper from "../../helper/Modalwrapper";
+import ModalWrapper from "../../utils/Modalwrapper";
+import Callendpoint from "../../utils/Callendpoint";
 import "./Sign.css";
 
 const CHECKS = {
@@ -46,11 +47,20 @@ function Signup(props) {
     }
   };
 
-  const submithandler = (event) => {
+  const submithandler = async (event) => {
     event.preventDefault();
+    seterror(false);
+    setmessage(false);
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);
+      const { data, statuscode } = await Callendpoint("post", "/auth/register", null, Formdata);
+      if (statuscode === 200) {
+        setmessage(data.message);
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -62,38 +72,6 @@ function Signup(props) {
       }
     }
   };
-
-  useEffect(() => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(Formdata),
-      mode: "cors"
-    };
-    const callingapi = async () => {
-      try {
-        const response = await fetch("/auth/register", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          setmessage(data.message);
-        } else {
-          seterror(data.message);
-        }
-        setsubmitted(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (submitted) {
-      seterror(false);
-      setmessage(false);
-      callingapi();
-    }
-  }, [submitted]);
 
   return (
     <ModalWrapper close={props.close}>
