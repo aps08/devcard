@@ -2,40 +2,17 @@
     grid-template-columns: 1fr;
 }
 .contact_form{
-    padding: .5rem 1rem;
+    padding: 1rem;
     padding-right: 1rem;
     background-color: rgba(78, 78, 78,.3);
     border-radius: .5rem;
-    margin-top: 1rem;
 }
-#contactform{
-    margin-top: 0;
-}
-.contact_form .form_element{
-    width: 100%;
-    margin: 1rem 0;
-}
-.about_step .para{
+.steps .para{
     padding: 0;
-}
-#form_inline_image{
-    margin: 1rem;
-    width: 100%;
-    height: auto;
-    border-radius: .5rem;
-}
-@media only screen and (max-width: 1024px){
-    #form_inline_image{
-        display: none;
-    }
 }
 
 @media only screen and (max-width: 768px){
     .contact_form{
-        grid-template-columns: 1fr;
-        margin-top: 0;
-    }
-    .contact_form .form_element{
         width: 100%;
     }
 }

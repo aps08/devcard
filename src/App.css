@@ -3,26 +3,25 @@ body{
     overflow-x: hidden;
 }
 main{
-    margin-top: 7rem;
-    margin-bottom: 3rem;
-    padding: 0 4rem;
+    background-color: #0d1117;
+    padding: 7rem 4rem 2rem;
     min-height: 55vh;
     transition: 0.5s ease-in-out;
+}
+.backdrop{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    backdrop-filter: blur(8px);
+    background-color: rgba(22, 21, 21, .8);
 }
 .para{
     padding: 10px 0;
     font-size: 1.2rem;
     color: var(--color-header-hover);
     opacity: .7;
-}
-.center{
-    text-align: center;
-}
-.left{
-    text-align: left;
-}
-.right{
-    text-align: right;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 button{
     padding: 0 10px;
@@ -36,10 +35,34 @@ button{
     border-color: none;
     cursor: pointer;
 }
-button:disabled{
-    opacity: .7;
+
+#modalconfirm{
+    color: rgba(255,255,255,0.7);
+    display: inline-block;
+    text-align: center;
+    width: 320px;
+    place-items: center;
+    margin-top: 1rem;
+    text-align: left;
+    transition: .5s ease-in-out;
 }
 
+.center{
+    text-align: center;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+.mt-2{
+    margin-top: 2rem;
+}
+button:disabled{
+    opacity: .7;
+    cursor: not-allowed;
+}
 button:hover:enabled{
     background-color: var(--color-btn-hover-bg);
 }

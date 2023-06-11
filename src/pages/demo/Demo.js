@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactDOM from "react-dom";
 import ReactLoading from "react-loading";
 import Preview from "../../components/preview/Preview";
 import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
+import Callendpoint from "../../utils/Callendpoint";
 import "./Demo.css";
 
 const MODAL_ELEMENT = document.getElementById("root-modal");
@@ -112,12 +113,17 @@ function Demo() {
     }
   };
 
-  const submithandler = (event) => {
+  const submithandler = async (event) => {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);
-      // Callendpoint here
+      const { data, statuscode } = await Callendpoint("post", "/public/demo", null, Formdata);
+      if (statuscode === 200) {
+        setmessage(data.message);
+      } else {
+        seterror(data.message);
+      }
       setsubmitted(false);
     } else {
       for (const key in validate) {
@@ -136,38 +142,6 @@ function Demo() {
     }
   };
 
-  useEffect(() => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(Formdata),
-      mode: "cors"
-    };
-    const callingapi = async () => {
-      try {
-        const response = await fetch("/public/demo", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          setmessage(data.message);
-        } else {
-          seterror(data.message);
-        }
-        setsubmitted(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (submitted) {
-      seterror(false);
-      setmessage(false);
-      callingapi();
-    }
-  }, [submitted]);
-
   return (
     <>
       {showmodal &&
@@ -177,9 +151,7 @@ function Demo() {
         )}
       <section className="center">
         <form id="demo_form" className="justify-center" onSubmit={submithandler}>
-          <h3 className="heading" style={{ marginBottom: "2rem" }}>
-            Filling out the exciting form below and create your devcard!
-          </h3>
+          <p className="para">Filling out the exciting form below and create your devcard!</p>
           <div style={{ display: "flex", justifyContent: "center" }}>
             {error && <p className="error">{error}</p>}
             {message && <p className="message">{message}</p>}

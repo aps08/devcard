@@ -7,10 +7,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5rem;
-    background-color: rgba(22, 27, 34, 0.8);
-    box-shadow: rgb(33, 34, 36) 0px 10px 10px -10px;
+    background-color: rgba(22, 27, 34,1);
     transition: all .5s ease-in-out;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
 }
 .avatar img{
     height: 45px;
@@ -74,12 +73,7 @@
     margin: 8px 0;
     background-color: var(--color-header-hover);
 }
-.sign_out_one{
-    display: none;
-}
-.sign_out_two{
-    display: block;
-}
+
 .list-item:hover{
     color: var(--color-white);
 }
@@ -98,9 +92,8 @@
         position: absolute;
         width: 100%;
         top: 90px;
-        backdrop-filter: blur(4px);
         box-shadow: rgb(30, 34, 40) 0px 10px 10px -10px;
-        background-color: rgba(22, 27, 34, 0.8);
+        background-color: rgba(22, 27, 34, 1);
         transition: all .5s ease-in-out;
     }
     .list-item{

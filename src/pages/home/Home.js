@@ -88,14 +88,14 @@ function Home() {
         </div>
         <div>
           <div className="right">
-            <img className="showcase" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
+            <img className="image_view" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
           </div>
         </div>
       </section>
-      <section className="section">
+      <section className="section mt-2">
         <div>
           <div className="left">
-            <img className="showcase" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
+            <img className="image_view" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
           </div>
         </div>
         <div className="second">
@@ -118,21 +118,19 @@ function Home() {
           <button onClick={() => showmodalhandler("signup")}>Sign up for free</button>
         </div>
       </section>
-      <div className="mt-2">
-        <h3 className="heading center line">What we offer ?</h3>
-        <section className="section">
-          {CARDS.map((card) => (
-            <Card
-              key={card.label}
-              label={card.label}
-              para={card.para}
-              list={card.list}
-              buttonlabel={card.buttonlabel}
-              description={card.description}
-            />
-          ))}
-        </section>
-      </div>
+      <h3 className="heading center mt-2">What we offer ?</h3>
+      <section className="section">
+        {CARDS.map((card) => (
+          <Card
+            key={card.label}
+            label={card.label}
+            para={card.para}
+            list={card.list}
+            buttonlabel={card.buttonlabel}
+            description={card.description}
+          />
+        ))}
+      </section>
     </>
   );
 }

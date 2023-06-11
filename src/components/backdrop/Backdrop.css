@@ -1,8 +1,0 @@
-.backdrop{
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2;
-    backdrop-filter: blur(8px);
-    background-color: rgba(22, 21, 21, .8);
-}

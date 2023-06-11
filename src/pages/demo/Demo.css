@@ -1,35 +1,13 @@
-#demo_form *{
-    transition: 0.5s ease-in-out;
-}
 #demo_form{
+    position: relative;
     color: rgba(255,255,255,0.7);
-    background-color: rgba(78, 78, 78,.3);
+    background-color: rgba(22, 27, 34,1);
     padding: 1rem 2rem;
     border-radius: .5rem;
     display: inline-block;
     text-align: center;
-    width: 70%;
+    width: 60%;
     place-items: center;
-    margin-top: 2rem;
-}
-input[type="file"][name="image"] {
-    display: none;
-  }
-#demo_form .form_element{
-    width: 100%;
-    margin: 1rem 0;
-}
-.form_element select{
-    background-color: var(--color-bg);
-    opacity: .6;
-    height: 40px;
-    border: none;
-    border: 2px solid rgb(58, 57, 57);
-    border-radius: 6px;
-    transition: .5s ease-in-out;
-    color: whitesmoke;
-    font-size: 1rem;
-    padding-left: .8rem;
 }
 #upload{
     display: inline-block;
@@ -38,31 +16,22 @@ input[type="file"][name="image"] {
     text-align: center;
     border-radius: .5rem;
     border: 2px dashed rgb(58, 57, 57);
-    background-color: var(--color-bg);
+    background-color: #0d1117;
     opacity: .6;
     cursor: pointer;
     margin-left: 0;
 }
+input[type="file"][name="image"] {
+    display: none;
+  }
 #upload .label{
     text-align: center;
     text-transform: capitalize;
     font-size: 1rem;
 }
-#demo_form .para:last-child{
-    padding: 0;
-    font-size: unset;
-}
-.form_element select:focus{
-    border: 2px solid rgb(176, 175, 175);
-    transition: .5s ease-in-out;
-}
-.form_element select option,.form_element select option:disabled{
-    color: whitesmoke;
-}
 .file_input_area{
     display: block;
 }
-
 .preview_image_after, .preview_image_before{
     padding: 0;
     margin: 0;
@@ -78,28 +47,14 @@ input[type="file"][name="image"] {
     border-radius: 50%;  
 }
 
-.form_element button:disabled{
-    cursor: not-allowed;
-}
 @media only screen and (max-width: 1024px){
     #demo_form{
-        width: 80%;
+        width: 70%;
     }
 }
 @media only screen and (max-width: 768px){
     #demo_form{
-        width: 90%;
-    }
-    #demo_form .form_element{
-        width: 100%;
-        margin: 1rem 0;
-    }
-    .preview_image_area{
-        height: 50px;
-        width: 50px;
-    }
-    #demo_form .heading{
-     font-size: 1.2rem;   
+        width: 80%;
     }
 }
 @media only screen and (max-width: 480px){

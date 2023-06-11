@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import Backdrop from "../components/backdrop/Backdrop";
+import Backdrop from "./Backdrop";
 function ModalWrapper(props) {
   return (
     <div className="modal">

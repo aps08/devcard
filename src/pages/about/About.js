@@ -1,7 +1,8 @@
 import Input from "../../components/input/Input";
-import "./About.css";
 import ReactLoading from "react-loading";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Callendpoint from "../../utils/Callendpoint";
+import "./About.css";
 
 const ELEMENTS = [
   { label: "NAME", placeholder: "enter full name" },
@@ -38,12 +39,17 @@ function About() {
       setvalidate({ ...validate, [name]: false });
     }
   };
-  const submithandler = (event) => {
+  const submithandler = async (event) => {
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);
-      // Callendpoint here
+      const { data, statuscode } = await Callendpoint("post", "/public/feeback_contact", null, Formdata);
+      if (statuscode === 200) {
+        setmessage(data.message);
+      } else {
+        seterror(data.message);
+      }
       setsubmitted(false);
     } else {
       for (const key in validate) {
@@ -56,36 +62,7 @@ function About() {
       }
     }
   };
-  useEffect(() => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(Formdata),
-      mode: "cors"
-    };
-    const callingapi = async () => {
-      try {
-        const response = await fetch("/public/feeback_contact", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          setmessage(data.message);
-        } else {
-          seterror(data.message);
-        }
-        setsubmitted(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (submitted) {
-      seterror(false);
-      setmessage(false);
-      callingapi();
-    }
-  }, [submitted]);
+
   return (
     <>
       <section className="section" id="about_section">
@@ -139,26 +116,21 @@ function About() {
             </div>
           </form>
         </div>
-        <div>
-          <div className="right">
-            <img id="form_inline_image" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
-          </div>
-        </div>
       </section>
-      <section className="cards">
+      <section className="cards mt-2">
         <div>
           <h3 className="heading">How to earn credits?</h3>
           <p className="para">
             In simple words, you can contribute to this project and earn credits, you can use those credits to get your
             favorite card. There are two ways to contribute.
           </p>
-          <ul className="about_step">
+          <ul className="steps">
             <li className="para">1. Submit new card design and earn 1 credit point</li>
             <li className="para">2. Write and submit code for the submitted design and earn 2 credit points</li>
           </ul>
           <p className="para">Follow the steps below in order to submit your design or code:</p>
         </div>
-        <ul className="about_step">
+        <ul className="steps">
           <li className="para">1. Create your account</li>
           <li className="para">2. Go to dashboard</li>
           <li className="para">3. Click on contribution</li>

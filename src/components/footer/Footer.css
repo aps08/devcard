@@ -1,11 +1,10 @@
-.footer *{
-    transition: .5s ease-in-out;
-}
 .footer{
+    position: relative;
     display: grid;
+    z-index: 1;
     grid-template-columns: 24% 24% 52%;
     padding: 1rem 4rem;
-    box-shadow: rgb(30, 34, 40) 0px -10px 10px -10px;
+    background-color: rgba(22, 27, 34, 1);
 }
 .footer .list-item{
     margin: 12px;

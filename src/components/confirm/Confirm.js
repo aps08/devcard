@@ -1,5 +1,5 @@
 import ModalWrapper from "../../utils/Modalwrapper";
-import "./Confirm.css";
+
 function Confirm(props) {
   const setconfirmation = (setyesorno) => {
     props.check(setyesorno);

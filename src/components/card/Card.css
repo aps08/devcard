@@ -1,10 +1,8 @@
-.card *{
-    transition: .5s ease-in-out;
-}
 .card{
-    margin: 1vw;
+    position: relative;
+    margin: 1rem;
     display: flex;
-    background-color: rgba(31, 35, 41, 0.9);
+    background-color: rgba(22, 27, 34,1);
     border-radius: .5rem;
 }
 .card_visual{
@@ -15,11 +13,11 @@
     border-bottom-left-radius: .5rem;
 }
 .description{
-    margin: 12px;
+    margin: 1rem;
     text-align: left;
 }
 .card .heading{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin: 0;
     margin-bottom: 8px;
 }
@@ -58,9 +56,6 @@
     .card{
         display: block;
     }
-    .description{
-        margin-top: 0;
-    }
     .card_visual{
         width: 100%;
         border-radius: .2rem;
@@ -78,7 +73,7 @@
         border-radius: none;
     }
     .card_modal{
-        width: 340px;
+        width: 320px;
         transition: .5s ease-in-out;
     }
 }

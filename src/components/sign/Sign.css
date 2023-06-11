@@ -24,7 +24,7 @@
     text-align: center;
     background-color: rgba(84, 248, 84, 0.2);
     color: whitesmoke;
-    max-width: 320px
+    /* max-width: 320px */
 }
 .error{
     max-width: 100%;
@@ -33,7 +33,7 @@
     text-align: center;
     background-color: rgba(205, 69, 69, 0.2);
     color: whitesmoke;
-    max-width: 320px
+    /* max-width: 320px */
 }
 .justify-center{
     animation: zoomOut 0.5s forwards;

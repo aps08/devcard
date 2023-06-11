@@ -7,7 +7,7 @@ function Input(props) {
     <div className="form_element">
       <label className="label">{props.label}</label>
       <input
-        style={{ border: !props.valid && focused ? "2px solid brown" : "" }}
+        style={{ border: !props.valid && focused ? "1px solid brown" : "" }}
         onFocus={() => setfocused(true)}
         name={props.label.toLowerCase()}
         placeholder={props.placeholder}

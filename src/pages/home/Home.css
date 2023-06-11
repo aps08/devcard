@@ -1,19 +1,8 @@
-.section *{
-    transition: 0.5s ease-in-out;
-}
 .section{
-    margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-content: center;
-}
-.first,.second{
-    padding: 0 1rem;
-}
-.line{
-    border-bottom: 2px solid gray;
-    padding-bottom: 1rem;
 }
 .heading{
     color: var(--color-header-hover);
@@ -21,11 +10,7 @@
     font-weight: 600;
     margin: 10px 0;
 }
-.section button{
-    margin: 0;
-    transition: none;
-}
-.showcase{
+.image_view{
     display: inline-block;
     place-items: center;
     width: 90%;
@@ -34,16 +19,11 @@
     animation: floating 2s infinite ease-in-out;
     margin: 1rem;
 }
-.mt-2{
-    margin-top: 2rem;
+.first,.second{
+    padding: 0 1rem;
 }
-.mt-2 .section{
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-.cards{
-    margin-top: 1rem;
-}
+
+
 @keyframes floating {
     0% {
         transform: translate(0, 0);
