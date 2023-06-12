@@ -24,7 +24,6 @@
     text-align: center;
     background-color: rgba(84, 248, 84, 0.2);
     color: whitesmoke;
-    /* max-width: 320px */
 }
 .error{
     max-width: 100%;
@@ -33,7 +32,6 @@
     text-align: center;
     background-color: rgba(205, 69, 69, 0.2);
     color: whitesmoke;
-    /* max-width: 320px */
 }
 .justify-center{
     animation: zoomOut 0.5s forwards;
@@ -50,14 +48,6 @@
     padding: 1rem 2rem;
     display: block;
     background-color: rgb(31, 35, 41);
-}
-.divider{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.divider .para{
-    font-size: 1rem;
 }
 .navlink_signin{
     color: var(--color-btn-bg);

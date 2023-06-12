@@ -1,10 +1,9 @@
 import Input from "../input/Input";
-import "./Professional.css";
 
 function Professional() {
   return (
     <form id="professionaldetails">
-      <h2 className="mb-2">Professional details</h2>
+      <h2 className="mb-1 para">Professional details</h2>
       <div className="user_name">
         <Input label="Company" change={null} hints={null} type="text" placeholder="enter company name" valid={true} />
         <Input label="Role" change={null} hints={null} type="text" placeholder="enter your role" valid={true} />

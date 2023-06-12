@@ -9,7 +9,7 @@ function Input(props) {
       <input
         style={{ border: !props.valid && focused ? "1px solid brown" : "" }}
         onFocus={() => setfocused(true)}
-        name={props.label.toLowerCase()}
+        name={props.name || props.label.toLowerCase()}
         placeholder={props.placeholder}
         onChange={props.change}
         type={props.type || "text"}

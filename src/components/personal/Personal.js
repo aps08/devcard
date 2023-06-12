@@ -21,7 +21,7 @@ function Personal() {
   return (
     <>
       <form id="personaldetails" onSubmit={personalhandler}>
-        <h2 className="mb-2">Personal details</h2>
+        <h2 className="para mb-1">Personal details</h2>
         <div className="user_name">
           <Input label="first name" change={null} hints={null} placeholder="enter first name" valid={true} />
           <Input label="middle name" change={null} hints={null} placeholder="enter middle name" valid={true} />

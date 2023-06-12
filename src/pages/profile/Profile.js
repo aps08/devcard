@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { getUserToken } from "../../store/localstorageoperations";
 import ReactLoading from "react-loading";
-import { removeLocalstorage } from "../../store/localstorageoperations";
+import { clearlocaldata } from "../../store/localstorage";
+import Callendpoint from "../../utils/Callendpoint";
 import "./Profile.css";
 
 function Profile() {
@@ -30,7 +31,16 @@ function Profile() {
       }
     }
   };
-
+  const signouthandler = async () => {
+    setsubmitted(true);
+    const { data, statuscode } = await Callendpoint("post", "/auth/logout", null, {});
+    if (statuscode === 200) {
+      clearlocaldata();
+    } else {
+      seterror(data.message);
+    }
+    setsubmitted(false);
+  };
   useEffect(() => {
     const callingapi = async () => {
       const jwt_token = getUserToken();
@@ -53,64 +63,15 @@ function Profile() {
     callingapi();
   }, []);
 
-  useEffect(() => {
-    const callingapi = async (apiendpoint) => {
-      const jwt_token = getUserToken();
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${jwt_token}`
-        },
-        mode: "cors",
-        body: Formdata
-      };
-      const response = await fetch(apiendpoint, requestOptions);
-      const data = await response.json();
-      if (response.ok) {
-        if (apiendpoint === "/auth/logout") {
-          removeLocalstorage();
-          window.location.reload();
-        } else {
-          setmessage(data.message);
-          setprofileimage(data.image);
-          setFormdata({});
-        }
-      } else {
-        seterror(data.message);
-      }
-      setsubmitted(false);
-      setimagechange(false);
-    };
-    if (submitted) {
-      setmessage(false);
-      seterror(false);
-      callingapi("/auth/logout");
-    }
-    if (imagechange) {
-      setmessage(false);
-      seterror(false);
-      callingapi("/user/account");
-    }
-  }, [submitted, imagechange]);
-
   return (
     <>
       <section className="profile">
-        <div className="pro-menu">
-          {error && (
-            <p className="error center" style={{ margin: "8px", maxWidth: "unset" }}>
-              {error}
-            </p>
-          )}
-          {message && (
-            <p className="message center" style={{ margin: "8px", maxWidth: "unset" }}>
-              {message}
-            </p>
-          )}
+        <div className="profile-menu">
+          {error && <p className="error center">{error}</p>}
+          {message && <p className="message center">{message}</p>}
           {profileimage && (
             <div>
-              <img className="pro-image" src={profileimage} alt="user image" />
+              <img className="profile-image" src={profileimage} alt="user image" />
             </div>
           )}
           <input name="image" accept="image/*" type="file" id="img" onChange={imagechangehandler} />
@@ -123,25 +84,25 @@ function Profile() {
               </label>
             )}
           </div>
-          <ul className="pro-list" style={{ marginTop: "1rem" }}>
-            <NavLink to="personal" className={"pro-list-item"}>
+          <ul className="mt-1 mb-1">
+            <NavLink to="personal" className={"profile-list-item"}>
               <li>Personal details</li>
             </NavLink>
-            <NavLink to="professional" className={"pro-list-item"}>
+            <NavLink to="professional" className={"profile-list-item"}>
               <li>Professional details</li>
             </NavLink>
-            <NavLink to="account" className={"pro-list-item"}>
+            <NavLink to="account" className={"profile-list-item"}>
               <li>Account settings</li>
             </NavLink>
-            <NavLink to="purchasehistory" className={"pro-list-item"}>
+            <NavLink to="purchasehistory" className={"profile-list-item"}>
               <li>Purchase history</li>
             </NavLink>
-            <NavLink className={"pro-list-action"} onClick={() => setsubmitted(true)}>
+            <NavLink className={"profile-list-action"} onClick={signouthandler}>
               <li>Sign out</li>
             </NavLink>
           </ul>
         </div>
-        <div className="pro-panel">
+        <div className="profile-item-panel">
           <Outlet />
         </div>
       </section>

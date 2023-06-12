@@ -6,8 +6,7 @@ import Forgotpasswordmodal from "./forgotpasswordmodal";
 import ReactLoading from "react-loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
-
-const MODAL_ELEMENT = document.getElementById("root-modal");
+import { MODAL_ELEMENT } from "../../utils/Constants";
 
 function ChangePassword() {
   const navigate = useNavigate();

@@ -2,9 +2,10 @@
     grid-template-columns: 1fr;
 }
 .contact_form{
+    position: relative;
     padding: 1rem;
     padding-right: 1rem;
-    background-color: rgba(78, 78, 78,.3);
+    background-color: rgba(22, 27, 34,1);
     border-radius: .5rem;
 }
 .steps .para{

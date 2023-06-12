@@ -6,3 +6,7 @@ export function getlocaldata(key) {
 export function setlocaldata(key, value) {
   localStorage.setItem(key, value);
 }
+
+export function clearlocaldata() {
+  localStorage.clear();
+}

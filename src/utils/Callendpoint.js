@@ -6,7 +6,7 @@ const HEADER = {
   Accept: "application/json"
 };
 
-async function Callendpoint(method, apiEndpoint, params = null, data = null, headers = HEADER, Authorization = false) {
+async function Callendpoint(method, apiEndpoint, params = null, data = null, Authorization = false, headers = HEADER) {
   let axiosConfig = null;
   try {
     axiosConfig = {

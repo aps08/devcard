@@ -17,7 +17,7 @@ function Purchasehistory() {
   console.log(formattedDate);
   return (
     <div className="purchasehistory">
-      <h2 style={{ marginBottom: "1rem" }}>Your orders</h2>
+      <h2 className="para mb-1">Your orders</h2>
       {orders.length > 0 &&
         orders.map((order) => (
           <Orderinfo

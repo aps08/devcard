@@ -105,12 +105,13 @@ function Signin(props) {
                 Forgot password
               </p>
             </NavLink>
-            <div className="divider">
-              <p className="para">Don&apos;t have an account ?</p>
-              <span onClick={props.formchange} className="navlink_signin">
-                Sign up
-              </span>
-            </div>
+            <div className="divider mt-1"></div>
+            <p className="para center" style={{ fontSize: "1rem" }}>
+              Don&apos;t have an account ?
+            </p>
+            <p onClick={props.formchange} className="navlink_signin center">
+              Sign up
+            </p>
           </form>
         </div>
       </div>

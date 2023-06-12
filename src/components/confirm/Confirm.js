@@ -12,8 +12,8 @@ function Confirm(props) {
         <div className="main_div">
           <p className="para center mb-2">Are you sure ?</p>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <button onClick={() => setconfirmation("yes")}>Yes</button>
-            <button onClick={() => setconfirmation("no")}>No</button>
+            <button onClick={() => setconfirmation(true)}>Yes</button>
+            <button onClick={() => setconfirmation(false)}>No</button>
           </div>
         </div>
       </div>

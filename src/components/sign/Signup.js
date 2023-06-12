@@ -99,12 +99,13 @@ function Signup(props) {
                 <button type="submit">Submit</button>
               )}
             </div>
-            <div className="divider">
-              <p className="para">Already have an account ?</p>
-              <span onClick={props.formchange} className="navlink_signin">
-                Sign in
-              </span>
-            </div>
+            <div className="divider mt-1"></div>
+            <p className="para center" style={{ fontSize: "1rem" }}>
+              Already have an account ?
+            </p>
+            <p onClick={props.formchange} className="navlink_signin center">
+              Sign in
+            </p>
           </form>
         </div>
       </div>

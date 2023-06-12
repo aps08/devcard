@@ -3,7 +3,6 @@ import Input from "../../components/input/Input";
 import ReactLoading from "react-loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
-import "./ForgotPassword.css";
 
 const INITIAL = {
   password: false,

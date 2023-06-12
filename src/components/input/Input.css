@@ -6,16 +6,16 @@ form .form_element{
     margin: 1rem 0;
 }
 .form_element select{
-    background-color: var(--color-bg);
     opacity: .6;
-    height: 40px;
+    height: 36px;
     border: none;
-    border: 2px solid rgb(58, 57, 57);
+    border: 1px solid rgb(58, 57, 57);
     border-radius: 6px;
     transition: .5s ease-in-out;
     color: whitesmoke;
     font-size: 1rem;
     padding-left: .8rem;
+    background-color: #0d1117;
 }
 .form_element select:focus{
     border: 2px solid rgb(176, 175, 175);
@@ -39,10 +39,9 @@ form .form_element{
 .form_element input{
     width: 100%;
     outline: none;
-    height: 40px;
+    height: 36px;
     background-color: #0d1117;
     opacity: .6;
-    border: none;
     caret-color: var(--color-header-hover);
     text-indent: 8px;
     font-size: 1rem;
