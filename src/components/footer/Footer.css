@@ -4,6 +4,7 @@
     grid-template-columns: 24% 24% 52%;
     padding: 2rem 4rem 1rem;
     background-color: rgba(22, 27, 34, 1);
+    border-top: 1px solid black;
 }
 .footer .list-item{
     margin: 12px;

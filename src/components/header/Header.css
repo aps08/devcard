@@ -10,6 +10,7 @@
     background-color: rgba(22, 27, 34,1);
     transition: all .5s ease-in-out;
     backdrop-filter: blur(4px);
+    border-bottom: 1px solid black;
 }
 .avatar img{
     height: 45px;

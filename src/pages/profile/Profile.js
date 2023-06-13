@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { getUserToken } from "../../store/localstorageoperations";
 import ReactLoading from "react-loading";
+import ReactDOM from "react-dom";
 import { clearlocaldata } from "../../store/localstorage";
 import Callendpoint from "../../utils/Callendpoint";
+import { BiUser, BiInfoCircle, BiHistory } from "react-icons/bi";
+import { FiSettings, FiEdit } from "react-icons/fi";
+import { GoSignOut } from "react-icons/go";
+import logo from "../../assets/images/logo.png";
+import Backdrop from "../../utils/Backdrop";
 import "./Profile.css";
 
 function Profile() {
   const [message, setmessage] = useState(false);
   const [error, seterror] = useState(false);
-  const [submitted, setsubmitted] = useState(false);
-  const [imagechange, setimagechange] = useState(false);
+  const [submitted, setsubmitted] = useState(true);
   const [profileimage, setprofileimage] = useState(false);
   const [Formdata, setFormdata] = useState({});
 
-  const imagechangehandler = (event) => {
+  const imagechangehandler = async (event) => {
     seterror(false);
+    setmessage(false);
     if (event.target.files.length !== 0) {
       const file = event.target.files[0];
       if (file.size / (1024 * 1024) > 5) {
@@ -27,11 +32,24 @@ function Profile() {
         formData.append("image", file);
         formData.append("url", imageSrc);
         setFormdata(formData);
-        setimagechange(true);
+        setsubmitted(true);
+        const { data, statuscode } = await Callendpoint("post", "/user/account", null, formData, true, {
+          "Content-Type": "*",
+          Accept: "application/json"
+        });
+        if (statuscode === 200) {
+          setmessage(data.message);
+          setprofileimage(data.image);
+        } else {
+          seterror(data.message);
+        }
+        setsubmitted(false);
       }
     }
   };
   const signouthandler = async () => {
+    seterror(false);
+    setmessage(false);
     setsubmitted(true);
     const { data, statuscode } = await Callendpoint("post", "/auth/logout", null, {});
     if (statuscode === 200) {
@@ -43,68 +61,88 @@ function Profile() {
   };
   useEffect(() => {
     const callingapi = async () => {
-      const jwt_token = getUserToken();
-      const requestOptions = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${jwt_token}`
-        },
-        mode: "cors"
-      };
-      const response = await fetch("/user/profile", requestOptions);
-      const data = await response.json();
-      if (response.ok) {
+      const { data, statuscode } = await Callendpoint("get", "/user/profile", null, null, true);
+      if (statuscode === 200) {
         setprofileimage(data.message);
       } else {
         seterror(data.message);
       }
+      setsubmitted(false);
     };
-    callingapi();
-  }, []);
+    if (submitted) {
+      callingapi();
+    }
+  }, [submitted]);
 
   return (
     <>
+      {submitted &&
+        ReactDOM.createPortal(
+          <Backdrop close={null}>
+            <ReactLoading type="spin" color="#fff" height="100px" width="100px" />
+          </Backdrop>,
+          document.getElementById("root-backdrop")
+        )}
       <section className="profile">
         <div className="profile-menu">
           {error && <p className="error center">{error}</p>}
           {message && <p className="message center">{message}</p>}
-          {profileimage && (
-            <div>
-              <img className="profile-image" src={profileimage} alt="user image" />
-            </div>
-          )}
-          <input name="image" accept="image/*" type="file" id="img" onChange={imagechangehandler} />
-          <div className="form_element">
-            {imagechange ? (
-              <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-            ) : (
+          <div style={{ position: "relative" }}>
+            <img className="profile-image" src={profileimage ? profileimage : logo} alt="user image" />
+            <input name="image" accept="image/*" type="file" id="img" onChange={imagechangehandler} />
+            <div className="form_element">
               <label name="upload" id="upload" htmlFor="img">
-                Change image
+                <span className="icon">
+                  <FiEdit />
+                </span>
+                Upload image
               </label>
-            )}
+            </div>
           </div>
           <ul className="mt-1 mb-1">
             <NavLink to="personal" className={"profile-list-item"}>
-              <li>Personal details</li>
+              <li>
+                <span className="icon">
+                  <BiUser />
+                </span>
+                Personal
+              </li>
             </NavLink>
             <NavLink to="professional" className={"profile-list-item"}>
-              <li>Professional details</li>
+              <li>
+                <span className="icon">
+                  <BiInfoCircle />
+                </span>
+                Professional
+              </li>
             </NavLink>
             <NavLink to="account" className={"profile-list-item"}>
-              <li>Account settings</li>
+              <li>
+                <span className="icon">
+                  <FiSettings />
+                </span>
+                Account
+              </li>
             </NavLink>
-            <NavLink to="purchasehistory" className={"profile-list-item"}>
-              <li>Purchase history</li>
+            <NavLink to="orders" className={"profile-list-item"}>
+              <li>
+                <span className="icon">
+                  <BiHistory />
+                </span>
+                Orders
+              </li>
             </NavLink>
             <NavLink className={"profile-list-action"} onClick={signouthandler}>
-              <li>Sign out</li>
+              <li>
+                <span className="icon">
+                  <GoSignOut />
+                </span>
+                Sign out
+              </li>
             </NavLink>
           </ul>
         </div>
-        <div className="profile-item-panel">
-          <Outlet />
-        </div>
+        <div className="profile-item-panel">{<Outlet />}</div>
       </section>
     </>
   );

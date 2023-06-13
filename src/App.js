@@ -15,17 +15,15 @@ import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import Verify from "./pages/verify/Verify";
 import PrivateRoute from "./utils/PrivateRouter";
 import PublicRoute from "./utils/PublicRoute";
-import { checkLocalStorageKeys } from "./store/localstorageoperations";
 import "./App.css";
 
 function App() {
-  const IsLoggedin = checkLocalStorageKeys();
-  const homecomponent = IsLoggedin ? Dashboard : Home;
+  const homecomponent = true ? Dashboard : Home;
 
   return (
     <AuthContext.Provider
       value={{
-        IsLoggedin: IsLoggedin
+        IsLoggedin: true
       }}>
       <Header />
       <main>
@@ -37,7 +35,7 @@ function App() {
             <Route path="personal" element={<PrivateRoute Component={Personal} />} />
             <Route path="professional" element={<PrivateRoute Component={Professional} />} />
             <Route path="account" element={<PrivateRoute Component={Account} />} />
-            <Route path="purchasehistory" element={<PrivateRoute Component={Purchasehistory} />} />
+            <Route path="orders" element={<PrivateRoute Component={Purchasehistory} />} />
             <Route path="" element={<Navigate to="personal" replace />} />
           </Route>
           <Route path="/verify/:token" element={<PublicRoute Component={Verify} />} />

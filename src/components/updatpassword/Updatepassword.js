@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input from "../input/Input";
 import ReactLoading from "react-loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
-import "./Updatepassword.css";
-import { clearlocaldata } from "../../store/localstorage";
 
 const CHECKS = {
   old_password: /^.{8,20}$/,
