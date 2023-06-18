@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ModalWrapper from "../../utils/Modalwrapper";
 import ReactLoading from "react-loading";
 import Avatar from "react-avatar-edit";
+import Callendpoint from "../../utils/Callendpoint";
 import "./Preview.css";
 
 function Preview(props) {
@@ -16,10 +17,23 @@ function Preview(props) {
     seterror(false);
   };
 
-  const ImageSavehandler = () => {
+  const ImageSavehandler = async () => {
     if (Preview) {
       seterror(false);
       setsubmitted(true);
+      const { data, statuscode } = await Callendpoint(
+        "put",
+        "/public/demo",
+        null,
+        JSON.stringify({ image: Preview }),
+        true
+      );
+      if (statuscode === 200) {
+        props.mutator(data.message);
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
     } else {
       seterror("Select an image");
     }
@@ -30,35 +44,6 @@ function Preview(props) {
       SetImage(URL.createObjectURL(props.file));
     }
   }, [props.file]);
-
-  useEffect(() => {
-    const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({ image: Preview }),
-      mode: "cors"
-    };
-    const callingapi = async () => {
-      try {
-        const response = await fetch("/public/demo", requestOptions);
-        const data = await response.json();
-        if (response.ok) {
-          props.mutator(data.message);
-        } else {
-          seterror(data.message);
-        }
-        setsubmitted(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (submitted) {
-      callingapi();
-    }
-  }, [submitted]);
 
   return (
     <ModalWrapper close={props.close}>

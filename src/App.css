@@ -18,12 +18,15 @@ main{
 }
 .para{
     padding: 10px 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--color-header-hover);
     opacity: .7;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* font-family: inherit; */
 }
 button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0 10px;
     font-size: 1rem;
     border-radius: 4px;

@@ -6,24 +6,25 @@
     background-color: rgba(22, 27, 34, 1);
     border-top: 1px solid black;
 }
-.footer .list-item{
-    margin: 12px;
-}
 .sub-heading{
     color: var(--color-btn-bg);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 .mark_line{
     padding: 1rem 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--color-header-hover);
     opacity: 1;
+}
+.footer .list-item:hover{
+    background-color: transparent;
+    color: whitesmoke;
 }
 @media only screen and (max-width: 1024px){
     .footer{
         grid-template-columns: 1fr 1fr;
     }
-    .sub-heading{
+    .sub-heading, .footer .list-item{
         text-align: center;
     }
     .branding_footer{

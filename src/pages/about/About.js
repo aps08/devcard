@@ -10,9 +10,9 @@ const ELEMENTS = [
   { label: "MESSAGE", placeholder: "enter your messsage" }
 ];
 const HINTS = {
-  name: ["Name is required", "Only alphabets and spaces are allowed", "Name should not exceed 30 characters"],
-  email: ["Email is required", "Email should not exceed 30 characters"],
-  message: ["Message is required", "Message should not exeed 100 characters"]
+  name: ["Name should not exceed 30 characters"],
+  email: ["Email should not exceed 30 characters"],
+  message: ["Message should not exeed 100 characters"]
 };
 const CHECKS = {
   name: /^[A-Za-z][A-Za-z\s]{0,28}[A-Za-z]$/,

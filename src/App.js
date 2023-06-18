@@ -16,23 +16,34 @@ import Verify from "./pages/verify/Verify";
 import PrivateRoute from "./utils/PrivateRouter";
 import PublicRoute from "./utils/PublicRoute";
 import "./App.css";
+import { useEffect, useState } from "react";
+import { getlocaldata } from "./store/localstorage";
 
 function App() {
-  const homecomponent = true ? Dashboard : Home;
+  const [IsLoggedin, setIsLoggedin] = useState(false);
+  useEffect(() => {
+    const user = getlocaldata("X-USER");
+    const token = getlocaldata("X-ACCESS-TOKEN");
+    if (user === null && token === null) {
+      setIsLoggedin(false);
+    } else {
+      setIsLoggedin(true);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        IsLoggedin: true
+        IsLoggedin: IsLoggedin
       }}>
       <Header />
       <main>
         <Routes>
-          <Route path="/home" element={<PrivateRoute Component={homecomponent} />} />
+          <Route path="/home" element={<PrivateRoute Component={IsLoggedin ? Dashboard : Home} />} />
           <Route path="/demo" element={<PublicRoute Component={Demo} />} />
           <Route path="/About" element={<About />} />
           <Route path="/profile" element={<PrivateRoute Component={Profile} />}>
-            <Route path="personal" element={<PrivateRoute Component={Personal} />} />
+            <Route path="personal" exact element={<PrivateRoute Component={Personal} />} />
             <Route path="professional" element={<PrivateRoute Component={Professional} />} />
             <Route path="account" element={<PrivateRoute Component={Account} />} />
             <Route path="orders" element={<PrivateRoute Component={Purchasehistory} />} />

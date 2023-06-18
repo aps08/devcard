@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import ReactLoading from "react-loading";
 import ReactDOM from "react-dom";
+import logo from "../../assets/images/logo.png";
+import Backdrop from "../../utils/Backdrop";
 import { clearlocaldata } from "../../store/localstorage";
 import Callendpoint from "../../utils/Callendpoint";
 import { BiUser, BiInfoCircle, BiHistory } from "react-icons/bi";
 import { FiSettings, FiEdit } from "react-icons/fi";
 import { GoSignOut } from "react-icons/go";
-import logo from "../../assets/images/logo.png";
-import Backdrop from "../../utils/Backdrop";
 import "./Profile.css";
 
 function Profile() {
@@ -16,7 +16,6 @@ function Profile() {
   const [error, seterror] = useState(false);
   const [submitted, setsubmitted] = useState(true);
   const [profileimage, setprofileimage] = useState(false);
-  const [Formdata, setFormdata] = useState({});
 
   const imagechangehandler = async (event) => {
     seterror(false);
@@ -26,12 +25,11 @@ function Profile() {
       if (file.size / (1024 * 1024) > 5) {
         seterror("File size exceeds the limit of 5MB");
       } else {
-        const imageTag = document.getElementsByClassName("pro-image");
+        const imageTag = document.getElementsByClassName("profile-image");
         const imageSrc = imageTag.length > 0 ? imageTag[0].src : null;
         const formData = new FormData();
         formData.append("image", file);
         formData.append("url", imageSrc);
-        setFormdata(formData);
         setsubmitted(true);
         const { data, statuscode } = await Callendpoint("post", "/user/account", null, formData, true, {
           "Content-Type": "*",
@@ -47,11 +45,12 @@ function Profile() {
       }
     }
   };
+
   const signouthandler = async () => {
     seterror(false);
     setmessage(false);
     setsubmitted(true);
-    const { data, statuscode } = await Callendpoint("post", "/auth/logout", null, {});
+    const { data, statuscode } = await Callendpoint("post", "/auth/logout", null, {}, true);
     if (statuscode === 200) {
       clearlocaldata();
     } else {
@@ -59,6 +58,7 @@ function Profile() {
     }
     setsubmitted(false);
   };
+
   useEffect(() => {
     const callingapi = async () => {
       const { data, statuscode } = await Callendpoint("get", "/user/profile", null, null, true);

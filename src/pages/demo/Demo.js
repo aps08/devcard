@@ -27,25 +27,10 @@ const ELEMENTS = [
   }
 ];
 const HINTS = {
-  name: [
-    "Name is required",
-    "Only alphabets and spaces are allowed",
-    "Type first name or full name that will be visible in your devcard",
-    "Name should not exceed 30 characters"
-  ],
-  company: [
-    "Company name is required",
-    "Only alphabets and spaces are allowed",
-    "Make sure you type correct company name",
-    "Company should not exceed 20 characters"
-  ],
-  experience: ["Experience is required", "Experience cannot be less than 0 or more than 50."],
-  role: [
-    "Role is requried",
-    "Only alphabets and spaces are allowed",
-    "Company should not exceed 20 characters",
-    "Example: Back-end Developer, Python Developer"
-  ],
+  name: ["Only alphabets and spaces are allowed", "Name should not exceed 30 characters"],
+  company: ["Only alphabets and spaces are allowed", "Company should not exceed 20 characters"],
+  experience: ["Experience cannot be less than 0 or more than 50."],
+  role: ["Example: Back-end Developer, Python Developer"],
   image: ["Image is required", "Image must be png,jpg or jpeg format"]
 };
 const CHECKS = {

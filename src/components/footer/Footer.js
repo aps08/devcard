@@ -8,7 +8,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div>
-        <h3 className="sub-heading">Quick links</h3>
+        <h3 className="sub-heading mb-1">Quick links</h3>
         <ul>
           <NavLink className={"list-item"} to="home">
             <li>Home</li>
@@ -29,7 +29,7 @@ function Footer() {
         </ul>
       </div>
       <div>
-        <h3 className="sub-heading">Learn more</h3>
+        <h3 className="sub-heading mb-1">Learn more</h3>
         <ul>
           <NavLink className={"list-item"} to="about">
             <li>Earn ?</li>
