@@ -61,7 +61,10 @@ function Profile() {
 
   useEffect(() => {
     const callingapi = async () => {
+      const currentEpochTime = Math.floor(Date.now() / 1000);
+      console.log(currentEpochTime);
       const { data, statuscode } = await Callendpoint("get", "/user/profile", null, null, true);
+      console.log(Math.floor(new Date().getTime() / 1000));
       if (statuscode === 200) {
         setprofileimage(data.message);
       } else {

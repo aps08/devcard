@@ -1,21 +1,20 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getlocaldata } from "../store/localstorage";
+import { useSelector } from "react-redux";
 
 function PublicRoute(props) {
-  const { Component } = props;
   const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const token = getlocaldata("X-USER");
-    const user = getlocaldata("X-ACCESS-TOKEN");
-    if (user && token) {
+    if (isLoggedIn) {
       navigate("/home");
     }
   }, []);
+
   return (
     <>
-      <Component />
+      <props.Component />
     </>
   );
 }
