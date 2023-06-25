@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import ReactLoading from "react-loading";
 import ReactDOM from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../assets/images/logo.png";
 import Backdrop from "../../utils/Backdrop";
 import { clearlocaldata } from "../../store/localstorage";
@@ -9,13 +10,18 @@ import Callendpoint from "../../utils/Callendpoint";
 import { BiUser, BiInfoCircle, BiHistory } from "react-icons/bi";
 import { FiSettings, FiEdit } from "react-icons/fi";
 import { GoSignOut } from "react-icons/go";
+import { reset as inforeset } from "../../redux/userinfoSlice";
+import { reset as authreset } from "../../redux/authSlice";
 import "./Profile.css";
 
 function Profile() {
+  const dispatch = useDispatch();
+  const userdata = useSelector((state) => state.userInfo.profile?.image);
   const [message, setmessage] = useState(false);
   const [error, seterror] = useState(false);
   const [submitted, setsubmitted] = useState(true);
   const [profileimage, setprofileimage] = useState(false);
+  console.log(userdata);
 
   const imagechangehandler = async (event) => {
     seterror(false);
@@ -53,6 +59,9 @@ function Profile() {
     const { data, statuscode } = await Callendpoint("post", "/auth/logout", null, {}, true);
     if (statuscode === 200) {
       clearlocaldata();
+      dispatch(inforeset());
+      dispatch(authreset());
+      window.location.reload();
     } else {
       seterror(data.message);
     }

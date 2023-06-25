@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import Confirm from "../confirm/Confirm";
 import Backdrop from "../../utils/Backdrop";
 import Callendpoint from "../../utils/Callendpoint";
-import { MODAL_ELEMENT } from "../../utils/Constants";
+import { MODAL_ELEMENT, BACKDROP_ELEMENT } from "../../utils/Constants";
 import { clearlocaldata } from "../../store/localstorage";
 
 function Account() {
@@ -61,7 +61,7 @@ function Account() {
           <Backdrop close={null}>
             <ReactLoading type="spin" color="#fff" height="100px" width="100px" />
           </Backdrop>,
-          document.getElementById("root-backdrop")
+          BACKDROP_ELEMENT
         )}
       {updatepass && ReactDOM.createPortal(<Updatepassword close={() => setupdatepass(false)} />, MODAL_ELEMENT)}
       {confirm &&

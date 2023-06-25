@@ -57,8 +57,6 @@ function Signin(props) {
       const { data, statuscode } = await Callendpoint("post", "/auth/login", null, Formdata);
       if (statuscode === 200) {
         setlocaldata("X-ACCESS-TOKEN", data["X-ACCESS-TOKEN"]);
-        setlocaldata("X-USER", data["X-USER"]);
-        setlocaldata("X-INFO", JSON.stringify(data["X-INFO"]));
         window.location.reload();
       } else {
         seterror(data.message);

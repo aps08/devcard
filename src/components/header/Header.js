@@ -1,21 +1,24 @@
 import ReactDOM from "react-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
 import Signin from "../sign/Signin";
 import Signup from "../sign/Signup";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../assets/images/logo.png";
 import { MODAL_ELEMENT, BACKDROP_ELEMENT } from "../../utils/Constants";
 import { FiMenu } from "react-icons/fi";
 import { clearlocaldata } from "../../store/localstorage";
 import Backdrop from "../../utils/Backdrop";
 import Callendpoint from "../../utils/Callendpoint";
+import { reset as inforeset } from "../../redux/userinfoSlice";
+import { reset as authreset } from "../../redux/authSlice";
 import "../header/Header.css";
 
 function Header() {
+  const dispatch = useDispatch();
   const [showsignin, setshowsignin] = useState(false);
   const [showsignup, setshowsignup] = useState(false);
-  const { IsLoggedin } = useContext(AuthContext);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
 
@@ -46,6 +49,8 @@ function Header() {
     const { statuscode } = await Callendpoint("post", "/auth/logout", null, null, true);
     if (statuscode === 200) {
       clearlocaldata();
+      dispatch(inforeset());
+      dispatch(authreset());
       window.location.reload();
     }
   };
@@ -60,14 +65,14 @@ function Header() {
           <span className="brand_name">Devcards</span>
         </div>
         <nav className="nav">
-          {IsLoggedin && (
+          {isLoggedIn && (
             <NavLink onClick={navigationhandler} to="/none">
               <button style={{ marginLeft: "1rem" }}>
                 {creditcounts ? `Credits: ${creditcounts}` : <>Buy credits</>}
               </button>
             </NavLink>
           )}
-          {!IsLoggedin && <button onClick={() => setshowsignin(true)}>Sign in</button>}
+          {!isLoggedIn && <button onClick={() => setshowsignin(true)}>Sign in</button>}
           <div className="mainmenu">
             <span className="menuburger icon" onClick={() => setIsopen(!Isopen)}>
               <FiMenu />
@@ -82,7 +87,7 @@ function Header() {
                   <NavLink className={"list-item"} to="/home" onClick={navigationhandler}>
                     <li>Home</li>
                   </NavLink>
-                  {!IsLoggedin && (
+                  {!isLoggedIn && (
                     <NavLink className={"list-item"} to="/demo" onClick={navigationhandler}>
                       <li>Demo</li>
                     </NavLink>
@@ -90,7 +95,7 @@ function Header() {
                   <NavLink className={"list-item"} to="/about" onClick={navigationhandler}>
                     <li>About</li>
                   </NavLink>
-                  {IsLoggedin && (
+                  {isLoggedIn && (
                     <>
                       <div className="divider"></div>
                       <NavLink to="/profile" className={"list-item"} onClick={navigationhandler}>
@@ -105,7 +110,7 @@ function Header() {
                     </>
                   )}
                   <div className="divider"></div>
-                  {!IsLoggedin && (
+                  {!isLoggedIn && (
                     <li
                       className="list-item"
                       onClick={() => {
@@ -115,7 +120,7 @@ function Header() {
                       Sign up for free
                     </li>
                   )}
-                  {IsLoggedin && (
+                  {isLoggedIn && (
                     <li className="list-item" onClick={signouthandler}>
                       Sign out
                     </li>

@@ -1,10 +1,10 @@
 import "../footer/Footer.css";
-import { useContext } from "react";
-import AuthContext from "../../store/auth-context";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 function Footer() {
-  const { IsLoggedin } = useContext(AuthContext);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   return (
     <footer className="footer">
       <div>
@@ -13,12 +13,12 @@ function Footer() {
           <NavLink className={"list-item"} to="home">
             <li>Home</li>
           </NavLink>
-          {!IsLoggedin && (
+          {!isLoggedIn && (
             <NavLink className={"list-item"} to="demo">
               <li>Demo</li>
             </NavLink>
           )}
-          {IsLoggedin && (
+          {isLoggedIn && (
             <NavLink className={"list-item"} to="home">
               <li>Contribute</li>
             </NavLink>
