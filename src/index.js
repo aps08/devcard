@@ -1,3 +1,4 @@
+import DataWrapper from "./utils/DataWrapper";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./utils/ScrollToTop";
@@ -8,10 +9,12 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <ScrollToTop />
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <ScrollToTop />
+      <DataWrapper>
+        <App />
+      </DataWrapper>
+    </BrowserRouter>
+  </Provider>
 );

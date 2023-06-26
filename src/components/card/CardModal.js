@@ -9,7 +9,9 @@ function CardModal(props) {
             <img className="card_visual" src="https://picsum.photos/300/200?grayscale" alt="cardimage" />
           </div>
           <p className="label">{props.description}</p>
-          <button onClick={props.close}>close</button>
+          <div className="mt-1 flex-center">
+            <button onClick={props.close}>close</button>
+          </div>
         </div>
       </div>
     </ModalWrapper>

@@ -5,7 +5,10 @@ import ReactLoading from "react-loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 import { setlocaldata } from "../../store/localstorage";
+import { setAuthAndUserType } from "../../redux/authSlice";
+import { setUserData } from "../../redux/userinfoSlice";
 import "./Sign.css";
+import { useDispatch } from "react-redux";
 
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -33,6 +36,7 @@ const HINTS = {
 };
 
 function Signin(props) {
+  const dispatch = useDispatch();
   const [error, seterror] = useState(false);
   const [submitted, setsubmitted] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
@@ -57,11 +61,26 @@ function Signin(props) {
       const { data, statuscode } = await Callendpoint("post", "/auth/login", null, Formdata);
       if (statuscode === 200) {
         setlocaldata("X-ACCESS-TOKEN", data["X-ACCESS-TOKEN"]);
-        window.location.reload();
+        const user = data["X-DATA"];
+        const { profile } = user;
+        dispatch(
+          setAuthAndUserType({
+            isLoggedIn: true,
+            userType: profile.user
+          })
+        );
+        dispatch(
+          setUserData({
+            profile: user.profile,
+            professional: user.professional,
+            personal: user.personal
+          })
+        );
       } else {
         seterror(data.message);
       }
       setsubmitted(false);
+      props.close();
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {

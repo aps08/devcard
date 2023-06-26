@@ -16,12 +16,15 @@ import "./Profile.css";
 
 function Profile() {
   const dispatch = useDispatch();
-  const userdata = useSelector((state) => state.userInfo.profile?.image);
+  const image = useSelector((state) => state.userInfo?.profile?.image);
   const [message, setmessage] = useState(false);
   const [error, seterror] = useState(false);
-  const [submitted, setsubmitted] = useState(true);
+  const [submitted, setsubmitted] = useState(false);
   const [profileimage, setprofileimage] = useState(false);
-  console.log(userdata);
+
+  useEffect(() => {
+    setprofileimage(image);
+  }, []);
 
   const imagechangehandler = async (event) => {
     seterror(false);
@@ -67,24 +70,6 @@ function Profile() {
     }
     setsubmitted(false);
   };
-
-  useEffect(() => {
-    const callingapi = async () => {
-      const currentEpochTime = Math.floor(Date.now() / 1000);
-      console.log(currentEpochTime);
-      const { data, statuscode } = await Callendpoint("get", "/user/profile", null, null, true);
-      console.log(Math.floor(new Date().getTime() / 1000));
-      if (statuscode === 200) {
-        setprofileimage(data.message);
-      } else {
-        seterror(data.message);
-      }
-      setsubmitted(false);
-    };
-    if (submitted) {
-      callingapi();
-    }
-  }, [submitted]);
 
   return (
     <>

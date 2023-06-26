@@ -30,6 +30,7 @@ function Header() {
   });
 
   const closemodal = () => {
+    navigationhandler();
     setshowsignin(false);
     setshowsignup(false);
   };
@@ -51,6 +52,7 @@ function Header() {
       clearlocaldata();
       dispatch(inforeset());
       dispatch(authreset());
+      navigationhandler();
       window.location.reload();
     }
   };

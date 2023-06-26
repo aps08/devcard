@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { getlocaldata } from "../store/localstorage";
 
 function PrivateRoute(props) {
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    const token = getlocaldata("X-ACCESS-TOKEN");
+    if (!token) {
       navigate("/home");
     }
   }, []);
