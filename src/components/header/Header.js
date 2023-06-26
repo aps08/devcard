@@ -5,7 +5,7 @@ import Signin from "../sign/Signin";
 import Signup from "../sign/Signup";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../assets/images/logo.png";
-import { MODAL_ELEMENT, BACKDROP_ELEMENT } from "../../utils/Constants";
+import { BACKDROP_ELEMENT } from "../../utils/Constants";
 import { FiMenu } from "react-icons/fi";
 import { clearlocaldata } from "../../store/localstorage";
 import Backdrop from "../../utils/Backdrop";
@@ -49,18 +49,18 @@ function Header() {
   const signouthandler = async () => {
     const { statuscode } = await Callendpoint("post", "/auth/logout", null, null, true);
     if (statuscode === 200) {
-      clearlocaldata();
       dispatch(inforeset());
       dispatch(authreset());
       navigationhandler();
+      clearlocaldata();
       window.location.reload();
     }
   };
 
   return (
     <>
-      {showsignin && ReactDOM.createPortal(<Signin formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
-      {showsignup && ReactDOM.createPortal(<Signup formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
+      {showsignin && <Signin formchange={formchange} close={closemodal} />}
+      {showsignup && <Signup formchange={formchange} close={closemodal} />}
       <header className="navbar">
         <div className="branding">
           <img className="brand_image" src={logo} alt="React Image" />

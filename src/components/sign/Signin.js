@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Input from "../input/Input";
-import ReactLoading from "react-loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 import { setlocaldata } from "../../store/localstorage";
-import { setAuthAndUserType } from "../../redux/authSlice";
-import { setUserData } from "../../redux/userinfoSlice";
+import Loading from "../../utils/Loading";
 import "./Sign.css";
-import { useDispatch } from "react-redux";
 
 const CHECKS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -36,7 +33,6 @@ const HINTS = {
 };
 
 function Signin(props) {
-  const dispatch = useDispatch();
   const [error, seterror] = useState(false);
   const [submitted, setsubmitted] = useState(false);
   const [Formdata, setFormdata] = useState(INITIAL);
@@ -61,26 +57,11 @@ function Signin(props) {
       const { data, statuscode } = await Callendpoint("post", "/auth/login", null, Formdata);
       if (statuscode === 200) {
         setlocaldata("X-ACCESS-TOKEN", data["X-ACCESS-TOKEN"]);
-        const user = data["X-DATA"];
-        const { profile } = user;
-        dispatch(
-          setAuthAndUserType({
-            isLoggedIn: true,
-            userType: profile.user
-          })
-        );
-        dispatch(
-          setUserData({
-            profile: user.profile,
-            professional: user.professional,
-            personal: user.personal
-          })
-        );
+        window.location.reload();
       } else {
         seterror(data.message);
       }
       setsubmitted(false);
-      props.close();
     } else {
       for (const key in validate) {
         if (validate[key] !== true) {
@@ -94,46 +75,47 @@ function Signin(props) {
   };
 
   return (
-    <ModalWrapper close={props.close}>
-      <div className="justify-center">
-        <div className="main_div">
-          <div className="heading left">Get started</div>
-          {error && <p className="error">{error}</p>}
-          <form id="signin" onSubmit={submithandler} name="signin">
-            {ELEMENTS.map((element, index) => (
-              <Input
-                key={index}
-                label={element.label}
-                placeholder={element.placeholder}
-                hints={HINTS[element.label.toLowerCase()]}
-                change={changehandler}
-                type={element.type}
-                valid={validate[element.label.toLowerCase()]}
-              />
-            ))}
-            <div className="form_element">
-              {submitted ? (
-                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-              ) : (
-                <button type="submit">Submit</button>
-              )}
+    <>
+      <Loading spinner={submitted} />
+      {!submitted && (
+        <ModalWrapper close={props.close}>
+          <div className="justify-center">
+            <div className="main_div">
+              <div className="heading left">Get started</div>
+              {error && <p className="error">{error}</p>}
+              <form id="signin" onSubmit={submithandler} name="signin">
+                {ELEMENTS.map((element, index) => (
+                  <Input
+                    key={index}
+                    label={element.label}
+                    placeholder={element.placeholder}
+                    hints={HINTS[element.label.toLowerCase()]}
+                    change={changehandler}
+                    type={element.type}
+                    valid={validate[element.label.toLowerCase()]}
+                  />
+                ))}
+                <div className="form_element">
+                  <button type="submit">Submit</button>
+                </div>
+                <NavLink to="/forgotpassword">
+                  <p onClick={props.close} className="forgot_pass">
+                    Forgot password
+                  </p>
+                </NavLink>
+                <div className="divider mt-1"></div>
+                <p className="para center" style={{ fontSize: "1rem" }}>
+                  Don&apos;t have an account ?
+                </p>
+                <p onClick={props.formchange} className="navlink_signin center">
+                  Sign up
+                </p>
+              </form>
             </div>
-            <NavLink to="/forgotpassword">
-              <p onClick={props.close} className="forgot_pass">
-                Forgot password
-              </p>
-            </NavLink>
-            <div className="divider mt-1"></div>
-            <p className="para center" style={{ fontSize: "1rem" }}>
-              Don&apos;t have an account ?
-            </p>
-            <p onClick={props.formchange} className="navlink_signin center">
-              Sign up
-            </p>
-          </form>
-        </div>
-      </div>
-    </ModalWrapper>
+          </div>
+        </ModalWrapper>
+      )}
+    </>
   );
 }
 

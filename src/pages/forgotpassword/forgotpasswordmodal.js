@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../../components/input/Input";
-import ReactLoading from "react-loading";
+import Loading from "../../utils/Loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 
@@ -56,40 +56,41 @@ function Forgotpasswordmodal(props) {
   };
 
   return (
-    <ModalWrapper close={props.close}>
-      <div className="justify-center">
-        <div className="main_div">
-          <div className="heading left">Reset password</div>
-          {message && <p className="message">{message}</p>}
-          {error && <p className="error">{error}</p>}
-          <form id="changepassword" onSubmit={submithandler}>
-            <Input
-              label="PASSWORD"
-              placeholder="*********"
-              hints={["Password must be 8 to 20 characters long"]}
-              change={changedhandler}
-              type="password"
-              valid={valid["password"]}
-            />
-            <Input
-              label="CONFIRM"
-              placeholder="*********"
-              hints={["Confirm password must match with password"]}
-              change={changedhandler}
-              type="password"
-              valid={valid["confirm"]}
-            />
-            <div className="form_element">
-              {submitted ? (
-                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-              ) : (
-                <button type="submit">Change password</button>
-              )}
+    <>
+      <Loading spinner={submitted} />
+      {!submitted && (
+        <ModalWrapper close={props.close}>
+          <div className="justify-center">
+            <div className="main_div">
+              <div className="heading left">Reset password</div>
+              {message && <p className="message">{message}</p>}
+              {error && <p className="error">{error}</p>}
+              <form id="changepassword" onSubmit={submithandler}>
+                <Input
+                  label="PASSWORD"
+                  placeholder="*********"
+                  hints={["Password must be 8 to 20 characters long"]}
+                  change={changedhandler}
+                  type="password"
+                  valid={valid["password"]}
+                />
+                <Input
+                  label="CONFIRM"
+                  placeholder="*********"
+                  hints={["Confirm password must match with password"]}
+                  change={changedhandler}
+                  type="password"
+                  valid={valid["confirm"]}
+                />
+                <div className="form_element">
+                  <button type="submit">Change password</button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
-    </ModalWrapper>
+          </div>
+        </ModalWrapper>
+      )}
+    </>
   );
 }
 

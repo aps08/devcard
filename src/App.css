@@ -14,14 +14,19 @@ main{
     height: 100vh;
     z-index: 2;
     backdrop-filter: blur(8px);
-    background-color: rgba(22, 21, 21, .8);
+}
+.backdropup{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    backdrop-filter: blur(8px);
 }
 .para{
     padding: 10px 0;
     font-size: 1rem;
     color: var(--color-header-hover);
     opacity: .7;
-    /* font-family: inherit; */
 }
 button{
     display: flex;

@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Card from "../../components/card/Card";
@@ -6,7 +5,6 @@ import Signup from "../../components/sign/Signup";
 import Signin from "../../components/sign/Signin";
 import "./Home.css";
 
-const MODAL_ELEMENT = document.getElementById("root-modal");
 const CARDS = [
   {
     label: "Exclusive",
@@ -67,8 +65,8 @@ function Home() {
 
   return (
     <>
-      {showsignin && ReactDOM.createPortal(<Signin formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
-      {showsignup && ReactDOM.createPortal(<Signup formchange={formchange} close={closemodal} />, MODAL_ELEMENT)}
+      {showsignin && <Signin formchange={formchange} close={closemodal} />}
+      {showsignup && <Signup formchange={formchange} close={closemodal} />}
       <section className="section">
         <div className="first">
           <h3 className="heading">

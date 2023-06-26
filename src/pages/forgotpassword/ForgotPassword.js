@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Input from "../../components/input/Input";
 import Forgotpasswordmodal from "./forgotpasswordmodal";
-import ReactLoading from "react-loading";
+import Loading from "../../utils/Loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 import { MODAL_ELEMENT } from "../../utils/Constants";
@@ -71,32 +71,33 @@ function ChangePassword() {
         ReactDOM.createPortal(<Forgotpasswordmodal token={token} close={closemodal} />, MODAL_ELEMENT)}
       {showenteremail &&
         ReactDOM.createPortal(
-          <ModalWrapper close={closemodal}>
-            <div className="justify-center">
-              <div className="main_div">
-                <div className="heading left">Enter registered email</div>
-                {message && <p className="message">{message}</p>}
-                {error && <p className="error">{error}</p>}
-                <form id="forgotpassword" onSubmit={submithandler}>
-                  <Input
-                    label="EMAIL"
-                    placeholder="aps08@email.com"
-                    hints={["Enter a correct email address"]}
-                    change={changehandler}
-                    type="email"
-                    valid={valid}
-                  />
-                  <div className="form_element">
-                    {submitted ? (
-                      <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-                    ) : (
-                      <button type="submit">Submit</button>
-                    )}
+          <>
+            <Loading spinner={submitted} />
+            {!submitted && (
+              <ModalWrapper close={closemodal}>
+                <div className="justify-center">
+                  <div className="main_div">
+                    <div className="heading left">Enter registered email</div>
+                    {message && <p className="message">{message}</p>}
+                    {error && <p className="error">{error}</p>}
+                    <form id="forgotpassword" onSubmit={submithandler}>
+                      <Input
+                        label="EMAIL"
+                        placeholder="aps08@email.com"
+                        hints={["Enter a correct email address"]}
+                        change={changehandler}
+                        type="email"
+                        valid={valid}
+                      />
+                      <div className="form_element">
+                        <button type="submit">Submit</button>
+                      </div>
+                    </form>
                   </div>
-                </form>
-              </div>
-            </div>
-          </ModalWrapper>,
+                </div>
+              </ModalWrapper>
+            )}
+          </>,
           MODAL_ELEMENT
         )}
     </>

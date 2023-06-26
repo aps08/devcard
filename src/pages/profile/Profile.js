@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import ReactLoading from "react-loading";
-import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../../assets/images/logo.png";
-import Backdrop from "../../utils/Backdrop";
 import { clearlocaldata } from "../../store/localstorage";
 import Callendpoint from "../../utils/Callendpoint";
+import Loading from "../../utils/Loading";
 import { BiUser, BiInfoCircle, BiHistory } from "react-icons/bi";
 import { FiSettings, FiEdit } from "react-icons/fi";
 import { GoSignOut } from "react-icons/go";
@@ -24,7 +21,7 @@ function Profile() {
 
   useEffect(() => {
     setprofileimage(image);
-  }, []);
+  }, [image]);
 
   const imagechangehandler = async (event) => {
     seterror(false);
@@ -59,33 +56,25 @@ function Profile() {
     seterror(false);
     setmessage(false);
     setsubmitted(true);
-    const { data, statuscode } = await Callendpoint("post", "/auth/logout", null, {}, true);
+    const { statuscode } = await Callendpoint("post", "/auth/logout", null, {}, true);
     if (statuscode === 200) {
-      clearlocaldata();
       dispatch(inforeset());
       dispatch(authreset());
+      clearlocaldata();
       window.location.reload();
-    } else {
-      seterror(data.message);
     }
     setsubmitted(false);
   };
 
   return (
     <>
-      {submitted &&
-        ReactDOM.createPortal(
-          <Backdrop close={null}>
-            <ReactLoading type="spin" color="#fff" height="100px" width="100px" />
-          </Backdrop>,
-          document.getElementById("root-backdrop")
-        )}
+      <Loading spinner={submitted} />
       <section className="profile">
         <div className="profile-menu">
           {error && <p className="error center">{error}</p>}
           {message && <p className="message center">{message}</p>}
           <div style={{ position: "relative" }}>
-            <img className="profile-image" src={profileimage ? profileimage : logo} alt="user image" />
+            {profileimage && <img className="profile-image" src={profileimage} alt="user image" />}
             <input name="image" accept="image/*" type="file" id="img" onChange={imagechangehandler} />
             <div className="form_element">
               <label name="upload" id="upload" htmlFor="img">

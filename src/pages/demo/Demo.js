@@ -1,13 +1,11 @@
 import { useState } from "react";
-import ReactDOM from "react-dom";
-import ReactLoading from "react-loading";
+import Loading from "../../utils/Loading";
 import Preview from "../../components/preview/Preview";
 import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
 import Callendpoint from "../../utils/Callendpoint";
 import "./Demo.css";
 
-const MODAL_ELEMENT = document.getElementById("root-modal");
 const ELEMENTS = [
   {
     label: "NAME",
@@ -129,11 +127,10 @@ function Demo() {
 
   return (
     <>
-      {showmodal &&
-        ReactDOM.createPortal(
-          <Preview Select={showmodal} mutator={mutate} setSelect={setshowmodal} file={file} close={closemodal} />,
-          MODAL_ELEMENT
-        )}
+      <Loading spinner={submitted} />
+      {showmodal && (
+        <Preview Select={showmodal} mutator={mutate} setSelect={setshowmodal} file={file} close={closemodal} />
+      )}
       <section className="center">
         <form id="demo_form" className="justify-center" onSubmit={submithandler}>
           <p className="para">Filling out the exciting form below and create your devcard!</p>
@@ -166,11 +163,7 @@ function Demo() {
             </label>
           </div>
           <div className="form_element">
-            {submitted ? (
-              <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-            ) : (
-              <button type="submit">Submit</button>
-            )}
+            <button type="submit">Submit</button>
           </div>
         </form>
       </section>

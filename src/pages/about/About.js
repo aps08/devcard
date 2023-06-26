@@ -1,8 +1,9 @@
 import Input from "../../components/input/Input";
-import ReactLoading from "react-loading";
-import { useState } from "react";
+import Loading from "../../utils/Loading";
+import { useEffect, useState } from "react";
 import Callendpoint from "../../utils/Callendpoint";
 import "./About.css";
+import { useSelector } from "react-redux";
 
 const ELEMENTS = [
   { label: "NAME", placeholder: "enter full name" },
@@ -25,11 +26,24 @@ const INITIAL = {
   message: ""
 };
 function About() {
+  const email = useSelector((state) => state.userInfo?.profile?.email);
+  const name = useSelector((state) => state.userInfo?.personal?.first_name);
   const [submitted, setsubmitted] = useState(false);
   const [validate, setvalidate] = useState(INITIAL);
   const [Formdata, setFormdata] = useState(INITIAL);
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
+
+  useEffect(() => {
+    setFormdata({ ...Formdata, email: email, name: name });
+    if (CHECKS["email"].test(email)) {
+      setvalidate({ ...validate, email: true });
+    }
+    if (CHECKS["name"].test(name)) {
+      setvalidate({ ...validate, name: true });
+    }
+  }, [email, name]);
+
   const changehandler = (event) => {
     const { name, value } = event.target;
     if (CHECKS[name].test(value)) {
@@ -65,6 +79,7 @@ function About() {
 
   return (
     <>
+      <Loading spinner={submitted} />
       <section className="section" id="about_section">
         <div>
           <h3 className="heading">About us</h3>
@@ -103,16 +118,13 @@ function About() {
                 change={changehandler}
                 hints={HINTS[element.label.toLowerCase()]}
                 label={element.label}
+                setvalue={Formdata[element.label.toLowerCase()]}
                 valid={validate[element.label.toLowerCase()]}
                 placeholder={element.placeholder}
               />
             ))}
             <div className="form_element">
-              {submitted ? (
-                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-              ) : (
-                <button type="submit">Submit</button>
-              )}
+              <button type="submit">Submit</button>
             </div>
           </form>
         </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../input/Input";
-import ReactLoading from "react-loading";
+import Loading from "../../utils/Loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 import "./Sign.css";
@@ -74,42 +74,43 @@ function Signup(props) {
   };
 
   return (
-    <ModalWrapper close={props.close}>
-      <div className="justify-center">
-        <div className="main_div">
-          <div className="heading left">Create account</div>
-          {error && <p className="error">{error}</p>}
-          {message && <p className="message">{message}</p>}
-          <form id="signup" onSubmit={submithandler} name="signup">
-            {ELEMENTS.map((element, index) => (
-              <Input
-                key={index}
-                label={element.label}
-                placeholder={element.placeholder}
-                hints={HINTS[element.label.toLowerCase()]}
-                change={changehandler}
-                type={element.type}
-                valid={validate[element.label.toLowerCase()]}
-              />
-            ))}
-            <div className="form_element">
-              {submitted ? (
-                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-              ) : (
-                <button type="submit">Submit</button>
-              )}
+    <>
+      <Loading spinner={submitted} />
+      {!submitted && (
+        <ModalWrapper close={props.close}>
+          <div className="justify-center">
+            <div className="main_div">
+              <div className="heading left">Create account</div>
+              {error && <p className="error">{error}</p>}
+              {message && <p className="message">{message}</p>}
+              <form id="signup" onSubmit={submithandler} name="signup">
+                {ELEMENTS.map((element, index) => (
+                  <Input
+                    key={index}
+                    label={element.label}
+                    placeholder={element.placeholder}
+                    hints={HINTS[element.label.toLowerCase()]}
+                    change={changehandler}
+                    type={element.type}
+                    valid={validate[element.label.toLowerCase()]}
+                  />
+                ))}
+                <div className="form_element">
+                  <button type="submit">Submit</button>
+                </div>
+                <div className="divider mt-1"></div>
+                <p className="para center" style={{ fontSize: "1rem" }}>
+                  Already have an account ?
+                </p>
+                <p onClick={props.formchange} className="navlink_signin center">
+                  Sign in
+                </p>
+              </form>
             </div>
-            <div className="divider mt-1"></div>
-            <p className="para center" style={{ fontSize: "1rem" }}>
-              Already have an account ?
-            </p>
-            <p onClick={props.formchange} className="navlink_signin center">
-              Sign in
-            </p>
-          </form>
-        </div>
-      </div>
-    </ModalWrapper>
+          </div>
+        </ModalWrapper>
+      )}
+    </>
   );
 }
 

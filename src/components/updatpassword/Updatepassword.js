@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../input/Input";
-import ReactLoading from "react-loading";
+import Loading from "../../utils/Loading";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 
@@ -69,42 +69,45 @@ function Updatepassword(props) {
   };
 
   return (
-    <ModalWrapper close={props.close}>
-      <div className="justify-center">
-        <div className="main_div">
-          <div className="heading left">Update password</div>
-          {error && <p className="error">{error}</p>}
-          {message && <p className="message">{message}</p>}
-          <form id="updatepassword" onSubmit={submithandler} name="updatepassword">
-            <Input
-              label="old password"
-              name="old_password"
-              type="password"
-              setvalue={null}
-              change={changedhandler}
-              hints={HINTS["old_password"]}
-              valid={validate["old_password"]}
-            />
-            <Input
-              label="new password"
-              name="new_password"
-              type="password"
-              setvalue={null}
-              change={changedhandler}
-              hints={HINTS["new_password"]}
-              valid={validate["new_password"]}
-            />
-            <div className="form_element">
-              {submitted ? (
-                <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-              ) : (
-                <button type="submit">Submit</button>
-              )}
+    <>
+      <Loading spinner={submitted} />
+      {!submitted && (
+        <ModalWrapper close={props.close}>
+          <div className="justify-center">
+            <div className="main_div">
+              <div className="heading left">Update password</div>
+              {error && <p className="error">{error}</p>}
+              {message && <p className="message">{message}</p>}
+              <form id="updatepassword" onSubmit={submithandler} name="updatepassword">
+                <Input
+                  label="old password"
+                  name="old_password"
+                  type="password"
+                  setvalue={null}
+                  change={changedhandler}
+                  hints={HINTS["old_password"]}
+                  valid={validate["old_password"]}
+                />
+                <Input
+                  label="new password"
+                  name="new_password"
+                  type="password"
+                  setvalue={null}
+                  change={changedhandler}
+                  hints={HINTS["new_password"]}
+                  valid={validate["new_password"]}
+                />
+                <div className="form_element">
+                  <button className="mt-1" type="submit">
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
-    </ModalWrapper>
+          </div>
+        </ModalWrapper>
+      )}
+    </>
   );
 }
 

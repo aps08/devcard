@@ -74,6 +74,9 @@
     display: inline-block;
     place-items: center;
 }
+#updatepassword .form_element{
+    margin: 1rem 0;
+}
 #personaldetails .form_element, #professionaldetails .form_element, .profile .form_element,.profile button{
     margin: 0;
 }

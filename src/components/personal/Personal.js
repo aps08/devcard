@@ -1,17 +1,6 @@
 import Input from "../input/Input";
+import { CITIES } from "../../utils/Constants";
 import "./Personal.css";
-const CITIES = [
-  "Bangalore, Karnataka",
-  "Hyderabad, Telangana",
-  "Chennai, Tamil Nadu",
-  "Pune, Maharashtra",
-  "Mumbai, Maharashtra",
-  "Noida, Uttar Pradesh",
-  "Gurgaon, Haryana",
-  "New Delhi",
-  "Kolkata, West Bengal",
-  "Ahmedabad, Gujarat"
-];
 
 function Personal() {
   const personalhandler = (event) => {

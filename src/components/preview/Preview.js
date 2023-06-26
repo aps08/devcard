@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalWrapper from "../../utils/Modalwrapper";
-import ReactLoading from "react-loading";
 import Avatar from "react-avatar-edit";
+import Loading from "react-loading";
 import Callendpoint from "../../utils/Callendpoint";
 import "./Preview.css";
 
@@ -46,53 +46,54 @@ function Preview(props) {
   }, [props.file]);
 
   return (
-    <ModalWrapper close={props.close}>
-      <div className="justify-center">
-        <div className="top">
-          <h3>Crop your devcard image</h3>
-        </div>
-        <div>
-          {error && <p className="error center">{error}</p>}
-          <div className="body">
-            {Image && (
-              <Avatar
-                src={Image}
-                imageWidth={320}
-                shadingColor="#111111"
-                shadingOpacity=".9"
-                label="Browse file"
-                exportAsSquare="true"
-                labelStyle={{ color: "whitesmoke" }}
-                onClose={closeavataredit}
-                onCrop={(view) => {
-                  setPreview(view);
-                  seterror(false);
-                }}
-              />
-            )}
-            {!Image && (
-              <Avatar
-                imageWidth={320}
-                shadingColor="#111111"
-                shadingOpacity=".9"
-                label="Browse file"
-                exportAsSquare="true"
-                labelStyle={{ color: "whitesmoke" }}
-              />
-            )}
+    <>
+      <Loading spinner={submitted} />
+      {!submitted && (
+        <ModalWrapper close={props.close}>
+          <div className="justify-center">
+            <div className="top">
+              <h3>Crop your devcard image</h3>
+            </div>
+            <div>
+              {error && <p className="error center">{error}</p>}
+              <div className="body">
+                {Image && (
+                  <Avatar
+                    src={Image}
+                    imageWidth={320}
+                    shadingColor="#111111"
+                    shadingOpacity=".9"
+                    label="Browse file"
+                    exportAsSquare="true"
+                    labelStyle={{ color: "whitesmoke" }}
+                    onClose={closeavataredit}
+                    onCrop={(view) => {
+                      setPreview(view);
+                      seterror(false);
+                    }}
+                  />
+                )}
+                {!Image && (
+                  <Avatar
+                    imageWidth={320}
+                    shadingColor="#111111"
+                    shadingOpacity=".9"
+                    label="Browse file"
+                    exportAsSquare="true"
+                    labelStyle={{ color: "whitesmoke" }}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="bottom">
+              <div id="preview_bottom">
+                <button onClick={ImageSavehandler}>Save</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="bottom">
-          <div id="preview_bottom">
-            {submitted ? (
-              <ReactLoading type="spin" color="#fff" height="35px" width="35px" className="reactloading" />
-            ) : (
-              <button onClick={ImageSavehandler}>Save</button>
-            )}
-          </div>
-        </div>
-      </div>
-    </ModalWrapper>
+        </ModalWrapper>
+      )}
+    </>
   );
 }
 

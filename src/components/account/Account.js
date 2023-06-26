@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import Updatepassword from "../updatpassword/Updatepassword";
-import ReactLoading from "react-loading";
 import Input from "../input/Input";
-import ReactDOM from "react-dom";
 import Confirm from "../confirm/Confirm";
-import Backdrop from "../../utils/Backdrop";
 import Callendpoint from "../../utils/Callendpoint";
-import { MODAL_ELEMENT, BACKDROP_ELEMENT } from "../../utils/Constants";
 import { clearlocaldata } from "../../store/localstorage";
+import Loading from "../../utils/Loading";
 
 function Account() {
   const [submitted, setsubmitted] = useState(false);
@@ -56,16 +53,9 @@ function Account() {
 
   return (
     <>
-      {submitted &&
-        ReactDOM.createPortal(
-          <Backdrop close={null}>
-            <ReactLoading type="spin" color="#fff" height="100px" width="100px" />
-          </Backdrop>,
-          BACKDROP_ELEMENT
-        )}
-      {updatepass && ReactDOM.createPortal(<Updatepassword close={() => setupdatepass(false)} />, MODAL_ELEMENT)}
-      {confirm &&
-        ReactDOM.createPortal(<Confirm close={() => setconfirm(false)} check={checkconfirmation} />, MODAL_ELEMENT)}
+      <Loading spinner={submitted} />
+      {updatepass && <Updatepassword close={() => setupdatepass(false)} />}
+      {confirm && <Confirm close={() => setconfirm(false)} check={checkconfirmation} />}
       <div className="account">
         {message && <p className="message">{message}</p>}
         {error && <p className="error">{error}</p>}
