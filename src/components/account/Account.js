@@ -5,14 +5,35 @@ import Confirm from "../confirm/Confirm";
 import Callendpoint from "../../utils/Callendpoint";
 import { clearlocaldata } from "../../store/localstorage";
 import Loading from "../../utils/Loading";
+import { useSelector } from "react-redux";
 
 function Account() {
+  const uemail = useSelector((state) => state.userInfo?.profile?.email);
+  const ucredits = useSelector((state) => state.userInfo?.profile?.credit);
+  const [validemail, setvalidemail] = useState(true);
+  const [newemail, setnewemail] = useState(null);
+  const [email, setemail] = useState("");
+  const [credits, setcredits] = useState(0);
   const [submitted, setsubmitted] = useState(false);
   const [message, setmessage] = useState(false);
   const [error, seterror] = useState(false);
   const [confirm, setconfirm] = useState(false);
   const [updatepass, setupdatepass] = useState(false);
-  const email = "8anoopsinngh@gmail.com";
+
+  useEffect(() => {
+    if (uemail || ucredits) {
+      setemail(uemail);
+      setcredits(ucredits);
+    }
+    if (error || message) {
+      setTimeout(() => {
+        seterror(false);
+        setmessage(false);
+      }, 5000);
+    }
+  }, [uemail, ucredits, message, error]);
+
+  useEffect(() => {}, []);
 
   const exporthandler = async () => {
     setsubmitted(true);
@@ -34,7 +55,7 @@ function Account() {
         setTimeout(() => {
           clearlocaldata();
           window.location.reload();
-        }, 3000);
+        }, 6000);
       } else {
         seterror(data.message);
       }
@@ -42,14 +63,34 @@ function Account() {
     }
   };
 
-  useEffect(() => {
-    if (error || message) {
-      setTimeout(() => {
-        seterror(false);
-        setmessage(false);
-      }, 3000);
+  const emailchangehandler = (event) => {
+    const { value } = event.target;
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value !== email) {
+      setnewemail({ email: value });
+      setvalidemail(true);
+    } else {
+      setvalidemail(false);
     }
-  }, [error, message]);
+  };
+
+  const changeemailsubmithandler = async (event) => {
+    event.preventDefault();
+    console.log();
+    if (validemail && newemail) {
+      setsubmitted(true);
+      const { data, statuscode } = await Callendpoint("put", "/user/profile", null, newemail, true);
+      if (statuscode === 200) {
+        setmessage(data.message);
+        setTimeout(() => {
+          clearlocaldata();
+          window.location.reload();
+        }, 3000);
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
+    }
+  };
 
   return (
     <>
@@ -60,13 +101,20 @@ function Account() {
         {message && <p className="message">{message}</p>}
         {error && <p className="error">{error}</p>}
         <h2 className="mb-1 para">Email settings</h2>
-        <form id="change_email">
-          <Input label="Email" className="mb-1" type="email" setvalue={email} change={null} hints={null} valid={true} />
+        <form id="change_email" onSubmit={changeemailsubmithandler}>
+          <Input
+            label="Email"
+            className="mb-1"
+            type="email"
+            change={emailchangehandler}
+            setvalue={email}
+            valid={validemail}
+          />
           <button type="submit">change email</button>
         </form>
         <div className="divider mt-1"></div>
         <h2 className="para">Credits</h2>
-        <p className="para">You have 0 devcard credits.</p>
+        <p className="para">{`You have ${credits} devcard credits.`}</p>
         <div className=" form_element">
           <button>Buy credits</button>
         </div>

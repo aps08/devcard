@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalWrapper from "../../utils/Modalwrapper";
 import Avatar from "react-avatar-edit";
-import Loading from "react-loading";
+import ReactLoading from "react-loading";
 import Callendpoint from "../../utils/Callendpoint";
 import "./Preview.css";
 
@@ -46,11 +46,12 @@ function Preview(props) {
   }, [props.file]);
 
   return (
-    <>
-      <Loading spinner={submitted} />
-      {!submitted && (
-        <ModalWrapper close={props.close}>
-          <div className="justify-center">
+    <ModalWrapper close={props.close}>
+      <div className="justify-center">
+        {submitted ? (
+          <ReactLoading type="spin" color="#fff" height="100px" width="100px" />
+        ) : (
+          <>
             <div className="top">
               <h3>Crop your devcard image</h3>
             </div>
@@ -90,10 +91,10 @@ function Preview(props) {
                 <button onClick={ImageSavehandler}>Save</button>
               </div>
             </div>
-          </div>
-        </ModalWrapper>
-      )}
-    </>
+          </>
+        )}
+      </div>
+    </ModalWrapper>
   );
 }
 

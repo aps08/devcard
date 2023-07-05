@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { LOADING_ELEMENT } from "./Constants";
 
 function Loading(props) {
-  const { spinner } = props;
+  const spinner = props.spinner ? 1 : 0;
   return (
     <>
       {spinner &&

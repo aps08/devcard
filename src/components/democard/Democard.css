@@ -1,0 +1,33 @@
+.democardbox{
+    height: 280px;
+    width: 500px;
+    border-radius: 8px;
+    padding: 1rem;
+    background-size: cover;
+    position: relative;
+}
+.demo-container{
+    display: grid;
+    grid-template-columns: 35% 65%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+.demo-image{
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+}
+.details{
+    display: block;
+}
+.details .para{
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+}
+.details .para:first-child{
+    font-size: 1.4rem;
+}

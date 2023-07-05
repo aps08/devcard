@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from "../../assets/images/logo.png";
 import { BACKDROP_ELEMENT } from "../../utils/Constants";
 import { FiMenu } from "react-icons/fi";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 import { clearlocaldata } from "../../store/localstorage";
 import Backdrop from "../../utils/Backdrop";
 import Callendpoint from "../../utils/Callendpoint";
@@ -16,11 +17,17 @@ import "../header/Header.css";
 
 function Header() {
   const dispatch = useDispatch();
+  const image = useSelector((state) => state.userInfo?.profile?.image);
   const [showsignin, setshowsignin] = useState(false);
   const [showsignup, setshowsignup] = useState(false);
+  const [avatar, setavatar] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const creditcounts = 0;
   const [Isopen, setIsopen] = useState(false);
+
+  useEffect(() => {
+    setavatar(image);
+  }, [image]);
 
   useEffect(() => {
     addEventListener("resize", () => setIsopen(false));
@@ -77,7 +84,13 @@ function Header() {
           {!isLoggedIn && <button onClick={() => setshowsignin(true)}>Sign in</button>}
           <div className="mainmenu">
             <span className="menuburger icon" onClick={() => setIsopen(!Isopen)}>
-              <FiMenu />
+              {!avatar && <FiMenu />}
+              {avatar && (
+                <>
+                  <img className="profile-image" src={avatar} alt="user image" />{" "}
+                  <MdOutlineArrowDropDown className="icon" />
+                </>
+              )}
             </span>
             {Isopen && (
               <>

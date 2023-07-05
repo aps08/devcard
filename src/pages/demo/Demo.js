@@ -5,6 +5,7 @@ import BrowseLogo from "../../assets/images/browselogo.svg";
 import Input from "../../components/input/Input";
 import Callendpoint from "../../utils/Callendpoint";
 import "./Demo.css";
+import DemoCard from "../../components/democard/Democard";
 
 const ELEMENTS = [
   {
@@ -45,6 +46,8 @@ const INITIAL = {
   image: false
 };
 function Demo() {
+  const [democard, setdemocard] = useState(false);
+  const [demodata, setdemodata] = useState(false);
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
   const [submitted, setsubmitted] = useState(false);
@@ -59,25 +62,25 @@ function Demo() {
     setdemoimage(url);
     setFormdata({ ...Formdata, image: true });
     setvalidate({ ...validate, image: true });
-    document.body.style.overflow = "unset";
     setshowmodal(false);
   };
 
   const closemodal = () => {
+    setmessage(false);
+    seterror(false);
     setdemoimage(false);
-    document.body.style.overflow = "unset";
     setshowmodal(false);
     setvalidate({ ...validate, image: false });
   };
 
   const imagechangehandler = (event) => {
+    setmessage(false);
     seterror(false);
     if (event.target.files.length !== 0) {
       const file = event.target.files[0];
       if (file.size / (1024 * 1024) > 5) {
         seterror("File size exceeds the limit of 5MB");
       } else {
-        document.body.style.overflow = "hidden";
         setfile(event.target.files[0]);
         setshowmodal(true);
       }
@@ -97,13 +100,16 @@ function Demo() {
   };
 
   const submithandler = async (event) => {
+    setmessage(false);
+    seterror(false);
     event.preventDefault();
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);
       const { data, statuscode } = await Callendpoint("post", "/public/demo", null, Formdata);
       if (statuscode === 200) {
-        setmessage(data.message);
+        setdemodata({ ...data, image: demoimage });
+        setdemocard(true);
       } else {
         seterror(data.message);
       }
@@ -127,9 +133,18 @@ function Demo() {
 
   return (
     <>
-      <Loading spinner={submitted} />
       {showmodal && (
         <Preview Select={showmodal} mutator={mutate} setSelect={setshowmodal} file={file} close={closemodal} />
+      )}
+      {democard && (
+        <DemoCard
+          data={demodata}
+          close={() => {
+            setdemocard(false);
+            setmessage(false);
+            seterror(false);
+          }}
+        />
       )}
       <section className="center">
         <form id="demo_form" className="justify-center" onSubmit={submithandler}>
@@ -166,6 +181,7 @@ function Demo() {
             <button type="submit">Submit</button>
           </div>
         </form>
+        <Loading spinner={submitted} />
       </section>
     </>
   );
