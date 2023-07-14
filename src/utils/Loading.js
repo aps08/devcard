@@ -7,13 +7,16 @@ function Loading(props) {
   const spinner = props.spinner ? 1 : 0;
   return (
     <>
-      {spinner &&
+      {spinner ? (
         ReactDOM.createPortal(
           <Backdrop close={null} class="backdropup">
             <ReactLoading type="spin" color="#fff" height="100px" width="100px" />
           </Backdrop>,
           LOADING_ELEMENT
-        )}
+        )
+      ) : (
+        <></>
+      )}
     </>
   );
 }

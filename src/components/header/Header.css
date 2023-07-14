@@ -7,8 +7,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5rem;
-    background-color: rgba(22, 27, 34,1);
     transition: all .5s ease-in-out;
+}
+.navbar-back{
+    background-color: rgba(22, 27, 34,1);
     backdrop-filter: blur(4px);
     border-bottom: 1px solid black;
 }

@@ -72,7 +72,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 .form_element input:focus, textarea:focus{
-    border: 2px solid rgb(176, 175, 175);
+    border: 1px solid rgb(176, 175, 175);
     transition: .5s ease-in-out;
 }
 .hints{

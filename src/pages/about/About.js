@@ -129,26 +129,6 @@ function About() {
           </form>
         </div>
       </section>
-      <section className="cards mt-2">
-        <div>
-          <h3 className="heading">How to earn credits?</h3>
-          <p className="para">
-            In simple words, you can contribute to this project and earn credits, you can use those credits to get your
-            favorite card. There are two ways to contribute.
-          </p>
-          <ul className="steps">
-            <li className="para">1. Submit new card design and earn 1 credit point</li>
-            <li className="para">2. Write and submit code for the submitted design and earn 2 credit points</li>
-          </ul>
-          <p className="para">Follow the steps below in order to submit your design or code:</p>
-        </div>
-        <ul className="steps">
-          <li className="para">1. Create your account</li>
-          <li className="para">2. Go to dashboard</li>
-          <li className="para">3. Click on contribution</li>
-          <li className="para">4. Select design or code, and submit it.</li>
-        </ul>
-      </section>
     </>
   );
 }

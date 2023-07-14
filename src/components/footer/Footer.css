@@ -10,12 +10,6 @@
     color: var(--color-btn-bg);
     font-size: 1.2rem;
 }
-.mark_line{
-    padding: 1rem 0;
-    font-size: 1rem;
-    color: var(--color-header-hover);
-    opacity: 1;
-}
 .footer .list-item:hover{
     background-color: transparent;
     color: whitesmoke;
@@ -48,8 +42,5 @@
 @media only screen and (max-width: 480px){
     .sub-heading{
         font-size: 1.2rem;
-    }
-    .mark_line{
-        font-size: 1rem;
     }
 }

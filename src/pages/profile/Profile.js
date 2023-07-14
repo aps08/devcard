@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearlocaldata } from "../../store/localstorage";
 import Callendpoint from "../../utils/Callendpoint";
 import Loading from "../../utils/Loading";
-import { BiUser, BiInfoCircle, BiHistory } from "react-icons/bi";
+import { BiUser, BiInfoCircle } from "react-icons/bi";
 import { FiSettings, FiEdit } from "react-icons/fi";
 import { GoSignOut } from "react-icons/go";
 import { reset as inforeset } from "../../redux/userinfoSlice";
@@ -108,14 +108,6 @@ function Profile() {
                   <FiSettings />
                 </span>
                 Account
-              </li>
-            </NavLink>
-            <NavLink to="orders" className={"profile-list-item"}>
-              <li>
-                <span className="icon">
-                  <BiHistory />
-                </span>
-                Orders
               </li>
             </NavLink>
             <NavLink className={"profile-list-action"} onClick={signouthandler}>

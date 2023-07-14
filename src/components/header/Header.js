@@ -18,6 +18,7 @@ import "../header/Header.css";
 function Header() {
   const dispatch = useDispatch();
   const image = useSelector((state) => state.userInfo?.profile?.image);
+  const [scrolled, setScrolled] = useState(false);
   const [showsignin, setshowsignin] = useState(false);
   const [showsignup, setshowsignup] = useState(false);
   const [avatar, setavatar] = useState(false);
@@ -35,6 +36,23 @@ function Header() {
       removeEventListener("resize", () => setIsopen(false));
     };
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const closemodal = () => {
     navigationhandler();
@@ -68,7 +86,7 @@ function Header() {
     <>
       {showsignin && <Signin formchange={formchange} close={closemodal} />}
       {showsignup && <Signup formchange={formchange} close={closemodal} />}
-      <header className="navbar">
+      <header className={scrolled ? "navbar navbar-back" : "navbar"}>
         <div className="branding">
           <img className="brand_image" src={logo} alt="React Image" />
           <span className="brand_name">Devcards</span>
@@ -115,9 +133,6 @@ function Header() {
                       <div className="divider"></div>
                       <NavLink to="/profile" className={"list-item"} onClick={navigationhandler}>
                         <li>Profile</li>
-                      </NavLink>
-                      <NavLink to="/profile/orders" className={"list-item"} onClick={navigationhandler}>
-                        <li>Orders</li>
                       </NavLink>
                       <NavLink to="/profile/account" className={"list-item"} onClick={navigationhandler}>
                         <li>Settings</li>

@@ -1,6 +1,8 @@
 body{
     background-color: var(--color-bg);
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 main{
     background-color: #0d1117;
@@ -94,7 +96,7 @@ button:hover:enabled{
 @media only screen and (max-width: 768px){
     main{
         padding: 1rem;
-        margin-top: 4rem;
+        padding-top: 4rem;
     }
     
 }
@@ -102,5 +104,8 @@ button:hover:enabled{
 @media only screen and (max-width: 480px){
     .para{
         font-size: 1rem;
+    }
+    main{
+        padding-top: 4rem;
     }
 }
