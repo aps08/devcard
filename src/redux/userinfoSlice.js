@@ -18,11 +18,7 @@ const userInfoSlice = createSlice({
     },
     setData: (state, action) => {
       const { key, value } = action.payload;
-      state.userData[key] = value;
-    },
-    getData: (state, action) => {
-      const { key } = action.payload;
-      return state.userData[key];
+      state[key] = value;
     },
     reset: (state) => {
       Object.assign(state, initialState);
@@ -30,5 +26,5 @@ const userInfoSlice = createSlice({
   }
 });
 
-export const { setUserData, setData, getData, reset } = userInfoSlice.actions;
+export const { setUserData, setData, reset } = userInfoSlice.actions;
 export default userInfoSlice.reducer;

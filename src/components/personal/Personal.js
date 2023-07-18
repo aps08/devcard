@@ -1,23 +1,93 @@
 import Input from "../input/Input";
 import { CITIES } from "../../utils/Constants";
+import { useEffect, useState } from "react";
+import { setData } from "../../redux/userinfoSlice";
+import { useSelector, useDispatch } from "react-redux";
+import Callendpoint from "../../utils/Callendpoint";
+import Loading from "../../utils/Loading";
+import _ from "lodash";
 import "./Personal.css";
 
 function Personal() {
-  const personalhandler = (event) => {
+  const dispatch = useDispatch();
+  const [message, setmessage] = useState(false);
+  const [error, seterror] = useState(false);
+  const [submitted, setsubmitted] = useState(false);
+  const userdata = useSelector((state) => state.userInfo?.personal);
+  const [Formdata, setFormdata] = useState();
+
+  useEffect(() => {
+    setFormdata(userdata);
+  }, [userdata]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (error || message) {
+        seterror(false);
+        setmessage(false);
+      }
+    }, 5000);
+  }, [error, message]);
+
+  const changehandler = (event) => {
+    seterror(false);
+    const { name, value } = event.target;
+    setFormdata({ ...Formdata, [name]: value });
+  };
+  const personalhandler = async (event) => {
     event.preventDefault();
+    seterror(false);
+    if (!_.isEqual(Formdata, userdata)) {
+      setsubmitted(true);
+      const { data, statuscode } = await Callendpoint("put", "/user/personal", null, Formdata, true);
+      if (statuscode === 200) {
+        setmessage(data.message);
+        dispatch(setData({ key: "personal", value: data.data }));
+      } else {
+        seterror(data.message);
+      }
+      setsubmitted(false);
+    }
   };
 
   return (
     <>
+      <Loading spinner={submitted} />
       <form id="personaldetails" onSubmit={personalhandler}>
+        {error && <p className="error">{error}</p>}
+        {message && <p className="message">{message}</p>}
         <h2 className="para mb-1">Personal details</h2>
         <div className="user_name">
-          <Input label="first name" change={null} hints={null} placeholder="enter first name" valid={true} />
-          <Input label="middle name" change={null} hints={null} placeholder="enter middle name" valid={true} />
-          <Input label="Last name" change={null} hints={null} placeholder="enter last name" valid={true} />
+          <Input
+            label="first name"
+            name="first_name"
+            change={changehandler}
+            hints={null}
+            setvalue={Formdata?.first_name}
+            placeholder="enter first name"
+            valid={true}
+          />
+          <Input
+            label="middle name"
+            name="middle_name"
+            change={changehandler}
+            hints={null}
+            setvalue={Formdata?.middle_name}
+            placeholder="enter middle name"
+            valid={true}
+          />
+          <Input
+            label="Last name"
+            name="last_name"
+            change={changehandler}
+            hints={null}
+            setvalue={Formdata?.last_name}
+            placeholder="enter last name"
+            valid={true}
+          />
           <div className="form_element">
             <label className="label">gender</label>
-            <select name="gender" title="gender" defaultValue={""}>
+            <select onChange={changehandler} name="gender" title="gender" value={Formdata?.gender || ""}>
               <option value="">Don&apos;t specify</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -25,7 +95,7 @@ function Personal() {
           </div>
           <div className="form_element">
             <label className="label">City</label>
-            <select name="city" title="city" defaultValue={""}>
+            <select onChange={changehandler} name="city" title="city" value={Formdata?.city || ""}>
               <option value="">Don&apos;t specify</option>
               {CITIES.map((city) => (
                 <option key={city} value={city}>
@@ -38,30 +108,31 @@ function Personal() {
             <label className="label">country</label>
             <input name="country" type="text" value="India" disabled />
           </div>
-          <div className="form_element occupy_three">
-            <label className="label">Quote</label>
-            <input name="quote" type="text" placeholder="enter your favorite quote from your dev universe" />
-          </div>
-          <div className="form_element occupy_two">
+          <div className="form_element">
             <label className="label">Linkedin</label>
-            <input name="linkedin" type="text" placeholder="enter your linkedin profile url" />
+            <input
+              name="linkedin"
+              type="text"
+              onChange={changehandler}
+              defaultValue={Formdata?.linkedin || ""}
+              placeholder="www.linkedin.com/username"
+            />
           </div>
-          <div className="form_element occupy_two">
+          <div className="form_element">
             <label className="label">Github</label>
-            <input name="github" type="text" placeholder="enter your github profile url" />
-          </div>
-          <div className="form_element occupy_two">
-            <label className="label">Twitter</label>
-            <input name="twitter" type="text" placeholder="enter your twitter profile url" />
+            <input
+              name="github"
+              type="text"
+              onChange={changehandler}
+              defaultValue={Formdata?.github || ""}
+              placeholder="www.github.com/username"
+            />
           </div>
         </div>
         <button style={{ marginTop: "1rem" }} type="submit">
           Save
         </button>
         <div className="single_line"></div>
-      </form>
-      <form>
-        <h2 className="mb-1">Address</h2>
       </form>
     </>
   );

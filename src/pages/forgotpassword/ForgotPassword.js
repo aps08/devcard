@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import Input from "../../components/input/Input";
 import Forgotpasswordmodal from "./forgotpasswordmodal";
 import Loading from "../../utils/Loading";
-import ModalWrapper from "../../utils/Modalwrapper";
 import Callendpoint from "../../utils/Callendpoint";
 import { MODAL_ELEMENT } from "../../utils/Constants";
 
@@ -12,7 +11,6 @@ function ChangePassword() {
   const navigate = useNavigate();
   const { token } = useParams();
   const [showenterpassword, setshowenterpassword] = useState(false);
-  const [showenteremail, setshowenteremail] = useState(false);
   const [error, seterror] = useState(false);
   const [message, setmessage] = useState(false);
   const [submitted, setsubmitted] = useState(false);
@@ -20,21 +18,14 @@ function ChangePassword() {
   const [valid, setvalid] = useState(false);
 
   const closemodal = () => {
-    setshowenteremail(false);
     setshowenterpassword(false);
-    document.body.style.overflow = "unset";
     navigate("/home");
   };
 
   useEffect(() => {
-    try {
-      if (token.length === 22) {
-        setshowenterpassword(true);
-      }
-    } catch {
-      setshowenteremail(true);
+    if (token?.length === 22) {
+      setshowenterpassword(true);
     }
-    document.body.style.overflow = "hidden";
   }, [token]);
 
   const changehandler = (event) => {
@@ -66,41 +57,41 @@ function ChangePassword() {
   };
 
   return (
-    <>
+    <div>
       {showenterpassword &&
         ReactDOM.createPortal(<Forgotpasswordmodal token={token} close={closemodal} />, MODAL_ELEMENT)}
-      {showenteremail &&
-        ReactDOM.createPortal(
-          <>
-            <Loading spinner={submitted} />
-            {!submitted && (
-              <ModalWrapper close={closemodal}>
-                <div className="justify-center">
-                  <div className="main_div">
-                    <div className="heading left">Enter registered email</div>
-                    {message && <p className="message">{message}</p>}
-                    {error && <p className="error">{error}</p>}
-                    <form id="forgotpassword" onSubmit={submithandler}>
-                      <Input
-                        label="EMAIL"
-                        placeholder="aps08@email.com"
-                        hints={["Enter a correct email address"]}
-                        change={changehandler}
-                        type="email"
-                        valid={valid}
-                      />
-                      <div className="form_element">
-                        <button type="submit">Submit</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </ModalWrapper>
-            )}
-          </>,
-          MODAL_ELEMENT
-        )}
-    </>
+      <Loading spinner={submitted} />
+      <div
+        className="justify-center"
+        style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
+        <div className="main_div">
+          <div className="heading left">Enter registered email</div>
+          {message && (
+            <p className="message" style={{ width: "320px" }}>
+              {message}
+            </p>
+          )}
+          {error && (
+            <p className="error" style={{ width: "320px" }}>
+              {error}
+            </p>
+          )}
+          <form id="forgotpassword" onSubmit={submithandler}>
+            <Input
+              label="EMAIL"
+              placeholder="aps08@email.com"
+              hints={["Enter a correct email address"]}
+              change={changehandler}
+              type="email"
+              valid={valid}
+            />
+            <div className="form_element">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 

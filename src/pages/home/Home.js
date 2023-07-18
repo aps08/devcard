@@ -5,7 +5,7 @@ import Card from "../../components/card/Card";
 import Signup from "../../components/sign/Signup";
 import Signin from "../../components/sign/Signin";
 import Dashboard from "../dashboard/Dashboard";
-import card from "../../assets/images/homecard.png";
+import card from "../../assets/images/cardhome3.png";
 import "./Home.css";
 
 const CARDS = [

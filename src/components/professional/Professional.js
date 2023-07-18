@@ -15,25 +15,10 @@ function Professional() {
           placeholder="enter experience(in years)"
           valid={true}
         />
-        <Input
-          label="Primary language"
-          change={null}
-          hints={null}
-          type="text"
-          placeholder="enter primary language"
-          valid={true}
-        />
-        <Input
-          label="Secondary language"
-          change={null}
-          hints={null}
-          type="text"
-          placeholder="enter secondary language"
-          valid={true}
-        />
-        <div className="form_element occupy_three">
+        <Input label="Primary language" change={null} hints={null} type="text" placeholder="python" valid={true} />
+        <div className="form_element">
           <label className="label">Other stack</label>
-          <input name="github" type="text" placeholder="enter other tools, stacks" />
+          <input name="stack" type="text" placeholder="enter other tools, stacks" />
         </div>
       </div>
       <button style={{ marginTop: "1rem" }} type="submit">
