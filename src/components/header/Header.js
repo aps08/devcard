@@ -13,6 +13,7 @@ import Backdrop from "../../utils/Backdrop";
 import Callendpoint from "../../utils/Callendpoint";
 import { reset as inforeset } from "../../redux/userinfoSlice";
 import { reset as authreset } from "../../redux/authSlice";
+import { RANDOM } from "../../utils/Constants";
 import "../header/Header.css";
 
 function Header() {
@@ -102,10 +103,10 @@ function Header() {
           {!isLoggedIn && <button onClick={() => setshowsignin(true)}>Sign in</button>}
           <div className="mainmenu">
             <span className="menuburger icon" onClick={() => setIsopen(!Isopen)}>
-              {!avatar && <FiMenu />}
-              {avatar && (
+              {!isLoggedIn && <FiMenu />}
+              {isLoggedIn && (
                 <>
-                  <img className="profile-image" src={avatar} alt="user image" />{" "}
+                  <img className="profile-image" src={avatar || RANDOM} alt="user image" />{" "}
                   <MdOutlineArrowDropDown className="icon" />
                 </>
               )}

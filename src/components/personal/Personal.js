@@ -34,6 +34,7 @@ function Personal() {
     const { name, value } = event.target;
     setFormdata({ ...Formdata, [name]: value });
   };
+
   const personalhandler = async (event) => {
     event.preventDefault();
     seterror(false);

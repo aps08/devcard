@@ -7,6 +7,7 @@ import Loading from "../../utils/Loading";
 import { BiUser, BiInfoCircle } from "react-icons/bi";
 import { FiSettings, FiEdit } from "react-icons/fi";
 import { GoSignOut } from "react-icons/go";
+import { RANDOM } from "../../utils/Constants";
 import { reset as inforeset } from "../../redux/userinfoSlice";
 import { reset as authreset } from "../../redux/authSlice";
 import "./Profile.css";
@@ -74,7 +75,7 @@ function Profile() {
           {error && <p className="error center">{error}</p>}
           {message && <p className="message center">{message}</p>}
           <div style={{ position: "relative" }}>
-            {profileimage && <img className="profile-image" src={profileimage} alt="user image" />}
+            <img className="profile-image" src={profileimage || RANDOM} alt="user image" />
             <input name="image" accept="image/*" type="file" id="img" onChange={imagechangehandler} />
             <div className="form_element">
               <label name="upload" id="upload" htmlFor="img">
