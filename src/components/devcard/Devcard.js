@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
-import "./Devcard.css";
 import image1 from "../../assets/images/cardhome2.png";
 import map from "../../assets/images/map.png";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { QR_API } from "../../utils/Constants";
+import "./Devcard.css";
 
 function Devcard() {
   const profile = useSelector((state) => state.userInfo?.profile);
