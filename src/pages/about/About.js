@@ -55,6 +55,8 @@ function About() {
   };
   const submithandler = async (event) => {
     event.preventDefault();
+    seterror(false);
+    setmessage(false);
     const allTrueValues = Object.values(validate).every((value) => value === true);
     if (allTrueValues) {
       setsubmitted(true);

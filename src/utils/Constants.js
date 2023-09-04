@@ -62,4 +62,3 @@ export const CARDS = [
   }
 ];
 export const RANDOM = "https://cataas.com/cat/gif";
-export const QR_API = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";

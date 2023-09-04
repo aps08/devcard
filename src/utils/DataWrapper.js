@@ -12,7 +12,7 @@ function DataWrapper({ children }) {
     const fetchDataFromAPI = async () => {
       try {
         const token = getlocaldata("X-ACCESS-TOKEN");
-        if (token) {
+        if (token && token.length > 20) {
           const { data, statuscode } = await Callendpoint("get", "/user/profile", null, null, true);
           if (statuscode === 200) {
             dispatch(

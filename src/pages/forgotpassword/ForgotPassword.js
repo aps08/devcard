@@ -47,6 +47,7 @@ function ChangePassword() {
         setmessage(data.message);
       } else {
         seterror(data.message);
+        setFormdata("");
       }
       setsubmitted(false);
     } else {

@@ -5,7 +5,6 @@ import Card from "../../components/card/Card";
 import Signup from "../../components/sign/Signup";
 import Signin from "../../components/sign/Signin";
 import Dashboard from "../dashboard/Dashboard";
-import card from "../../assets/images/cardhome3.png";
 import { CARDS } from "../../utils/Constants";
 import "./Home.css";
 
@@ -60,7 +59,7 @@ function Home() {
             </div>
             <div>
               <div className="right">
-                <img className="image_view" src={card} alt="cardimage" />
+                <img className="image_view" src="https://picsum.photos/600/320?grayscale" alt="cardimage" />
               </div>
             </div>
           </section>

@@ -24,6 +24,14 @@ function Profile() {
     setprofileimage(image);
   }, [image]);
 
+  useEffect(() => {
+    if (message) {
+      setTimeout(() => {
+        setmessage(false);
+      }, 5000);
+    }
+  }, [message]);
+
   const imagechangehandler = async (event) => {
     seterror(false);
     setmessage(false);

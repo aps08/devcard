@@ -37,7 +37,6 @@ function Professional() {
   const professionalhandler = async (event) => {
     event.preventDefault();
     seterror(false);
-    console.log(Formdata);
     if (!_.isEqual(Formdata, userdata)) {
       setsubmitted(true);
       const { data, statuscode } = await Callendpoint("put", "/user/professional", null, Formdata, true);
