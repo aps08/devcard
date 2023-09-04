@@ -1,4 +1,4 @@
-# devcard
+# Devcard
 DevCard is the go-to platform for developers to create professional business cards that showcase their skills and expertise. Our user-friendly platform allows you to get cards that reflect your brand and communicate your value proposition. Join us today to elevate your professional image and succeed in your career!
 
 ## Made with
@@ -9,6 +9,23 @@ DevCard is the go-to platform for developers to create professional business car
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 ## [Demo](http://localhost:3000/about)
+
+## API endpoints
+```
+auth/register
+auth/login
+auth/logout
+
+public/demo
+public/feeback_contact
+public/verify_email
+public/forgot_password
+
+user/account
+user/profile
+user/personal
+user/professional
+```
 
 ## Where to find me
  
