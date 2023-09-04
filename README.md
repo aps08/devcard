@@ -75,6 +75,8 @@ HOST_URL - URL of your frontend
 3. Create public and private keys.
 4. Create AWS KEY and AWS SECRET for boto3 SDK
 
+## NOTE
+I attempted to create this website as a part of my learning experience with React and Flask. Unfortunately, due to some recent changes in my circumstances, I haven't been able to fully complete the project. I am now seeking someone who would be interested in taking over this project, and I would be more than happy to offer my assistance and guidance to ensure its successful continuation.
    
 <p align="center" style="text"><strong>If you liked something about this repository, do give it a 🌟. It will motivate me come up with more such project. You can reach out to me on my social media given below.</strong></p>
 
@@ -87,6 +89,3 @@ HOST_URL - URL of your frontend
  <a href="mailto:anoopprsingh@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
  <a href="https://t.me/aps080"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"></a>
 </p>
-
-## NOTE
-**I attempted to create this website as a part of my learning experience with React and Flask. Unfortunately, due to some recent changes in my circumstances, I haven't been able to fully complete the project. I am now seeking someone who would be interested in taking over this project, and I would be more than happy to offer my assistance and guidance to ensure its successful continuation.**
