@@ -1,18 +1,134 @@
-.header{
-    padding: 20px 5%;
+.navbar{
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5rem;
+    transition: all .5s ease-in-out;
+}
+.navbar-back{
+    background-color: rgba(22, 27, 34,1);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid black;
+}
+.avatar img{
+    height: 45px;
+    width: 45px;
 }
 .branding{
     display: flex;
+    align-items: center;
 }
-.brand_logo{
-    width: 50px;
-    height: 50px;
+.brand_image{
+    width: 60px;
+    height: 40px;
+    transition: all .5s ease-in-out;
 }
 .brand_name{
     margin-left: 10px;
-    line-height: 1.8;
-    font-size: 1.8rem;
+    font-size: 3.2rem;
     font-weight: bolder;
+    text-transform: capitalize;
+    color: var(--color-header-hover);
+    transition: all .5s ease-in-out;
+}
+.nav{
+    height: 100%;
+    display: flex;
+    align-items:center;
+}
+.menuburger{
+    cursor: pointer;
+    color: var(--color-header-hover);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    border-radius: 6px;
+}
+.mainmenu{
+    position: relative;
+    display: block;
+}
+.nav-list{
+    width: 200px;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background-color: #21262d;
+    border-radius: 6px;
+    z-index: 5;
+    border: 1px solid black;
+    text-align: center;
+}
+.nav-list button{
+    font-size: 1rem;
+}
+.backdrop-transparent{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: transparent;
+}
+.list-item{
+    display: block;
+    font-size: 1rem;
+    color: var(--color-header-hover);
+    margin: 0;
+    padding: 4px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.menuburger .profile-image{
+    margin-left: 8px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    padding: 0;
+}
+.menuburger .icon{
+    padding: 0;
+    font-size: 24px;
+}
+.active button{
+    background-color:var(--color-btn-hover-bg);
+}
+.list-item:hover{
+    background-color: rgba(78, 78, 78,.6); 
+}
+.menuburger:hover{
+    color: var(--color-white);
+}
+@media only screen and (max-width: 1024px){
+    .navbar button{
+        margin: 6px 0;
+        transition: all .5s ease-in-out;
+    }
+    
+}
+
+@media only screen and (max-width: 768px){
+    .navbar{
+        padding: 1rem 2rem;
+        transition: all .5s ease-in-out;
+    }
+    .brand_image{
+        width: 55px;
+        height: 35px;
+        transition: all .5s ease-in-out;
+    }
+    .brand_name{
+        font-size: 2rem;
+        transition: all .5s ease-in-out;
+    }
+}
+@media only screen and (max-width: 480px){
+    .brand_name{
+        display: none;
+    }
 }

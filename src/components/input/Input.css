@@ -1,0 +1,106 @@
+form .form_element{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+.form_element select{
+    opacity: .6;
+    height: 36px;
+    border: none;
+    border: 1px solid rgb(58, 57, 57);
+    border-radius: 6px;
+    transition: .5s ease-in-out;
+    color: whitesmoke;
+    font-size: 1rem;
+    padding-left: .8rem;
+    background-color: #0d1117;
+}
+.form_element select:focus{
+    border: 2px solid rgb(176, 175, 175);
+    transition: .5s ease-in-out;
+}
+.form_element select option,.form_element select option:disabled{
+    color: whitesmoke;
+}
+.label{
+    display: block;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: var(--color-header-hover);
+    text-align: left;
+    margin-left: .4rem;
+    margin-bottom: .4rem;
+}
+.form_element input:focus::placeholder {
+    color: transparent;
+  }
+.form_element input{
+    width: 100%;
+    outline: none;
+    height: 36px;
+    background-color: #0d1117;
+    opacity: .6;
+    caret-color: var(--color-header-hover);
+    text-indent: 8px;
+    font-size: 1rem;
+    color: whitesmoke;
+    border: 1px solid rgb(58, 57, 57);
+    border-radius: 6px;
+    transition: .5s ease-in-out;
+}
+form .form_element input::placeholder{
+    color: whitesmoke;
+    font-weight: 100;
+    opacity: .4;
+    font-size: 1rem;
+}
+form .form_element input[type="file"]{
+    padding: 0;
+    border: none;
+    padding: .2rem;
+    background-color: rgba(31, 35, 41, 0.9);
+}
+form .form_element input#file-upload-button{
+    width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form_element input:focus, textarea:focus{
+    border: 1px solid rgb(176, 175, 175);
+    transition: .5s ease-in-out;
+}
+.hints{
+    margin: .4rem;
+    text-align: left;
+    color: brown;
+    font-size: 14px;
+}
+.hints .hint-item{
+    margin: .1rem 0;
+    animation: fade-in .5s ease-in-out forwards;
+}
+input:disabled{
+    cursor:not-allowed;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+@media only screen and (max-width: 768px){
+    .form_element input{
+        height: 40px;
+        transition: .5s ease-in-out;
+    }
+}

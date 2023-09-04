@@ -1,12 +1,18 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
-
-import Header from './components/header/Header';
-import Home from './pages/home/Home';
-import Dashboard from './pages/dashboard/Dashboard';
-import Notfound from './pages/notfound/Notfound';
-import About from './pages/about/About';
-import Demo from './pages/demo/Demo';
-import Footer from './components/footer/Footer';
+import { Route, Routes, Navigate } from "react-router-dom";
+import Home from "./pages/home/Home";
+import Demo from "./pages/demo/Demo";
+import About from "./pages/about/About";
+import Profile from "./pages/profile/Profile";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import Personal from "./components/personal/Personal";
+import Professional from "./components/professional/Professional";
+import Account from "./components/account/Account";
+import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
+import Verify from "./pages/verify/Verify";
+import PrivateRoute from "./utils/PrivateRouter";
+import PublicRoute from "./utils/PublicRoute";
+import "./App.css";
 
 function App() {
   return (
@@ -14,13 +20,20 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/demo" element={<Demo />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/home" element={<PublicRoute Component={Home} />} />
+          <Route path="/demo" element={<PublicRoute Component={Demo} />} />
           <Route path="/About" element={<About />} />
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="" element={<Navigate to="/home" replace />} />
-          <Route path="*" element={<Notfound />} />
+          <Route path="/profile" element={<PrivateRoute Component={Profile} />}>
+            <Route path="personal" exact element={<PrivateRoute Component={Personal} />} />
+            <Route path="professional" element={<PrivateRoute Component={Professional} />} />
+            <Route path="account" element={<PrivateRoute Component={Account} />} />
+            <Route path="" element={<Navigate to="personal" replace />} />
+          </Route>
+          <Route path="/verify/:token" element={<PublicRoute Component={Verify} />} />
+          <Route path="/forgotpassword" element={<PublicRoute Component={ForgotPassword} />}>
+            <Route path=":token" element={<PublicRoute Component={ForgotPassword} />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </main>
       <Footer />

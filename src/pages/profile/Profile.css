@@ -1,0 +1,107 @@
+.profile{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    border-radius: 6px;
+    background-color: rgba(22, 27, 34,1);
+    position: relative;
+}
+.profile-menu{
+    margin: 1rem 0 1rem;
+    position: relative;
+    display: block;
+    text-align: center;
+    padding: 0 1rem;
+    border-right: 1px solid rgb(58, 57, 57);
+}
+.profile-menu #upload{
+    padding: 7px;
+    width: unset;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    opacity: .7;
+    border: 1px solid rgb(85, 84, 84);
+    background-color: #21262d;
+}
+.profile-image{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    padding: 1rem;
+}
+.profile-list-item li, .profile-list-action li{
+    font-size: 1rem;
+    color: var(--color-header-hover);
+    margin: 0;
+    padding: 4px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.profile-item-panel{
+    min-height: 70vh;
+    border-radius: 6px;
+}
+.icon{
+    padding: 5px;
+    vertical-align: middle;
+}
+#updatepassword{
+    color: rgba(255,255,255,0.7);
+    display: inline-block;
+    text-align: center;
+    width: 320px;
+    place-items: center;
+    margin-top: 1rem;
+    text-align: left;
+    transition: .5s ease-in-out;
+}
+.profile-list-item.active li{
+    background-color: rgba(78, 78, 78,.3);
+}
+.profile-menu #upload:hover{
+    opacity: 1;
+}
+.profile-list-item li:hover,.profile-list-action li:hover{
+    background-color: rgba(78, 78, 78,.6); 
+}
+
+#personaldetails, #professionaldetails, .account{
+    width: 100%;
+    padding: 1rem;
+    display: inline-block;
+    place-items: center;
+}
+#updatepassword .form_element{
+    margin: 1rem 0;
+}
+#personaldetails .form_element, #professionaldetails .form_element, .profile .form_element,.profile button{
+    margin: 0;
+}
+
+@media only screen and (max-width: 1024px){
+    .profile{
+        grid-template-columns: 200px 1fr;
+    }
+    .profile-image{
+        height: 150px;
+        width: 150px;
+    }
+}
+@media only screen and (max-width: 768px){
+    .profile{
+       display: block;
+    }
+    .profile-menu{
+        margin: 0;
+        margin-bottom: 1rem;
+        position: relative;
+        display: block;
+        text-align: center;
+        padding: 0 1rem;
+        border:none;
+        border-bottom: 1px solid rgb(58, 57, 57);
+    }
+}

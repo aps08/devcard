@@ -1,0 +1,19 @@
+#about_section{
+    grid-template-columns: 1fr;
+}
+.contact_form{
+    position: relative;
+    padding: 1rem;
+    padding-right: 1rem;
+    background-color: rgba(22, 27, 34,1);
+    border-radius: .5rem;
+}
+.steps .para{
+    padding: 0;
+}
+
+@media only screen and (max-width: 768px){
+    .contact_form{
+        width: 100%;
+    }
+}

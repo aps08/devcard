@@ -1,0 +1,111 @@
+body{
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+main{
+    background-color: #0d1117;
+    padding: 7rem 4rem 2rem;
+    min-height: 70vh;
+    transition: 0.5s ease-in-out;
+}
+.backdrop{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+}
+.backdropup{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    backdrop-filter: blur(8px);
+}
+.para{
+    padding: 10px 0;
+    font-size: 1rem;
+    color: var(--color-header-hover);
+    opacity: .7;
+}
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    line-height: 2;
+    margin: 0 5px;
+    color: var(--color-header-hover);
+    background-color: var(--color-btn-bg);
+    border-color: none;
+    cursor: pointer;
+}
+#forgotpassword,#changepassword{
+    margin-top: 2rem;
+    width: 320px;
+}
+#modalconfirm{
+    color: rgba(255,255,255,0.7);
+    display: inline-block;
+    text-align: center;
+    width: 320px;
+    place-items: center;
+    margin-top: 1rem;
+    text-align: left;
+    transition: .5s ease-in-out;
+}
+
+.center{
+    text-align: center;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+.mt-1{
+    margin-top: 1rem;
+}
+.mt-2{
+    margin-top: 2rem;
+}
+.mb-1{
+    margin-bottom: 1rem;
+}
+.mb-2{
+    margin-bottom: 2rem;
+}
+button:disabled{
+    opacity: .7;
+    cursor: not-allowed;
+}
+button:hover:enabled{
+    background-color: var(--color-btn-hover-bg);
+}
+
+@media only screen and (max-width: 1024px){
+
+}
+
+@media only screen and (max-width: 768px){
+    main{
+        padding: 1rem;
+        padding-top: 4rem;
+    }
+    
+}
+
+@media only screen and (max-width: 480px){
+    .para{
+        font-size: 1rem;
+    }
+    main{
+        padding-top: 4rem;
+    }
+}
