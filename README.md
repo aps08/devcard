@@ -8,7 +8,7 @@ DevCard is the go-to platform for developers to create professional business car
 ![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
-## [Demo](http://localhost:3000/about)
+## [Demo]([http://localhost:3000/about](https://www.youtube.com/watch?v=zkAAkazL9Jk))
 
 ## Functionalities
 1. Sign In (Sign not possible without email verification) / Sign Up
